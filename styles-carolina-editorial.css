@@ -2392,14 +2392,15 @@ a.quick-link-card:active {
   height: 100vh;
   background: var(--editorial-paper);
   z-index: 1000;
-  transform: translateX(100%);
+  transform: translateX(100%) translateZ(0);
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15);
   overflow-y: auto;
+  will-change: transform;
 }
 
 .mobile-menu-checkbox:checked ~ .mobile-nav {
-  transform: translateX(0);
+  transform: translateX(0) translateZ(0);
 }
 
 .mobile-nav-inner {
@@ -3339,6 +3340,7 @@ a.quick-link-card:active {
    ============================================ */
 @media (max-width: 768px) {
   /* GPU Acceleration for Animations */
+  /* Note: .mobile-nav removed - conflicts with translateX for hide/show */
   .btn,
   .profile-card,
   .dept-card,
@@ -3346,7 +3348,6 @@ a.quick-link-card:active {
   .news-card,
   .quick-link-card,
   .mobile-menu-toggle,
-  .mobile-nav,
   .hamburger-bar,
   .scroll-to-top {
     transform: translateZ(0);
