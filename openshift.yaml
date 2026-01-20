@@ -1,0 +1,89 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: uncsg-website
+  labels:
+    app: uncsg-website
+---
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: uncsg-website
+  labels:
+    app: uncsg-website
+spec:
+  source:
+    type: Git
+    git:
+      uri: https://github.com/WillieTheWhale/UNCSG.github.io.git
+      ref: main
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: Dockerfile
+  output:
+    to:
+      kind: ImageStreamTag
+      name: uncsg-website:latest
+  triggers:
+    - type: ConfigChange
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uncsg-website
+  labels:
+    app: uncsg-website
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: uncsg-website
+  template:
+    metadata:
+      labels:
+        app: uncsg-website
+    spec:
+      containers:
+        - name: uncsg-website
+          image: uncsg-website:latest
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              memory: 128Mi
+              cpu: 100m
+            requests:
+              memory: 64Mi
+              cpu: 50m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: uncsg-website
+  labels:
+    app: uncsg-website
+spec:
+  selector:
+    app: uncsg-website
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: uncsg-website
+  labels:
+    app: uncsg-website
+spec:
+  to:
+    kind: Service
+    name: uncsg-website
+  port:
+    targetPort: 8080
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
