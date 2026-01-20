@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Reproductive Health Task Force - UNC Student Government">
+  <title>Reproductive Health Task Force | UNC Student Government</title>
+  <link rel="stylesheet" href="styles-carolina-editorial.css">
+
+  <!-- Iconoir Icons - Minimalist editorial aesthetic -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css">
+  <!-- Redirect to canonical page -->
+  <link rel="canonical" href="task-force-reproductive-health.html">
+  <meta http-equiv="refresh" content="0; url=task-force-reproductive-health.html">
+</head>
+<body>
+  <p>Redirecting to <a href="task-force-reproductive-health.html">Reproductive Health Task Force</a>...</p>
+<!-- Scroll-to-Top Button -->
+<script>
+(function() {
+  const scrollBtn = document.createElement('button');
+  scrollBtn.className = 'scroll-to-top';
+  scrollBtn.setAttribute('aria-label', 'Scroll to top');
+  scrollBtn.setAttribute('type', 'button');
+  document.body.appendChild(scrollBtn);
+
+  let scrollTimeout;
+  const toggleButton = () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      if (window.pageYOffset > 400) {
+        scrollBtn.classList.add('visible');
+      } else {
+        scrollBtn.classList.remove('visible');
+      }
+    }, 100);
+  };
+
+  scrollBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  window.addEventListener('scroll', toggleButton, { passive: true });
+  toggleButton();
+})();
+</script>
+
+</body>
+</html>
