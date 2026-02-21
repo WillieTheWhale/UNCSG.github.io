@@ -27,6 +27,10 @@ spec:
       name: uncsg-website:latest
   triggers:
     - type: ConfigChange
+    - type: GitHub
+      github:
+        secretReference:
+          name: uncsg-webhook-secret
 ---
 apiVersion: apps/v1
 kind: Deployment
