@@ -13,7 +13,9 @@ Static HTML website for the UNC Student Government (Alvarez Administration 2025-
 ### File Structure
 - `styles-carolina-editorial.css` - Single CSS file containing the entire design system
 - `*.html` - 30+ static HTML pages following consistent template structure
-- Images hosted externally at `executivebranch.unc.edu`
+- Logo images stored locally in `images/logos/`
+- Banner images stored locally in `images/banners/`
+- Some images hosted externally at `executivebranch.unc.edu`
 
 ### CSS Design System
 
@@ -50,8 +52,8 @@ All pages follow this structure:
 </body>
 ```
 
-**Header logo**: `Undergrad_Exec_Branch_Logo_Full_1.png`
-**Footer logo**: `Undergrad_Exec_Branch_Logo_Full_3.png` (white variant for dark background)
+**Header logo**: `images/logos/Undergrad_Exec_Branch_Logo_Full_1.png`
+**Footer logo**: `images/logos/Undergrad_Exec_Branch_Logo_Full_3.png` (white variant for dark background)
 
 ### External Dependencies (CDN)
 - Google Fonts: Playfair Display, Libre Baskerville, Open Sans
