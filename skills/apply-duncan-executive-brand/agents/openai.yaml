@@ -1,0 +1,5 @@
+interface:
+  display_name: "Duncan Executive Brand"
+  short_description: "Build interfaces in the Duncan administration brand"
+  brand_color: "#2959A4"
+  default_prompt: "Use $apply-duncan-executive-brand to design and verify an on-brand Executive Branch interface."

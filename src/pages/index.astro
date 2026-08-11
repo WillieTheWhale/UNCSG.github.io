@@ -1,0 +1,68 @@
+---
+import "@fontsource/anton/400.css";
+import "@fontsource-variable/montserrat";
+import "../styles/global.css";
+
+const instagramUrl = "https://www.instagram.com/unc_executivebranch/";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="The UNC Student Government Executive Branch website is being updated for the Duncan Administration."
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#13294B" />
+    <link rel="canonical" href="https://executivebranch.unc.edu/" />
+    <title>UNC Student Government | Duncan Administration</title>
+    <script
+      is:inline
+      type="text/javascript"
+      id="unc-ub-script"
+      data-color="black"
+      src="https://unc.edu/web-assets/utility-bar/utility-bar.min.js"
+    ></script>
+  </head>
+  <body>
+    <main id="main" class="construction">
+      <section class="construction__content" aria-labelledby="construction-title">
+        <h1 id="construction-title">
+          <span class="bold-word">Bold</span>
+          {" "}
+          <span class="headline-rest">things are coming</span>
+        </h1>
+
+        <p class="construction__message">
+          This website is being updated for the Duncan Administration. Check back
+          soon.
+        </p>
+
+        <p class="social-callout">
+          Stay up to date with the Student Government Executive Branch on
+          {" "}
+          <a
+            href={instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram (opens in a new tab)"
+          >
+            <span>Instagram</span>
+            <svg
+              aria-hidden="true"
+              class="social-callout__chevron"
+              viewBox="0 0 16 16"
+              width="16"
+              height="16"
+            >
+              <path d="m5.5 2.75 5.25 5.25-5.25 5.25"></path>
+            </svg>
+          </a>
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

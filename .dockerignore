@@ -1,7 +1,8 @@
-Dockerfile
-nginx.conf
-openshift.yaml
 .git
-.gitignore
+dist
+node_modules
+.DS_Store
+skills
+tmp
 .dockerignore
 *.md

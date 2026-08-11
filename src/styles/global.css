@@ -1,0 +1,247 @@
+/* Duncan Administration design system
+   Canonical brand guidance lives in skills/apply-duncan-executive-brand/SKILL.md. */
+
+:root {
+  /* Exact primitives from the original ProjectBOLD brand-guide export. */
+  --brand-navy: #13294b;
+  --brand-blue: #2959a4;
+  --brand-carolina: #83b3ff;
+  --brand-gold: #ffd965;
+  --brand-yellow: #fff683;
+  --brand-orange: #fa6118;
+  --brand-magenta: #eb0677;
+
+  /* Neutral primitives for light text on the deep brand surface. */
+  --neutral-0: #ffffff;
+  --neutral-50: #f8f8f8;
+  --neutral-100: #dce8f6;
+
+  /* Semantic color roles. */
+  --color-surface: var(--brand-navy);
+  --color-text: var(--neutral-0);
+  --color-text-subtle: var(--neutral-100);
+  --color-link: var(--brand-carolina);
+  --color-focus: var(--brand-yellow);
+  --color-rule: var(--brand-carolina);
+
+  /* Anton supersedes the retired campaign display face. */
+  --font-display: "Anton", "Arial Narrow", sans-serif;
+  --font-body: "Montserrat Variable", Montserrat, Arial, sans-serif;
+  --type-display: clamp(3.75rem, 8.2vw, 9rem);
+  --type-body-lg: clamp(1.0625rem, 0.98rem + 0.35vw, 1.25rem);
+  --type-body: 1rem;
+  --type-label: 0.75rem;
+
+  /* Compact nonlinear spacing scale. */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+
+  --page-gutter: clamp(1.25rem, 4vw, 4.75rem);
+  --content-max: 100rem;
+  --copy-max: 58rem;
+  --motion-fast: 180ms ease;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 20rem;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-synthesis: none;
+  text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100svh;
+  margin: 0;
+  background: var(--color-surface);
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 4px;
+}
+
+.construction {
+  display: grid;
+  min-height: calc(100vh - 3rem);
+  min-height: calc(100svh - 3rem);
+  padding: clamp(2rem, 4vh, 4rem) var(--page-gutter)
+    clamp(6rem, 14vh, 10rem);
+  align-items: center;
+}
+
+.construction__content {
+  width: min(100%, var(--content-max));
+  margin-inline: auto;
+  text-align: center;
+}
+
+h1 {
+  max-width: none;
+  margin: 0 auto;
+  color: var(--color-text);
+  font-family: var(--font-display);
+  font-size: var(--type-display);
+  font-weight: 400;
+  letter-spacing: -0.018em;
+  line-height: 0.94;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.bold-word {
+  position: relative;
+  z-index: 0;
+  display: inline-block;
+  margin: 0 0 0.1em -0.08em;
+  padding: 0.07em 0.13em 0.1em;
+  color: var(--brand-navy);
+}
+
+.bold-word::before,
+.bold-word::after {
+  position: absolute;
+  content: "";
+  inset: 0;
+  z-index: -1;
+}
+
+.bold-word::before {
+  background: var(--brand-gold);
+  transform: rotate(-1.1deg);
+}
+
+.bold-word::after {
+  z-index: -2;
+  background: var(--brand-carolina);
+  transform: translate(0.07em, 0.07em) rotate(0.4deg);
+}
+
+.headline-rest {
+  display: inline;
+}
+
+.construction__message {
+  max-width: var(--copy-max);
+  margin: var(--space-7) auto 0;
+  color: var(--color-text-subtle);
+  font-size: var(--type-body-lg);
+  font-weight: 500;
+  line-height: 1.65;
+}
+
+.social-callout {
+  max-width: var(--copy-max);
+  margin: var(--space-6) auto 0;
+  color: var(--color-text-subtle);
+  font-size: var(--type-body);
+  font-weight: 500;
+  line-height: 1.75;
+}
+
+.social-callout a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--color-link);
+  font-weight: 750;
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+.social-callout a::after {
+  position: absolute;
+  content: "";
+  inset: auto 0 -0.2em;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--motion-fast);
+}
+
+.social-callout a:hover::after,
+.social-callout a:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.social-callout__chevron {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  stroke-width: 1.8;
+  transition: transform var(--motion-fast);
+}
+
+.social-callout a:hover .social-callout__chevron,
+.social-callout a:focus-visible .social-callout__chevron {
+  transform: translateX(0.2rem);
+}
+
+@media (max-width: 64rem) {
+  :root {
+    --content-max: 56rem;
+  }
+}
+
+@media (max-width: 42rem) {
+  .construction {
+    padding-block: var(--space-6) calc(var(--space-9) + var(--space-6));
+  }
+
+  h1 {
+    width: 100%;
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  .headline-rest {
+    display: block;
+  }
+
+  .construction__message {
+    margin-top: var(--space-6);
+  }
+
+}
+
+@media (max-width: 26rem) {
+  :root {
+    --type-display: clamp(3.75rem, 19vw, 5rem);
+  }
+
+  .construction {
+    padding-block: var(--space-5) var(--space-9);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
