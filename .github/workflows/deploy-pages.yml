@@ -1,0 +1,60 @@
+name: Deploy Astro site to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Build and upload Astro site
+        uses: withastro/action@v6
+        env:
+          SITE_URL: https://williethewhale.github.io
+          BASE_PATH: /UNCSG.github.io
+
+  validate-cloudapps:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Build CloudApps image
+        run: docker build --tag uncsg-website:test .
+
+      - name: Verify CloudApps image
+        run: |
+          container_id="$(docker run --detach --publish 8080:8080 uncsg-website:test)"
+          trap 'docker logs "$container_id"; docker rm --force "$container_id"' EXIT
+          for attempt in {1..20}; do
+            if curl --fail --silent --show-error http://127.0.0.1:8080/ > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          exit 1
+
+  deploy:
+    needs: [build, validate-cloudapps]
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
