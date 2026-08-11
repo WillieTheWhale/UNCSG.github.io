@@ -150,7 +150,7 @@ h1 {
 }
 
 .social-callout {
-  max-width: var(--copy-max);
+  max-width: 60rem;
   margin: var(--space-6) auto 0;
   color: var(--color-text-subtle);
   font-size: var(--type-body);
