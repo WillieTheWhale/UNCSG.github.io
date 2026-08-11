@@ -3,7 +3,9 @@ import "@fontsource/anton/400.css";
 import "@fontsource-variable/montserrat";
 import "../styles/global.css";
 
-const instagramUrl = "https://www.instagram.com/unc_executivebranch/";
+const executiveBranchInstagramUrl =
+  "https://www.instagram.com/unc_executivebranch/";
+const studentBodyPresidentInstagramUrl = "https://www.instagram.com/sbpdevin/";
 ---
 
 <!doctype html>
@@ -42,15 +44,15 @@ const instagramUrl = "https://www.instagram.com/unc_executivebranch/";
         </p>
 
         <p class="social-callout">
-          Stay up to date with the Student Government Executive Branch on
+          Stay up to date with the
           {" "}
           <a
-            href={instagramUrl}
+            href={executiveBranchInstagramUrl}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Instagram (opens in a new tab)"
+            aria-label="Student Government Executive Branch Instagram (opens in a new tab)"
           >
-            <span>Instagram</span>
+            <span>Student Government Executive Branch</span>
             <svg
               aria-hidden="true"
               class="social-callout__chevron"
@@ -61,6 +63,28 @@ const instagramUrl = "https://www.instagram.com/unc_executivebranch/";
               <path d="m5.5 2.75 5.25 5.25-5.25 5.25"></path>
             </svg>
           </a>
+          {" "}
+          and
+          {" "}
+          <a
+            href={studentBodyPresidentInstagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Student Body President Instagram (opens in a new tab)"
+          >
+            <span>Student Body President</span>
+            <svg
+              aria-hidden="true"
+              class="social-callout__chevron"
+              viewBox="0 0 16 16"
+              width="16"
+              height="16"
+            >
+              <path d="m5.5 2.75 5.25 5.25-5.25 5.25"></path>
+            </svg>
+          </a>
+          {" "}
+          Instagram pages.
         </p>
       </section>
     </main>
