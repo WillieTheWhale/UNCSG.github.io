@@ -1,11 +1,8 @@
 ---
 import "@fontsource/anton/400.css";
 import "@fontsource-variable/montserrat";
+import HomeSections from "../components/HomeSections.astro";
 import "../styles/global.css";
-
-const executiveBranchInstagramUrl =
-  "https://www.instagram.com/unc_executivebranch/";
-const studentBodyPresidentInstagramUrl = "https://www.instagram.com/sbpdevin/";
 ---
 
 <!doctype html>
@@ -15,12 +12,11 @@ const studentBodyPresidentInstagramUrl = "https://www.instagram.com/sbpdevin/";
     <meta name="viewport" content="width=device-width" />
     <meta
       name="description"
-      content="The UNC Student Government Executive Branch website is being updated for the Duncan Administration."
+      content="The UNC Student Government Executive Branch website for the Duncan Administration. Find departments, priorities, updates, and public events."
     />
-    <meta name="robots" content="noindex, nofollow" />
-    <meta name="theme-color" content="#13294B" />
+    <meta name="theme-color" content="#13294b" />
     <link rel="canonical" href="https://executivebranch.unc.edu/" />
-    <title>UNC Student Government | Duncan Administration</title>
+    <title>UNC Student Government Executive Branch | Duncan Administration</title>
     <script
       is:inline
       type="text/javascript"
@@ -30,63 +26,70 @@ const studentBodyPresidentInstagramUrl = "https://www.instagram.com/sbpdevin/";
     ></script>
   </head>
   <body>
-    <main id="main" class="construction">
-      <section class="construction__content" aria-labelledby="construction-title">
-        <h1 id="construction-title">
-          <span class="bold-word">Bold</span>
-          {" "}
-          <span class="headline-rest">things are coming</span>
-        </h1>
+    <a class="skip-link" href="#main">Skip to main content</a>
 
-        <p class="construction__message">
-          This website is being updated for the Duncan Administration. Check back
-          soon.
-        </p>
+    <header class="site-header">
+      <a class="site-identity" href="#main" aria-label="UNC Student Government Executive Branch home">
+        <span class="site-identity__seal" aria-hidden="true"></span>
+        <span class="site-identity__text">
+          <strong>Executive Branch</strong>
+          <small>Duncan Administration · 2026–27</small>
+        </span>
+      </a>
 
-        <p class="social-callout">
-          Stay up to date with the
-          {" "}
-          <a
-            href={executiveBranchInstagramUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Student Government Executive Branch Instagram (opens in a new tab)"
-          >
-            <span>Student Government Executive Branch</span>
-            <svg
-              aria-hidden="true"
-              class="social-callout__chevron"
-              viewBox="0 0 16 16"
-              width="16"
-              height="16"
-            >
-              <path d="m5.5 2.75 5.25 5.25-5.25 5.25"></path>
-            </svg>
-          </a>
-          {" "}
-          and
-          {" "}
-          <a
-            href={studentBodyPresidentInstagramUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Student Body President Instagram (opens in a new tab)"
-          >
-            <span>Student Body President</span>
-            <svg
-              aria-hidden="true"
-              class="social-callout__chevron"
-              viewBox="0 0 16 16"
-              width="16"
-              height="16"
-            >
-              <path d="m5.5 2.75 5.25 5.25-5.25 5.25"></path>
-            </svg>
-          </a>
-          {" "}
-          Instagram pages.
-        </p>
+      <nav class="site-nav" aria-label="Executive Branch navigation">
+        <a href="#departments">Teams</a>
+        <a href="#priorities">Priorities</a>
+        <a href="#updates">Updates</a>
+        <a href="#events">Events</a>
+        <a class="site-nav__contact" href="#contact">Get in touch</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="page-title">
+        <figure class="hero__media">
+          <img
+            src="/design-lab/wilson-library.jpg"
+            alt="Wilson Library and Polk Place at UNC-Chapel Hill"
+            fetchpriority="high"
+            decoding="async"
+            width="2000"
+            height="1333"
+          />
+        </figure>
+        <div class="hero__shade" aria-hidden="true"></div>
+
+        <div class="hero__inner">
+          <div class="hero__copy">
+            <h1 id="page-title">UNC Student Government Executive Branch</h1>
+            <p>The Duncan Administration coordinates executive departments, task forces, student advocacy, public updates, and events for Carolina's undergraduate students.</p>
+          </div>
+
+          <aside class="office-card" aria-label="Open office hours">
+            <time><b>Fall</b><span>2026</span></time>
+            <div>
+              <strong>Open office hours</strong>
+              <p>Dates, times, and locations will be published with the public calendar.</p>
+              <a href="#events">View events <span aria-hidden="true">→</span></a>
+            </div>
+          </aside>
+        </div>
       </section>
+
+      <HomeSections />
     </main>
+
+    <footer class="site-footer" id="contact">
+      <div>
+        <strong>Executive Branch</strong>
+        <p>Duncan Administration · Serving Carolina's undergraduate students.</p>
+      </div>
+      <div class="site-footer__links">
+        <a href="mailto:studentgovernment@unc.edu">Contact us</a>
+        <a href="https://www.instagram.com/unc_executivebranch/">Executive Branch Instagram</a>
+        <a href="https://www.instagram.com/sbpdevin/">Student Body President Instagram</a>
+      </div>
+    </footer>
   </body>
 </html>
