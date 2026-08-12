@@ -1,0 +1,76 @@
+---
+import "@fontsource/anton/400.css";
+import "@fontsource-variable/montserrat";
+import "@fontsource-variable/montserrat/wght-italic.css";
+import "@fontsource/open-sans/600.css";
+import AccessDeniedBanner from "../components/AccessDeniedBanner.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import "../styles/global.css";
+import "../styles/updates.css";
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  noindex?: boolean;
+  bodyClass?: string;
+}
+
+const {
+  title,
+  description,
+  canonicalPath,
+  noindex = false,
+  bodyClass = "",
+} = Astro.props;
+const canonical = new URL(canonicalPath, "https://executivebranch.unc.edu");
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#13294b" />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonical} />
+    <title>{title}</title>
+    <script
+      is:inline
+      type="text/javascript"
+      id="unc-ub-script"
+      data-color="black"
+      src="https://unc.edu/web-assets/utility-bar/utility-bar.min.js"
+    ></script>
+  </head>
+  <body class={bodyClass}>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <AccessDeniedBanner />
+
+    <SiteHeader currentPath={canonicalPath} />
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer" id="contact">
+      <div class="site-footer__identity">
+        <img
+          class="site-footer__signature"
+          src="/images/unc-chapel-hill-signature.svg"
+          alt="The University of North Carolina at Chapel Hill"
+          width="232"
+          height="72"
+        />
+        <strong class="site-footer__title">UNC-Chapel Hill Student Government Executive Branch</strong>
+        <p>First, Best, and For All</p>
+      </div>
+      <div class="site-footer__links">
+        <a href="mailto:studentgovernment@unc.edu">Contact us</a>
+        <a href="https://www.instagram.com/unc_executivebranch/">Executive Branch Instagram</a>
+        <a href="https://www.instagram.com/sbpdevin/">Student Body President Instagram</a>
+      </div>
+    </footer>
+  </body>
+</html>

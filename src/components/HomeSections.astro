@@ -1,108 +1,463 @@
 ---
-const teams = [
-  ["Office of the President", "Devin Duncan", "Student Body President"],
-  ["Diversity, Equity & Inclusion", "Amiera Alharazim", "Executive Council"],
-  ["Academic Affairs", "Lily-Elizabeth Ludwick", "Executive Council"],
-  ["State & External Affairs", "Aidan Tobin", "Executive Council"],
-  ["Office of the Secretary", "Hailey Shapiro", "Executive Council"],
-  ["Basic Needs", "Chloe Johnson", "Cabinet Director"],
-  ["Environmental Affairs", "Ellie Prosser", "Cabinet Director"],
-  ["Executive Council · Office of the President", "Pokuaa Biritwum", "Executive Council"],
+import VisionSection from "./VisionSection.astro";
+import HomeUpdates from "./HomeUpdates.astro";
+
+const directoryGroups = [
+  {
+    title: "Executive offices",
+    teams: [
+      {
+        team: "Office of the Student Body President",
+        leader: "Devin Duncan",
+        role: "Student Body President",
+        email: "spb@unc.edu",
+        description: "Sets the administration's agenda and leads student advocacy, university partnerships, and executive action.",
+        portrait: "/images/leadership/devin-duncan.jpg",
+        portraitPosition: "center 32%",
+      },
+      {
+        team: "Office of the Vice Student Body President",
+        leader: "Ben Jones",
+        role: "Vice President",
+        email: "usgvp@unc.edu",
+        description: "Supports the President and helps coordinate the Executive Council, student engagement, and cross-office initiatives.",
+        initials: "BJ",
+      },
+      {
+        team: "Office of the Treasurer",
+        leader: "Hadi Rahim",
+        role: "Treasurer",
+        email: "usgtreasurer@unc.edu",
+        description: "Oversees Executive Branch finances and promotes responsible, transparent stewardship of student government resources.",
+        initials: "HR",
+      },
+      {
+        team: "Office of the Student Body Secretary",
+        leader: "Hailey Shapiro",
+        role: "Secretary",
+        email: "usgsec@unc.edu",
+        description: "Maintains official records, supports administration-wide operations, and helps keep the branch's work organized and accessible.",
+        portrait: "/images/leadership/hailey-shapiro.jpg",
+        portraitPosition: "center 24%",
+      },
+      {
+        team: "Office of the Chief of the Cabinet",
+        leader: "Finlay Cullen",
+        role: "Chief of Cabinet (Interim)",
+        email: "spb@unc.edu",
+        description: "Coordinates cabinet departments and keeps shared priorities, staff collaboration, and implementation moving together.",
+        portrait: "/images/leadership/finlay-cullen.jpg",
+        portraitPosition: "center 28%",
+      },
+      {
+        team: "Office of Communications",
+        leader: "Hailey Shapiro",
+        role: "Chief Communications Officer",
+        email: "hmshap@unc.edu",
+        description: "Shares authentic student stories and publishes clear updates, benchmarks, and progress from across the administration.",
+      },
+    ],
+  },
+  {
+    title: "Cabinet departments",
+    teams: [
+      {
+        team: "Academic Affairs",
+        leader: "Matthew Howard",
+        role: "Director",
+        email: "mghoward@unc.edu",
+        description: "Strengthens advising, mentoring, academic support, and innovation in teaching and learning so every Tar Heel can thrive.",
+        portrait: "/images/leadership/matthew-howard.jpg",
+        portraitPosition: "center 30%",
+      },
+      {
+        team: "Basic Needs",
+        leader: "Chloe Johnson",
+        role: "Director",
+        email: "chlojo@unc.edu",
+        description: "Connects students with food, housing, transportation, and financial-stability resources that make daily life at Carolina more secure.",
+        portrait: "/images/leadership/chloe-johnson.jpg",
+        portraitPosition: "center 34%",
+      },
+      {
+        team: "Civic Engagement and Outreach",
+        leader: "Shakila Cantebury",
+        role: "Director",
+        email: "scant@unc.edu",
+        description: "Builds pathways to service, civic participation, and stronger partnerships between Carolina and the surrounding community.",
+        portrait: "/images/leadership/shakila-cantebury.jpg",
+        portraitPosition: "center 27%",
+      },
+      {
+        team: "Diversity, Equity, and Inclusion",
+        leader: "Cameron Lee",
+        role: "Director",
+        email: "campslee@unc.edu",
+        description: "Fosters belonging, celebrates identity, and advances equitable access and participation across campus life.",
+        initials: "CL",
+      },
+      {
+        team: "Environmental Affairs",
+        leader: "Ellie Prosser",
+        role: "Director",
+        email: "eprosser@unc.edu",
+        description: "Leads campus sustainability, waste reduction, food recovery, and shared stewardship of Carolina's environment.",
+        portrait: "/images/leadership/ellie-prosser.jpg",
+        portraitPosition: "center 24%",
+      },
+      {
+        team: "State and External Affairs",
+        leader: "Sophia Fontecchio",
+        role: "Director",
+        email: "sophfont@unc.edu",
+        description: "Represents student priorities beyond campus and connects Tar Heels with public officials, policy, and public-service partners.",
+        initials: "SF",
+      },
+      {
+        team: "Student Safety and Wellness",
+        leader: "Lauryn Sidni Cooper",
+        role: "Director",
+        email: "lsc@unc.edu",
+        description: "Improves access to mental and physical health resources while advancing prevention, preparedness, and campus safety.",
+        initials: "LSC",
+      },
+      {
+        team: "Management and Budget",
+        leader: "Timothy Gaylord",
+        role: "Director",
+        email: "tpg@unc.edu",
+        description: "Supports cabinet operations through budgeting, resource planning, and accountable management across the Executive Branch.",
+        initials: "TG",
+      },
+    ],
+  },
 ];
 
 const priorities = [
-  ["01", "Academic success", "Advising, planning, and academic support."],
-  ["02", "Basic needs and wellbeing", "Food, housing, health, and emergency support."],
-  ["03", "Civic engagement", "Clearer paths from student ideas to public action."],
-  ["04", "Belonging", "Communities where every Tar Heel can participate."],
-  ["05", "Clear communication", "Public updates on commitments, decisions, and next steps."],
-];
-
-const updates = [
-  ["August 2026", "How the Executive Branch will publish progress", "A proposed format for identifying the owner, current status, and next public checkpoint for administration priorities."],
-  ["August 2026", "Fall office hours and public meeting schedule", "Where students will be able to meet administration leaders and follow public Executive Branch meetings."],
-  ["August 2026", "A clearer route to department contacts", "How the website will connect student questions with the department or task force responsible for the issue."],
+  [
+    "01",
+    "Academic success",
+    "Reimagine advising, mentorship, and learning support so every Tar Heel has the guidance to thrive.",
+    "Expand peer support and early feedback while advancing accessible, student-centered innovation in teaching and learning.",
+    "priority-card--academic",
+  ],
+  [
+    "02",
+    "Basic needs and wellbeing",
+    "Help every student reliably access food, housing, transportation, health, and safety resources.",
+    "Centralize support, reduce practical barriers, and pursue partnerships that make essential resources easier to find and use.",
+    "priority-card--needs",
+  ],
+  [
+    "03",
+    "Civic and community engagement",
+    "Strengthen Carolina's culture of service and the connection between students, campus, and the wider community.",
+    "Create more routes into public service, civic participation, respectful dialogue, and town-university collaboration.",
+    "priority-card--civic",
+  ],
+  [
+    "04",
+    "Diversity, equity, and inclusion",
+    "Build a Carolina where every student feels seen, supported, respected, and able to participate fully.",
+    "Invest in belonging, cultural programming, shared understanding, and equitable access across campus life.",
+    "priority-card--belonging",
+  ],
+  [
+    "05",
+    "Communication and transparency",
+    "Tell Carolina's story authentically and ensure student voices help shape university decisions.",
+    "Publish clear benchmarks, timelines, and progress updates so students can see what the administration is doing and hold it accountable.",
+    "priority-card--communication",
+  ],
 ];
 
 const events = [
-  ["28", "AUG", "Open office hours", "Student Union · Room and time to be confirmed"],
-  ["09", "SEP", "Public listening session", "Location and time to be confirmed"],
-  ["17", "SEP", "Monthly administration update", "Location and time to be confirmed"],
+  ["28", "AUG", "Example event", "Student Union · Room and time to be confirmed", "2026-08-28", "2026-08-29"],
+  ["09", "SEP", "Another example event", "Location and time to be confirmed", "2026-09-09", "2026-09-10"],
+  ["17", "SEP", "Yet another example event", "Location and time to be confirmed", "2026-09-17", "2026-09-18"],
 ];
 ---
 
 <div class="content-sections">
-  <section class="content-section content-section--departments" id="departments" aria-labelledby="departments-title">
-    <header class="section-heading">
-      <h2 id="departments-title">Departments, task forces, and executive offices</h2>
-      <p>Find the student leaders responsible for each area and use one shared contact route to reach the right team.</p>
-    </header>
-
-    <div class="team-grid">
-      {teams.map(([team, leader, role]) => (
-        <article class="team">
-          <div>
-            <h3>{team}</h3>
-            <p><strong>{leader}</strong><span>{role}</span></p>
-          </div>
-          <a
-            href={`mailto:studentgovernment@unc.edu?subject=${encodeURIComponent(`Executive Branch: ${team}`)}`}
-            aria-label={`Contact ${team}`}
-          >
-            Contact this team <span aria-hidden="true">→</span>
-          </a>
-        </article>
-      ))}
-    </div>
-  </section>
+  <VisionSection />
 
   <section class="content-section content-section--priorities" id="priorities" aria-labelledby="priorities-title">
     <header class="section-heading">
-      <h2 id="priorities-title">Administration priorities</h2>
-      <p>The ProjectBOLD platform organized as five areas of public work.</p>
+      <h2 id="priorities-title">Our priorities</h2>
     </header>
 
     <ol class="priority-list">
-      {priorities.map(([number, title, copy]) => (
-        <li><span>{number}</span><div><h3>{title}</h3><p>{copy}</p></div></li>
+      {priorities.map(([number, title, copy, approach, design]) => (
+        <li class:list={["priority-card", design]}>
+          <span>{number}</span>
+          <div>
+            <h3>{title}</h3>
+            <p>{copy}</p>
+            <p class="priority-list__approach"><strong>Our approach:</strong> {approach}</p>
+          </div>
+        </li>
       ))}
     </ol>
   </section>
 
-  <section class="content-section content-section--updates" id="updates" aria-labelledby="updates-title">
+  <section class="content-section content-section--departments" id="departments" aria-labelledby="departments-title">
     <header class="section-heading">
-      <h2 id="updates-title">Updates from the Executive Branch</h2>
-      <p>News, explanations, and public progress reports from the administration.</p>
+      <h2 id="departments-title">Executive offices and cabinet departments</h2>
     </header>
 
-    <div class="update-grid">
-      {updates.map(([date, title, copy]) => (
-        <article class="update">
-          <time>{date}</time>
-          <h3>{title}</h3>
-          <p>{copy}</p>
-          <a href="#updates" aria-label={`Read update: ${title}`}>Read update <span aria-hidden="true">→</span></a>
-        </article>
-      ))}
-    </div>
-    <p class="prototype-note">Representative content for layout evaluation; published posts will replace these examples.</p>
+    {directoryGroups.map(({ title, teams }) => (
+      <section class="directory-group" aria-labelledby={`directory-${title.toLowerCase().replaceAll(" ", "-")}`}>
+        <h3 class="directory-group__title" id={`directory-${title.toLowerCase().replaceAll(" ", "-")}`}>{title}</h3>
+        <div class="team-grid">
+          {teams.map(({ team, leader, role, email, description, portrait, portraitPosition, initials }) => (
+            <article class="team">
+              <div class:list={["team__portrait", {
+                "team__portrait--fallback": !portrait && initials,
+                "team__portrait--empty": !portrait && !initials,
+              }]}>
+                {portrait ? (
+                  <img
+                    src={portrait}
+                    alt=""
+                    width="160"
+                    height="160"
+                    loading="lazy"
+                    decoding="async"
+                    style={`object-position: ${portraitPosition};`}
+                  />
+                ) : initials ? (
+                  <span aria-hidden="true">{initials}</span>
+                ) : null}
+              </div>
+              <div class="team__details">
+                <h4>{team}</h4>
+                <p class="team__description">{description}</p>
+                <p class="team__leader"><strong>{leader}</strong><span>{role}</span></p>
+              </div>
+              <a
+                href={`mailto:${email}?subject=${encodeURIComponent(`Executive Branch: ${team}`)}`}
+                aria-label={`Email ${team}`}
+              >
+                <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">
+                  <path d="M3 5.5h18v13H3zM4 7l8 6 8-6" />
+                </svg>
+                Email this team
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
   </section>
+
+  <HomeUpdates />
 
   <section class="content-section content-section--events" id="events" aria-labelledby="events-title">
     <header class="section-heading">
       <h2 id="events-title">Events and public meetings</h2>
-      <p>Office hours, listening sessions, and administration meetings open to students.</p>
     </header>
 
     <div class="event-list">
-      {events.map(([day, month, title, detail]) => (
+      {events.map(([day, month, title, detail, start, end]) => (
         <article class="event">
-          <time><b>{day}</b><span>{month}</span></time>
+          <time datetime={start}><b>{day}</b><span>{month}</span></time>
           <div><h3>{title}</h3><p>{detail}</p></div>
-          <a href="#contact" aria-label={`Event details: ${title}`}>Event details <span aria-hidden="true">→</span></a>
+          <div class="event__actions">
+            <button
+              type="button"
+              class="event__calendar"
+              data-calendar-event
+              data-event-title={title}
+              data-event-detail={detail}
+              data-event-start={start}
+              data-event-end={end}
+              aria-haspopup="dialog"
+            >
+              <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">
+                <path d="M6.5 3v3M17.5 3v3M4 8.5h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z" />
+              </svg>
+              Add to calendar
+            </button>
+            <a href="#contact" aria-label={`Event details: ${title}`}>
+              Event details
+              <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="m9 6 6 6-6 6" /></svg>
+            </a>
+          </div>
         </article>
       ))}
     </div>
-    <p class="prototype-note">Dates are representative placeholders pending the administration's confirmed public calendar.</p>
+  </section>
+
+  <section class="content-section content-section--connected" id="connected" aria-labelledby="connected-title">
+    <header class="section-heading">
+      <h2 id="connected-title">Stay connected</h2>
+    </header>
+
+    <div class="instagram-embed-grid">
+      <article
+        class="instagram-embed"
+        aria-label="UNC Student Government Executive Branch Instagram profile"
+        data-instagram-embed-title="UNC Student Government Executive Branch Instagram profile"
+      >
+        <blockquote
+          class="instagram-media"
+          data-instgrm-permalink="https://www.instagram.com/unc_executivebranch/"
+          data-instgrm-version="14"
+        >
+          <a href="https://www.instagram.com/unc_executivebranch/" target="_blank" rel="noreferrer">
+            View the UNC Student Government Executive Branch on Instagram
+          </a>
+        </blockquote>
+      </article>
+
+      <article
+        class="instagram-embed"
+        aria-label="Student Body President Instagram profile"
+        data-instagram-embed-title="Student Body President Devin Duncan Instagram profile"
+      >
+        <blockquote
+          class="instagram-media"
+          data-instgrm-permalink="https://www.instagram.com/sbpdevin/"
+          data-instgrm-version="14"
+        >
+          <a href="https://www.instagram.com/sbpdevin/" target="_blank" rel="noreferrer">
+            View Student Body President Devin Duncan on Instagram
+          </a>
+        </blockquote>
+      </article>
+    </div>
   </section>
 </div>
+
+<script is:inline async src="https://www.instagram.com/embed.js"></script>
+<script is:inline>
+  (() => {
+    const embeds = [...document.querySelectorAll("[data-instagram-embed-title]")];
+    const titleInstagramFrames = () => {
+      let titledFrames = 0;
+
+      embeds.forEach((embed) => {
+        const frame = embed.querySelector("iframe");
+        if (!frame) return;
+        frame.title = embed.dataset.instagramEmbedTitle;
+        titledFrames += 1;
+      });
+
+      if (titledFrames === embeds.length) observer.disconnect();
+    };
+
+    const observer = new MutationObserver(titleInstagramFrames);
+    observer.observe(document.body, { childList: true, subtree: true });
+    titleInstagramFrames();
+  })();
+</script>
+
+<dialog class="calendar-dialog" id="calendar-dialog" aria-labelledby="calendar-dialog-title" aria-describedby="calendar-dialog-event">
+  <div class="calendar-dialog__panel">
+    <form method="dialog" class="calendar-dialog__close-form">
+      <button class="calendar-dialog__close" type="submit" aria-label="Close add to calendar dialog">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path d="m6 6 12 12M18 6 6 18" /></svg>
+      </button>
+    </form>
+    <h2 id="calendar-dialog-title">Add to calendar</h2>
+    <p class="calendar-dialog__event" id="calendar-dialog-event"></p>
+    <div class="calendar-dialog__options">
+      <a data-calendar-apple href="#" download>
+        <strong>Apple Calendar</strong>
+        <span>Download an .ics calendar event</span>
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path d="m9 6 6 6-6 6" /></svg>
+      </a>
+      <a data-calendar-google href="#" target="_blank" rel="noreferrer">
+        <strong>Google Calendar</strong>
+        <span>Open this event in Google Calendar</span>
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path d="m9 6 6 6-6 6" /></svg>
+      </a>
+      <a data-calendar-outlook href="#" target="_blank" rel="noreferrer">
+        <strong>Microsoft Outlook</strong>
+        <span>Open this event in Outlook Calendar</span>
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path d="m9 6 6 6-6 6" /></svg>
+      </a>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  const calendarDialog = document.querySelector<HTMLDialogElement>("#calendar-dialog");
+  const calendarEventName = document.querySelector<HTMLElement>("#calendar-dialog-event");
+  const appleCalendarLink = document.querySelector<HTMLAnchorElement>("[data-calendar-apple]");
+  const googleCalendarLink = document.querySelector<HTMLAnchorElement>("[data-calendar-google]");
+  const outlookCalendarLink = document.querySelector<HTMLAnchorElement>("[data-calendar-outlook]");
+  let calendarDownloadUrl = "";
+
+  const calendarDate = (value: string) => value.replaceAll("-", "");
+  const escapeCalendarText = (value: string) => value
+    .replaceAll("\\", "\\\\")
+    .replaceAll("\n", "\\n")
+    .replaceAll(",", "\\,")
+    .replaceAll(";", "\\;");
+
+  document.querySelectorAll<HTMLButtonElement>("[data-calendar-event]").forEach((button) => {
+    button.addEventListener("click", () => {
+      if (!calendarDialog || !calendarEventName || !appleCalendarLink || !googleCalendarLink || !outlookCalendarLink) return;
+
+      const title = button.dataset.eventTitle ?? "Executive Branch event";
+      const detail = button.dataset.eventDetail ?? "";
+      const start = button.dataset.eventStart ?? "";
+      const end = button.dataset.eventEnd ?? "";
+      const compactStart = calendarDate(start);
+      const compactEnd = calendarDate(end);
+
+      calendarEventName.textContent = title;
+
+      if (calendarDownloadUrl) URL.revokeObjectURL(calendarDownloadUrl);
+      const calendarFile = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//UNC Student Government Executive Branch//Events//EN",
+        "CALSCALE:GREGORIAN",
+        "BEGIN:VEVENT",
+        `UID:${compactStart}-${title.toLowerCase().replaceAll(/[^a-z0-9]+/g, "-")}@executivebranch.unc.edu`,
+        `DTSTART;VALUE=DATE:${compactStart}`,
+        `DTEND;VALUE=DATE:${compactEnd}`,
+        `SUMMARY:${escapeCalendarText(title)}`,
+        `DESCRIPTION:${escapeCalendarText(detail)}`,
+        "END:VEVENT",
+        "END:VCALENDAR",
+      ].join("\r\n");
+      calendarDownloadUrl = URL.createObjectURL(new Blob([calendarFile], { type: "text/calendar;charset=utf-8" }));
+      appleCalendarLink.href = calendarDownloadUrl;
+      appleCalendarLink.download = `${title.toLowerCase().replaceAll(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") || "event"}.ics`;
+
+      const googleUrl = new URL("https://calendar.google.com/calendar/render");
+      googleUrl.search = new URLSearchParams({
+        action: "TEMPLATE",
+        text: title,
+        dates: `${compactStart}/${compactEnd}`,
+        details: detail,
+      }).toString();
+      googleCalendarLink.href = googleUrl.toString();
+
+      const outlookUrl = new URL("https://outlook.live.com/calendar/0/deeplink/compose");
+      outlookUrl.search = new URLSearchParams({
+        subject: title,
+        startdt: start,
+        enddt: end,
+        body: detail,
+        allday: "true",
+      }).toString();
+      outlookCalendarLink.href = outlookUrl.toString();
+
+      calendarDialog.showModal();
+    });
+  });
+
+  calendarDialog?.addEventListener("click", (event) => {
+    if (event.target === calendarDialog) calendarDialog.close();
+  });
+
+  calendarDialog?.addEventListener("close", () => {
+    if (!calendarDownloadUrl) return;
+    URL.revokeObjectURL(calendarDownloadUrl);
+    calendarDownloadUrl = "";
+  });
+</script>

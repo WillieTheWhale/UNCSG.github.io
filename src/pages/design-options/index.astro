@@ -1,0 +1,59 @@
+---
+import "@fontsource/anton/400.css";
+import "@fontsource-variable/montserrat";
+import "../../styles/design-options.css";
+import "../../styles/design-options-variants.css";
+import "../../styles/design-options-refined.css";
+import { designOptions, optionPath } from "../../data/design-options";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#13294b" />
+    <title>Duncan Administration | {designOptions.length} Landing Page Directions</title>
+  </head>
+  <body class="design-options-index">
+    <a class="skip-link" href="#options">Skip to design options</a>
+    <header class="overview-hero">
+      <div>
+        <span class="section-label">Duncan Administration · Design Lab</span>
+        <h1><span>{designOptions.length}</span> ways to build the Executive Branch.</h1>
+      </div>
+      <div class="overview-intro">
+        <p>Every direction uses the same Anton and Montserrat type system, ProjectBOLD palette, official UNC utility bar, and accessible interaction language.</p>
+        <p>Options 26–45 respond to the second-round brief with quieter institutional hierarchy, authentic photography, Student Government branding, and no eyebrow text.</p>
+        <p><a href="/design-options/finalists/">Compare the three Wilson Library finalists →</a></p>
+        <span>Use ← and → inside any option to move quickly.</span>
+      </div>
+    </header>
+
+    <main id="options" class="overview-grid">
+      {designOptions.map((option) => (
+        <article class={`overview-card overview-card--${option.layout}`}>
+          <a class="overview-card__preview" href={optionPath(option)} aria-label={`Open option ${option.id}: ${option.name}`}>
+            <span class="preview-number">{String(option.id).padStart(2, "0")}</span>
+            <span class="preview-frame" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i>
+            </span>
+            <strong>{option.name}</strong>
+          </a>
+          <div class="overview-card__copy">
+            <h2>{String(option.id).padStart(2, "0")} · {option.name}</h2>
+            <p>{option.thesis}</p>
+            <small><b>Tradeoff:</b> {option.tradeoff}</small>
+            <a href={optionPath(option)}>Open direction <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      ))}
+    </main>
+
+    <footer class="overview-footer">
+      <strong>{designOptions.length} directions · one Duncan design system</strong>
+      <a href="/">Return to the current construction page</a>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+---
+import UpdateListing from "../../components/UpdateListing.astro";
+import UpdateSiteLayout from "../../layouts/UpdateSiteLayout.astro";
+---
+
+<UpdateSiteLayout
+  title="Preview Updates | UNC Student Government Executive Branch"
+  description="Staff preview of Executive Branch updates."
+  canonicalPath="/preview-updates/"
+  noindex
+  bodyClass="updates-page"
+>
+  <aside class="preview-mode-banner">
+    <p>
+      Showing both public and <strong>preview</strong> updates.
+      <a href="/manage-updates/">Return to manage updates</a> to finalize and publish.
+    </p>
+  </aside>
+  <header class="updates-hero updates-hero--preview">
+    <div>
+      <h1>Updates preview</h1>
+      <p>This page matches the public updates page while including work that has not been published.</p>
+    </div>
+  </header>
+  <section class="updates-index" aria-label="Public and preview Executive Branch updates">
+    <UpdateListing mode="preview" />
+  </section>
+</UpdateSiteLayout>

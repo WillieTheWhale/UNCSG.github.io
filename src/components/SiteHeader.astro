@@ -1,0 +1,52 @@
+---
+interface Props {
+  onHomePage?: boolean;
+  currentPath?: string;
+}
+
+const { onHomePage = false, currentPath = "" } = Astro.props;
+const sectionHref = (section: string) => onHomePage ? `#${section}` : `/#${section}`;
+---
+
+<header class="site-header" data-site-header>
+  <a
+    class="site-identity"
+    href={onHomePage ? "#main" : "/"}
+    aria-label="UNC Student Government Executive Branch home"
+  >
+    <span class="site-identity__seal" aria-hidden="true"></span>
+    <span class="site-identity__text">
+      <strong>Executive Branch</strong>
+      <small>Duncan Administration · 2026–27</small>
+    </span>
+  </a>
+
+  <button
+    class="site-nav-toggle"
+    type="button"
+    aria-expanded="false"
+    aria-controls="executive-branch-navigation"
+    data-site-nav-toggle
+  >
+    <span class="site-nav-toggle__icon" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="site-nav-toggle__label" data-site-nav-label>Open navigation</span>
+  </button>
+
+  <nav
+    class="site-nav"
+    id="executive-branch-navigation"
+    aria-label="Executive Branch navigation"
+  >
+    <a href={sectionHref("vision")}>Vision</a>
+    <a href={sectionHref("priorities")}>Priorities</a>
+    <a href={sectionHref("departments")}>Teams</a>
+    <a href="/updates/" aria-current={currentPath === "/updates/" ? "page" : undefined}>Updates</a>
+    <a href={sectionHref("events")}>Events</a>
+    <a class="site-nav__contact" href={sectionHref("contact")}>Get in touch</a>
+  </nav>
+</header>
+
+<script>
+  import { initializeSiteNavigation } from "../scripts/site-navigation";
+  initializeSiteNavigation();
+</script>

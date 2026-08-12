@@ -1,7 +1,11 @@
 ---
 import "@fontsource/anton/400.css";
 import "@fontsource-variable/montserrat";
+import "@fontsource-variable/montserrat/wght-italic.css";
+import "@fontsource/open-sans/600.css";
+import AccessDeniedBanner from "../components/AccessDeniedBanner.astro";
 import HomeSections from "../components/HomeSections.astro";
+import SiteHeader from "../components/SiteHeader.astro";
 import "../styles/global.css";
 ---
 
@@ -27,24 +31,9 @@ import "../styles/global.css";
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
+    <AccessDeniedBanner />
 
-    <header class="site-header">
-      <a class="site-identity" href="#main" aria-label="UNC Student Government Executive Branch home">
-        <span class="site-identity__seal" aria-hidden="true"></span>
-        <span class="site-identity__text">
-          <strong>Executive Branch</strong>
-          <small>Duncan Administration · 2026–27</small>
-        </span>
-      </a>
-
-      <nav class="site-nav" aria-label="Executive Branch navigation">
-        <a href="#departments">Teams</a>
-        <a href="#priorities">Priorities</a>
-        <a href="#updates">Updates</a>
-        <a href="#events">Events</a>
-        <a class="site-nav__contact" href="#contact">Get in touch</a>
-      </nav>
-    </header>
+    <SiteHeader onHomePage />
 
     <main id="main">
       <section class="hero" aria-labelledby="page-title">
@@ -63,13 +52,13 @@ import "../styles/global.css";
         <div class="hero__inner">
           <div class="hero__copy">
             <h1 id="page-title">UNC Student Government Executive Branch</h1>
-            <p>The Duncan Administration coordinates executive departments, task forces, student advocacy, public updates, and events for Carolina's undergraduate students.</p>
+            <p>The Duncan Administration is creating a Carolina that is first in excellence, best in integrity, and for every student.</p>
           </div>
 
-          <aside class="office-card" aria-label="Open office hours">
+          <aside class="office-card" aria-label="Example event">
             <time><b>Fall</b><span>2026</span></time>
             <div>
-              <strong>Open office hours</strong>
+              <strong>Example event</strong>
               <p>Dates, times, and locations will be published with the public calendar.</p>
               <a href="#events">View events <span aria-hidden="true">→</span></a>
             </div>
@@ -81,9 +70,16 @@ import "../styles/global.css";
     </main>
 
     <footer class="site-footer" id="contact">
-      <div>
-        <strong>Executive Branch</strong>
-        <p>Duncan Administration · Serving Carolina's undergraduate students.</p>
+      <div class="site-footer__identity">
+        <img
+          class="site-footer__signature"
+          src="/images/unc-chapel-hill-signature.svg"
+          alt="The University of North Carolina at Chapel Hill"
+          width="232"
+          height="72"
+        />
+        <strong class="site-footer__title">UNC-Chapel Hill Student Government Executive Branch</strong>
+        <p>First, Best, and For All</p>
       </div>
       <div class="site-footer__links">
         <a href="mailto:studentgovernment@unc.edu">Contact us</a>

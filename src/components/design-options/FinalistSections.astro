@@ -1,0 +1,117 @@
+---
+import type { ModuleKind } from "../../data/design-options";
+
+interface Props {
+  order: Extract<ModuleKind, "departments" | "priorities" | "updates" | "events">[];
+  variant: string;
+}
+
+const { order, variant } = Astro.props;
+
+const teams = [
+  ["Office of the President", "Devin Duncan", "Student Body President"],
+  ["Diversity, Equity & Inclusion", "Amiera Alharazim", "Executive Council"],
+  ["Academic Affairs", "Lily-Elizabeth Ludwick", "Executive Council"],
+  ["State & External Affairs", "Aidan Tobin", "Executive Council"],
+  ["Office of the Secretary", "Hailey Shapiro", "Executive Council"],
+  ["Basic Needs", "Chloe Johnson", "Cabinet Director"],
+  ["Environmental Affairs", "Ellie Prosser", "Cabinet Director"],
+  ["Executive Council · Office of the President", "Pokuaa Biritwum", "Executive Council"],
+];
+
+const priorities = [
+  ["01", "Academic success", "Advising, planning, and academic support."],
+  ["02", "Basic needs and wellbeing", "Food, housing, health, and emergency support."],
+  ["03", "Civic engagement", "Clearer paths from student ideas to public action."],
+  ["04", "Belonging", "Communities where every Tar Heel can participate."],
+  ["05", "Clear communication", "Public updates on commitments, decisions, and next steps."],
+];
+
+const updates = [
+  ["August 2026", "How the Executive Branch will publish progress", "A proposed format for identifying the owner, current status, and next public checkpoint for administration priorities."],
+  ["August 2026", "Fall office hours and public meeting schedule", "Where students will be able to meet administration leaders and follow public Executive Branch meetings."],
+  ["August 2026", "A clearer route to department contacts", "How the website will connect student questions with the department or task force responsible for the issue."],
+];
+
+const events = [
+  ["28", "AUG", "Open office hours", "Student Union · Room and time to be confirmed"],
+  ["09", "SEP", "Public listening session", "Location and time to be confirmed"],
+  ["17", "SEP", "Monthly administration update", "Location and time to be confirmed"],
+];
+---
+
+<div class:list={["finalist-sections", `finalist-sections--${variant}`]}>
+  {order.map((kind) => (
+    kind === "departments" ? (
+      <section class="finalist-section finalist-section--departments" id="departments" aria-labelledby="departments-title">
+        <header class="finalist-section__heading">
+          <h2 id="departments-title">Departments, task forces, and executive offices</h2>
+          <p>Find the student leaders responsible for each area and use one shared contact route to reach the right team.</p>
+        </header>
+        <div class="finalist-team-grid">
+          {teams.map(([team, leader, role]) => (
+            <article class="finalist-team">
+              <div>
+                <h3>{team}</h3>
+                <p><strong>{leader}</strong><span>{role}</span></p>
+              </div>
+              <a
+                href={`mailto:studentgovernment@unc.edu?subject=${encodeURIComponent(`Executive Branch: ${team}`)}`}
+                aria-label={`Contact ${team}`}
+              >
+                Contact this team <span aria-hidden="true">→</span>
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
+    ) : kind === "priorities" ? (
+      <section class="finalist-section finalist-section--priorities" id="priorities" aria-labelledby="priorities-title">
+        <header class="finalist-section__heading">
+          <h2 id="priorities-title">Administration priorities</h2>
+          <p>The ProjectBOLD platform organized as five areas of public work.</p>
+        </header>
+        <ol class="finalist-priority-list">
+          {priorities.map(([number, title, copy]) => (
+            <li><span>{number}</span><div><h3>{title}</h3><p>{copy}</p></div></li>
+          ))}
+        </ol>
+      </section>
+    ) : kind === "updates" ? (
+      <section class="finalist-section finalist-section--updates" id="updates" aria-labelledby="updates-title">
+        <header class="finalist-section__heading">
+          <h2 id="updates-title">Updates from the Executive Branch</h2>
+          <p>News, explanations, and public progress reports from the administration.</p>
+        </header>
+        <div class="finalist-update-grid">
+          {updates.map(([date, title, copy]) => (
+            <article class="finalist-update">
+              <time>{date}</time>
+              <h3>{title}</h3>
+              <p>{copy}</p>
+              <a href="#updates" aria-label={`Read update: ${title}`}>Read update <span aria-hidden="true">→</span></a>
+            </article>
+          ))}
+        </div>
+        <p class="finalist-prototype-note">Representative content for layout evaluation; published posts will replace these examples.</p>
+      </section>
+    ) : (
+      <section class="finalist-section finalist-section--events" id="events" aria-labelledby="events-title">
+        <header class="finalist-section__heading">
+          <h2 id="events-title">Events and public meetings</h2>
+          <p>Office hours, listening sessions, and administration meetings open to students.</p>
+        </header>
+        <div class="finalist-event-list">
+          {events.map(([day, month, title, detail]) => (
+            <article class="finalist-event">
+              <time><b>{day}</b><span>{month}</span></time>
+              <div><h3>{title}</h3><p>{detail}</p></div>
+              <a href="#contact" aria-label={`Event details: ${title}`}>Event details <span aria-hidden="true">→</span></a>
+            </article>
+          ))}
+        </div>
+        <p class="finalist-prototype-note">Dates are representative placeholders pending the administration's confirmed public calendar.</p>
+      </section>
+    )
+  ))}
+</div>

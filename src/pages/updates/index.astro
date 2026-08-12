@@ -1,0 +1,21 @@
+---
+import UpdateListing from "../../components/UpdateListing.astro";
+import UpdateSiteLayout from "../../layouts/UpdateSiteLayout.astro";
+---
+
+<UpdateSiteLayout
+  title="Updates | UNC Student Government Executive Branch"
+  description="Updates from the Duncan Administration and the UNC Student Government Executive Branch."
+  canonicalPath="/updates/"
+  bodyClass="updates-page"
+>
+  <header class="updates-hero">
+    <div>
+      <h1>Updates from the Executive Branch</h1>
+      <p>News, decisions, and progress from the Duncan Administration, published clearly and in one place.</p>
+    </div>
+  </header>
+  <section class="updates-index" aria-label="Executive Branch updates">
+    <UpdateListing />
+  </section>
+</UpdateSiteLayout>

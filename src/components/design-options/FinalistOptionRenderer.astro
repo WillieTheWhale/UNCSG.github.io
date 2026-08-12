@@ -1,0 +1,46 @@
+---
+import type { DesignOption, ModuleKind } from "../../data/design-options";
+import FinalistSections from "./FinalistSections.astro";
+
+interface Props {
+  option: DesignOption;
+}
+
+const { option } = Astro.props;
+const order = option.modules.filter((kind): kind is Extract<ModuleKind, "departments" | "priorities" | "updates" | "events"> =>
+  ["departments", "priorities", "updates", "events"].includes(kind)
+);
+---
+
+<main id="main" class={`finalist-page finalist-page--${option.layout}`}>
+  <section class="finalist-hero" aria-labelledby="option-title">
+    <figure class="finalist-hero__media">
+      <img
+        src={option.image}
+        alt={option.imageAlt ?? ""}
+        fetchpriority="high"
+        decoding="async"
+        width="2000"
+        height="1333"
+      />
+    </figure>
+    <div class="finalist-hero__shade" aria-hidden="true"></div>
+    <div class="finalist-hero__inner">
+      <div class="finalist-hero__copy">
+        <h1 id="option-title">{option.headline}</h1>
+        <p>{option.intro}</p>
+      </div>
+
+      <aside class="finalist-office-card" aria-label="Open office hours">
+        <time><b>Fall</b><span>2026</span></time>
+        <div>
+          <strong>Open office hours</strong>
+          <p>Dates, times, and locations will be published with the public calendar.</p>
+          <a href="#events">View events <span aria-hidden="true">→</span></a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <FinalistSections order={order} variant={option.layout} />
+</main>

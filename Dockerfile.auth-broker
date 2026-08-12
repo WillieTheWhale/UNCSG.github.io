@@ -1,0 +1,26 @@
+FROM node:24-alpine AS build
+
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+RUN npm ci
+
+COPY tsconfig.json tsconfig.auth-broker.json ./
+COPY auth-broker ./auth-broker
+
+RUN npm run build:auth-broker && npm prune --omit=dev
+
+FROM node:24-alpine
+
+ENV NODE_ENV=production
+ENV BROKER_PORT=8080
+
+WORKDIR /app
+
+COPY --from=build /app/package.json /app/package-lock.json ./
+COPY --from=build /app/node_modules ./node_modules
+COPY --from=build /app/dist-auth-broker ./dist-auth-broker
+
+EXPOSE 8080
+
+CMD ["node", "dist-auth-broker/index.js"]

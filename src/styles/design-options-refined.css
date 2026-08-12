@@ -1,0 +1,1574 @@
+/*
+ * Options 26–45: restrained institutional explorations.
+ * These routes deliberately share a quieter type, spacing, and photography system
+ * while varying their information architecture and responsive composition.
+ */
+
+.option-refined {
+  --unc-utility-bar-width: 100rem;
+  --refined-gutter: clamp(1.25rem, 4vw, 4.75rem);
+  --refined-rule: #cfd8e4;
+  --refined-muted: #53627a;
+  --refined-cloud: #edf5fb;
+  --refined-carolina: #4b9cd3;
+  --refined-max: 100rem;
+  background: var(--neutral-0);
+}
+
+.option-refined .section-label,
+.option-refined .hero-eyebrow,
+.option-refined .footer-kicker {
+  display: none;
+}
+
+.option-refined .evaluated-ui {
+  background: var(--neutral-0);
+}
+
+.option-refined .option-site-header {
+  width: min(100%, var(--refined-max));
+  min-height: 6.25rem;
+  padding: 1rem var(--refined-gutter);
+  border-bottom: 1px solid var(--refined-rule);
+}
+
+.site-lockup--student-government {
+  min-width: 0;
+  gap: clamp(0.8rem, 1.8vw, 1.4rem);
+}
+
+.site-lockup--student-government > img {
+  width: clamp(8.75rem, 13vw, 12.5rem);
+  height: auto;
+  flex: 0 0 auto;
+}
+
+.site-lockup--student-government .site-lockup__text {
+  padding-left: clamp(0.8rem, 1.5vw, 1.25rem);
+  border-left: 1px solid var(--refined-rule);
+}
+
+.site-lockup--student-government .site-lockup__text strong {
+  color: var(--brand-navy);
+  font-size: clamp(0.74rem, 0.9vw, 0.9rem);
+  letter-spacing: 0.025em;
+}
+
+.site-lockup--student-government .site-lockup__text small {
+  color: var(--refined-muted);
+  font-size: 0.66rem;
+}
+
+.option-refined .option-site-nav {
+  gap: clamp(0.75rem, 1.8vw, 1.7rem);
+}
+
+.option-refined .option-site-nav a {
+  font-size: 0.76rem;
+  font-weight: 650;
+}
+
+.option-refined .option-site-nav .nav-action {
+  border-radius: 0.2rem;
+  background: var(--brand-blue);
+}
+
+.option-refined .option-site-nav a:not(.nav-action)::after {
+  height: 1px;
+}
+
+.refined-hero {
+  position: relative;
+  width: min(100%, var(--refined-max));
+  min-height: clamp(40rem, 72vh, 52rem);
+  margin-inline: auto;
+  overflow: hidden;
+  background: var(--brand-navy);
+}
+
+.refined-hero__media,
+.refined-hero__shade {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+}
+
+.refined-hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.refined-hero__shade {
+  z-index: 1;
+  background: linear-gradient(90deg, rgb(19 41 75 / 90%) 0%, rgb(19 41 75 / 68%) 46%, rgb(19 41 75 / 18%) 78%);
+}
+
+.refined-hero__inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  min-height: inherit;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-items: center;
+  gap: clamp(1.25rem, 3vw, 3.5rem);
+  padding: clamp(4.5rem, 9vw, 8rem) var(--refined-gutter);
+}
+
+.refined-hero__copy {
+  grid-column: 1 / span 7;
+  grid-row: 1;
+  color: var(--neutral-0);
+}
+
+.refined-hero__panel {
+  grid-row: 1;
+}
+
+.refined-hero__copy h1 {
+  max-width: 11ch;
+  margin: 0;
+  color: inherit;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 7.2vw, 7.8rem);
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  line-height: 0.94;
+  text-wrap: balance;
+}
+
+.refined-hero__copy > p {
+  max-width: 56ch;
+  margin: 1.5rem 0 0;
+  color: inherit;
+  font-size: clamp(1rem, 1.2vw, 1.2rem);
+  font-weight: 450;
+  line-height: 1.65;
+}
+
+.option-refined .hero-actions {
+  margin-top: 2rem;
+}
+
+.option-refined .button {
+  min-height: 3rem;
+  padding-inline: 1.15rem;
+  border-radius: 0.2rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.option-refined .refined-hero .button--primary {
+  color: var(--brand-navy);
+  background: var(--neutral-0);
+}
+
+.option-refined .refined-hero .button--secondary {
+  color: var(--neutral-0);
+  border-color: currentColor;
+}
+
+.refined-hero__panel {
+  grid-column: 9 / -1;
+  align-self: end;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  color: var(--brand-navy);
+  background: rgb(255 255 255 / 96%);
+}
+
+.refined-hero__panel a {
+  text-underline-offset: 0.24em;
+}
+
+.refined-hero__panel--services,
+.refined-hero__panel--records,
+.refined-hero__panel--resources {
+  display: grid;
+  padding-block: 0.35rem;
+}
+
+.refined-hero__panel--services a,
+.refined-hero__panel--records a,
+.refined-hero__panel--resources a {
+  display: grid;
+  min-height: 4.8rem;
+  align-content: center;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--refined-rule);
+  text-decoration: none;
+}
+
+.refined-hero__panel--services a:last-child,
+.refined-hero__panel--records a:last-child,
+.refined-hero__panel--resources a:last-child {
+  border-bottom: 0;
+}
+
+.refined-hero__panel--services strong {
+  font-size: 0.95rem;
+}
+
+.refined-hero__panel--services span {
+  margin-top: 0.22rem;
+  color: var(--refined-muted);
+  font-size: 0.74rem;
+  line-height: 1.45;
+}
+
+.refined-hero__panel--records a {
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  align-items: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.refined-hero__panel--records span {
+  color: var(--brand-blue);
+  font-variant-numeric: tabular-nums;
+}
+
+.refined-hero__panel--resources a {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.refined-hero__panel--progress {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 0;
+}
+
+.refined-hero__panel--progress > div {
+  display: flex;
+  min-height: 8.5rem;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.35rem;
+  border-left: 1px solid var(--refined-rule);
+}
+
+.refined-hero__panel--progress > div:first-child {
+  border-left: 0;
+}
+
+.refined-hero__panel--progress dt {
+  color: var(--refined-muted);
+  font-size: 0.7rem;
+  font-weight: 650;
+}
+
+.refined-hero__panel--progress dd {
+  margin: 0;
+  font-size: clamp(1rem, 1.7vw, 1.4rem);
+  font-weight: 750;
+  line-height: 1.15;
+}
+
+.refined-hero__panel--event {
+  display: grid;
+  grid-template-columns: 5rem minmax(0, 1fr);
+  align-items: center;
+  gap: 1.3rem;
+}
+
+.refined-hero__panel--event time {
+  display: grid;
+  text-align: center;
+}
+
+.refined-hero__panel--event time b {
+  color: var(--brand-blue);
+  font-family: var(--font-display);
+  font-size: 3.8rem;
+  font-weight: 400;
+  line-height: 0.9;
+}
+
+.refined-hero__panel--event time span,
+.refined-hero__panel--leadership > strong {
+  font-size: 0.7rem;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.refined-hero__panel--event p {
+  margin: 0.35rem 0 0.65rem;
+  color: var(--refined-muted);
+  font-size: 0.75rem;
+}
+
+.refined-hero__panel--event a,
+.refined-hero__panel--leadership a {
+  color: var(--brand-blue);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.refined-hero__panel--leadership {
+  align-self: center;
+}
+
+.refined-hero__panel--leadership p {
+  margin: 0;
+  padding-block: 0.65rem;
+  border-bottom: 1px solid var(--refined-rule);
+  font-size: 0.76rem;
+}
+
+.refined-hero__panel--leadership a {
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.refined-hero__panel--listening {
+  display: grid;
+  gap: 0;
+  padding-block: 0.35rem;
+  margin-block: 0;
+  list-style: none;
+}
+
+.refined-hero__panel--listening li {
+  display: grid;
+  min-height: 4.4rem;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.8rem;
+  border-bottom: 1px solid var(--refined-rule);
+}
+
+.refined-hero__panel--listening li:last-child {
+  border-bottom: 0;
+}
+
+.refined-hero__panel--listening span {
+  color: var(--brand-blue);
+  font-variant-numeric: tabular-nums;
+}
+
+.refined-hero__panel--listening strong {
+  font-size: 0.82rem;
+}
+
+.refined-hero__panel--priorities {
+  padding: 0;
+  margin-block: 0;
+  background: var(--neutral-0);
+  counter-reset: priority;
+  list-style: none;
+}
+
+.refined-hero__panel--priorities li {
+  display: grid;
+  min-height: 3.65rem;
+  grid-template-columns: 2.4rem minmax(0, 1fr);
+  align-items: center;
+  padding-inline: 1.35rem;
+  border-bottom: 1px solid var(--refined-rule);
+  counter-increment: priority;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.refined-hero__panel--priorities li::before {
+  color: var(--brand-blue);
+  content: "0" counter(priority);
+  font-variant-numeric: tabular-nums;
+}
+
+.refined-hero--curve-soft {
+  border-radius: 0 0 50% 50% / 0 0 7% 7%;
+}
+
+.refined-hero--curve-deep {
+  border-radius: 0 0 50% 50% / 0 0 13% 13%;
+}
+
+.refined-hero--curve-offset {
+  border-radius: 0 0 68% 28% / 0 0 12% 7%;
+}
+
+/* The refined content system keeps Anton as an accent, not the default voice. */
+.option-refined .refined-module-stream {
+  background: var(--neutral-0);
+}
+
+.option-refined .module {
+  width: min(100%, var(--refined-max));
+  padding: clamp(4.75rem, 8vw, 7.5rem) var(--refined-gutter);
+}
+
+.option-refined .module:nth-child(even) {
+  background: var(--refined-cloud);
+}
+
+.option-refined .module-heading {
+  max-width: 76rem;
+  margin-bottom: clamp(2.25rem, 4.5vw, 4rem);
+}
+
+.option-refined .module-heading h2,
+.option-refined .module--cta h2 {
+  max-width: 19ch;
+  font-family: var(--font-body);
+  font-size: clamp(2.25rem, 4.1vw, 4rem);
+  font-weight: 720;
+  letter-spacing: -0.04em;
+  line-height: 1.06;
+  text-transform: none;
+}
+
+.option-refined .module-heading > p {
+  max-width: 62ch;
+  color: var(--refined-muted);
+  font-size: 0.95rem;
+}
+
+.option-refined .service-list {
+  border-top-width: 1px;
+}
+
+.option-refined .service-item {
+  min-height: 5.7rem;
+  border-color: var(--refined-rule);
+}
+
+.option-refined .service-number,
+.option-refined .department-index > a > span:first-child {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.option-refined .priority-list {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1rem;
+  padding: 0;
+  background: transparent;
+}
+
+.option-refined .priority-list li {
+  min-height: 19rem;
+  padding: clamp(1.2rem, 2.1vw, 2rem);
+  border-top: 0.28rem solid var(--brand-navy);
+  background: var(--neutral-0);
+}
+
+.option-refined .priority-list li > span {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 750;
+}
+
+.option-refined .priority-list h3 {
+  font-family: var(--font-body);
+  font-size: clamp(1.25rem, 1.8vw, 1.65rem);
+  font-weight: 720;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  text-transform: none;
+}
+
+.option-refined .leader-grid {
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.option-refined .leader-card {
+  min-height: 23rem;
+  color: var(--brand-navy);
+  background: var(--neutral-0);
+  border-bottom: 1px solid var(--refined-rule);
+}
+
+.option-refined .leader-placeholder {
+  color: var(--neutral-0);
+  background: var(--brand-blue) !important;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+}
+
+.option-refined .leader-card > div {
+  padding-inline: 0;
+}
+
+.option-refined .leader-card p {
+  color: var(--refined-muted);
+}
+
+.option-refined .leader-card a {
+  color: var(--brand-blue);
+}
+
+.option-refined .update-grid {
+  border-block-width: 1px;
+}
+
+.option-refined .update-card {
+  border-color: var(--refined-rule);
+}
+
+.option-refined .update-card--lead h3,
+.option-refined .update-card h3 {
+  font-family: var(--font-body);
+  font-weight: 720;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  text-transform: none;
+}
+
+.option-refined .update-card--lead h3 {
+  font-size: clamp(2rem, 3.3vw, 3.4rem);
+}
+
+.option-refined .number-grid {
+  gap: 1px;
+  padding: 1px;
+  background: var(--refined-rule);
+}
+
+.option-refined .number-grid article {
+  color: var(--brand-navy);
+  background: var(--neutral-0);
+}
+
+.option-refined .number-grid strong {
+  font-size: clamp(2.6rem, 5vw, 5rem);
+}
+
+.option-refined .briefing-grid article {
+  border-color: var(--refined-rule);
+}
+
+.option-refined .briefing-grid h3 {
+  font-family: var(--font-body);
+  font-size: clamp(1.4rem, 2vw, 2rem);
+  font-weight: 720;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.option-refined .photo-grid {
+  gap: 0;
+}
+
+.option-refined .photo-grid figure {
+  border: 0;
+  box-shadow: none;
+}
+
+.option-refined .photo-grid figcaption {
+  color: var(--neutral-0);
+  background: var(--brand-navy);
+}
+
+.option-refined .module--cta {
+  color: var(--neutral-0);
+  background: var(--brand-navy) !important;
+}
+
+.option-refined .module--cta h2 {
+  color: var(--neutral-0);
+}
+
+/* 26 · The Carolina Brief — panoramic editorial report. */
+.option-carolina-brief .refined-hero__shade {
+  background: linear-gradient(0deg, rgb(19 41 75 / 94%) 0%, rgb(19 41 75 / 58%) 58%, rgb(19 41 75 / 18%) 100%);
+}
+
+.option-carolina-brief .refined-hero__inner {
+  align-items: end;
+}
+
+.option-carolina-brief .refined-hero__copy {
+  grid-column: 1 / span 9;
+}
+
+.option-carolina-brief .refined-hero__copy h1 {
+  max-width: 12ch;
+}
+
+.option-carolina-brief .module {
+  max-width: 88rem;
+}
+
+/* 27 · Student Front Door — photo and task gateway. */
+.option-student-front-door .refined-hero {
+  background: var(--neutral-0);
+}
+
+.option-student-front-door .refined-hero__media {
+  right: 50%;
+}
+
+.option-student-front-door .refined-hero__media img {
+  object-position: 52% center;
+}
+
+.option-student-front-door .refined-hero__shade {
+  display: none;
+}
+
+.option-student-front-door .refined-hero__copy {
+  grid-column: 7 / -1;
+  align-self: start;
+  color: var(--brand-navy);
+}
+
+.option-student-front-door .refined-hero__copy h1 {
+  font-size: clamp(3.8rem, 6vw, 6.7rem);
+}
+
+.option-student-front-door .refined-hero .button--primary {
+  color: var(--neutral-0);
+  background: var(--brand-blue);
+}
+
+.option-student-front-door .refined-hero .button--secondary {
+  color: var(--brand-navy);
+}
+
+.option-student-front-door .refined-hero__panel {
+  grid-column: 1 / span 5;
+  align-self: end;
+  margin-bottom: -2rem;
+}
+
+.option-student-front-door .module-stream > .module:first-child {
+  padding-top: 7rem;
+}
+
+/* 28 · Administration Portrait — leadership-led, curved asymmetrically. */
+.option-administration-portrait .refined-hero__media img {
+  object-position: 65% center;
+}
+
+.option-administration-portrait .refined-hero__shade {
+  background: linear-gradient(90deg, rgb(19 41 75 / 97%) 0%, rgb(19 41 75 / 82%) 46%, rgb(19 41 75 / 20%) 78%);
+}
+
+.option-administration-portrait .refined-hero__copy {
+  grid-column: 1 / span 6;
+}
+
+.option-administration-portrait .refined-hero__panel {
+  grid-column: 9 / -1;
+  align-self: end;
+  margin-bottom: 1rem;
+}
+
+.option-administration-portrait .module--president {
+  background: var(--neutral-0);
+}
+
+/* 29 · Public Workboard — compact masthead plus public status strip. */
+.option-public-workboard .refined-hero {
+  min-height: 47rem;
+  background: var(--neutral-0);
+}
+
+.option-public-workboard .refined-hero__media {
+  bottom: 13rem;
+}
+
+.option-public-workboard .refined-hero__shade {
+  bottom: 13rem;
+  background: linear-gradient(90deg, rgb(19 41 75 / 90%), rgb(19 41 75 / 40%));
+}
+
+.option-public-workboard .refined-hero__inner {
+  grid-template-rows: minmax(0, 1fr) auto;
+  align-items: start;
+  padding-bottom: 2rem;
+}
+
+.option-public-workboard .refined-hero__copy {
+  grid-column: 1 / span 7;
+}
+
+.option-public-workboard .refined-hero__panel {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  align-self: end;
+  box-shadow: 0 -1px 0 var(--refined-rule);
+}
+
+.option-public-workboard .module-stream > .module:first-child {
+  padding-top: 4.5rem;
+}
+
+/* 30 · Carolina Current — update-led photo masthead. */
+.option-carolina-current .refined-hero__shade {
+  background: linear-gradient(90deg, rgb(19 41 75 / 86%) 0%, rgb(19 41 75 / 56%) 54%, rgb(19 41 75 / 24%) 100%);
+}
+
+.option-carolina-current .refined-hero__copy {
+  grid-column: 1 / span 8;
+  align-self: end;
+}
+
+.option-carolina-current .refined-hero__copy h1 {
+  max-width: 10ch;
+}
+
+.option-carolina-current .module-stream > .module:first-child {
+  background: var(--neutral-0);
+}
+
+/* 31 · Executive Directory — compact split index. */
+.option-executive-directory .option-site-header {
+  color: var(--neutral-0);
+  background: var(--brand-navy);
+  border-bottom: 0;
+}
+
+.option-executive-directory .site-lockup--student-government {
+  padding: 0.4rem 0.7rem;
+  background: var(--neutral-0);
+}
+
+.option-executive-directory .site-lockup--student-government .site-lockup__text {
+  padding-right: 0.3rem;
+}
+
+.option-executive-directory .option-site-nav .nav-action {
+  color: var(--brand-navy);
+  background: var(--neutral-0);
+}
+
+.option-executive-directory .refined-hero {
+  min-height: 36rem;
+  background: var(--neutral-0);
+}
+
+.option-executive-directory .refined-hero__media {
+  left: 57%;
+}
+
+.option-executive-directory .refined-hero__shade {
+  display: none;
+}
+
+.option-executive-directory .refined-hero__copy {
+  grid-column: 1 / span 6;
+  color: var(--brand-navy);
+}
+
+.option-executive-directory .refined-hero .button--primary {
+  color: var(--neutral-0);
+  background: var(--brand-navy);
+}
+
+.option-executive-directory .refined-hero .button--secondary {
+  color: var(--brand-navy);
+}
+
+.option-executive-directory .refined-hero__panel {
+  grid-column: 8 / -1;
+  align-self: end;
+}
+
+.option-executive-directory .department-index {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* 32 · Records Desk — image masthead with a document shelf. */
+.option-records-desk .refined-hero {
+  min-height: 50rem;
+  background: var(--neutral-0);
+}
+
+.option-records-desk .refined-hero__media {
+  bottom: 18rem;
+}
+
+.option-records-desk .refined-hero__media img {
+  object-position: center 42%;
+}
+
+.option-records-desk .refined-hero__shade {
+  bottom: 18rem;
+  background: rgb(19 41 75 / 62%);
+}
+
+.option-records-desk .refined-hero__inner {
+  grid-template-rows: minmax(0, 1fr) auto;
+  align-items: end;
+}
+
+.option-records-desk .refined-hero__copy {
+  grid-column: 1 / span 7;
+  align-self: start;
+}
+
+.option-records-desk .refined-hero__panel {
+  grid-column: 1 / -1;
+  grid-row: 2;
+}
+
+/* 33 · Campus Service Guide — utility sheet over photography. */
+.option-campus-service-guide .refined-hero__shade {
+  background: linear-gradient(90deg, rgb(19 41 75 / 82%), rgb(19 41 75 / 36%));
+}
+
+.option-campus-service-guide .refined-hero__copy {
+  grid-column: 1 / span 6;
+}
+
+.option-campus-service-guide .refined-hero__panel {
+  grid-column: 8 / -1;
+  align-self: center;
+}
+
+.option-campus-service-guide .module-stream > .module:first-child {
+  background: var(--refined-cloud);
+}
+
+/* 34 · Office Hours — event invitation with a deep curved image. */
+.option-office-hours .refined-hero__media img {
+  object-position: center 34%;
+}
+
+.option-office-hours .refined-hero__shade {
+  background: linear-gradient(90deg, rgb(19 41 75 / 92%) 0%, rgb(19 41 75 / 58%) 52%, rgb(19 41 75 / 18%) 100%);
+}
+
+.option-office-hours .refined-hero__copy {
+  grid-column: 1 / span 7;
+  align-self: start;
+}
+
+.option-office-hours .refined-hero__panel {
+  grid-column: 8 / -1;
+}
+
+.option-office-hours .event-list article {
+  grid-template-columns: 8rem minmax(0, 1fr) 3.5rem;
+}
+
+/* 35 · People at Work — photograph first, responsibilities second. */
+.option-people-at-work .refined-hero {
+  min-height: 52rem;
+  background: var(--brand-navy);
+}
+
+.option-people-at-work .refined-hero__media {
+  bottom: 15rem;
+}
+
+.option-people-at-work .refined-hero__shade {
+  bottom: 15rem;
+  background: linear-gradient(0deg, rgb(19 41 75 / 62%), rgb(19 41 75 / 10%));
+}
+
+.option-people-at-work .refined-hero__inner {
+  align-items: end;
+  padding-bottom: 3rem;
+}
+
+.option-people-at-work .refined-hero__copy {
+  grid-column: 1 / span 7;
+}
+
+.option-people-at-work .refined-hero__panel {
+  grid-column: 8 / -1;
+}
+
+.option-people-at-work .leader-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* 36 · Carolina Commitments — policy index paired with place. */
+.option-carolina-commitments .refined-hero__media img {
+  object-position: 66% 42%;
+}
+
+.option-carolina-commitments .refined-hero__shade {
+  background: linear-gradient(90deg, rgb(19 41 75 / 90%) 0%, rgb(19 41 75 / 68%) 42%, rgb(19 41 75 / 28%) 72%, rgb(19 41 75 / 12%) 100%);
+}
+
+.option-carolina-commitments .refined-hero__copy {
+  grid-column: 1 / span 6;
+}
+
+.option-carolina-commitments .refined-hero__panel {
+  grid-column: 8 / -1;
+  align-self: center;
+}
+
+.option-carolina-commitments .priority-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.option-carolina-commitments .priority-list li:last-child {
+  grid-column: 1 / -1;
+  min-height: 13rem;
+}
+
+/* 37 · In Conversation — centered public response loop. */
+.option-in-conversation .refined-hero__shade {
+  background: rgb(19 41 75 / 75%);
+}
+
+.option-in-conversation .refined-hero__inner {
+  grid-template-rows: minmax(0, 1fr) auto;
+  align-content: center;
+}
+
+.option-in-conversation .refined-hero__copy {
+  grid-column: 2 / span 10;
+  text-align: center;
+}
+
+.option-in-conversation .refined-hero__copy h1,
+.option-in-conversation .refined-hero__copy > p {
+  margin-inline: auto;
+}
+
+.option-in-conversation .hero-actions {
+  justify-content: center;
+}
+
+.option-in-conversation .refined-hero__panel {
+  grid-column: 3 / span 8;
+  grid-row: 2;
+  align-self: end;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.option-in-conversation .refined-hero__panel li {
+  min-height: 7rem;
+  grid-template-columns: 1fr;
+  align-content: center;
+  text-align: center;
+  border-right: 1px solid var(--refined-rule);
+  border-bottom: 0;
+}
+
+.option-in-conversation .refined-hero__panel li:last-child {
+  border-right: 0;
+}
+
+/* 38 · Carolina Daybook — photographic story with a quiet text block. */
+.option-carolina-daybook .refined-hero__shade {
+  background: linear-gradient(90deg, rgb(19 41 75 / 42%), transparent 72%);
+}
+
+.option-carolina-daybook .refined-hero__copy {
+  grid-column: 1 / span 6;
+  align-self: end;
+  padding: clamp(1.5rem, 3.5vw, 3.25rem);
+  background: rgb(19 41 75 / 94%);
+}
+
+.option-carolina-daybook .refined-hero__copy h1 {
+  font-size: clamp(3.4rem, 5.7vw, 6.4rem);
+}
+
+.option-carolina-daybook .photo-grid {
+  grid-template-columns: 1.3fr 0.7fr;
+}
+
+/* 39 · Executive Bulletin — compact broadsheet structure. */
+.option-executive-bulletin .refined-hero {
+  min-height: 44rem;
+  background: var(--brand-navy);
+}
+
+.option-executive-bulletin .refined-hero__media {
+  inset: 0;
+}
+
+.option-executive-bulletin .refined-hero__shade {
+  inset: 0;
+  background: rgb(19 41 75 / 72%);
+}
+
+.option-executive-bulletin .refined-hero__inner {
+  align-items: center;
+}
+
+.option-executive-bulletin .refined-hero__copy {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(20rem, 0.6fr);
+  align-items: center;
+  gap: 3rem;
+  color: var(--neutral-0);
+}
+
+.option-executive-bulletin .refined-hero__copy > p {
+  margin: 0;
+}
+
+.option-executive-bulletin .refined-hero__copy .hero-actions {
+  grid-column: 2;
+}
+
+.option-executive-bulletin .refined-hero .button--primary {
+  color: var(--brand-navy);
+  background: var(--neutral-0);
+}
+
+.option-executive-bulletin .refined-hero .button--secondary {
+  color: var(--neutral-0);
+}
+
+.option-executive-bulletin .update-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* 40 · Support & Advocacy — two-layer help model. */
+.option-support-and-advocacy .refined-hero {
+  background: var(--refined-cloud);
+}
+
+.option-support-and-advocacy .refined-hero__media {
+  left: 55%;
+}
+
+.option-support-and-advocacy .refined-hero__shade {
+  display: none;
+}
+
+.option-support-and-advocacy .refined-hero__copy {
+  grid-column: 1 / span 6;
+  align-self: start;
+  color: var(--brand-navy);
+}
+
+.option-support-and-advocacy .refined-hero__copy h1 {
+  font-size: clamp(3.5rem, 5.7vw, 6rem);
+}
+
+.option-support-and-advocacy .refined-hero .button--primary {
+  color: var(--neutral-0);
+  background: var(--brand-blue);
+}
+
+.option-support-and-advocacy .refined-hero .button--secondary {
+  color: var(--brand-navy);
+}
+
+.option-support-and-advocacy .refined-hero__panel {
+  grid-column: 7 / -1;
+  align-self: end;
+}
+
+.option-support-and-advocacy .module-stream > .module:first-child {
+  background: var(--brand-navy);
+}
+
+.option-support-and-advocacy .module-stream > .module:first-child h2 {
+  color: var(--neutral-0);
+}
+
+/* 41 · Progress Report — photographic split with compact indicators. */
+.option-progress-report .refined-hero {
+  min-height: 43rem;
+  background: var(--brand-navy);
+}
+
+.option-progress-report .refined-hero__inner {
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+
+.option-progress-report .refined-hero__media {
+  left: 52%;
+}
+
+.option-progress-report .refined-hero__shade {
+  right: 48%;
+  background: var(--brand-navy);
+}
+
+.option-progress-report .refined-hero__copy {
+  grid-column: 1 / span 6;
+  align-self: start;
+}
+
+.option-progress-report .refined-hero__panel {
+  grid-column: 1 / span 6;
+  grid-row: 2;
+  align-self: end;
+}
+
+.option-progress-report .number-grid article {
+  min-height: 18rem;
+}
+
+/* 42 · Public Agenda — civic calendar over a photographic field. */
+.option-public-agenda .refined-hero__shade {
+  background: linear-gradient(90deg, rgb(19 41 75 / 92%) 0%, rgb(19 41 75 / 64%) 55%, rgb(19 41 75 / 26%) 100%);
+}
+
+.option-public-agenda .refined-hero__copy {
+  grid-column: 1 / span 7;
+}
+
+.option-public-agenda .refined-hero__panel {
+  grid-column: 8 / -1;
+  align-self: end;
+}
+
+.option-public-agenda .event-list article {
+  border-top-width: 2px;
+}
+
+/* 43 · Across Carolina — place-based documentary gateway. */
+.option-across-carolina .refined-hero__media img {
+  object-position: center 38%;
+}
+
+.option-across-carolina .refined-hero__shade {
+  background: rgb(19 41 75 / 68%);
+}
+
+.option-across-carolina .refined-hero__copy {
+  grid-column: 2 / span 10;
+  text-align: center;
+}
+
+.option-across-carolina .refined-hero__copy h1,
+.option-across-carolina .refined-hero__copy > p {
+  margin-inline: auto;
+}
+
+.option-across-carolina .hero-actions {
+  justify-content: center;
+}
+
+.option-across-carolina .photo-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* 44 · From the President — letter and unframed administration image. */
+.option-from-the-president .refined-hero {
+  background: var(--neutral-0);
+}
+
+.option-from-the-president .refined-hero__media {
+  right: 47%;
+}
+
+.option-from-the-president .refined-hero__media img {
+  object-position: 58% center;
+}
+
+.option-from-the-president .refined-hero__shade {
+  display: none;
+}
+
+.option-from-the-president .refined-hero__copy {
+  grid-column: 7 / -1;
+  color: var(--brand-navy);
+}
+
+.option-from-the-president .refined-hero__copy h1 {
+  font-size: clamp(3.4rem, 5.6vw, 6.1rem);
+}
+
+.option-from-the-president .refined-hero .button--primary {
+  color: var(--neutral-0);
+  background: var(--brand-navy);
+}
+
+.option-from-the-president .refined-hero .button--secondary {
+  color: var(--brand-navy);
+}
+
+.option-from-the-president .module--president {
+  background: var(--refined-cloud);
+}
+
+/* 45 · Carolina Together — balanced synthesis. */
+.option-carolina-together .refined-hero__shade {
+  background: linear-gradient(0deg, rgb(19 41 75 / 88%) 0%, rgb(19 41 75 / 60%) 72%, rgb(19 41 75 / 34%) 100%);
+}
+
+.option-carolina-together .refined-hero__inner {
+  grid-template-rows: minmax(0, 1fr) auto;
+  align-content: center;
+}
+
+.option-carolina-together .refined-hero__copy {
+  grid-column: 2 / span 10;
+  text-align: center;
+}
+
+.option-carolina-together .refined-hero__copy h1,
+.option-carolina-together .refined-hero__copy > p {
+  margin-inline: auto;
+}
+
+.option-carolina-together .hero-actions {
+  justify-content: center;
+}
+
+.option-carolina-together .refined-hero__panel {
+  grid-column: 2 / span 10;
+  grid-row: 2;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-self: end;
+  padding: 0;
+}
+
+.option-carolina-together .refined-hero__panel a {
+  min-height: 7rem;
+  padding: 1rem 1.35rem;
+  border-right: 1px solid var(--refined-rule);
+  border-bottom: 0;
+}
+
+.option-carolina-together .refined-hero__panel a:last-child {
+  border-right: 0;
+}
+
+/* Overview thumbnails for the refined round use photographic fields, not abstract blocks. */
+.overview-card--carolina-brief .overview-card__preview,
+.overview-card--carolina-current .overview-card__preview,
+.overview-card--carolina-daybook .overview-card__preview,
+.overview-card--executive-bulletin .overview-card__preview {
+  color: var(--neutral-0);
+  background: linear-gradient(rgb(19 41 75 / 58%), rgb(19 41 75 / 78%)), url("/design-lab/homepage-hero.jpg") center / cover;
+}
+
+.overview-card--student-front-door .overview-card__preview,
+.overview-card--in-conversation .overview-card__preview,
+.overview-card--carolina-together .overview-card__preview {
+  color: var(--neutral-0);
+  background: linear-gradient(rgb(19 41 75 / 62%), rgb(19 41 75 / 72%)), url("/design-lab/campus-community.jpg") center / cover;
+}
+
+.overview-card--administration-portrait .overview-card__preview,
+.overview-card--from-the-president .overview-card__preview {
+  color: var(--neutral-0);
+  background: linear-gradient(rgb(19 41 75 / 55%), rgb(19 41 75 / 70%)), url("/design-lab/devin-wide.jpg") center / cover;
+}
+
+.overview-card--public-workboard .overview-card__preview,
+.overview-card--progress-report .overview-card__preview {
+  color: var(--neutral-0);
+  background: linear-gradient(rgb(19 41 75 / 50%), rgb(19 41 75 / 70%)), url("/design-lab/south-building.jpg") center / cover;
+}
+
+.overview-card--executive-directory .overview-card__preview,
+.overview-card--people-at-work .overview-card__preview {
+  color: var(--neutral-0);
+  background: linear-gradient(rgb(19 41 75 / 48%), rgb(19 41 75 / 72%)), url("/design-lab/students-formal.jpg") center / cover;
+}
+
+.overview-card--records-desk .overview-card__preview,
+.overview-card--public-agenda .overview-card__preview {
+  color: var(--neutral-0);
+  background: linear-gradient(rgb(19 41 75 / 40%), rgb(19 41 75 / 70%)), url("/design-lab/flag-kenan.jpg") center / cover;
+}
+
+.overview-card--campus-service-guide .overview-card__preview,
+.overview-card--support-and-advocacy .overview-card__preview {
+  color: var(--neutral-0);
+  background: linear-gradient(rgb(19 41 75 / 42%), rgb(19 41 75 / 74%)), url("/design-lab/homepage-hero.jpg") center / cover;
+}
+
+.overview-card--office-hours .overview-card__preview,
+.overview-card--carolina-commitments .overview-card__preview,
+.overview-card--across-carolina .overview-card__preview {
+  color: var(--neutral-0);
+  background: linear-gradient(rgb(19 41 75 / 40%), rgb(19 41 75 / 72%)), url("/design-lab/old-well-sun.jpg") center / cover;
+}
+
+.overview-card--carolina-brief .overview-card__preview,
+.overview-card--carolina-current .overview-card__preview,
+.overview-card--records-desk .overview-card__preview,
+.overview-card--office-hours .overview-card__preview,
+.overview-card--carolina-commitments .overview-card__preview,
+.overview-card--in-conversation .overview-card__preview,
+.overview-card--carolina-daybook .overview-card__preview,
+.overview-card--support-and-advocacy .overview-card__preview,
+.overview-card--public-agenda .overview-card__preview,
+.overview-card--across-carolina .overview-card__preview,
+.overview-card--from-the-president .overview-card__preview,
+.overview-card--carolina-together .overview-card__preview {
+  border-radius: 0 0 48% 48% / 0 0 9% 9%;
+}
+
+@media (max-width: 72rem) {
+  .option-refined .priority-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .option-refined .priority-list li:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .option-people-at-work .leader-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .option-executive-directory .department-index {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 60rem) {
+  .option-refined .option-site-header {
+    min-height: 5.5rem;
+  }
+
+  .site-lockup--student-government > img {
+    width: 8.5rem;
+  }
+
+  .option-refined .refined-hero {
+    min-height: auto;
+  }
+
+  .option-refined .refined-hero__inner {
+    min-height: 46rem;
+    grid-template-columns: minmax(0, 1fr);
+    align-content: end;
+    padding-block: 4.5rem 5.5rem;
+  }
+
+  .option-refined .refined-hero__copy,
+  .option-refined .refined-hero__panel,
+  .option-student-front-door .refined-hero__copy,
+  .option-student-front-door .refined-hero__panel,
+  .option-administration-portrait .refined-hero__copy,
+  .option-administration-portrait .refined-hero__panel,
+  .option-public-workboard .refined-hero__copy,
+  .option-public-workboard .refined-hero__panel,
+  .option-executive-directory .refined-hero__copy,
+  .option-executive-directory .refined-hero__panel,
+  .option-records-desk .refined-hero__copy,
+  .option-records-desk .refined-hero__panel,
+  .option-campus-service-guide .refined-hero__copy,
+  .option-campus-service-guide .refined-hero__panel,
+  .option-office-hours .refined-hero__copy,
+  .option-office-hours .refined-hero__panel,
+  .option-people-at-work .refined-hero__copy,
+  .option-people-at-work .refined-hero__panel,
+  .option-carolina-commitments .refined-hero__copy,
+  .option-carolina-commitments .refined-hero__panel,
+  .option-in-conversation .refined-hero__copy,
+  .option-in-conversation .refined-hero__panel,
+  .option-carolina-daybook .refined-hero__copy,
+  .option-executive-bulletin .refined-hero__copy,
+  .option-support-and-advocacy .refined-hero__copy,
+  .option-support-and-advocacy .refined-hero__panel,
+  .option-progress-report .refined-hero__copy,
+  .option-progress-report .refined-hero__panel,
+  .option-public-agenda .refined-hero__copy,
+  .option-public-agenda .refined-hero__panel,
+  .option-across-carolina .refined-hero__copy,
+  .option-from-the-president .refined-hero__copy,
+  .option-carolina-together .refined-hero__copy,
+  .option-carolina-together .refined-hero__panel {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .option-refined .refined-hero__copy {
+    align-self: auto;
+  }
+
+  .option-refined .refined-hero__panel {
+    align-self: auto;
+  }
+
+  .option-student-front-door .refined-hero__media,
+  .option-executive-directory .refined-hero__media,
+  .option-support-and-advocacy .refined-hero__media,
+  .option-progress-report .refined-hero__media,
+  .option-from-the-president .refined-hero__media {
+    inset: 0;
+  }
+
+  .option-student-front-door .refined-hero__shade,
+  .option-executive-directory .refined-hero__shade,
+  .option-support-and-advocacy .refined-hero__shade,
+  .option-from-the-president .refined-hero__shade {
+    display: block;
+    background: rgb(19 41 75 / 77%);
+  }
+
+  .option-progress-report .refined-hero__shade {
+    inset: 0;
+    background: rgb(19 41 75 / 77%);
+  }
+
+  .option-student-front-door .refined-hero__copy,
+  .option-executive-directory .refined-hero__copy,
+  .option-support-and-advocacy .refined-hero__copy,
+  .option-from-the-president .refined-hero__copy {
+    color: var(--neutral-0);
+  }
+
+  .option-student-front-door .refined-hero .button--primary,
+  .option-executive-directory .refined-hero .button--primary,
+  .option-support-and-advocacy .refined-hero .button--primary,
+  .option-from-the-president .refined-hero .button--primary {
+    color: var(--brand-navy);
+    background: var(--neutral-0);
+  }
+
+  .option-student-front-door .refined-hero .button--secondary,
+  .option-executive-directory .refined-hero .button--secondary,
+  .option-support-and-advocacy .refined-hero .button--secondary,
+  .option-from-the-president .refined-hero .button--secondary {
+    color: var(--neutral-0);
+  }
+
+  .option-public-workboard .refined-hero__media,
+  .option-public-workboard .refined-hero__shade,
+  .option-records-desk .refined-hero__media,
+  .option-records-desk .refined-hero__shade,
+  .option-people-at-work .refined-hero__media,
+  .option-people-at-work .refined-hero__shade,
+  .option-executive-bulletin .refined-hero__media,
+  .option-executive-bulletin .refined-hero__shade {
+    bottom: 0;
+  }
+
+  .option-public-workboard .refined-hero__shade,
+  .option-records-desk .refined-hero__shade,
+  .option-people-at-work .refined-hero__shade,
+  .option-executive-bulletin .refined-hero__shade {
+    background: rgb(19 41 75 / 78%);
+  }
+
+  .option-executive-bulletin .refined-hero__copy {
+    display: block;
+    color: var(--neutral-0);
+  }
+
+  .option-executive-bulletin .refined-hero__copy > p {
+    margin-top: 1.5rem;
+  }
+
+  .option-executive-bulletin .refined-hero__copy .hero-actions {
+    grid-column: auto;
+  }
+
+  .option-executive-bulletin .refined-hero .button--primary {
+    color: var(--brand-navy);
+    background: var(--neutral-0);
+  }
+
+  .option-executive-bulletin .refined-hero .button--secondary {
+    color: var(--neutral-0);
+  }
+
+  .option-carolina-daybook .refined-hero__copy {
+    padding: 1.5rem;
+  }
+
+  .option-in-conversation .refined-hero__panel,
+  .option-carolina-together .refined-hero__panel {
+    grid-template-columns: 1fr;
+  }
+
+  .option-in-conversation .refined-hero__panel li,
+  .option-carolina-together .refined-hero__panel a {
+    min-height: 4.6rem;
+    border-right: 0;
+    border-bottom: 1px solid var(--refined-rule);
+  }
+
+  .option-in-conversation .refined-hero__panel li:last-child,
+  .option-carolina-together .refined-hero__panel a:last-child {
+    border-bottom: 0;
+  }
+
+  .option-carolina-daybook .photo-grid,
+  .option-across-carolina .photo-grid,
+  .option-executive-bulletin .update-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 42rem) {
+  .option-refined .option-site-header {
+    gap: 0.75rem;
+    padding-block: 0.85rem;
+  }
+
+  .site-lockup--student-government {
+    gap: 0;
+  }
+
+  .site-lockup--student-government > img {
+    width: 8rem;
+  }
+
+  .site-lockup--student-government .site-lockup__text {
+    display: none;
+  }
+
+  .option-refined .option-site-nav .nav-action {
+    padding-inline: 0.75rem;
+  }
+
+  .option-refined .refined-hero__inner {
+    min-height: 42rem;
+    padding-block: 4rem 5rem;
+  }
+
+  .option-refined .refined-hero__copy h1,
+  .option-student-front-door .refined-hero__copy h1,
+  .option-support-and-advocacy .refined-hero__copy h1,
+  .option-from-the-president .refined-hero__copy h1 {
+    max-width: 100%;
+    font-size: clamp(3.35rem, 16vw, 5.2rem);
+    line-height: 0.96;
+  }
+
+  .option-refined .refined-hero__copy > p {
+    font-size: 0.98rem;
+  }
+
+  .option-refined .refined-hero__panel--progress {
+    grid-template-columns: 1fr;
+  }
+
+  .option-refined .refined-hero__panel--progress > div {
+    min-height: 5.5rem;
+    border-top: 1px solid var(--refined-rule);
+    border-left: 0;
+  }
+
+  .option-refined .refined-hero__panel--progress > div:first-child {
+    border-top: 0;
+  }
+
+  .option-refined .priority-list,
+  .option-carolina-commitments .priority-list,
+  .option-people-at-work .leader-grid,
+  .option-executive-directory .department-index {
+    grid-template-columns: 1fr;
+  }
+
+  .option-refined .priority-list li,
+  .option-refined .priority-list li:last-child {
+    grid-column: auto;
+    min-height: 15rem;
+  }
+
+  .option-refined .refined-hero--curve-soft,
+  .option-refined .refined-hero--curve-deep,
+  .option-refined .refined-hero--curve-offset {
+    border-radius: 0 0 48% 48% / 0 0 4% 4%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .option-refined *,
+  .option-refined *::before,
+  .option-refined *::after {
+    scroll-behavior: auto;
+    transition-duration: 0.01ms !important;
+  }
+}

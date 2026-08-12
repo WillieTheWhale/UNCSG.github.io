@@ -1,0 +1,49 @@
+---
+import type { DesignOption } from "../../data/design-options";
+import OptionModule from "./OptionModule.astro";
+
+interface Props {
+  option: DesignOption;
+}
+
+const { option } = Astro.props;
+---
+
+<main id="main" class={`option-page option-page--${option.layout}`}>
+  <section
+    class:list={["option-hero", option.image && "option-hero--has-image"]}
+    style={option.image ? `--hero-image: url("${option.image}")` : undefined}
+    aria-labelledby="option-title"
+  >
+    <div class="hero-copy">
+      <span class="hero-eyebrow">{option.eyebrow}</span>
+      <h1 id="option-title">{option.headline}</h1>
+      <p>{option.intro}</p>
+      <div class="hero-actions">
+        <a class="button button--primary" href="#work">{option.primaryAction} <span aria-hidden="true">→</span></a>
+        <a class="button button--secondary" href="#leadership">{option.secondaryAction}</a>
+      </div>
+    </div>
+
+    {option.image && (
+      <figure class="hero-media">
+        <img src={option.image} alt={option.imageAlt ?? ""} />
+        <figcaption>Duncan Administration · Carolina in action</figcaption>
+      </figure>
+    )}
+
+    <div class="hero-mark" aria-hidden="true">
+      <span>BOLD</span>
+      <small>FOR CAROLINA</small>
+    </div>
+
+    <div class="hero-index" aria-hidden="true">
+      <span>{String(option.id).padStart(2, "0")}</span>
+      <small>Design direction</small>
+    </div>
+  </section>
+
+  <div class="module-stream" id="work">
+    {option.modules.map((kind) => <OptionModule kind={kind} />)}
+  </div>
+</main>

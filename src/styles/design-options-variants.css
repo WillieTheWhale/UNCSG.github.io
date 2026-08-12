@@ -1,0 +1,1426 @@
+/* 01 · Poster Manifesto */
+.option-poster .option-site-header,
+.option-poster .option-hero {
+  color: var(--neutral-0);
+  background: var(--brand-navy);
+}
+
+.option-poster .site-lockup__text small,
+.option-poster .hero-eyebrow,
+.option-poster .hero-copy > p {
+  color: var(--brand-carolina);
+}
+
+.option-poster .option-site-nav .nav-action {
+  color: var(--brand-navy);
+  background: var(--brand-gold);
+}
+
+.option-poster .option-hero {
+  min-height: calc(100vh - 8.75rem);
+  min-height: calc(100svh - 8.75rem);
+}
+
+.option-poster .hero-copy {
+  grid-column: 1 / -1;
+}
+
+.option-poster .hero-copy h1 {
+  max-width: 10ch;
+  color: var(--neutral-0);
+  font-size: clamp(5.5rem, 12vw, 13rem);
+}
+
+.option-poster .option-hero::before {
+  position: absolute;
+  z-index: 0;
+  top: 17%;
+  right: 7%;
+  width: clamp(8rem, 19vw, 22rem);
+  aspect-ratio: 1;
+  content: "";
+  background: var(--brand-gold);
+  transform: rotate(6deg);
+}
+
+.option-poster .hero-mark {
+  color: var(--brand-carolina);
+  opacity: 0.09;
+}
+
+.option-poster .hero-index {
+  color: var(--brand-yellow);
+}
+
+.option-poster .priority-list li:nth-child(even) {
+  color: var(--brand-navy);
+  background: var(--brand-carolina);
+}
+
+/* 02 · Service First */
+.option-service .option-hero {
+  min-height: 38rem;
+  background: var(--brand-carolina);
+}
+
+.option-service .hero-copy {
+  grid-column: 1 / span 9;
+}
+
+.option-service .hero-copy h1 {
+  max-width: 9ch;
+  font-size: clamp(5rem, 10vw, 11rem);
+}
+
+.option-service .option-hero::after {
+  position: absolute;
+  right: 0;
+  bottom: -0.19em;
+  color: rgb(19 41 75 / 10%);
+  content: "HELP";
+  font-family: var(--font-display);
+  font-size: clamp(12rem, 29vw, 34rem);
+  line-height: 0.7;
+}
+
+.option-service .module-stream > .module:first-child {
+  z-index: 4;
+  width: min(calc(100% - 2 * var(--gutter)), 88rem);
+  margin-top: -3rem;
+  padding: clamp(2rem, 4vw, 4rem);
+  background: var(--neutral-0);
+  border-top: 0.7rem solid var(--brand-gold);
+}
+
+.option-service .service-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: 0;
+  gap: 1px;
+  padding: 1px;
+  background: var(--brand-navy);
+}
+
+.option-service .service-item {
+  min-height: 9rem;
+  padding: 1.25rem;
+  border: 0;
+  background: var(--neutral-0);
+}
+
+/* 03 · President's Desk */
+.option-president .option-site-header,
+.option-president .option-hero {
+  color: var(--neutral-0);
+  background: var(--brand-navy);
+}
+
+.option-president .site-lockup__text small,
+.option-president .hero-eyebrow,
+.option-president .hero-copy > p {
+  color: var(--neutral-100);
+}
+
+.option-president .option-site-nav .nav-action {
+  color: var(--brand-navy);
+  background: var(--brand-carolina);
+}
+
+.option-president .hero-copy {
+  grid-column: 1 / span 7;
+}
+
+.option-president .hero-copy h1 {
+  max-width: 9ch;
+  color: var(--neutral-0);
+}
+
+.option-president .hero-media {
+  grid-column: 8 / -1;
+  overflow: visible;
+  background: var(--brand-carolina);
+  border-bottom: 0.8rem solid var(--brand-gold);
+}
+
+.option-president .hero-media img {
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+.option-president .hero-mark {
+  display: none;
+}
+
+.option-president .module--president {
+  background: var(--brand-gold);
+}
+
+/* 04 · ProjectBOLD Tracker */
+.option-tracker .option-site-header {
+  color: var(--neutral-0);
+  background: var(--brand-blue);
+}
+
+.option-tracker .site-lockup__text small {
+  color: var(--neutral-100);
+}
+
+.option-tracker .option-hero {
+  min-height: 31rem;
+  background: var(--brand-gold);
+}
+
+.option-tracker .hero-copy {
+  grid-column: 1 / span 9;
+}
+
+.option-tracker .hero-copy h1 {
+  max-width: 10ch;
+  font-size: clamp(4.8rem, 9vw, 10rem);
+}
+
+.option-tracker .hero-copy > p {
+  color: var(--brand-navy);
+}
+
+.option-tracker .hero-mark {
+  color: var(--brand-blue);
+  opacity: 0.14;
+}
+
+.option-tracker .module-stream > .module:first-child {
+  padding-top: 4rem;
+  color: var(--neutral-0);
+  background: var(--brand-navy);
+}
+
+.option-tracker .module-stream > .module:first-child h2,
+.option-tracker .module-stream > .module:first-child .section-label,
+.option-tracker .module-stream > .module:first-child .prototype-note {
+  color: var(--neutral-0);
+}
+
+.option-tracker .module-stream > .module:first-child .tracker-board,
+.option-tracker .module-stream > .module:first-child .tracker-row {
+  border-color: rgb(255 255 255 / 30%);
+}
+
+/* 05 · Carolina Bulletin */
+.option-bulletin .option-site-header {
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-block: 1.25rem 0;
+  border-bottom: 2px solid var(--brand-navy);
+}
+
+.option-bulletin .site-lockup__mark {
+  display: none;
+}
+
+.option-bulletin .site-lockup__text {
+  text-align: center;
+}
+
+.option-bulletin .site-lockup__text strong {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  font-weight: 400;
+}
+
+.option-bulletin .option-site-nav {
+  width: 100%;
+  justify-content: center;
+  padding-block: 0.45rem;
+  border-top: 1px solid #aebcd0;
+}
+
+.option-bulletin .option-hero {
+  min-height: 42rem;
+  align-items: stretch;
+  padding-top: 2rem;
+  background: var(--neutral-0);
+}
+
+.option-bulletin .hero-copy {
+  grid-column: 1 / span 7;
+  align-self: center;
+  padding-right: 2rem;
+  border-right: 1px solid #aebcd0;
+}
+
+.option-bulletin .hero-copy h1 {
+  max-width: 10ch;
+}
+
+.option-bulletin .hero-media {
+  grid-column: 8 / -1;
+  min-height: 34rem;
+}
+
+.option-bulletin .hero-index {
+  top: auto;
+  right: auto;
+  bottom: 1.5rem;
+  left: var(--gutter);
+  text-align: left;
+}
+
+.option-bulletin .module-heading,
+.option-bulletin .update-grid,
+.option-bulletin .record-layout {
+  max-width: 76rem;
+  margin-inline: auto;
+}
+
+/* 06 · Department Directory */
+@media (min-width: 72.01rem) {
+  .option-directory .evaluated-ui {
+    display: grid;
+    grid-template-columns: 18rem minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .option-directory .option-site-header {
+    position: sticky;
+    top: 3.25rem;
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 3.25rem);
+    height: calc(100svh - 3.25rem);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    grid-column: 1;
+    grid-row: 1 / 3;
+    padding: 2rem;
+    color: var(--neutral-0);
+    background: var(--brand-navy);
+  }
+
+  .option-directory .site-lockup {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .option-directory .site-lockup__text small {
+    color: var(--neutral-100);
+  }
+
+  .option-directory .option-site-nav {
+    width: 100%;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .option-directory .option-site-nav a {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgb(255 255 255 / 18%);
+  }
+
+  .option-directory .option-site-nav .nav-action {
+    margin-top: 1rem;
+    padding-inline: 0.8rem;
+    color: var(--brand-navy);
+    background: var(--brand-gold);
+  }
+
+  .option-directory .option-page,
+  .option-directory .option-footer {
+    grid-column: 2;
+    width: 100%;
+  }
+}
+
+.option-directory .option-hero {
+  min-height: 38rem;
+  color: var(--neutral-0);
+  background: var(--brand-blue);
+}
+
+.option-directory .hero-copy {
+  grid-column: 1 / -1;
+}
+
+.option-directory .hero-copy h1,
+.option-directory .hero-copy > p {
+  color: var(--neutral-0);
+}
+
+.option-directory .hero-eyebrow {
+  color: var(--brand-yellow);
+}
+
+.option-directory .hero-mark {
+  color: var(--neutral-0);
+}
+
+.option-directory .module-stream > .module:first-child {
+  background: var(--neutral-0);
+}
+
+/* 07 · Student Voice Hub */
+.option-voice .option-hero {
+  min-height: 43rem;
+  background: var(--brand-carolina);
+}
+
+.option-voice .hero-copy {
+  grid-column: 2 / span 10;
+  text-align: center;
+}
+
+.option-voice .hero-copy h1,
+.option-voice .hero-copy > p {
+  margin-inline: auto;
+}
+
+.option-voice .hero-actions {
+  justify-content: center;
+}
+
+.option-voice .hero-mark {
+  right: 50%;
+  color: var(--brand-navy);
+  opacity: 0.08;
+  transform: translateX(50%);
+}
+
+.option-voice .module-stream > .module:first-child {
+  background: var(--brand-navy);
+}
+
+.option-voice .module-stream > .module:first-child h2 {
+  color: var(--neutral-0);
+}
+
+.option-voice .module-stream > .module:first-child .section-label {
+  color: var(--brand-carolina);
+}
+
+/* 08 · Campus Photo Essay */
+.option-photo .option-site-header {
+  color: var(--neutral-0);
+  background: var(--brand-navy);
+}
+
+.option-photo .site-lockup__text small {
+  color: var(--neutral-100);
+}
+
+.option-photo .option-hero {
+  min-height: calc(100vh - 8.75rem);
+  min-height: calc(100svh - 8.75rem);
+  background-color: var(--brand-navy);
+  background-image: var(--hero-image);
+  background-position: center;
+  background-size: cover;
+}
+
+.option-photo .option-hero::before,
+.option-oldwell .option-hero::before,
+.option-zine .option-hero::before {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  content: "";
+  background: rgb(19 41 75 / 86%);
+}
+
+.option-photo .hero-copy {
+  grid-column: 1 / span 8;
+}
+
+.option-photo .hero-copy h1,
+.option-photo .hero-copy > p {
+  color: var(--neutral-0);
+}
+
+.option-photo .hero-eyebrow {
+  color: var(--brand-yellow);
+}
+
+.option-photo .hero-media {
+  display: none;
+}
+
+.option-photo .hero-index,
+.option-photo .hero-mark {
+  z-index: 2;
+  color: var(--brand-carolina);
+}
+
+/* 09 · Five Priorities */
+.option-priorities .option-hero {
+  min-height: 40rem;
+  background: var(--brand-gold);
+}
+
+.option-priorities .option-hero::after {
+  position: absolute;
+  right: var(--gutter);
+  bottom: -0.17em;
+  color: rgb(19 41 75 / 10%);
+  content: "05";
+  font-family: var(--font-display);
+  font-size: clamp(16rem, 34vw, 38rem);
+  line-height: 0.8;
+}
+
+.option-priorities .hero-copy {
+  grid-column: 1 / span 9;
+}
+
+.option-priorities .priority-list {
+  grid-template-columns: 1fr;
+  gap: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.option-priorities .priority-list li {
+  display: grid;
+  min-height: 12rem;
+  grid-template-columns: 8rem minmax(12rem, 0.75fr) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid #9faec3;
+}
+
+.option-priorities .priority-list li:last-child {
+  grid-column: auto;
+  border-bottom: 1px solid #9faec3;
+}
+
+.option-priorities .priority-list h3,
+.option-priorities .priority-list a {
+  margin: 0;
+}
+
+/* 10 · Action Calendar */
+.option-calendar .option-hero {
+  min-height: 35rem;
+  background: var(--neutral-0);
+  border-bottom: 0.8rem solid var(--brand-carolina);
+}
+
+.option-calendar .hero-copy {
+  grid-column: 1 / span 8;
+}
+
+.option-calendar .option-hero::after {
+  position: absolute;
+  right: var(--gutter);
+  bottom: 2rem;
+  width: clamp(13rem, 25vw, 23rem);
+  padding: 1rem;
+  color: var(--brand-navy);
+  content: "AUG  /  28";
+  background: var(--brand-gold);
+  border: 2px solid var(--brand-navy);
+  box-shadow: 0.7rem 0.7rem 0 var(--brand-carolina);
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 5rem);
+  line-height: 1;
+  text-align: center;
+}
+
+.option-calendar .module-stream > .module:first-child {
+  background: var(--neutral-0);
+}
+
+.option-calendar .event-list article:nth-child(even) {
+  padding-inline: 1rem;
+  background: var(--neutral-50);
+}
+
+/* 11 · Open Government */
+.option-records .option-site-header,
+.option-records .option-hero {
+  color: var(--neutral-0);
+  background: var(--brand-navy);
+}
+
+.option-records .site-lockup__text small,
+.option-records .hero-copy > p {
+  color: var(--neutral-100);
+}
+
+.option-records .hero-eyebrow {
+  color: var(--brand-carolina);
+}
+
+.option-records .hero-copy {
+  grid-column: 1 / span 9;
+}
+
+.option-records .hero-copy h1 {
+  color: var(--neutral-0);
+}
+
+.option-records .hero-mark {
+  color: var(--neutral-0);
+  opacity: 0.05;
+}
+
+.option-records .module-stream > .module:first-child {
+  background: var(--neutral-50);
+}
+
+/* 12 · Split-Screen Administration */
+@media (min-width: 64.01rem) {
+  .option-split .option-page {
+    display: grid;
+    grid-template-columns: minmax(26rem, 0.82fr) minmax(34rem, 1.18fr);
+    align-items: start;
+  }
+
+  .option-split .option-hero {
+    position: sticky;
+    top: 3.25rem;
+    width: 100%;
+    height: calc(100vh - 3.25rem);
+    height: calc(100svh - 3.25rem);
+    min-height: 42rem;
+    grid-template-columns: 1fr;
+    grid-column: 1;
+    padding: 4rem;
+    color: var(--neutral-0);
+    background: var(--brand-navy);
+  }
+
+  .option-split .hero-copy,
+  .option-split .hero-media {
+    grid-column: 1;
+  }
+
+  .option-split .hero-copy h1 {
+    color: var(--neutral-0);
+    font-size: clamp(4rem, 6vw, 7rem);
+  }
+
+  .option-split .hero-copy > p {
+    color: var(--neutral-100);
+  }
+
+  .option-split .hero-media {
+    display: none;
+  }
+
+  .option-split .module-stream {
+    grid-column: 2;
+  }
+
+  .option-split .module {
+    width: 100%;
+    padding: clamp(4rem, 7vw, 7rem) clamp(2rem, 5vw, 5rem);
+  }
+
+  .option-split .leader-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* 13 · Old Well Civic Portal */
+.option-oldwell .option-site-header {
+  color: var(--neutral-0);
+  background: var(--brand-navy);
+}
+
+.option-oldwell .site-lockup__text small {
+  color: var(--neutral-100);
+}
+
+.option-oldwell .option-hero {
+  min-height: 48rem;
+  color: var(--neutral-0);
+  background-color: var(--brand-navy);
+  background-image: var(--hero-image);
+  background-position: center;
+  background-size: cover;
+  border-radius: 0 0 48% 48% / 0 0 12% 12%;
+}
+
+.option-oldwell .option-hero::before {
+  background: rgb(19 41 75 / 83%);
+}
+
+.option-oldwell .hero-copy {
+  grid-column: 2 / span 10;
+  text-align: center;
+}
+
+.option-oldwell .hero-copy h1,
+.option-oldwell .hero-copy > p {
+  margin-inline: auto;
+  color: var(--neutral-0);
+}
+
+.option-oldwell .hero-eyebrow {
+  color: var(--brand-yellow);
+}
+
+.option-oldwell .hero-actions {
+  justify-content: center;
+}
+
+.option-oldwell .hero-media {
+  display: none;
+}
+
+.option-oldwell .hero-mark,
+.option-oldwell .hero-index {
+  z-index: 2;
+  color: var(--brand-carolina);
+}
+
+/* 14 · Carolina Field Notes */
+.option-notes .evaluated-ui,
+.option-notes .option-page,
+.option-notes .module-stream,
+.option-notes .option-hero {
+  background-color: #f8f8f8;
+  background-image: repeating-linear-gradient(to bottom, transparent 0 31px, rgb(41 89 164 / 12%) 31px 32px);
+}
+
+.option-notes .option-site-header {
+  border-bottom: 2px solid var(--brand-navy);
+}
+
+.option-notes .option-hero {
+  min-height: 43rem;
+  border-bottom: 2px solid var(--brand-navy);
+}
+
+.option-notes .hero-copy {
+  grid-column: 1 / span 9;
+}
+
+.option-notes .hero-copy h1 {
+  padding: 0.08em 0.14em 0.12em;
+  background: var(--brand-yellow);
+  box-shadow: 0.65rem 0.65rem 0 var(--brand-carolina);
+  transform: rotate(-1deg);
+}
+
+.option-notes .module {
+  background-color: transparent !important;
+}
+
+.option-notes .briefing-grid article:nth-child(2) {
+  padding: 1.5rem;
+  background: var(--brand-gold);
+  border-top: 0;
+  transform: rotate(1deg);
+}
+
+.option-notes .briefing-grid article:nth-child(3) {
+  padding: 1.5rem;
+  background: var(--brand-carolina);
+  border-top: 0;
+  transform: rotate(-0.75deg);
+}
+
+/* 15 · Executive Newsroom */
+.option-newsroom .option-site-header {
+  color: var(--neutral-0);
+  background: var(--brand-navy);
+}
+
+.option-newsroom .site-lockup__text small {
+  color: var(--neutral-100);
+}
+
+.option-newsroom .option-hero {
+  min-height: 42rem;
+  align-items: stretch;
+  padding-top: 4.5rem;
+  background: var(--neutral-0);
+  border-top: 0.65rem solid var(--brand-gold);
+}
+
+.option-newsroom .hero-copy {
+  grid-column: 1 / span 7;
+  align-self: center;
+}
+
+.option-newsroom .hero-media {
+  grid-column: 8 / -1;
+}
+
+.option-newsroom .hero-index {
+  top: 0.6rem;
+  right: auto;
+  left: var(--gutter);
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  color: var(--brand-navy);
+  text-align: left;
+}
+
+.option-newsroom .module-stream > .module:first-child {
+  background: var(--neutral-0);
+}
+
+/* 16 · Resource Hotline */
+.option-hotline .option-hero {
+  min-height: 39rem;
+  color: var(--brand-navy);
+  background: var(--brand-carolina);
+  border-bottom: 1rem solid var(--brand-yellow);
+}
+
+.option-hotline .hero-copy {
+  grid-column: 1 / span 10;
+}
+
+.option-hotline .hero-copy h1 {
+  max-width: 12ch;
+  font-size: clamp(4.5rem, 9vw, 10rem);
+}
+
+.option-hotline .module-stream > .module:first-child {
+  background: var(--brand-navy);
+}
+
+.option-hotline .module-stream > .module:first-child h2 {
+  color: var(--neutral-0);
+}
+
+.option-hotline .module-stream > .module:first-child .section-label {
+  color: var(--brand-yellow);
+}
+
+.option-hotline .resource-grid {
+  grid-template-columns: 1fr;
+}
+
+.option-hotline .resource-grid a {
+  min-height: 9rem;
+  grid-template-columns: 5rem minmax(0, 0.45fr) minmax(0, 1fr);
+  align-items: center;
+  align-content: center;
+  border-bottom: 1px solid rgb(255 255 255 / 24%);
+}
+
+.option-hotline .resource-grid span {
+  grid-row: auto;
+}
+
+/* 17 · People First */
+.option-people .option-hero {
+  min-height: 38rem;
+  color: var(--neutral-0);
+  background: var(--brand-navy);
+}
+
+.option-people .hero-copy {
+  grid-column: 6 / -1;
+  grid-row: 1;
+}
+
+.option-people .hero-copy h1,
+.option-people .hero-copy > p {
+  color: var(--neutral-0);
+}
+
+.option-people .hero-media {
+  grid-column: 1 / span 4;
+  background: var(--brand-gold);
+  box-shadow: 0.9rem 0.9rem 0 var(--brand-carolina);
+}
+
+.option-people .hero-index {
+  color: var(--brand-yellow);
+}
+
+.option-people .leader-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-flow: dense;
+}
+
+.option-people .leader-card--featured {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+/* 18 · Impact Metrics */
+.option-metrics .option-site-header,
+.option-metrics .option-hero,
+.option-metrics .module-stream {
+  color: var(--neutral-0);
+  background: var(--brand-navy);
+}
+
+.option-metrics .site-lockup__text small,
+.option-metrics .hero-copy > p {
+  color: var(--neutral-100);
+}
+
+.option-metrics .hero-eyebrow {
+  color: var(--brand-yellow);
+}
+
+.option-metrics .hero-copy {
+  grid-column: 1 / span 9;
+}
+
+.option-metrics .hero-copy h1 {
+  color: var(--neutral-0);
+}
+
+.option-metrics .hero-mark {
+  color: var(--brand-carolina);
+}
+
+.option-metrics .module {
+  color: var(--neutral-0);
+  background: var(--brand-navy) !important;
+}
+
+.option-metrics .module h2 {
+  color: var(--neutral-0);
+}
+
+.option-metrics .module .section-label {
+  color: var(--brand-carolina);
+}
+
+.option-metrics .number-grid,
+.option-metrics .number-grid article {
+  background: var(--brand-blue);
+}
+
+.option-metrics .number-grid article {
+  color: var(--neutral-0);
+  border-right: 1px solid rgb(255 255 255 / 24%);
+}
+
+.option-metrics .number-grid strong,
+.option-metrics .number-grid span,
+.option-metrics .number-grid small {
+  color: var(--neutral-0);
+}
+
+.option-metrics .tracker-row,
+.option-metrics .tracker-board {
+  border-color: rgb(255 255 255 / 25%);
+}
+
+/* 19 · Policy Briefing */
+.option-briefing .option-site-header {
+  border-bottom: 1px solid #aebcd0;
+}
+
+.option-briefing .option-hero {
+  min-height: 44rem;
+  color: var(--neutral-0);
+  background: var(--brand-navy);
+  border-left: clamp(1rem, 4vw, 4rem) solid var(--brand-gold);
+}
+
+.option-briefing .hero-copy {
+  grid-column: 1 / span 9;
+}
+
+.option-briefing .hero-copy h1,
+.option-briefing .hero-copy > p {
+  color: var(--neutral-0);
+}
+
+.option-briefing .hero-eyebrow,
+.option-briefing .hero-index {
+  color: var(--brand-yellow);
+}
+
+.option-briefing .briefing-grid {
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.option-briefing .briefing-grid article {
+  display: grid;
+  min-height: 16rem;
+  grid-template-columns: 10rem minmax(18rem, 0.7fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 2rem;
+  padding-block: 2rem;
+  border-top: 1px solid #aebcd0;
+}
+
+.option-briefing .briefing-grid h3 {
+  margin: 0;
+}
+
+/* 20 · Campus Map */
+.option-map .option-hero {
+  min-height: 44rem;
+  background-color: var(--brand-carolina);
+  background-image: var(--hero-image);
+  background-position: center;
+  background-size: cover;
+}
+
+.option-map .option-hero::before {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  content: "";
+  background: rgb(131 179 255 / 88%);
+}
+
+.option-map .hero-copy {
+  grid-column: 1 / span 8;
+}
+
+.option-map .hero-media {
+  display: none;
+}
+
+.option-map .hero-mark,
+.option-map .hero-index {
+  z-index: 2;
+}
+
+.option-map .module-stream > .module:first-child {
+  background: var(--neutral-0);
+}
+
+/* 21 · Listening Tour */
+.option-listening .option-hero {
+  min-height: 42rem;
+  background: var(--neutral-0);
+  border-bottom: 0.75rem solid var(--brand-carolina);
+}
+
+.option-listening .hero-copy {
+  grid-column: 2 / span 9;
+}
+
+.option-listening .option-hero::after {
+  position: absolute;
+  right: 3%;
+  bottom: -0.35em;
+  color: var(--brand-gold);
+  content: "“";
+  font-family: var(--font-display);
+  font-size: clamp(22rem, 42vw, 46rem);
+  line-height: 0.7;
+  opacity: 0.72;
+}
+
+.option-listening .listening-timeline {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.option-listening .listening-timeline li {
+  min-height: 24rem;
+  grid-template-columns: 1fr;
+  align-content: space-between;
+  padding: 2rem;
+  border: 2px solid var(--brand-navy);
+}
+
+.option-listening .listening-timeline li:nth-child(2) {
+  background: var(--brand-carolina);
+}
+
+.option-listening .listening-timeline li:nth-child(3) {
+  background: var(--brand-gold);
+}
+
+/* 22 · Mobile Action Stack */
+.option-mobile .evaluated-ui {
+  width: min(100%, 36rem);
+  margin-inline: auto;
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 24%);
+}
+
+.option-mobile {
+  background: #0d1d36;
+}
+
+.option-mobile .option-site-header,
+.option-mobile .option-hero,
+.option-mobile .module,
+.option-mobile .option-footer {
+  width: 100%;
+}
+
+.option-mobile .option-site-header {
+  min-height: 4.5rem;
+}
+
+.option-mobile .site-lockup__text small,
+.option-mobile .option-site-nav a:not(.nav-action) {
+  display: none;
+}
+
+.option-mobile .option-hero {
+  min-height: 38rem;
+  grid-template-columns: 1fr;
+  padding: 4rem 1.5rem;
+  color: var(--neutral-0);
+  background: var(--brand-navy);
+}
+
+.option-mobile .hero-copy {
+  grid-column: 1;
+}
+
+.option-mobile .hero-copy h1 {
+  color: var(--neutral-0);
+  font-size: clamp(4rem, 17vw, 6.4rem);
+}
+
+.option-mobile .hero-copy > p {
+  color: var(--neutral-100);
+}
+
+.option-mobile .hero-actions {
+  align-items: stretch;
+  flex-direction: column;
+}
+
+.option-mobile .button {
+  width: 100%;
+}
+
+.option-mobile .module {
+  padding: 4.5rem 1.5rem;
+}
+
+.option-mobile .service-item,
+.option-mobile .event-list article {
+  grid-template-columns: 2.5rem minmax(0, 1fr) auto;
+}
+
+.option-mobile .resource-grid,
+.option-mobile .record-layout {
+  grid-template-columns: 1fr;
+}
+
+/* 23 · ProjectBOLD Zine */
+.option-zine .option-site-header {
+  color: var(--neutral-0);
+  background: var(--brand-navy);
+}
+
+.option-zine .site-lockup__text small {
+  color: var(--neutral-100);
+}
+
+.option-zine .option-hero {
+  min-height: calc(100vh - 8.75rem);
+  min-height: calc(100svh - 8.75rem);
+  background-color: var(--brand-navy);
+  background-image: var(--hero-image);
+  background-position: center;
+  background-size: cover;
+}
+
+.option-zine .option-hero::before {
+  background: rgb(19 41 75 / 70%);
+}
+
+.option-zine .hero-copy {
+  grid-column: 1 / span 9;
+  padding: clamp(1rem, 3vw, 3rem);
+  background: var(--brand-gold);
+  border: 0.4rem solid var(--brand-navy);
+  box-shadow: 1rem 1rem 0 var(--brand-carolina);
+  transform: rotate(-1.2deg);
+}
+
+.option-zine .hero-copy h1,
+.option-zine .hero-copy > p {
+  color: var(--brand-navy);
+}
+
+.option-zine .hero-eyebrow {
+  color: var(--brand-magenta);
+}
+
+.option-zine .hero-media {
+  display: none;
+}
+
+.option-zine .hero-index,
+.option-zine .hero-mark {
+  z-index: 2;
+  color: var(--brand-yellow);
+}
+
+.option-zine .module-stream > .module:nth-child(odd) {
+  border-block: 0.6rem solid var(--brand-navy);
+}
+
+.option-zine .photo-grid figure:nth-child(2) {
+  box-shadow: 0.7rem 0.7rem 0 var(--brand-orange);
+  transform: rotate(1deg);
+}
+
+.option-zine .photo-grid figure:nth-child(3) {
+  box-shadow: -0.7rem 0.7rem 0 var(--brand-magenta);
+  transform: rotate(-1deg);
+}
+
+/* 24 · Quiet Institutional */
+.option-quiet .option-site-header {
+  min-height: 7rem;
+  border-bottom: 1px solid #c3cedd;
+}
+
+.option-quiet .site-lockup__mark {
+  font-size: 1.2rem;
+}
+
+.option-quiet .option-hero {
+  min-height: 48rem;
+  background: var(--neutral-0);
+}
+
+.option-quiet .hero-copy {
+  grid-column: 2 / span 9;
+}
+
+.option-quiet .hero-copy h1 {
+  max-width: 11ch;
+  font-size: clamp(4rem, 7.5vw, 8rem);
+}
+
+.option-quiet .hero-mark,
+.option-quiet .hero-index {
+  display: none;
+}
+
+.option-quiet .module-stream,
+.option-quiet .module,
+.option-quiet .module:nth-child(even) {
+  background: var(--neutral-0);
+}
+
+.option-quiet .module {
+  max-width: 82rem;
+}
+
+.option-quiet .module-heading {
+  margin-bottom: 5rem;
+}
+
+/* 25 · Community Mosaic */
+.option-mosaic .option-site-header,
+.option-mosaic .option-hero {
+  color: var(--neutral-0);
+  background: var(--brand-navy);
+}
+
+.option-mosaic .site-lockup__text small,
+.option-mosaic .hero-copy > p {
+  color: var(--neutral-100);
+}
+
+.option-mosaic .hero-copy {
+  grid-column: 1 / span 6;
+}
+
+.option-mosaic .hero-copy h1 {
+  color: var(--neutral-0);
+}
+
+.option-mosaic .hero-eyebrow {
+  color: var(--brand-yellow);
+}
+
+.option-mosaic .hero-media {
+  grid-column: 7 / -1;
+  border: 0.7rem solid var(--brand-gold);
+  box-shadow: 0.8rem 0.8rem 0 var(--brand-carolina);
+}
+
+@media (min-width: 78rem) {
+  .option-mosaic .module-stream {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--brand-navy);
+  }
+
+  .option-mosaic .module {
+    width: 100%;
+    margin: 0;
+    padding: clamp(2rem, 4vw, 4rem);
+  }
+
+  .option-mosaic .module:nth-child(1) { grid-column: 1 / span 8; }
+  .option-mosaic .module:nth-child(2) { grid-column: 9 / -1; }
+  .option-mosaic .module:nth-child(3) { grid-column: 1 / -1; }
+  .option-mosaic .module:nth-child(4) { grid-column: 1 / span 7; }
+  .option-mosaic .module:nth-child(5) { grid-column: 8 / -1; }
+
+  .option-mosaic .module:nth-child(2) .leader-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .option-mosaic .module:nth-child(2) .leader-card:nth-child(n + 5) {
+    display: none;
+  }
+
+  .option-mosaic .module:nth-child(4) .photo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .option-mosaic .module:nth-child(4) .photo-grid figure:nth-child(n + 2) {
+    display: none;
+  }
+}
+
+/* Overview thumbnails mirror each composition without becoming miniature screenshots. */
+.overview-card--poster .overview-card__preview,
+.overview-card--metrics .overview-card__preview,
+.overview-card--records .overview-card__preview { background: var(--brand-navy); }
+.overview-card--service .overview-card__preview,
+.overview-card--voice .overview-card__preview,
+.overview-card--map .overview-card__preview { color: var(--brand-navy); background: var(--brand-carolina); }
+.overview-card--president .overview-card__preview,
+.overview-card--people .overview-card__preview { background: var(--brand-blue); }
+.overview-card--tracker .overview-card__preview,
+.overview-card--priorities .overview-card__preview,
+.overview-card--calendar .overview-card__preview { color: var(--brand-navy); background: var(--brand-gold); }
+.overview-card--bulletin .overview-card__preview,
+.overview-card--quiet .overview-card__preview { color: var(--brand-navy); background: var(--neutral-0); }
+.overview-card--directory .preview-frame { grid-template-columns: 0.55fr 1.45fr; }
+.overview-card--photo .overview-card__preview,
+.overview-card--oldwell .overview-card__preview,
+.overview-card--newsroom .overview-card__preview,
+.overview-card--zine .overview-card__preview { background: #20385a; }
+.overview-card--photo .preview-frame,
+.overview-card--oldwell .preview-frame,
+.overview-card--newsroom .preview-frame,
+.overview-card--zine .preview-frame { transform: rotate(-3deg); }
+.overview-card--split .preview-frame { grid-template-columns: 1fr 1fr; inset-inline: 8%; }
+.overview-card--notes .overview-card__preview { color: var(--brand-navy); background: var(--neutral-50); }
+.overview-card--hotline .preview-frame { grid-template-columns: 1fr; }
+.overview-card--listening .preview-frame { grid-template-columns: repeat(3, 1fr); }
+.overview-card--mobile .preview-frame { inset-inline: 28%; grid-template-columns: 1fr; border: 2px solid var(--brand-carolina); padding: 0.35rem; }
+.overview-card--briefing .preview-frame { grid-template-columns: 0.25fr 1.75fr; }
+.overview-card--mosaic .preview-frame { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); }
+
+@media (max-width: 72rem) {
+  .option-people .leader-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .option-people .leader-card--featured {
+    grid-column: span 2;
+    grid-row: auto;
+  }
+
+  .option-listening .listening-timeline {
+    grid-template-columns: 1fr;
+  }
+
+  .option-listening .listening-timeline li {
+    min-height: 15rem;
+  }
+}
+
+@media (max-width: 64rem) {
+  .option-priorities .priority-list li,
+  .option-briefing .briefing-grid article {
+    grid-template-columns: 5rem minmax(0, 1fr);
+  }
+
+  .option-priorities .priority-list p,
+  .option-priorities .priority-list a,
+  .option-briefing .briefing-grid p {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 52rem) {
+  .option-poster .hero-copy h1 {
+    font-size: clamp(3.4rem, 18vw, 6.5rem);
+  }
+
+  .option-service .service-list,
+  .option-listening .listening-timeline {
+    grid-template-columns: 1fr;
+  }
+
+  .option-president .hero-copy,
+  .option-president .hero-media,
+  .option-bulletin .hero-copy,
+  .option-bulletin .hero-media,
+  .option-newsroom .hero-copy,
+  .option-newsroom .hero-media,
+  .option-people .hero-copy,
+  .option-people .hero-media,
+  .option-mosaic .hero-copy,
+  .option-mosaic .hero-media {
+    grid-column: 1;
+  }
+
+  .option-president .hero-media,
+  .option-people .hero-media,
+  .option-mosaic .hero-media {
+    grid-row: auto;
+  }
+
+  .option-bulletin .hero-copy {
+    padding-right: 0;
+    border-right: 0;
+  }
+
+  .option-directory .hero-copy h1 {
+    font-size: clamp(3.1rem, 12.5vw, 5rem);
+  }
+
+  .option-priorities .option-hero::after,
+  .option-calendar .option-hero::after {
+    opacity: 0.35;
+  }
+
+  .option-priorities .priority-list li,
+  .option-briefing .briefing-grid article {
+    min-height: auto;
+    grid-template-columns: 3.5rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 2rem;
+  }
+
+  .option-hotline .resource-grid a {
+    min-height: 12rem;
+    grid-template-columns: 3.5rem minmax(0, 1fr);
+  }
+
+  .option-hotline .resource-grid small {
+    grid-column: 2;
+  }
+
+  .option-people .leader-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .option-people .leader-card--featured {
+    grid-column: auto;
+  }
+
+  .option-notes .hero-copy h1,
+  .option-zine .hero-copy {
+    transform: none;
+  }
+}
+
+@media (max-width: 30rem) {
+  .option-bulletin .hero-copy h1 {
+    font-size: clamp(3rem, 13vw, 4rem);
+  }
+
+  .option-directory .hero-copy h1 {
+    font-size: clamp(2.7rem, 12vw, 3.8rem);
+  }
+}

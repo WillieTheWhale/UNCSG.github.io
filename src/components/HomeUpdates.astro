@@ -1,0 +1,63 @@
+<section class="content-section content-section--updates" id="updates" aria-labelledby="updates-title">
+  <header class="section-heading section-heading--with-link">
+    <h2 id="updates-title">Updates from the Executive Branch</h2>
+    <a href="/updates/">View all updates <span aria-hidden="true">→</span></a>
+  </header>
+
+  <div class="update-grid" data-home-updates aria-live="polite">
+    <p class="home-updates-status" data-home-updates-status>Loading updates…</p>
+  </div>
+</section>
+
+<script>
+  interface HomeUpdate {
+    title: string;
+    slug: string;
+    publishedAt: string;
+  }
+
+  const grid = document.querySelector<HTMLElement>("[data-home-updates]");
+  const status = document.querySelector<HTMLElement>("[data-home-updates-status]");
+  if (grid && status) {
+    const formatter = new Intl.DateTimeFormat("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+      timeZone: "America/New_York",
+    });
+    fetch("/api/updates?limit=3", { credentials: "same-origin" })
+      .then(async (response) => {
+        if (!response.ok) throw new Error("Unable to load updates");
+        return (await response.json()) as { updates: HomeUpdate[] };
+      })
+      .then(({ updates }) => {
+        if (!updates.length) {
+          status.textContent = "No updates have been published yet. Check back soon.";
+          return;
+        }
+        const cards = updates.map((update) => {
+          const article = document.createElement("article");
+          article.className = "update";
+          const time = document.createElement("time");
+          time.dateTime = update.publishedAt;
+          time.textContent = formatter.format(new Date(update.publishedAt));
+          const heading = document.createElement("h3");
+          heading.textContent = update.title;
+          const link = document.createElement("a");
+          link.href = `/updates/${encodeURIComponent(update.slug)}`;
+          link.setAttribute("aria-label", `Read update: ${update.title}`);
+          link.innerHTML = 'Read update <span aria-hidden="true">→</span>';
+          article.append(time, heading, link);
+          return article;
+        });
+        grid.replaceChildren(...cards);
+      })
+      .catch(() => {
+        status.textContent = "Updates could not be loaded right now. Visit the updates page to try again.";
+        const link = document.createElement("a");
+        link.href = "/updates/";
+        link.textContent = "View updates";
+        status.append(" ", link);
+      });
+  }
+</script>
