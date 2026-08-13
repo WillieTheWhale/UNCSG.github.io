@@ -1,0 +1,191 @@
+---
+import teamGroups from "../../data/team-directory.json";
+import type { TeamOptionLayout } from "../../data/team-options";
+import "../../styles/team-directory.css";
+import TeamMember from "./TeamMember.astro";
+
+interface Props {
+  layout: TeamOptionLayout;
+  showLabNote?: boolean;
+}
+
+const { layout, showLabNote = false } = Astro.props;
+const sections = ["Executive offices", "Cabinet departments", "Task forces"];
+const groupedBySection = sections.map((section) => ({
+  section,
+  groups: teamGroups.filter((group) => group.section === section),
+}));
+const totalPeople = new Set(teamGroups.flatMap((group) => group.members.map((member) => member.email))).size;
+const totalMemberships = teamGroups.reduce((sum, group) => sum + group.members.length, 0);
+---
+
+<div class:list={["team-directory-page", `team-directory-page--${layout}`]} data-team-directory>
+  <header class="team-directory-hero">
+    <div>
+      <p class="team-directory-hero__kicker">Duncan Administration · 2026–27</p>
+      <h1>Meet the team</h1>
+      <p>Student leaders across executive offices, cabinet departments, and task forces work together to serve Carolina with excellence and integrity.</p>
+      <dl class="team-directory-hero__counts" aria-label="Directory summary">
+        <div><dt>{totalPeople}</dt><dd>people</dd></div>
+        <div><dt>{teamGroups.length}</dt><dd>teams</dd></div>
+        <div><dt>{totalMemberships}</dt><dd>roles</dd></div>
+      </dl>
+    </div>
+  </header>
+
+  {showLabNote && (
+    <aside class="team-option-thesis" aria-label="Design option note">
+      <strong>Design prototype</strong>
+      <span>All people and public directory fields come from the supplied onboarding and master-directory files.</span>
+    </aside>
+  )}
+
+  {layout === "sticky-index" && (
+    <div class="team-sticky-shell">
+      <aside class="team-sticky-index" aria-label="Team index">
+        <strong>Jump to a team</strong>
+        <nav>
+          {groupedBySection.map(({ section, groups }) => (
+            <section>
+              <span>{section}</span>
+              {groups.map((group) => <a href={`#team-${group.slug}`}>{group.name}</a>)}
+            </section>
+          ))}
+        </nav>
+      </aside>
+      <div class="team-sticky-content">
+        {teamGroups.map((group) => (
+          <section class="team-group" id={`team-${group.slug}`} aria-labelledby={`team-${group.slug}-title`}>
+            <header class="team-group__heading">
+              <div><p>{group.section}</p><h2 id={`team-${group.slug}-title`}>{group.name}</h2></div>
+              <span>{group.members.length} {group.members.length === 1 ? "member" : "members"}</span>
+              <p>{group.description}</p>
+            </header>
+            <div class="team-member-grid">
+              {group.members.map((member) => <TeamMember member={member} />)}
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
+  )}
+
+  {layout === "accordion-directory" && (
+    <div class="team-accordion-groups">
+      {groupedBySection.map(({ section, groups }, sectionIndex) => (
+        <section class="team-section" aria-labelledby={`team-section-${sectionIndex}`}>
+          <h2 id={`team-section-${sectionIndex}`}>{section}</h2>
+          {groups.map((group, groupIndex) => (
+            <details class="team-accordion" open={sectionIndex === 0 && groupIndex === 0}>
+              <summary>
+                <div><h3>{group.name}</h3><p>{group.description}</p></div>
+                <span>{group.members.length}</span>
+                <i aria-hidden="true"></i>
+              </summary>
+              <div class="team-member-grid">
+                {group.members.map((member) => <TeamMember member={member} />)}
+              </div>
+            </details>
+          ))}
+        </section>
+      ))}
+    </div>
+  )}
+
+  {layout === "portrait-mosaic" && (
+    <div class="team-mosaic-shell" data-team-mosaic>
+      <div class="team-section-tabs" role="tablist" aria-label="Team directory sections">
+        {groupedBySection.map(({ section }, index) => (
+          <button
+            type="button"
+            role="tab"
+            aria-selected={index === 0 ? "true" : "false"}
+            aria-controls={`team-mosaic-panel-${index}`}
+            id={`team-mosaic-tab-${index}`}
+            tabindex={index === 0 ? "0" : "-1"}
+            data-team-section-tab={index}
+          >{section}</button>
+        ))}
+      </div>
+      {groupedBySection.map(({ section, groups }, sectionIndex) => (
+        <section
+          class="team-mosaic-panel"
+          id={`team-mosaic-panel-${sectionIndex}`}
+          role="tabpanel"
+          aria-labelledby={`team-mosaic-tab-${sectionIndex}`}
+          hidden={sectionIndex !== 0}
+          data-team-section-panel={sectionIndex}
+        >
+          <h2>{section}</h2>
+          {groups.map((group) => (
+            <section class="team-group" aria-labelledby={`mosaic-${group.slug}-title`}>
+              <header class="team-group__heading">
+                <div><h3 id={`mosaic-${group.slug}-title`}>{group.name}</h3><p>{group.description}</p></div>
+                <span>{group.members.length} {group.members.length === 1 ? "member" : "members"}</span>
+              </header>
+              <div class="team-member-grid">
+                {group.members.map((member, memberIndex) => (
+                  <TeamMember member={member} mode="mosaic" featured={memberIndex === 0} />
+                ))}
+              </div>
+            </section>
+          ))}
+        </section>
+      ))}
+    </div>
+  )}
+
+  {(layout === "classic-grid" || layout === "editorial-roster") && (
+    <div class="team-standard-groups">
+      {groupedBySection.map(({ section, groups }, sectionIndex) => (
+        <section class="team-section" aria-labelledby={`team-standard-section-${sectionIndex}`}>
+          <h2 id={`team-standard-section-${sectionIndex}`}>{section}</h2>
+          {groups.map((group) => (
+            <section class="team-group" id={`team-${group.slug}`} aria-labelledby={`team-${group.slug}-title`}>
+              <header class="team-group__heading">
+                <div><h3 id={`team-${group.slug}-title`}>{group.name}</h3><p>{group.description}</p></div>
+                <span>{group.members.length} {group.members.length === 1 ? "member" : "members"}</span>
+              </header>
+              <div class="team-member-grid">
+                {group.members.map((member) => (
+                  <TeamMember member={member} mode={layout === "editorial-roster" ? "row" : "card"} />
+                ))}
+              </div>
+            </section>
+          ))}
+        </section>
+      ))}
+    </div>
+  )}
+</div>
+
+{layout === "portrait-mosaic" && (
+  <script is:inline>
+    (() => {
+      document.querySelectorAll("[data-team-mosaic]").forEach((mosaic) => {
+        const tabs = [...mosaic.querySelectorAll("[data-team-section-tab]")];
+        const panels = [...mosaic.querySelectorAll("[data-team-section-panel]")];
+        const activate = (index, focus = false) => {
+          tabs.forEach((tab, tabIndex) => {
+            const selected = tabIndex === index;
+            tab.setAttribute("aria-selected", String(selected));
+            tab.setAttribute("tabindex", selected ? "0" : "-1");
+            if (selected && focus && tab instanceof HTMLButtonElement) tab.focus();
+          });
+          panels.forEach((panel, panelIndex) => {
+            if (panel instanceof HTMLElement) panel.hidden = panelIndex !== index;
+          });
+        };
+        tabs.forEach((tab, index) => {
+          tab.addEventListener("click", () => activate(index));
+          tab.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+              event.preventDefault();
+              activate((index + (event.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length, true);
+            }
+          });
+        });
+      });
+    })();
+  </script>
+)}

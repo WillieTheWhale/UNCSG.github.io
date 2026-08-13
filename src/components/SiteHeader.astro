@@ -39,7 +39,7 @@ const sectionHref = (section: string) => onHomePage ? `#${section}` : `/#${secti
   >
     <a href={sectionHref("vision")}>Vision</a>
     <a href={sectionHref("priorities")}>Priorities</a>
-    <a href={sectionHref("departments")}>Teams</a>
+    <a href="/team/" aria-current={currentPath === "/team/" ? "page" : undefined}>Teams</a>
     <a href="/updates/" aria-current={currentPath === "/updates/" ? "page" : undefined}>Updates</a>
     <a href={onHomePage ? "#events" : "/events/"} aria-current={currentPath === "/events/" ? "page" : undefined}>Events</a>
     <a class="site-nav__contact" href={sectionHref("contact")}>Get in touch</a>

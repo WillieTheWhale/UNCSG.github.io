@@ -1,0 +1,39 @@
+---
+import UpdateSiteLayout from "../../../layouts/UpdateSiteLayout.astro";
+import { teamOptions, teamOptionPath } from "../../../data/team-options";
+import "../../../styles/team-directory.css";
+---
+
+<UpdateSiteLayout
+  title="Team Page Design Lab | Duncan Administration"
+  description="Five closely related directory designs for the Duncan Administration team page."
+  canonicalPath="/design-options/team/"
+  bodyClass="team-lab-overview-page"
+  noindex
+>
+  <section class="team-lab-overview" aria-labelledby="team-lab-title">
+    <header>
+      <p>Duncan Administration · Focused design lab</p>
+      <h1 id="team-lab-title">Five ways to meet the team.</h1>
+      <span>Every option uses the same complete directory, public UNC email addresses, supplied headshots, and existing Duncan design system.</span>
+    </header>
+
+    <div class="team-lab-overview__grid">
+      {teamOptions.map((option) => (
+        <article>
+          <a class:list={["team-lab-overview__preview", `team-lab-overview__preview--${option.layout}`]} href={teamOptionPath(option)}>
+            <span>{String(option.id).padStart(2, "0")}</span>
+            <div aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+            <strong>{option.name}</strong>
+          </a>
+          <div>
+            <h2>{option.name}</h2>
+            <p>{option.thesis}</p>
+            <small><b>Tradeoff:</b> {option.tradeoff}</small>
+            <a href={teamOptionPath(option)}>Open option <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</UpdateSiteLayout>
