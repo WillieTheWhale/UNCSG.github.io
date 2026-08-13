@@ -85,7 +85,7 @@ async function loadListing(root: HTMLElement): Promise<void> {
   try {
     const response = await fetch(endpoint, { credentials: "same-origin" });
     if (response.status === 401 && preview) {
-      window.location.assign(`/manage-updates/?return=${encodeURIComponent(window.location.pathname)}`);
+      window.location.assign(`/manage/updates/?return=${encodeURIComponent(window.location.pathname)}`);
       return;
     }
     if (response.status === 403 && preview) {

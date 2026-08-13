@@ -4,6 +4,7 @@ import "@fontsource-variable/montserrat";
 import "@fontsource-variable/montserrat/wght-italic.css";
 import "@fontsource/open-sans/600.css";
 import AccessDeniedBanner from "../components/AccessDeniedBanner.astro";
+import FeaturedEvent from "../components/FeaturedEvent.astro";
 import HomeSections from "../components/HomeSections.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import "../styles/global.css";
@@ -36,7 +37,7 @@ import "../styles/global.css";
     <SiteHeader onHomePage />
 
     <main id="main">
-      <section class="hero" aria-labelledby="page-title">
+      <section class="hero" aria-labelledby="page-title" data-featured-event-state="empty">
         <figure class="hero__media">
           <img
             src="/design-lab/wilson-library.jpg"
@@ -55,14 +56,7 @@ import "../styles/global.css";
             <p>The Duncan Administration is creating a Carolina that is first in excellence, best in integrity, and for every student.</p>
           </div>
 
-          <aside class="office-card" aria-label="Example event">
-            <time><b>Fall</b><span>2026</span></time>
-            <div>
-              <strong>Example event</strong>
-              <p>Dates, times, and locations will be published with the public calendar.</p>
-              <a href="#events">View events <span aria-hidden="true">→</span></a>
-            </div>
-          </aside>
+          <FeaturedEvent />
         </div>
       </section>
 
@@ -83,8 +77,10 @@ import "../styles/global.css";
       </div>
       <div class="site-footer__links">
         <a href="mailto:studentgovernment@unc.edu">Contact us</a>
+        <a href="https://studentgovernment.unc.edu/" rel="nofollow">Student Government home</a>
         <a href="https://www.instagram.com/unc_executivebranch/">Executive Branch Instagram</a>
         <a href="https://www.instagram.com/sbpdevin/">Student Body President Instagram</a>
+        <a href="/manage/">Staff login</a>
       </div>
     </footer>
   </body>

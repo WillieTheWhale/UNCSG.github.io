@@ -28,8 +28,26 @@ async function loadArticle(root: HTMLElement): Promise<void> {
   const slug = slugFromLocation(preview);
   const status = root.querySelector<HTMLElement>("[data-article-status]");
   const content = root.querySelector<HTMLElement>("[data-article-content]");
-  if (!slug || slug === "article" || !status || !content) {
-    status!.textContent = "This update could not be found.";
+  const loading = root.querySelector<HTMLElement>("[data-article-loading]");
+  const errorState = root.querySelector<HTMLElement>("[data-article-error]");
+  const errorLabel = root.querySelector<HTMLElement>("[data-article-error-label]");
+  const errorTitle = root.querySelector<HTMLElement>("[data-article-error-title]");
+  const errorMessage = root.querySelector<HTMLElement>("[data-article-error-message]");
+  const retry = root.querySelector<HTMLButtonElement>("[data-article-retry]");
+  if (!status || !content || !loading || !errorState || !errorLabel || !errorTitle || !errorMessage || !retry) return;
+  retry.addEventListener("click", () => window.location.reload());
+  const showError = (notFound: boolean) => {
+    loading.hidden = true;
+    errorLabel.textContent = notFound ? "404 · Update not found" : "Update unavailable";
+    errorTitle.textContent = notFound ? "This update could not be found." : "We couldn’t load this update.";
+    errorMessage.textContent = notFound
+      ? "The update may have moved, been archived, or may no longer be public."
+      : "Please try again. If the problem continues, return to the updates page.";
+    errorState.hidden = false;
+    status.classList.add("update-article__status--error");
+  };
+  if (!slug || slug === "article") {
+    showError(true);
     return;
   }
   const endpoint = preview
@@ -39,7 +57,7 @@ async function loadArticle(root: HTMLElement): Promise<void> {
   try {
     const response = await fetch(endpoint, { credentials: "same-origin" });
     if (response.status === 401 && preview) {
-      window.location.assign(`/manage-updates/?return=${encodeURIComponent(window.location.pathname)}`);
+      window.location.assign(`/manage/updates/?return=${encodeURIComponent(window.location.pathname)}`);
       return;
     }
     if (response.status === 403 && preview) {
@@ -47,8 +65,7 @@ async function loadArticle(root: HTMLElement): Promise<void> {
       return;
     }
     if (response.status === 404) {
-      status.textContent = "This update could not be found.";
-      status.classList.add("update-article__status--error");
+      showError(true);
       return;
     }
     if (!response.ok) throw new Error("Unable to load article");
@@ -79,10 +96,7 @@ async function loadArticle(root: HTMLElement): Promise<void> {
     document.title = `${update.title} | UNC Student Government Executive Branch`;
     status.hidden = true;
     content.hidden = false;
-  } catch {
-    status.textContent = "This update could not be loaded right now. Please try again shortly.";
-    status.classList.add("update-article__status--error");
-  }
+  } catch { showError(false); }
 }
 
 export function initializeUpdateArticles(): void {

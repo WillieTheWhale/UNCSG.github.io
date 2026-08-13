@@ -1,0 +1,83 @@
+---
+import ManageTabs from "../../../components/ManageTabs.astro";
+import UpdateSiteLayout from "../../../layouts/UpdateSiteLayout.astro";
+---
+<UpdateSiteLayout title="Manage Events | UNC Student Government Executive Branch" description="Staff workspace for Executive Branch events." canonicalPath="/manage/events/" noindex bodyClass="updates-page manage-updates-page manage-events-page">
+  <section class="staff-auth" data-staff-auth aria-busy="true">
+    <div class="staff-auth__status">
+      <h1 class="visually-hidden">Manage events</h1><span class="staff-auth__spinner" aria-hidden="true"></span>
+      <p class="staff-form-message" data-auth-message aria-live="polite">Checking your UNC sign-in…</p>
+      <div class="staff-auth__actions">
+        <button class="staff-button staff-button--secondary" type="button" data-unc-sign-in hidden>Try UNC SSO again</button>
+        <button class="staff-link-button staff-auth__reset" type="button" data-auth-reset hidden>Sign out and start over</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="updates-manager" data-events-manager hidden aria-label="Events management workspace">
+    <header class="manager-toolbar">
+      <div><strong>Manage events</strong><ManageTabs current="events" /></div>
+      <div class="manager-toolbar__actions">
+        <a href="/preview-events/" target="_blank" rel="noopener">View event previews</a>
+        <span data-staff-identity></span><button class="staff-link-button" type="button" data-sign-out>Sign out</button>
+      </div>
+    </header>
+    <div class="manager-layout">
+      <aside class="manager-sidebar">
+        <div class="manager-sidebar__heading"><h2>Events</h2><button class="staff-button staff-button--primary" type="button" data-new-event><span aria-hidden="true">+</span> New event</button></div>
+        <label class="manager-filter"><span>Show</span><select data-status-filter>
+          <option value="current">Current events</option><option value="upcoming">Upcoming</option><option value="preview">Preview</option><option value="scheduled">Scheduled</option><option value="published">Published</option><option value="past">Past</option><option value="archived">Archived</option><option value="all">All</option>
+        </select></label>
+        <div class="manager-article-list" data-manager-list aria-live="polite"><p class="manager-list-message">Loading events…</p></div>
+      </aside>
+      <section class="manager-editor-shell">
+        <div class="manager-empty" data-manager-empty><h2>Select an event or create a new one.</h2><button class="staff-button staff-button--primary" type="button" data-empty-new-event>Create an event</button></div>
+        <div class="manager-editor" data-manager-editor hidden>
+          <header class="manager-editor__statusbar">
+            <div class="manager-editor__state"><span class="update-status" data-editor-status>preview</span><span data-save-state aria-live="polite">All changes saved</span></div>
+            <button class="staff-link-button manager-archive-button" type="button" data-archive-event><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M4 7h16M9 7V4h6v3m3 0-1 13H7L6 7m4 4v5m4-5v5"></path></svg><span>Archive</span></button>
+          </header>
+          <div class="manager-fields manager-event-fields">
+            <label class="manager-title-field"><span>Title</span><input type="text" maxlength="180" data-event-title placeholder="Event title" /></label>
+            <label class="manager-slug-field"><span>URL</span><div><span>executivebranch.unc.edu/events/</span><input type="text" maxlength="120" data-event-slug /></div><small>Lowercase letters, numbers, and hyphens.</small></label>
+            <label class="manager-event-field manager-event-field--wide"><span class="manager-field-label">Short description</span><textarea rows="3" maxlength="500" data-event-summary></textarea></label>
+            <div class="manager-toggle manager-toggle--featured">
+              <label class="manager-toggle__control"><input type="checkbox" data-event-featured /><span><strong>Feature on the homepage</strong><small>Only one published, upcoming event can appear in the homepage hero.</small></span></label>
+              <button class="manager-example-button" type="button" data-feature-example><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8h.01"></path></svg><span>See example</span></button>
+            </div>
+            <label class="manager-toggle"><input type="checkbox" data-event-all-day /><span><strong>All-day event</strong><small>Hide start and end times from public views.</small></span></label>
+            <label class="manager-event-field"><span class="manager-field-label">Starts</span><input data-event-start required /></label>
+            <label class="manager-event-field"><span class="manager-field-label">Ends</span><input data-event-end required /></label>
+            <p class="manager-time-zone-notice manager-event-field--wide"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg><span data-eastern-time-notice>Enter start and end times in Eastern Time.</span></p>
+            <label class="manager-event-field"><span class="manager-field-label">Format</span><select data-event-format><option value="in-person">In person</option><option value="virtual">Virtual</option><option value="hybrid">Hybrid</option></select></label>
+            <label class="manager-event-field"><span class="manager-field-label">Location <em>optional</em></span><input type="text" maxlength="240" data-event-location /></label>
+            <label class="manager-event-field"><span class="manager-field-label">Virtual link <em>optional</em></span><input type="url" data-event-virtual /></label>
+            <label class="manager-event-field"><span class="manager-field-label">Registration or details link <em>optional</em></span><input type="url" data-event-registration /></label>
+            <label class="manager-event-field"><span class="manager-field-label">Contact email <em>optional</em></span><input type="email" data-event-contact /></label>
+            <div class="manager-hero-field manager-event-field--wide">
+              <div><span class="manager-field-label">Hero image <em>optional</em></span><p>JPEG, PNG, WebP, or GIF. Maximum 5 MB.</p></div>
+              <div class="manager-hero-field__actions"><input type="file" accept="image/jpeg,image/png,image/webp,image/gif" data-hero-input hidden /><button class="staff-button staff-button--secondary" type="button" data-choose-hero>Choose image</button><button class="staff-link-button" type="button" data-remove-hero hidden>Remove</button></div>
+              <figure data-hero-preview hidden><img alt="Selected event hero image preview" /></figure>
+            </div>
+          </div>
+          <div class="manager-body-field"><div class="manager-body-field__heading"><div><span class="manager-field-label">Full event details</span><p>Add the context, agenda, accessibility notes, and anything attendees should know.</p></div></div><div class="manager-milkdown" data-markdown-editor></div></div>
+          <footer class="manager-publish-bar">
+            <button class="staff-link-button manager-preview-button" type="button" data-preview-page>Preview full page<svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16"><path d="M14 4h6v6M13 11l7-7M20 13v7H4V4h7"></path></svg></button>
+            <div class="manager-publish-bar__actions"><button class="staff-button staff-button--secondary" type="button" data-save-preview>Save as preview</button><button class="staff-button staff-button--secondary" type="button" data-open-schedule>Schedule</button><button class="staff-button staff-button--primary" type="button" data-publish-now>Publish event</button></div>
+          </footer>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <dialog class="manager-dialog" data-schedule-dialog aria-labelledby="event-schedule-title"><form method="dialog" class="manager-dialog__panel" data-schedule-form><button class="manager-dialog__close" value="cancel" aria-label="Close scheduling dialog">×</button><h2 id="event-schedule-title">Schedule this event</h2><p>Choose when this event listing should become public. All scheduling uses Eastern Time.</p><label><span>Publish date and time</span><input type="datetime-local" data-schedule-at required /></label><div class="manager-dialog__actions"><button class="staff-button staff-button--secondary" value="cancel">Cancel</button><button class="staff-button staff-button--primary" type="submit" value="default">Schedule event</button></div><p class="staff-form-message" data-schedule-message aria-live="polite"></p></form></dialog>
+  <dialog class="manager-dialog manager-confirm-dialog" data-confirm-dialog aria-labelledby="event-confirm-title" aria-describedby="event-confirm-message"><form method="dialog" class="manager-dialog__panel"><button class="manager-dialog__close" value="cancel" aria-label="Close confirmation dialog">×</button><h2 id="event-confirm-title" data-confirm-title>Confirm action</h2><p id="event-confirm-message" data-confirm-message></p><div class="manager-dialog__actions"><button class="staff-button staff-button--secondary" value="cancel">Cancel</button><button class="staff-button staff-button--primary" value="confirm" data-confirm-accept>Confirm</button></div></form></dialog>
+  <dialog class="manager-dialog manager-feature-example-dialog" data-feature-example-dialog aria-labelledby="featured-event-example-title"><div class="manager-dialog__panel"><button class="manager-dialog__close" type="button" aria-label="Close featured event example" data-feature-example-close>×</button><h2 id="featured-event-example-title">Featured event example</h2><p>This is where a featured event appears in the homepage hero.</p><figure><img src="/images/featured-event-example.webp" alt="Homepage hero with the featured event card outlined" width="1800" height="1015" loading="lazy" decoding="async" /></figure></div></dialog>
+  <div class="manager-toast-region" data-toast-region aria-live="polite" aria-atomic="true"></div>
+  <script>
+    import "@milkdown/crepe/theme/common/style.css";
+    import "@milkdown/crepe/theme/frame.css";
+    import { initializeEventsManager } from "../../../scripts/manage-events";
+    initializeEventsManager();
+  </script>
+</UpdateSiteLayout>

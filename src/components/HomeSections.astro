@@ -1,6 +1,7 @@
 ---
 import VisionSection from "./VisionSection.astro";
 import HomeUpdates from "./HomeUpdates.astro";
+import HomeEvents from "./HomeEvents.astro";
 
 const directoryGroups = [
   {
@@ -171,10 +172,42 @@ const priorities = [
   ],
 ];
 
-const events = [
-  ["28", "AUG", "Example event", "Student Union · Room and time to be confirmed", "2026-08-28", "2026-08-29"],
-  ["09", "SEP", "Another example event", "Location and time to be confirmed", "2026-09-09", "2026-09-10"],
-  ["17", "SEP", "Yet another example event", "Location and time to be confirmed", "2026-09-17", "2026-09-18"],
+const newsCoverage = [
+  {
+    outlet: "Inside Higher Ed",
+    date: "July 8, 2026",
+    datetime: "2026-07-08",
+    title: "UNC Student Body President Devin Duncan on What Students Want",
+    href: "https://www.insidehighered.com/podcasts/key-podcast/2026/07/08/ep-203-unc-student-body-president-devin-duncan-what-students-want",
+  },
+  {
+    outlet: "The Daily Tar Heel",
+    date: "April 8, 2026",
+    datetime: "2026-04-08",
+    title: "Devin Duncan sworn in as 2026–27 student body president, wants to ‘deliver consistently’ for students",
+    href: "https://www.dailytarheel.com/article/university-devin-duncan-induction-feature-20260408",
+  },
+  {
+    outlet: "Carolina Insider",
+    date: "March 11, 2026",
+    datetime: "2026-03-11",
+    title: "Student body president-elect Devin Duncan joins Carolina Insider",
+    href: "https://goheels.com/podcasts/carolina-insider-3-11-26/293",
+  },
+  {
+    outlet: "Morehead-Cain",
+    date: "March 2, 2026",
+    datetime: "2026-03-02",
+    title: "Devin Duncan ’28 elected student body president",
+    href: "https://www.moreheadcain.org/blog/devin-duncan-28-elected-student-body-president-jakhari-bryant-27-elected-senior-class-president/",
+  },
+  {
+    outlet: "The Daily Tar Heel",
+    date: "February 18, 2026",
+    datetime: "2026-02-18",
+    title: "Devin Duncan elected as 2026–27 student body president",
+    href: "https://www.dailytarheel.com/article/be71ed84-fc3e-4cc7-9c24-c408923669aa",
+  },
 ];
 ---
 
@@ -205,9 +238,16 @@ const events = [
       <h2 id="departments-title">Executive offices and cabinet departments</h2>
     </header>
 
-    {directoryGroups.map(({ title, teams }) => (
-      <section class="directory-group" aria-labelledby={`directory-${title.toLowerCase().replaceAll(" ", "-")}`}>
-        <h3 class="directory-group__title" id={`directory-${title.toLowerCase().replaceAll(" ", "-")}`}>{title}</h3>
+    {directoryGroups.map(({ title, teams }, groupIndex) => (
+      <details
+        class="directory-group"
+        aria-labelledby={`directory-${title.toLowerCase().replaceAll(" ", "-")}`}
+        open={groupIndex === 0}
+      >
+        <summary class="directory-group__summary">
+          <h3 class="directory-group__title" id={`directory-${title.toLowerCase().replaceAll(" ", "-")}`}>{title}</h3>
+          <span class="directory-group__icon" aria-hidden="true"></span>
+        </summary>
         <div class="team-grid">
           {teams.map(({ team, leader, role, email, description, portrait, portraitPosition, initials }) => (
             <article class="team">
@@ -246,46 +286,35 @@ const events = [
             </article>
           ))}
         </div>
-      </section>
+      </details>
     ))}
   </section>
 
   <HomeUpdates />
 
-  <section class="content-section content-section--events" id="events" aria-labelledby="events-title">
+  <HomeEvents />
+
+  <section class="content-section content-section--news" id="news" aria-labelledby="news-title">
     <header class="section-heading">
-      <h2 id="events-title">Events and public meetings</h2>
+      <h2 id="news-title">In the news</h2>
     </header>
 
-    <div class="event-list">
-      {events.map(([day, month, title, detail, start, end]) => (
-        <article class="event">
-          <time datetime={start}><b>{day}</b><span>{month}</span></time>
-          <div><h3>{title}</h3><p>{detail}</p></div>
-          <div class="event__actions">
-            <button
-              type="button"
-              class="event__calendar"
-              data-calendar-event
-              data-event-title={title}
-              data-event-detail={detail}
-              data-event-start={start}
-              data-event-end={end}
-              aria-haspopup="dialog"
-            >
-              <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">
-                <path d="M6.5 3v3M17.5 3v3M4 8.5h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z" />
-              </svg>
-              Add to calendar
-            </button>
-            <a href="#contact" aria-label={`Event details: ${title}`}>
-              Event details
-              <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="m9 6 6 6-6 6" /></svg>
-            </a>
-          </div>
-        </article>
+    <ul class="news-list">
+      {newsCoverage.map(({ outlet, date, datetime, title, href }) => (
+        <li>
+          <a href={href} target="_blank" rel="noreferrer">
+            <span class="news-list__meta">
+              <span>{outlet}</span>
+              <time datetime={datetime}>{date}</time>
+            </span>
+            <span class="news-list__title">{title}</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20">
+              <path d="M7 17 17 7M9 7h8v8" />
+            </svg>
+          </a>
+        </li>
       ))}
-    </div>
+    </ul>
   </section>
 
   <section class="content-section content-section--connected" id="connected" aria-labelledby="connected-title">
@@ -350,114 +379,4 @@ const events = [
     observer.observe(document.body, { childList: true, subtree: true });
     titleInstagramFrames();
   })();
-</script>
-
-<dialog class="calendar-dialog" id="calendar-dialog" aria-labelledby="calendar-dialog-title" aria-describedby="calendar-dialog-event">
-  <div class="calendar-dialog__panel">
-    <form method="dialog" class="calendar-dialog__close-form">
-      <button class="calendar-dialog__close" type="submit" aria-label="Close add to calendar dialog">
-        <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path d="m6 6 12 12M18 6 6 18" /></svg>
-      </button>
-    </form>
-    <h2 id="calendar-dialog-title">Add to calendar</h2>
-    <p class="calendar-dialog__event" id="calendar-dialog-event"></p>
-    <div class="calendar-dialog__options">
-      <a data-calendar-apple href="#" download>
-        <strong>Apple Calendar</strong>
-        <span>Download an .ics calendar event</span>
-        <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path d="m9 6 6 6-6 6" /></svg>
-      </a>
-      <a data-calendar-google href="#" target="_blank" rel="noreferrer">
-        <strong>Google Calendar</strong>
-        <span>Open this event in Google Calendar</span>
-        <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path d="m9 6 6 6-6 6" /></svg>
-      </a>
-      <a data-calendar-outlook href="#" target="_blank" rel="noreferrer">
-        <strong>Microsoft Outlook</strong>
-        <span>Open this event in Outlook Calendar</span>
-        <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path d="m9 6 6 6-6 6" /></svg>
-      </a>
-    </div>
-  </div>
-</dialog>
-
-<script>
-  const calendarDialog = document.querySelector<HTMLDialogElement>("#calendar-dialog");
-  const calendarEventName = document.querySelector<HTMLElement>("#calendar-dialog-event");
-  const appleCalendarLink = document.querySelector<HTMLAnchorElement>("[data-calendar-apple]");
-  const googleCalendarLink = document.querySelector<HTMLAnchorElement>("[data-calendar-google]");
-  const outlookCalendarLink = document.querySelector<HTMLAnchorElement>("[data-calendar-outlook]");
-  let calendarDownloadUrl = "";
-
-  const calendarDate = (value: string) => value.replaceAll("-", "");
-  const escapeCalendarText = (value: string) => value
-    .replaceAll("\\", "\\\\")
-    .replaceAll("\n", "\\n")
-    .replaceAll(",", "\\,")
-    .replaceAll(";", "\\;");
-
-  document.querySelectorAll<HTMLButtonElement>("[data-calendar-event]").forEach((button) => {
-    button.addEventListener("click", () => {
-      if (!calendarDialog || !calendarEventName || !appleCalendarLink || !googleCalendarLink || !outlookCalendarLink) return;
-
-      const title = button.dataset.eventTitle ?? "Executive Branch event";
-      const detail = button.dataset.eventDetail ?? "";
-      const start = button.dataset.eventStart ?? "";
-      const end = button.dataset.eventEnd ?? "";
-      const compactStart = calendarDate(start);
-      const compactEnd = calendarDate(end);
-
-      calendarEventName.textContent = title;
-
-      if (calendarDownloadUrl) URL.revokeObjectURL(calendarDownloadUrl);
-      const calendarFile = [
-        "BEGIN:VCALENDAR",
-        "VERSION:2.0",
-        "PRODID:-//UNC Student Government Executive Branch//Events//EN",
-        "CALSCALE:GREGORIAN",
-        "BEGIN:VEVENT",
-        `UID:${compactStart}-${title.toLowerCase().replaceAll(/[^a-z0-9]+/g, "-")}@executivebranch.unc.edu`,
-        `DTSTART;VALUE=DATE:${compactStart}`,
-        `DTEND;VALUE=DATE:${compactEnd}`,
-        `SUMMARY:${escapeCalendarText(title)}`,
-        `DESCRIPTION:${escapeCalendarText(detail)}`,
-        "END:VEVENT",
-        "END:VCALENDAR",
-      ].join("\r\n");
-      calendarDownloadUrl = URL.createObjectURL(new Blob([calendarFile], { type: "text/calendar;charset=utf-8" }));
-      appleCalendarLink.href = calendarDownloadUrl;
-      appleCalendarLink.download = `${title.toLowerCase().replaceAll(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") || "event"}.ics`;
-
-      const googleUrl = new URL("https://calendar.google.com/calendar/render");
-      googleUrl.search = new URLSearchParams({
-        action: "TEMPLATE",
-        text: title,
-        dates: `${compactStart}/${compactEnd}`,
-        details: detail,
-      }).toString();
-      googleCalendarLink.href = googleUrl.toString();
-
-      const outlookUrl = new URL("https://outlook.live.com/calendar/0/deeplink/compose");
-      outlookUrl.search = new URLSearchParams({
-        subject: title,
-        startdt: start,
-        enddt: end,
-        body: detail,
-        allday: "true",
-      }).toString();
-      outlookCalendarLink.href = outlookUrl.toString();
-
-      calendarDialog.showModal();
-    });
-  });
-
-  calendarDialog?.addEventListener("click", (event) => {
-    if (event.target === calendarDialog) calendarDialog.close();
-  });
-
-  calendarDialog?.addEventListener("close", () => {
-    if (!calendarDownloadUrl) return;
-    URL.revokeObjectURL(calendarDownloadUrl);
-    calendarDownloadUrl = "";
-  });
 </script>

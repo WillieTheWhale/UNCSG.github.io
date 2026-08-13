@@ -1,0 +1,46 @@
+---
+import EventCalendarDialog from "./EventCalendarDialog.astro";
+interface Props { mode?: "public" | "preview"; }
+const { mode = "public" } = Astro.props;
+---
+
+<article class="event-article" data-event-article data-mode={mode} aria-live="polite">
+  <div class="update-article__status" data-event-article-status>
+    <div data-event-loading><span class="updates-loading" aria-hidden="true"></span> Loading event…</div>
+    <div class="content-error-state" data-event-error hidden>
+      <span class="content-error-state__label" data-event-error-label>Event unavailable</span>
+      <h1 data-event-error-title>We couldn’t load this event.</h1>
+      <p data-event-error-message>Please try again. If the problem continues, return to the events page.</p>
+      <div class="content-error-state__actions">
+        <a class="staff-button staff-button--primary" href={mode === "preview" ? "/preview-events/" : "/events/"}>All events</a>
+        <button class="staff-button staff-button--secondary" type="button" data-event-retry>Try again</button>
+      </div>
+    </div>
+  </div>
+  <div data-event-article-content hidden>
+    <header class="event-article__header">
+      <div class="event-article__eyeline">
+        <a class="update-article__back" href={mode === "preview" ? "/preview-events/" : "/events/"}><span aria-hidden="true">←</span> All events</a>
+        <span class="update-status" data-event-article-badge hidden></span>
+      </div>
+      <h1 data-event-article-title></h1>
+      <p class="event-article__summary" data-event-article-summary hidden></p>
+    </header>
+    <figure class="event-article__hero" data-event-article-hero hidden><img alt="" data-event-article-hero-image /></figure>
+    <div class="event-article__layout">
+      <aside class="event-article__facts" aria-label="Event information">
+        <div><strong>When</strong><p data-event-article-when></p></div>
+        <div><strong>Where</strong><p data-event-article-place></p></div>
+        <div data-event-article-links></div>
+        <button class="staff-button staff-button--primary" type="button" data-calendar-event aria-haspopup="dialog">Add to calendar</button>
+      </aside>
+      <div class="update-article__body event-article__body" data-event-article-body></div>
+    </div>
+  </div>
+</article>
+
+<EventCalendarDialog />
+<script>
+  import { initializeEventArticles } from "../scripts/event-article";
+  initializeEventArticles();
+</script>

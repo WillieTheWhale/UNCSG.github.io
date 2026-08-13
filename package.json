@@ -7,7 +7,7 @@
     "dev": "astro dev",
     "dev:api": "tsx watch server/index.ts",
     "dev:auth-broker": "BROKER_DEV_ONYEN=bhilberg tsx watch auth-broker/index.ts",
-    "dev:full": "concurrently -k -n web,api -c blue,green \"npm:dev\" \"npm:dev:api\"",
+    "dev:full": "concurrently -k -n web,api,auth -c blue,green,magenta \"npm:dev\" \"npm:dev:api\" \"npm:dev:auth-broker\"",
     "build": "astro build",
     "build:api": "tsc -p tsconfig.server.json",
     "build:auth-broker": "tsc -p tsconfig.auth-broker.json",

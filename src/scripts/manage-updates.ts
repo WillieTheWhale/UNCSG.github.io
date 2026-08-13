@@ -1,4 +1,10 @@
 import { Crepe } from "@milkdown/crepe";
+import {
+  requireStaffSession,
+  signOutStaff,
+  watchStaffSession,
+  type StaffSession,
+} from "./staff-route-auth";
 
 type UpdateStatus = "preview" | "scheduled" | "published" | "archived";
 
@@ -15,11 +21,6 @@ interface ManagedUpdate {
   createdAt: string;
   updatedAt: string;
   archivedAt: string | null;
-}
-
-interface StaffSession {
-  email: string;
-  onyen: string;
 }
 
 const apiErrorMessage = async (response: Response): Promise<string> => {
@@ -82,7 +83,10 @@ async function request<T>(url: string, options: RequestInit = {}): Promise<T> {
       ...options.headers,
     },
   });
-  if (response.status === 401) throw new Error("sign_in_required");
+  if (response.status === 401) {
+    window.location.assign("/manage/updates/?auth=session-expired");
+    throw new Error("sign_in_required");
+  }
   if (response.status === 403) {
     window.location.assign("/?auth=unauthorized");
     throw new Error("access_denied");
@@ -98,6 +102,7 @@ export function initializeUpdatesManager(): void {
   manager.dataset.initialized = "true";
 
   const uncSignIn = document.querySelector<HTMLButtonElement>("[data-unc-sign-in]");
+  const authReset = document.querySelector<HTMLButtonElement>("[data-auth-reset]");
   const authMessage = document.querySelector<HTMLElement>("[data-auth-message]");
   const staffIdentity = document.querySelector<HTMLElement>("[data-staff-identity]");
   const list = document.querySelector<HTMLElement>("[data-manager-list]");
@@ -124,7 +129,7 @@ export function initializeUpdatesManager(): void {
   const toastRegion = document.querySelector<HTMLElement>("[data-toast-region]");
 
   if (
-    !uncSignIn || !authMessage ||
+    !uncSignIn || !authReset || !authMessage ||
     !staffIdentity || !list || !filter || !empty || !editorShell ||
     !titleInput || !slugInput || !statusBadge || !saveState || !editorRoot ||
     !heroInput || !heroPreview || !heroPreviewImage || !removeHero ||
@@ -191,6 +196,24 @@ export function initializeUpdatesManager(): void {
     if (tone !== "loading") {
       toastTimer = window.setTimeout(() => toastRegion.replaceChildren(), 4800);
     }
+  };
+
+  const reservePreviewTab = (): Window | null => {
+    const tab = window.open("", "_blank");
+    if (!tab) return null;
+    tab.opener = null;
+    tab.document.title = "Preparing preview…";
+    tab.document.body.style.margin = "0";
+    tab.document.body.style.padding = "3rem";
+    tab.document.body.style.color = "#13294b";
+    tab.document.body.style.background = "#f8f8f8";
+    tab.document.body.style.fontFamily = "Montserrat, Arial, sans-serif";
+    const status = tab.document.createElement("p");
+    status.textContent = "Saving preview…";
+    status.style.fontSize = "1rem";
+    status.style.fontWeight = "700";
+    tab.document.body.append(status);
+    return tab;
   };
 
   const confirmAction = (
@@ -469,69 +492,25 @@ export function initializeUpdatesManager(): void {
 
   const showManager = async (staff: StaffSession) => {
     staffIdentity.textContent = staff.email;
+    await loadUpdates();
     authSection.setAttribute("aria-busy", "false");
     authSection.hidden = true;
     manager.hidden = false;
-    await loadUpdates();
+    watchStaffSession("/manage/updates/");
     const requested = new URLSearchParams(window.location.search).get("update");
     if (requested && updates.some((item) => item.id === requested)) {
       await selectUpdate(requested);
     }
   };
 
-  const beginUncSignIn = async () => {
-    authSection.setAttribute("aria-busy", "true");
-    uncSignIn.hidden = true;
-    setButtonBusy(uncSignIn, true);
-    setMessage(authMessage, "Redirecting to sign-in…");
-    try {
-      const statusResponse = await fetch("/api/auth/provider-status", {
-        credentials: "same-origin",
-        cache: "no-store",
-      });
-      if (!statusResponse.ok) throw new Error(await apiErrorMessage(statusResponse));
-      const status = (await statusResponse.json()) as { uncOpenShift: boolean };
-      if (!status.uncOpenShift) {
-        throw new Error("UNC SSO is not configured yet. Contact bhilberg@unc.edu.");
-      }
-
-      const returnTo = new URLSearchParams(window.location.search).get("return");
-      const callbackURL = returnTo?.startsWith("/preview-updates")
-        ? returnTo
-        : "/manage-updates/";
-      const response = await fetch("/api/auth/sign-in/oauth2", {
-        method: "POST",
-        credentials: "same-origin",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          providerId: "unc-openshift",
-          callbackURL,
-          errorCallbackURL: "/manage-updates/?auth=unc-sso-error",
-        }),
-      });
-      if (!response.ok) throw new Error(await apiErrorMessage(response));
-      const result = (await response.json()) as { url?: string };
-      if (!result.url) throw new Error("UNC sign-in could not be started. Please try again.");
-      window.location.replace(result.url);
-    } catch (error) {
-      authSection.setAttribute("aria-busy", "false");
-      setMessage(authMessage, (error as Error).message, "error");
-      setButtonBusy(uncSignIn, false);
-      uncSignIn.hidden = false;
-    }
-  };
-
-  uncSignIn.addEventListener("click", () => void beginUncSignIn());
-
-  document.querySelector("[data-sign-out]")?.addEventListener("click", async () => {
-    await fetch("/api/auth/sign-out", {
-      method: "POST",
-      credentials: "same-origin",
-      headers: { "Content-Type": "application/json" },
-      body: "{}",
-    });
-    window.location.assign("/");
-  });
+  document.querySelector("[data-sign-out]")?.addEventListener("click", () => void signOutStaff((error) => {
+    manager.hidden = true;
+    authSection.hidden = false;
+    authSection.setAttribute("aria-busy", "false");
+    setMessage(authMessage, error, "error");
+    uncSignIn.hidden = false;
+    authReset.hidden = false;
+  }));
 
   document.querySelectorAll("[data-new-update], [data-empty-new-update]").forEach((button) => {
     button.addEventListener("click", () => void createUpdate());
@@ -602,9 +581,19 @@ export function initializeUpdatesManager(): void {
   const previewPageButton = document.querySelector<HTMLButtonElement>("[data-preview-page]");
   previewPageButton?.addEventListener("click", async () => {
     if (!current) return;
-    await runAction(previewPageButton, "Preparing full-page preview…", "Preview opened in a new tab.", async () => {
-      await flushSave();
-      window.open(`/preview-updates/${encodeURIComponent(current?.slug ?? "")}`, "_blank", "noopener");
+    const previewTab = reservePreviewTab();
+    if (!previewTab) {
+      showToast("Your browser blocked the preview tab. Allow pop-ups for this site and try again.", "error");
+      return;
+    }
+    await runAction(previewPageButton, "Saving full-page preview…", "Preview opened in a new tab.", async () => {
+      try {
+        await action("preview");
+        previewTab.location.replace(`/preview-updates/${encodeURIComponent(current?.slug ?? "")}`);
+      } catch (error) {
+        previewTab.close();
+        throw error;
+      }
     });
   });
 
@@ -679,36 +668,22 @@ export function initializeUpdatesManager(): void {
     }
   });
 
-  void (async () => {
-    try {
-      const signInFailed =
-        new URLSearchParams(window.location.search).get("auth") === "unc-sso-error";
-      const response = await fetch("/api/staff/session", { credentials: "same-origin" });
-      if (response.status === 401) {
-        if (signInFailed) {
-          authSection.setAttribute("aria-busy", "false");
-          setMessage(
-            authMessage,
-            "UNC sign-in could not be completed. Try again or contact bhilberg@unc.edu.",
-            "error",
-          );
-          uncSignIn.hidden = false;
-          return;
-        }
-        await beginUncSignIn();
-        return;
-      }
-      if (response.status === 403) {
-        window.location.assign("/?auth=unauthorized");
-        return;
-      }
-      if (!response.ok) throw new Error(await apiErrorMessage(response));
-      const { staff } = (await response.json()) as { staff: StaffSession };
-      await showManager(staff);
-    } catch (error) {
+  requireStaffSession({
+    authSection,
+    authMessage,
+    retryButton: uncSignIn,
+    resetButton: authReset,
+    defaultCallback: "/manage/updates/",
+    allowedReturnPrefix: "/preview-updates",
+  })
+    .then(showManager)
+    .catch((error) => {
+      if (["redirecting", "access_denied"].includes((error as Error).message)) return;
+      manager.hidden = true;
+      authSection.hidden = false;
       authSection.setAttribute("aria-busy", "false");
       setMessage(authMessage, (error as Error).message, "error");
       uncSignIn.hidden = false;
-    }
-  })();
+      authReset.hidden = false;
+    });
 }

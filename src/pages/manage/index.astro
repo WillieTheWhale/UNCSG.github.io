@@ -1,0 +1,49 @@
+---
+import ManageTabs from "../../components/ManageTabs.astro";
+import UpdateSiteLayout from "../../layouts/UpdateSiteLayout.astro";
+---
+<UpdateSiteLayout title="Manage | UNC Student Government Executive Branch" description="Staff publishing workspace." canonicalPath="/manage/" noindex bodyClass="updates-page manage-updates-page">
+  <section class="staff-auth" data-staff-auth aria-busy="true">
+    <div class="staff-auth__status">
+      <h1 class="visually-hidden">Manage Executive Branch content</h1>
+      <span class="staff-auth__spinner" aria-hidden="true"></span>
+      <p class="staff-form-message" data-auth-message aria-live="polite">Checking your UNC sign-in…</p>
+      <div class="staff-auth__actions">
+        <button class="staff-button staff-button--secondary" type="button" data-unc-sign-in hidden>Try UNC SSO again</button>
+        <button class="staff-link-button staff-auth__reset" type="button" data-auth-reset hidden>Sign out and start over</button>
+      </div>
+    </div>
+  </section>
+  <section class="manage-dashboard" data-manage-dashboard hidden>
+    <header class="manage-dashboard__header">
+      <div><h1>Manage content</h1></div>
+      <div class="manage-dashboard__account"><span data-staff-identity></span><button class="staff-link-button" type="button" data-sign-out>Sign out</button></div>
+    </header>
+    <ManageTabs current="dashboard" />
+    <div class="manage-dashboard__choices">
+      <a href="/manage/updates/"><span>Publishing</span><strong>Updates</strong><p>Write, preview, schedule, and publish Executive Branch articles.</p><b>Manage updates <i aria-hidden="true">→</i></b></a>
+      <a href="/manage/events/"><span>Calendar</span><strong>Events</strong><p>Create events, manage the public calendar, and choose a featured event.</p><b>Manage events <i aria-hidden="true">→</i></b></a>
+    </div>
+  </section>
+  <script>
+    import { requireStaffSession, signOutStaff, watchStaffSession } from "../../scripts/staff-route-auth";
+    const auth = document.querySelector<HTMLElement>("[data-staff-auth]");
+    const message = document.querySelector<HTMLElement>("[data-auth-message]");
+    const retry = document.querySelector<HTMLButtonElement>("[data-unc-sign-in]");
+    const reset = document.querySelector<HTMLButtonElement>("[data-auth-reset]");
+    const dashboard = document.querySelector<HTMLElement>("[data-manage-dashboard]");
+    const identity = document.querySelector<HTMLElement>("[data-staff-identity]");
+    if (auth && message && retry && reset && dashboard && identity) {
+      requireStaffSession({ authSection: auth, authMessage: message, retryButton: retry, resetButton: reset, defaultCallback: "/manage/" })
+        .then((staff) => { identity.textContent = staff.email; auth.hidden = true; dashboard.hidden = false; watchStaffSession("/manage/"); })
+        .catch((error) => {
+          if (["redirecting", "access_denied"].includes((error as Error).message)) return;
+          auth.hidden = false; auth.setAttribute("aria-busy", "false"); message.textContent = (error as Error).message; message.dataset.tone = "error"; retry.hidden = false; reset.hidden = false;
+        });
+    }
+    document.querySelector("[data-sign-out]")?.addEventListener("click", () => void signOutStaff((error) => {
+      if (!auth || !message || !retry || !reset || !dashboard) return;
+      dashboard.hidden = true; auth.hidden = false; auth.setAttribute("aria-busy", "false"); message.textContent = error; message.dataset.tone = "error"; retry.hidden = false; reset.hidden = false;
+    }));
+  </script>
+</UpdateSiteLayout>

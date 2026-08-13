@@ -66,7 +66,7 @@ async function createPool(): Promise<Pool> {
 
 export const pool = await createPool();
 
-const updatesSchema = `
+const contentSchema = `
   CREATE TABLE IF NOT EXISTS update_media (
     id text PRIMARY KEY,
     file_name text NOT NULL,
@@ -97,10 +97,43 @@ const updatesSchema = `
   CREATE INDEX IF NOT EXISTS updates_public_order_idx
     ON updates (status, publish_at DESC, published_at DESC, created_at DESC);
   CREATE INDEX IF NOT EXISTS updates_updated_idx ON updates (updated_at DESC);
+
+  CREATE TABLE IF NOT EXISTS events (
+    id text PRIMARY KEY,
+    title text NOT NULL,
+    slug text NOT NULL UNIQUE,
+    summary text NOT NULL DEFAULT '',
+    details_markdown text NOT NULL DEFAULT '',
+    hero_media_id text REFERENCES update_media(id) ON DELETE SET NULL,
+    start_at timestamptz,
+    end_at timestamptz,
+    all_day boolean NOT NULL DEFAULT false,
+    event_format text NOT NULL DEFAULT 'in-person'
+      CHECK (event_format IN ('in-person', 'virtual', 'hybrid')),
+    location text,
+    virtual_url text,
+    registration_url text,
+    contact_email text,
+    is_featured boolean NOT NULL DEFAULT false,
+    status text NOT NULL DEFAULT 'preview'
+      CHECK (status IN ('preview', 'scheduled', 'published', 'archived')),
+    publish_at timestamptz,
+    published_at timestamptz,
+    archived_at timestamptz,
+    created_by text NOT NULL,
+    updated_by text NOT NULL,
+    created_at timestamptz NOT NULL DEFAULT now(),
+    updated_at timestamptz NOT NULL DEFAULT now()
+  );
+
+  CREATE INDEX IF NOT EXISTS events_public_order_idx
+    ON events (status, start_at, end_at);
+  CREATE INDEX IF NOT EXISTS events_updated_idx ON events (updated_at DESC);
+  CREATE INDEX IF NOT EXISTS events_featured_idx ON events (is_featured, status);
 `;
 
 export async function initializeDatabase(authOptions: unknown): Promise<void> {
   const { runMigrations } = await getMigrations(authOptions as never);
   await runMigrations();
-  await pool.query(updatesSchema);
+  await pool.query(contentSchema);
 }

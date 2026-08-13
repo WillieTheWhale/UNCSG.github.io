@@ -1,0 +1,8 @@
+---
+import EventListing from "../../components/EventListing.astro";
+import UpdateSiteLayout from "../../layouts/UpdateSiteLayout.astro";
+---
+<UpdateSiteLayout title="Events | UNC Student Government Executive Branch" description="Events and public meetings from the Duncan Administration." canonicalPath="/events/" bodyClass="updates-page events-page">
+  <header class="updates-hero events-hero"><div><h1>Events and public meetings</h1><p>Find upcoming meetings, programs, and opportunities to connect with the Executive Branch.</p></div></header>
+  <section class="updates-index events-index" aria-label="Executive Branch events"><EventListing /></section>
+</UpdateSiteLayout>
