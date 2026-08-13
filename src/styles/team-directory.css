@@ -12,11 +12,9 @@
 }
 
 .team-directory-hero {
-  padding: clamp(4rem, 8vw, 7.5rem) var(--page-gutter);
+  padding: clamp(3rem, 6vw, 5rem) var(--page-gutter);
   border-bottom: 1px solid var(--rule);
-  background:
-    linear-gradient(90deg, var(--brand-navy) 0 0.55rem, transparent 0.55rem),
-    var(--neutral-50);
+  background: var(--neutral-50);
 }
 
 .team-directory-hero > div {
@@ -24,60 +22,23 @@
   margin-inline: auto;
 }
 
-.team-directory-hero__kicker {
-  margin: 0 0 1rem;
-  color: var(--brand-blue);
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-}
-
 .team-directory-hero h1 {
   margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(4rem, 9vw, 8rem);
-  font-weight: 400;
-  letter-spacing: -0.025em;
-  line-height: 0.9;
-  text-transform: uppercase;
+  color: var(--brand-navy);
+  font-family: var(--font-body);
+  font-size: clamp(2.35rem, 4.4vw, 4.5rem);
+  font-weight: 760;
+  letter-spacing: -0.045em;
+  line-height: 1.02;
+  text-wrap: balance;
 }
 
 .team-directory-hero > div > p:last-of-type {
-  max-width: 60rem;
-  margin: 1.5rem 0 0;
-  color: var(--muted);
-  font-size: clamp(1.08rem, 1.8vw, 1.35rem);
+  max-width: 70ch;
+  margin: 1.25rem 0 0;
+  color: #344968;
+  font-size: clamp(1.08rem, 1.5vw, 1.25rem);
   line-height: 1.65;
-}
-
-.team-directory-hero__counts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem 2.25rem;
-  margin: clamp(2rem, 4vw, 3rem) 0 0;
-}
-
-.team-directory-hero__counts div {
-  display: flex;
-  align-items: baseline;
-  gap: 0.55rem;
-}
-
-.team-directory-hero__counts dt {
-  color: var(--brand-blue);
-  font-family: var(--font-display);
-  font-size: 2.25rem;
-  line-height: 1;
-}
-
-.team-directory-hero__counts dd {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.82rem;
-  font-weight: 750;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
 }
 
 .team-option-thesis {
@@ -246,6 +207,12 @@
   line-height: 1.2;
 }
 
+.team-member__class-year {
+  color: inherit;
+  font: inherit;
+  font-weight: 500;
+}
+
 .team-member__facts {
   display: grid;
   gap: 0.7rem;
@@ -256,8 +223,8 @@
 
 .team-member__facts div {
   display: grid;
-  grid-template-columns: 4.25rem minmax(0, 1fr);
-  gap: 0.5rem;
+  grid-template-columns: 5rem minmax(0, 1fr);
+  gap: 0.75rem;
 }
 
 .team-member__facts dt {
@@ -375,6 +342,10 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.team-directory-page--sticky-index .team-group__heading {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 /* Option 3: quieter, information-forward horizontal roster. */
 .team-directory-page--editorial-roster .team-standard-groups {
   width: min(100%, 88rem);
@@ -421,7 +392,7 @@
 }
 
 .team-member--row .team-member__facts div {
-  grid-template-columns: 4rem minmax(0, 1fr);
+  grid-template-columns: 5rem minmax(0, 1fr);
 }
 
 /* Option 4: compact office-level progressive disclosure. */
@@ -858,12 +829,12 @@
     display: contents;
   }
 
-  .team-sticky-index section > span {
-    display: none;
-  }
-
   .team-sticky-index section + section {
     margin-top: 0;
+  }
+
+  .team-sticky-index section > span {
+    display: none;
   }
 
   .team-sticky-index a {
@@ -915,11 +886,7 @@
   }
 
   .team-directory-hero h1 {
-    font-size: clamp(3.6rem, 21vw, 5.5rem);
-  }
-
-  .team-directory-hero__counts {
-    gap: 1rem 1.5rem;
+    font-size: clamp(2.25rem, 11vw, 3.4rem);
   }
 
   .team-option-thesis {

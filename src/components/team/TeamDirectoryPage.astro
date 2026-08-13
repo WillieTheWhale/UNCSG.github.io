@@ -15,21 +15,32 @@ const groupedBySection = sections.map((section) => ({
   section,
   groups: teamGroups.filter((group) => group.section === section),
 }));
-const totalPeople = new Set(teamGroups.flatMap((group) => group.members.map((member) => member.email))).size;
+const uniquePeople = [...new Map(
+  teamGroups.flatMap((group) => group.members).map((member) => [member.email, member]),
+).values()];
+const totalPeople = uniquePeople.length;
 const totalMemberships = teamGroups.reduce((sum, group) => sum + group.members.length, 0);
+const hometowns = uniquePeople.map((member) => member.hometown).filter(Boolean);
+const totalHometowns = new Set(hometowns).size;
+const totalStates = new Set(
+  hometowns.map((hometown) => hometown.match(/, ([A-Z]{2})$/)?.[1]).filter(Boolean),
+).size;
+const internationalCountries = new Set(
+  hometowns
+    .filter((hometown) => !/, [A-Z]{2}$/.test(hometown))
+    .map((hometown) => hometown.split(", ").at(-1)),
+);
+const totalCountries = internationalCountries.size + (totalStates > 0 ? 1 : 0);
 ---
 
 <div class:list={["team-directory-page", `team-directory-page--${layout}`]} data-team-directory>
   <header class="team-directory-hero">
     <div>
-      <p class="team-directory-hero__kicker">Duncan Administration · 2026–27</p>
       <h1>Meet the team</h1>
-      <p>Student leaders across executive offices, cabinet departments, and task forces work together to serve Carolina with excellence and integrity.</p>
-      <dl class="team-directory-hero__counts" aria-label="Directory summary">
-        <div><dt>{totalPeople}</dt><dd>people</dd></div>
-        <div><dt>{teamGroups.length}</dt><dd>teams</dd></div>
-        <div><dt>{totalMemberships}</dt><dd>roles</dd></div>
-      </dl>
+      <p>
+        Together, {totalPeople} student leaders serve in {totalMemberships} roles across {teamGroups.length} teams,
+        representing {totalHometowns} hometowns, {totalStates} states, and {totalCountries} countries.
+      </p>
     </div>
   </header>
 
@@ -57,8 +68,7 @@ const totalMemberships = teamGroups.reduce((sum, group) => sum + group.members.l
         {teamGroups.map((group) => (
           <section class="team-group" id={`team-${group.slug}`} aria-labelledby={`team-${group.slug}-title`}>
             <header class="team-group__heading">
-              <div><p>{group.section}</p><h2 id={`team-${group.slug}-title`}>{group.name}</h2></div>
-              <span>{group.members.length} {group.members.length === 1 ? "member" : "members"}</span>
+              <div><h2 id={`team-${group.slug}-title`}>{group.name}</h2></div>
               <p>{group.description}</p>
             </header>
             <div class="team-member-grid">

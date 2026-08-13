@@ -6,6 +6,7 @@ interface Member {
   major: string;
   hometown: string;
   portrait: string | null;
+  classYear?: string;
 }
 
 interface Props {
@@ -33,7 +34,10 @@ const initials = member.name
     )}
   </div>
   <div class="team-member__content">
-    <h3>{member.name}</h3>
+    <h3>
+      {member.name}
+      {member.classYear && <span class="team-member__class-year"> {member.classYear}</span>}
+    </h3>
     <p class="team-member__role">{member.title}</p>
     {(member.major || member.hometown) && (
       <dl class="team-member__facts">

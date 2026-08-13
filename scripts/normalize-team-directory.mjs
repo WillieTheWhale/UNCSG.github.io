@@ -73,10 +73,48 @@ const majorNames = new Map([
   ["Sports journalism and marketing major, philosophy/economics/political science minor.", "Sports Journalism and Marketing"],
 ]);
 
+const hometownNames = new Map([
+  ["St Paul, MN", "St. Paul, MN"],
+  ["Belmont, North Carolina", "Belmont, NC"],
+  ["Boston, Massachusetts", "Boston, MA"],
+  ["Bozeman, Mt", "Bozeman, MT"],
+  ["Chapel Hill", "Chapel Hill, NC"],
+  ["Charlotte", "Charlotte, NC"],
+  ["Charlotte North Carolina", "Charlotte, NC"],
+  ["Charlotte, North Carolina", "Charlotte, NC"],
+  ["Chattanooga Tennessee", "Chattanooga, TN"],
+  ["Cincinnati, Ohio", "Cincinnati, OH"],
+  ["Commack, New York", "Commack, NY"],
+  ["Denver, Colorado", "Denver, CO"],
+  ["Fairfax, Virginia", "Fairfax, VA"],
+  ["Gastonia NC", "Gastonia, NC"],
+  ["Greensboro", "Greensboro, NC"],
+  ["Greensboro North Carolina", "Greensboro, NC"],
+  ["High Point", "High Point, NC"],
+  ["Knightdale/Raleigh", "Knightdale, NC"],
+  ["Leigh-on-Sea, England", "Leigh-on-Sea, United Kingdom"],
+  ["Miami, Florida", "Miami, FL"],
+  ["Morssivlle (But got in as a PA Resident)", "Morrisville, PA"],
+  ["Nashville, Tennessee", "Nashville, TN"],
+  ["New York City", "New York, NY"],
+  ["Newtown, UK", "Newtown, United Kingdom"],
+  ["Raleigh, North Carolina", "Raleigh, NC"],
+  ["Roseboro", "Roseboro, NC"],
+  ["Southern Pines NC", "Southern Pines, NC"],
+  ["Toronto, Ontario, Canada", "Toronto, Canada"],
+  ["Weddington, Charlotte NC", "Weddington, NC"],
+  ["Whitsett", "Whitsett, NC"],
+  ["Williamston, Michigan", "Williamston, MI"],
+  ["Winston Salem", "Winston-Salem, NC"],
+]);
+
 for (const group of groups) {
   for (const member of group.members) {
     if (member.major && majorNames.has(member.major)) {
       member.major = majorNames.get(member.major);
+    }
+    if (member.hometown && hometownNames.has(member.hometown)) {
+      member.hometown = hometownNames.get(member.hometown);
     }
   }
 }
@@ -87,8 +125,16 @@ const bennettIndex = academicAffairs?.members.findIndex((member) => member.email
 
 if (academicAffairs && presidentOffice && bennettIndex >= 0) {
   const [bennett] = academicAffairs.members.splice(bennettIndex, 1);
-  bennett.title = "Alumni Technical Advisor";
   presidentOffice.members.push(bennett);
+}
+
+const bennett = presidentOffice?.members.find((member) => member.email === "bhilberg@unc.edu");
+if (bennett) {
+  bennett.title = "Alumni Technical Advisor";
+  bennett.major = "Computer Science";
+  bennett.hometown = "Medina, MN";
+  bennett.portrait = "/images/team/bennett-hilberg.jpg";
+  bennett.classYear = "'26";
 }
 
 await writeFile(directoryPath, `${JSON.stringify(groups, null, 2)}\n`);

@@ -10,7 +10,7 @@
         "title": "Student Body President",
         "email": "duncanda@unc.edu",
         "major": "Public Policy; Media and Journalism",
-        "hometown": "Cincinnati, Ohio",
+        "hometown": "Cincinnati, OH",
         "portrait": "/images/leadership/devin-duncan.jpg"
       },
       {
@@ -18,7 +18,7 @@
         "title": "Chief of Staff",
         "email": "fwcullen@unc.edu",
         "major": "Political Science",
-        "hometown": "Newtown, UK",
+        "hometown": "Newtown, United Kingdom",
         "portrait": "/images/team/finlay-cullen.jpg"
       },
       {
@@ -34,7 +34,7 @@
         "title": "Staffer",
         "email": "lasb@unc.edu",
         "major": "History; Public Policy",
-        "hometown": "Bozeman, Mt",
+        "hometown": "Bozeman, MT",
         "portrait": "/images/team/laszlo-baumgardner.jpg"
       },
       {
@@ -50,16 +50,17 @@
         "title": "Staffer",
         "email": "pokuaa@unc.edu",
         "major": "Psychology; Political Science",
-        "hometown": "Southern Pines NC",
+        "hometown": "Southern Pines, NC",
         "portrait": "/images/team/pokuaa-biritwum.jpg"
       },
       {
         "name": "Bennett Hilberg",
         "title": "Alumni Technical Advisor",
         "email": "bhilberg@unc.edu",
-        "major": "",
-        "hometown": "",
-        "portrait": null
+        "major": "Computer Science",
+        "hometown": "Medina, MN",
+        "portrait": "/images/team/bennett-hilberg.jpg",
+        "classYear": "'26"
       }
     ]
   },
@@ -98,7 +99,7 @@
         "title": "Staffer",
         "email": "jasmine.teague@unc.edu",
         "major": "Political Science; Information Science",
-        "hometown": "Nashville, Tennessee",
+        "hometown": "Nashville, TN",
         "portrait": "/images/team/jasmine-teague.jpg"
       },
       {
@@ -154,7 +155,7 @@
         "title": "Staffer",
         "email": "addieg@unc.edu",
         "major": "Media and Journalism",
-        "hometown": "Miami, Florida",
+        "hometown": "Miami, FL",
         "portrait": "/images/team/addison-grinan.jpg"
       },
       {
@@ -186,7 +187,7 @@
         "title": "Chief of Cabinet (Interim)",
         "email": "fwcullen@unc.edu",
         "major": "Political Science",
-        "hometown": "Newtown, UK",
+        "hometown": "Newtown, United Kingdom",
         "portrait": "/images/team/finlay-cullen.jpg"
       },
       {
@@ -210,7 +211,7 @@
         "title": "Staffer",
         "email": "deanham@unc.edu",
         "major": "History; Global Studies",
-        "hometown": "Miami, Florida",
+        "hometown": "Miami, FL",
         "portrait": "/images/team/nicholas-hamilton.jpg"
       }
     ]
@@ -234,7 +235,7 @@
         "title": "Staffer",
         "email": "kaiden@unc.edu",
         "major": "Business Administration; Advertising and Public Relations",
-        "hometown": "Greensboro",
+        "hometown": "Greensboro, NC",
         "portrait": "/images/team/kaiden-lech.jpg"
       },
       {
@@ -242,7 +243,7 @@
         "title": "Staffer",
         "email": "karenas@unc.edu",
         "major": "Biology",
-        "hometown": "Gastonia NC",
+        "hometown": "Gastonia, NC",
         "portrait": "/images/team/karena-singh.jpg"
       },
       {
@@ -274,7 +275,7 @@
         "title": "Staffer",
         "email": "sraskew@unc.edu",
         "major": "Sports Journalism and Marketing",
-        "hometown": "Charlotte North Carolina",
+        "hometown": "Charlotte, NC",
         "portrait": "/images/team/sydney-askew.jpg"
       }
     ]
@@ -290,7 +291,7 @@
         "title": "Director",
         "email": "mghoward@unc.edu",
         "major": "Economics; Public Policy",
-        "hometown": "Leigh-on-Sea, England",
+        "hometown": "Leigh-on-Sea, United Kingdom",
         "portrait": "/images/team/matthew-howard.jpg"
       },
       {
@@ -298,7 +299,7 @@
         "title": "Deputy Director",
         "email": "amygao@unc.edu",
         "major": "Economics",
-        "hometown": "Denver, Colorado",
+        "hometown": "Denver, CO",
         "portrait": "/images/team/amy-gao.jpg"
       },
       {
@@ -322,7 +323,7 @@
         "title": "Staffer",
         "email": "caseysch@unc.edu",
         "major": "Applied Mathematics; Business Administration",
-        "hometown": "Commack, New York",
+        "hometown": "Commack, NY",
         "portrait": "/images/team/casey-schwartz.jpg"
       },
       {
@@ -338,7 +339,7 @@
         "title": "Staffer",
         "email": "silewis@unc.edu",
         "major": "Political Science; Economics",
-        "hometown": "Chattanooga Tennessee",
+        "hometown": "Chattanooga, TN",
         "portrait": "/images/team/simon-lewis.jpg"
       },
       {
@@ -362,7 +363,7 @@
         "title": "Director",
         "email": "chlojo@ad.unc.edu",
         "major": "Political Science; Human Development and Family Science; Data Science",
-        "hometown": "Knightdale/Raleigh",
+        "hometown": "Knightdale, NC",
         "portrait": "/images/team/chloe-johnson.jpg"
       },
       {
@@ -402,7 +403,7 @@
         "title": "Staffer",
         "email": "hmkang17@unc.edu",
         "major": "Political Science",
-        "hometown": "Chapel Hill",
+        "hometown": "Chapel Hill, NC",
         "portrait": "/images/team/hyon-gyu-michael-kang.jpg"
       },
       {
@@ -410,7 +411,7 @@
         "title": "Staffer",
         "email": "msomp@unc.edu",
         "major": "Biology",
-        "hometown": "Charlotte, North Carolina",
+        "hometown": "Charlotte, NC",
         "portrait": "/images/team/mahip-sompura.jpg"
       }
     ]
@@ -426,7 +427,7 @@
         "title": "Director",
         "email": "scant@unc.edu",
         "major": "Political Science; Human and Organizational Leadership Development",
-        "hometown": "New York City",
+        "hometown": "New York, NY",
         "portrait": "/images/team/shakila-cantebury.jpg"
       },
       {
@@ -474,7 +475,7 @@
         "title": "Deputy Director",
         "email": "mpruiz@ad.unc.edu",
         "major": "Human Development and Family Science; Biology",
-        "hometown": "Winston Salem",
+        "hometown": "Winston-Salem, NC",
         "portrait": "/images/team/martha-pena-ruiz.jpg"
       },
       {
@@ -506,7 +507,7 @@
         "title": "Staffer",
         "email": "kwillow@unc.edu",
         "major": "Political Science; Human and Organizational Leadership Development",
-        "hometown": "Boston, Massachusetts",
+        "hometown": "Boston, MA",
         "portrait": "/images/team/kyla-sheedy-goff.jpg"
       },
       {
@@ -514,7 +515,7 @@
         "title": "Staffer",
         "email": "odublina@unc.edu",
         "major": "Economics; Information Systems",
-        "hometown": "High Point",
+        "hometown": "High Point, NC",
         "portrait": "/images/team/oscar-dublina.jpg"
       },
       {
@@ -522,7 +523,7 @@
         "title": "Staffer",
         "email": "shiloht@unc.edu",
         "major": "Geology; Business Administration",
-        "hometown": "Toronto, Ontario, Canada",
+        "hometown": "Toronto, Canada",
         "portrait": "/images/team/shiloh-pria-puri-terner.jpg"
       }
     ]
@@ -562,7 +563,7 @@
         "title": "Staffer",
         "email": "helhunt@unc.edu",
         "major": "Environmental Health Science",
-        "hometown": "Charlotte",
+        "hometown": "Charlotte, NC",
         "portrait": "/images/team/helene-hunter.jpg"
       },
       {
@@ -570,7 +571,7 @@
         "title": "Staffer",
         "email": "lewisju@unc.edu",
         "major": "Political Science; Interdisciplinary Studies",
-        "hometown": "Williamston, Michigan",
+        "hometown": "Williamston, MI",
         "portrait": "/images/team/juliana-lewis.jpg"
       },
       {
@@ -610,7 +611,7 @@
         "title": "Staffer",
         "email": "aidmtob@unc.edu",
         "major": "Peace, War, and Defense; Public Policy",
-        "hometown": "Belmont, North Carolina",
+        "hometown": "Belmont, NC",
         "portrait": "/images/team/aidan-michael-tobin.jpg"
       },
       {
@@ -634,7 +635,7 @@
         "title": "Staffer",
         "email": "wcbullar@ad.unc.edu",
         "major": "Political Science",
-        "hometown": "Roseboro",
+        "hometown": "Roseboro, NC",
         "portrait": "/images/team/williford-cosby-bullard.jpg"
       }
     ]
@@ -658,7 +659,7 @@
         "title": "Ass Director, CIA",
         "email": "alene1@unc.edu",
         "major": "Global Studies; Chinese; Public Policy",
-        "hometown": "St Paul, MN",
+        "hometown": "St. Paul, MN",
         "portrait": "/images/team/elizabeth-alene.jpg"
       },
       {
@@ -682,7 +683,7 @@
         "title": "Staffer",
         "email": "caccoop@ad.unc.edu",
         "major": "Economics",
-        "hometown": "Whitsett",
+        "hometown": "Whitsett, NC",
         "portrait": "/images/team/cameron-c-cooper.jpg"
       },
       {
@@ -698,7 +699,7 @@
         "title": "Staffer",
         "email": "jkrai@unc.edu",
         "major": "Biomedical Engineering",
-        "hometown": "Greensboro North Carolina",
+        "hometown": "Greensboro, NC",
         "portrait": "/images/team/jasmine-kaur-rai.jpg"
       },
       {
@@ -714,7 +715,7 @@
         "title": "Staffer",
         "email": "laura_lassiter@kenan-flagler.unc.edu",
         "major": "Business Administration; Political Science",
-        "hometown": "Charlotte",
+        "hometown": "Charlotte, NC",
         "portrait": "/images/team/laura-lassiter.jpg"
       },
       {
@@ -730,7 +731,7 @@
         "title": "Staffer",
         "email": "apranav@unc.edu",
         "major": "Neuroscience",
-        "hometown": "Morssivlle (But got in as a PA Resident)",
+        "hometown": "Morrisville, PA",
         "portrait": "/images/team/pranav-ayyappan.jpg"
       },
       {
@@ -738,7 +739,7 @@
         "title": "Staffer",
         "email": "sahilk@unc.edu",
         "major": "Computer Science; Neuroscience",
-        "hometown": "Fairfax, Virginia",
+        "hometown": "Fairfax, VA",
         "portrait": "/images/team/sahil-kapadia.jpg"
       },
       {
@@ -810,7 +811,7 @@
         "title": "Staffer",
         "email": "harsham@unc.edu",
         "major": "Mathematics; Computer Science",
-        "hometown": "Weddington, Charlotte NC",
+        "hometown": "Weddington, NC",
         "portrait": "/images/team/harsha-matta.jpg"
       },
       {
@@ -818,7 +819,7 @@
         "title": "Staffer",
         "email": "lwbacon@unc.edu",
         "major": "Business Administration; Sports Administration",
-        "hometown": "Raleigh, North Carolina",
+        "hometown": "Raleigh, NC",
         "portrait": "/images/team/lucas-bacon.jpg"
       },
       {
@@ -842,7 +843,7 @@
         "title": "Staffer",
         "email": "sahilk@unc.edu",
         "major": "Computer Science; Neuroscience",
-        "hometown": "Fairfax, Virginia",
+        "hometown": "Fairfax, VA",
         "portrait": "/images/team/sahil-kapadia.jpg"
       }
     ]
