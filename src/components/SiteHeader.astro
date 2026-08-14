@@ -5,7 +5,6 @@ interface Props {
 }
 
 const { onHomePage = false, currentPath = "" } = Astro.props;
-const sectionHref = (section: string) => onHomePage ? `#${section}` : `/#${section}`;
 ---
 
 <header class="site-header" data-site-header>
@@ -40,7 +39,7 @@ const sectionHref = (section: string) => onHomePage ? `#${section}` : `/#${secti
     <a href="/team/" aria-current={currentPath === "/team/" ? "page" : undefined}>Our Team</a>
     <a href="/updates/" aria-current={currentPath === "/updates/" ? "page" : undefined}>Updates</a>
     <a href={onHomePage ? "#events" : "/events/"} aria-current={currentPath === "/events/" ? "page" : undefined}>Events</a>
-    <a class="site-nav__contact" href={sectionHref("contact")}>Get in touch</a>
+    <a class="site-nav__contact" href="/contact/" aria-current={currentPath === "/contact/" ? "page" : undefined}>Get in touch</a>
   </nav>
 </header>
 

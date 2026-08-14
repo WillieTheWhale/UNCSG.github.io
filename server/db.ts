@@ -130,10 +130,47 @@ const contentSchema = `
     ON events (status, start_at, end_at);
   CREATE INDEX IF NOT EXISTS events_updated_idx ON events (updated_at DESC);
   CREATE INDEX IF NOT EXISTS events_featured_idx ON events (is_featured, status);
+
+  CREATE TABLE IF NOT EXISTS news_coverage (
+    id text PRIMARY KEY,
+    title text NOT NULL DEFAULT '',
+    outlet text NOT NULL DEFAULT '',
+    article_url text NOT NULL DEFAULT '',
+    published_on date,
+    status text NOT NULL DEFAULT 'draft'
+      CHECK (status IN ('draft', 'published', 'archived')),
+    archived_at timestamptz,
+    created_by text NOT NULL,
+    updated_by text NOT NULL,
+    created_at timestamptz NOT NULL DEFAULT now(),
+    updated_at timestamptz NOT NULL DEFAULT now()
+  );
+
+  CREATE INDEX IF NOT EXISTS news_coverage_public_order_idx
+    ON news_coverage (status, published_on DESC, created_at DESC);
+  CREATE INDEX IF NOT EXISTS news_coverage_updated_idx
+    ON news_coverage (updated_at DESC);
 `;
+
+const initialNewsCoverage = [
+  ["seed-news-ihe-2026-07-08", "UNC Student Body President Devin Duncan on What Students Want", "Inside Higher Ed", "https://www.insidehighered.com/podcasts/key-podcast/2026/07/08/ep-203-unc-student-body-president-devin-duncan-what-students-want", "2026-07-08"],
+  ["seed-news-dth-2026-04-08", "Devin Duncan sworn in as 2026–27 student body president, wants to ‘deliver consistently’ for students", "The Daily Tar Heel", "https://www.dailytarheel.com/article/university-devin-duncan-induction-feature-20260408", "2026-04-08"],
+  ["seed-news-ci-2026-03-11", "Student body president-elect Devin Duncan joins Carolina Insider", "Carolina Insider", "https://goheels.com/podcasts/carolina-insider-3-11-26/293", "2026-03-11"],
+  ["seed-news-mc-2026-03-02", "Devin Duncan ’28 elected student body president", "Morehead-Cain", "https://www.moreheadcain.org/blog/devin-duncan-28-elected-student-body-president-jakhari-bryant-27-elected-senior-class-president/", "2026-03-02"],
+  ["seed-news-dth-2026-02-18", "Devin Duncan elected as 2026–27 student body president", "The Daily Tar Heel", "https://www.dailytarheel.com/article/be71ed84-fc3e-4cc7-9c24-c408923669aa", "2026-02-18"],
+] as const;
 
 export async function initializeDatabase(authOptions: unknown): Promise<void> {
   const { runMigrations } = await getMigrations(authOptions as never);
   await runMigrations();
   await pool.query(contentSchema);
+  for (const item of initialNewsCoverage) {
+    await pool.query(
+      `INSERT INTO news_coverage
+       (id, title, outlet, article_url, published_on, status, created_by, updated_by)
+       VALUES ($1, $2, $3, $4, $5, 'published', 'system', 'system')
+       ON CONFLICT (id) DO NOTHING`,
+      [...item],
+    );
+  }
 }

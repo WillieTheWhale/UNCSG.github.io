@@ -1,9 +1,10 @@
 ---
-interface Props { current: "dashboard" | "updates" | "events"; }
+interface Props { current: "dashboard" | "updates" | "events" | "news"; }
 const { current } = Astro.props;
 ---
 <nav class="manager-section-tabs" aria-label="Publishing workspace">
   <a href="/manage/" aria-current={current === "dashboard" ? "page" : undefined}>Overview</a>
   <a href="/manage/updates/" aria-current={current === "updates" ? "page" : undefined}>Updates</a>
   <a href="/manage/events/" aria-current={current === "events" ? "page" : undefined}>Events</a>
+  <a href="/manage/news/" aria-current={current === "news" ? "page" : undefined}>In the news</a>
 </nav>

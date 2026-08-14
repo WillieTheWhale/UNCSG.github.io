@@ -80,6 +80,20 @@ export const eventFeatureSchema = z
   .object({ featured: z.boolean() })
   .strict();
 
+export const newsPatchSchema = z
+  .object({
+    title: z.string().trim().max(240).optional(),
+    outlet: z.string().trim().max(120).optional(),
+    articleUrl: optionalUrl("Article link").optional(),
+    publishedOn: z
+      .string()
+      .trim()
+      .regex(/^\d{4}-\d{2}-\d{2}$/, "Publication date: choose a valid date.")
+      .nullable()
+      .optional(),
+  })
+  .strict();
+
 export function slugifyTitle(title: string): string {
   const slug = title
     .normalize("NFKD")

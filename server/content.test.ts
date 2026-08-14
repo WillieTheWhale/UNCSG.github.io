@@ -5,6 +5,7 @@ import {
   articlePatchSchema,
   eventFeatureSchema,
   eventPatchSchema,
+  newsPatchSchema,
   scheduleSchema,
   slugifyEventTitle,
   slugifyTitle,
@@ -60,6 +61,23 @@ test("validates event fields and feature changes", () => {
     registrationUrl: null,
     contactEmail: null,
   }).success, true);
+});
+
+test("validates editable news coverage fields", () => {
+  assert.equal(newsPatchSchema.safeParse({
+    title: "Student government opens a new resource",
+    outlet: "The Daily Tar Heel",
+    articleUrl: "https://www.dailytarheel.com/example",
+    publishedOn: "2026-08-14",
+  }).success, true);
+  const invalidLink = newsPatchSchema.safeParse({ articleUrl: "www.example.com/story" });
+  assert.equal(invalidLink.success, false);
+  if (!invalidLink.success) {
+    assert.equal(
+      invalidLink.error.issues[0]?.message,
+      "Article link: enter a complete URL beginning with http:// or https://.",
+    );
+  }
 });
 
 test("normalizes event boundaries in Eastern Time", () => {

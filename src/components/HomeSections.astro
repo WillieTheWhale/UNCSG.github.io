@@ -2,6 +2,7 @@
 import VisionSection from "./VisionSection.astro";
 import HomeUpdates from "./HomeUpdates.astro";
 import HomeEvents from "./HomeEvents.astro";
+import HomeNews from "./HomeNews.astro";
 
 const directoryGroups = [
   {
@@ -56,6 +57,8 @@ const directoryGroups = [
         role: "Chief Communications Officer",
         email: "hmshap@unc.edu",
         description: "Shares authentic student stories and publishes clear updates, benchmarks, and progress from across the administration.",
+        portrait: "/images/leadership/hailey-shapiro.jpg",
+        portraitPosition: "center 24%",
       },
     ],
   },
@@ -158,7 +161,7 @@ const priorities = [
   ],
   [
     "04",
-    "Diversity, equity, and inclusion",
+    "Student success and belonging",
     "Build a Carolina where every student feels seen, supported, respected, and able to participate fully.",
     "Invest in belonging, cultural programming, shared understanding, and equitable access across campus life.",
     "priority-card--belonging",
@@ -172,43 +175,6 @@ const priorities = [
   ],
 ];
 
-const newsCoverage = [
-  {
-    outlet: "Inside Higher Ed",
-    date: "July 8, 2026",
-    datetime: "2026-07-08",
-    title: "UNC Student Body President Devin Duncan on What Students Want",
-    href: "https://www.insidehighered.com/podcasts/key-podcast/2026/07/08/ep-203-unc-student-body-president-devin-duncan-what-students-want",
-  },
-  {
-    outlet: "The Daily Tar Heel",
-    date: "April 8, 2026",
-    datetime: "2026-04-08",
-    title: "Devin Duncan sworn in as 2026–27 student body president, wants to ‘deliver consistently’ for students",
-    href: "https://www.dailytarheel.com/article/university-devin-duncan-induction-feature-20260408",
-  },
-  {
-    outlet: "Carolina Insider",
-    date: "March 11, 2026",
-    datetime: "2026-03-11",
-    title: "Student body president-elect Devin Duncan joins Carolina Insider",
-    href: "https://goheels.com/podcasts/carolina-insider-3-11-26/293",
-  },
-  {
-    outlet: "Morehead-Cain",
-    date: "March 2, 2026",
-    datetime: "2026-03-02",
-    title: "Devin Duncan ’28 elected student body president",
-    href: "https://www.moreheadcain.org/blog/devin-duncan-28-elected-student-body-president-jakhari-bryant-27-elected-senior-class-president/",
-  },
-  {
-    outlet: "The Daily Tar Heel",
-    date: "February 18, 2026",
-    datetime: "2026-02-18",
-    title: "Devin Duncan elected as 2026–27 student body president",
-    href: "https://www.dailytarheel.com/article/be71ed84-fc3e-4cc7-9c24-c408923669aa",
-  },
-];
 ---
 
 <div class="content-sections">
@@ -294,28 +260,7 @@ const newsCoverage = [
 
   <HomeEvents />
 
-  <section class="content-section content-section--news" id="news" aria-labelledby="news-title">
-    <header class="section-heading">
-      <h2 id="news-title">In the news</h2>
-    </header>
-
-    <ul class="news-list">
-      {newsCoverage.map(({ outlet, date, datetime, title, href }) => (
-        <li>
-          <a href={href} target="_blank" rel="noreferrer">
-            <span class="news-list__meta">
-              <span>{outlet}</span>
-              <time datetime={datetime}>{date}</time>
-            </span>
-            <span class="news-list__title">{title}</span>
-            <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20">
-              <path d="M7 17 17 7M9 7h8v8" />
-            </svg>
-          </a>
-        </li>
-      ))}
-    </ul>
-  </section>
+  <HomeNews />
 
   <section class="content-section content-section--connected" id="connected" aria-labelledby="connected-title">
     <header class="section-heading">

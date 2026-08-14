@@ -23,6 +23,7 @@ import {
   articlePatchSchema,
   eventFeatureSchema,
   eventPatchSchema,
+  newsPatchSchema,
   scheduleSchema,
   slugifyEventTitle,
   slugifyTitle,
@@ -169,6 +170,44 @@ function staffEvent(row: Record<string, unknown>) {
     createdAt: row.created_at,
     archivedAt: row.archived_at,
   };
+}
+
+function publicNewsItem(row: Record<string, unknown>) {
+  const publishedOn = row.published_on
+    ? row.published_on instanceof Date
+      ? row.published_on.toISOString().slice(0, 10)
+      : String(row.published_on).slice(0, 10)
+    : null;
+  return {
+    id: row.id,
+    title: row.title,
+    outlet: row.outlet,
+    articleUrl: row.article_url,
+    publishedOn,
+  };
+}
+
+function staffNewsItem(row: Record<string, unknown>) {
+  return {
+    ...publicNewsItem(row),
+    status: row.status,
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+    archivedAt: row.archived_at,
+  };
+}
+
+function newsPublicationIssue(row: Record<string, unknown>): string | null {
+  if (!String(row.title ?? "").trim()) return "Add a headline before publishing.";
+  if (!String(row.outlet ?? "").trim()) return "Add the publication name before publishing.";
+  if (!row.published_on) return "Add the publication date before publishing.";
+  try {
+    const url = new URL(String(row.article_url ?? ""));
+    if (!["http:", "https:"].includes(url.protocol)) throw new Error("invalid protocol");
+  } catch {
+    return "Article link: enter a complete URL beginning with http:// or https://.";
+  }
+  return null;
 }
 
 async function eventForPublication(id: string) {
@@ -388,6 +427,24 @@ app.get(
   }),
 );
 
+app.get(
+  "/api/news",
+  asyncRoute(async (request, response) => {
+    const requestedLimit = Number(request.query.limit ?? 50);
+    const limit = Number.isFinite(requestedLimit)
+      ? Math.max(1, Math.min(100, requestedLimit))
+      : 50;
+    const result = await pool.query(
+      `SELECT * FROM news_coverage
+       WHERE status = 'published'
+       ORDER BY published_on DESC NULLS LAST, created_at DESC
+       LIMIT $1`,
+      [limit],
+    );
+    response.json({ news: result.rows.map(publicNewsItem) });
+  }),
+);
+
 app.use("/api/staff", asyncRoute(requireStaff), requireSameOrigin);
 
 app.get("/api/staff/session", (request: StaffRequest, response) => {
@@ -604,6 +661,127 @@ app.post(
       return;
     }
     response.json({ update: staffArticle(result.rows[0]) });
+  }),
+);
+
+app.get(
+  "/api/staff/news",
+  asyncRoute(async (request, response) => {
+    const includeArchived = request.query.archived === "true";
+    const result = await pool.query(
+      `SELECT * FROM news_coverage
+       ${includeArchived ? "" : "WHERE status <> 'archived'"}
+       ORDER BY updated_at DESC`,
+    );
+    response.json({ news: result.rows.map(staffNewsItem) });
+  }),
+);
+
+app.post(
+  "/api/staff/news",
+  asyncRoute(async (request, response) => {
+    const id = randomUUID();
+    const result = await pool.query(
+      `INSERT INTO news_coverage (id, title, created_by, updated_by)
+       VALUES ($1, 'Untitled article', $2, $2)
+       RETURNING *`,
+      [id, request.staff?.onyen],
+    );
+    response.status(201).json({ newsItem: staffNewsItem(result.rows[0]) });
+  }),
+);
+
+app.patch(
+  "/api/staff/news/:id",
+  asyncRoute(async (request, response) => {
+    const parsed = newsPatchSchema.safeParse(request.body);
+    if (!parsed.success) {
+      response.status(400).json({ error: "invalid_news_item", issues: parsed.error.issues });
+      return;
+    }
+    const entries = Object.entries(parsed.data);
+    if (!entries.length) {
+      response.status(400).json({ error: "no_changes" });
+      return;
+    }
+    const columns: Record<string, string> = {
+      title: "title",
+      outlet: "outlet",
+      articleUrl: "article_url",
+      publishedOn: "published_on",
+    };
+    const values = entries.map(([, value]) => value || null);
+    const assignments = entries.map(([key], index) => `${columns[key]} = $${index + 1}`);
+    values.push(request.staff?.onyen ?? "", String(request.params.id));
+    const result = await pool.query(
+      `UPDATE news_coverage
+       SET ${assignments.join(", ")}, updated_by = $${values.length - 1}, updated_at = now()
+       WHERE id = $${values.length}
+       RETURNING *`,
+      values,
+    );
+    if (!result.rowCount) {
+      response.status(404).json({ error: "news_item_not_found" });
+      return;
+    }
+    response.json({ newsItem: staffNewsItem(result.rows[0]) });
+  }),
+);
+
+app.post(
+  "/api/staff/news/:id/publish",
+  asyncRoute(async (request, response) => {
+    const existing = await pool.query("SELECT * FROM news_coverage WHERE id = $1 LIMIT 1", [request.params.id]);
+    if (!existing.rowCount) {
+      response.status(404).json({ error: "news_item_not_found" });
+      return;
+    }
+    const issue = newsPublicationIssue(existing.rows[0]);
+    if (issue) {
+      response.status(400).json({ error: "news_item_not_ready", message: issue });
+      return;
+    }
+    const result = await pool.query(
+      `UPDATE news_coverage
+       SET status = 'published', archived_at = NULL, updated_by = $1, updated_at = now()
+       WHERE id = $2 RETURNING *`,
+      [request.staff?.onyen, request.params.id],
+    );
+    response.json({ newsItem: staffNewsItem(result.rows[0]) });
+  }),
+);
+
+app.post(
+  "/api/staff/news/:id/draft",
+  asyncRoute(async (request, response) => {
+    const result = await pool.query(
+      `UPDATE news_coverage
+       SET status = 'draft', archived_at = NULL, updated_by = $1, updated_at = now()
+       WHERE id = $2 RETURNING *`,
+      [request.staff?.onyen, request.params.id],
+    );
+    if (!result.rowCount) {
+      response.status(404).json({ error: "news_item_not_found" });
+      return;
+    }
+    response.json({ newsItem: staffNewsItem(result.rows[0]) });
+  }),
+);
+
+app.post(
+  "/api/staff/news/:id/archive",
+  asyncRoute(async (request, response) => {
+    const result = await pool.query(
+      `UPDATE news_coverage
+       SET status = 'archived', archived_at = now(), updated_by = $1, updated_at = now()
+       WHERE id = $2 RETURNING *`,
+      [request.staff?.onyen, request.params.id],
+    );
+    if (!result.rowCount) {
+      response.status(404).json({ error: "news_item_not_found" });
+      return;
+    }
+    response.json({ newsItem: staffNewsItem(result.rows[0]) });
   }),
 );
 

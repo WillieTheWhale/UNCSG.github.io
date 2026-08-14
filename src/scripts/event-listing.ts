@@ -57,11 +57,9 @@ export function initializeEventListings(): void {
     const clear = root.querySelector<HTMLButtonElement>("[data-clear-event-filters]");
     if (!form || !status || !grid || !clear) return;
     const scope = form.elements.namedItem("scope") as HTMLSelectElement;
-    const month = form.elements.namedItem("month") as HTMLInputElement;
     const format = form.elements.namedItem("format") as HTMLSelectElement;
     const query = new URLSearchParams(window.location.search);
     scope.value = query.get("when") || "upcoming";
-    month.value = query.get("month") || "";
     format.value = query.get("format") || "";
 
     const load = async () => {
@@ -69,7 +67,6 @@ export function initializeEventListings(): void {
       status.innerHTML = '<span class="updates-loading" aria-hidden="true"></span> Loading events…';
       grid.hidden = true;
       const params = new URLSearchParams({ scope: scope.value, limit: "100" });
-      if (month.value) params.set("month", month.value);
       if (format.value) params.set("format", format.value);
       try {
         const endpoint = preview ? "/api/staff/preview-events" : `/api/events?${params}`;
@@ -90,14 +87,12 @@ export function initializeEventListings(): void {
             const ends = new Date(event.endAt).getTime();
             if (scope.value === "upcoming" && ends < now) return false;
             if (scope.value === "past" && ends >= now) return false;
-            if (month.value && event.startAt.slice(0, 7) !== month.value) return false;
             if (format.value && event.format !== format.value) return false;
             return true;
           });
         }
         const nextQuery = new URLSearchParams();
         if (scope.value !== "upcoming") nextQuery.set("when", scope.value);
-        if (month.value) nextQuery.set("month", month.value);
         if (format.value) nextQuery.set("format", format.value);
         history.replaceState(null, "", `${window.location.pathname}${nextQuery.size ? `?${nextQuery}` : ""}`);
         if (!events.length) {
@@ -114,7 +109,7 @@ export function initializeEventListings(): void {
     };
     form.addEventListener("change", load);
     clear.addEventListener("click", () => {
-      scope.value = "upcoming"; month.value = ""; format.value = ""; load();
+      scope.value = "upcoming"; format.value = ""; load();
     });
     load();
   });

@@ -1,0 +1,20 @@
+---
+import ContactOptionNavigator from "../../../components/design-options/ContactOptionNavigator.astro";
+import ContactRouterPage from "../../../components/contact/ContactRouterPage.astro";
+import { contactOptions, type ContactOption } from "../../../data/contact-options";
+import UpdateSiteLayout from "../../../layouts/UpdateSiteLayout.astro";
+
+export function getStaticPaths() {
+  return contactOptions.map((option) => ({
+    params: { slug: `${String(option.id).padStart(2, "0")}-${option.slug}` },
+    props: { option },
+  }));
+}
+interface Props { option: ContactOption; }
+const { option } = Astro.props;
+---
+
+<UpdateSiteLayout title={`${option.name} | Contact Page Design Lab`} description={option.thesis} canonicalPath={`/design-options/contact/${String(option.id).padStart(2, "0")}-${option.slug}/`} bodyClass="contact-lab-option-page" noindex>
+  <ContactOptionNavigator current={option} />
+  <ContactRouterPage option={option} />
+</UpdateSiteLayout>
