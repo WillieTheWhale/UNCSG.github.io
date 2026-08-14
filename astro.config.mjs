@@ -33,6 +33,9 @@ export default defineConfig({
   ...(base ? { base } : {}),
   output: "static",
   vite: {
+    build: {
+      assetsInlineLimit: 0,
+    },
     plugins: [contentDevRewrites],
     server: {
       proxy: {
