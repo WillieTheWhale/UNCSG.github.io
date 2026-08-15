@@ -90,9 +90,9 @@
         "name": "April Chou",
         "title": "Staffer",
         "email": "aprilcho@unc.edu",
-        "major": "",
-        "hometown": "",
-        "portrait": null
+        "major": "Biostatistics; Mathematics",
+        "hometown": "West Chester, PA",
+        "portrait": "/images/team/april-chou.webp"
       },
       {
         "name": "Jasmine Teague",
@@ -466,9 +466,9 @@
         "name": "Cameron Lee",
         "title": "Director",
         "email": "campslee@unc.edu",
-        "major": "",
-        "hometown": "",
-        "portrait": null
+        "major": "Public Health; Biology",
+        "hometown": "Vancouver, Canada",
+        "portrait": "/images/team/cameron-lee.webp"
       },
       {
         "name": "Martha Pena Ruiz",
@@ -594,17 +594,17 @@
         "name": "Sophia Fontecchio",
         "title": "Director",
         "email": "sophfont@unc.edu",
-        "major": "",
-        "hometown": "",
-        "portrait": null
+        "major": "Political Science; Public Policy",
+        "hometown": "Downingtown, PA",
+        "portrait": "/images/team/sophia-fontecchio.webp"
       },
       {
         "name": "Sloane Whalen",
         "title": "Deputy Director",
         "email": "sloawhal@unc.edu",
-        "major": "",
-        "hometown": "",
-        "portrait": null
+        "major": "Political Science; Global Studies",
+        "hometown": "Winston-Salem, NC",
+        "portrait": "/images/team/sloane-whalen.webp"
       },
       {
         "name": "Aidan Michael Tobin",
@@ -650,9 +650,9 @@
         "name": "Lauryn Sidni Cooper",
         "title": "Director",
         "email": "lsc@unc.edu",
-        "major": "",
-        "hometown": "",
-        "portrait": null
+        "major": "Nutrition",
+        "hometown": "Greensboro, NC",
+        "portrait": "/images/team/lauryn-cooper.webp"
       },
       {
         "name": "Elizabeth Alene",
@@ -674,9 +674,9 @@
         "name": "Meredith McKinney",
         "title": "NSES Director",
         "email": "meredith.mckinney@unc.edu",
-        "major": "",
-        "hometown": "",
-        "portrait": null
+        "major": "Public Policy; Geography",
+        "hometown": "Greensboro, NC",
+        "portrait": "/images/team/meredith-mckinney.webp"
       },
       {
         "name": "Cameron C. Cooper",
@@ -778,9 +778,9 @@
         "name": "Hayden Koller",
         "title": "Deputy Director",
         "email": "hkoller@unc.edu",
-        "major": "",
-        "hometown": "",
-        "portrait": null
+        "major": "Pre-Business; Economics",
+        "hometown": "Raleigh, NC",
+        "portrait": "/images/team/hayden-koller.webp"
       }
     ]
   },
