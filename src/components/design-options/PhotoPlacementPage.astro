@@ -1,0 +1,116 @@
+---
+import FeaturedEvent from "../FeaturedEvent.astro";
+import HomeSections from "../HomeSections.astro";
+import PhotoStory from "./PhotoStory.astro";
+import type { PhotoOption } from "../../data/photo-options";
+import "../../styles/photo-options.css";
+
+interface Props {
+  option: PhotoOption;
+}
+
+const { option } = Astro.props;
+---
+
+<div class:list={["photo-placement-page", `photo-placement-page--${option.layout}`]}>
+  <section class="hero photo-placement-hero" aria-labelledby="page-title" data-featured-event-state="empty">
+    <figure class="hero__media">
+      <img
+        src={option.heroImage}
+        alt={option.heroAlt}
+        fetchpriority="high"
+        decoding="async"
+        width="2400"
+        height="1600"
+        style={`object-position: ${option.heroFocus};`}
+      />
+    </figure>
+    <div class="hero__shade" aria-hidden="true"></div>
+
+    <div class="hero__inner">
+      <div class="hero__copy">
+        <h1 id="page-title">UNC Student Government Executive Branch</h1>
+        <p>The Duncan Administration is creating a Carolina that is first in excellence, best in integrity, and for every student.</p>
+      </div>
+
+      <FeaturedEvent />
+    </div>
+  </section>
+
+  <HomeSections>
+    {option.layout === "editorial-bands" && (
+      <PhotoStory
+        slot="after-vision"
+        src="/images/photo-lab/student-government-meeting.webp"
+        alt="Student Government leaders gathered around a conference table with Dr. James Orr"
+        caption="Student Government leaders meet with Dr. James Orr in South Building."
+        size="wide"
+        focus="center 48%"
+      />
+    )}
+    {option.layout === "editorial-bands" && (
+      <PhotoStory
+        slot="after-departments"
+        src="/images/photo-lab/devin-oath.webp"
+        alt="Devin Duncan taking the student body president oath of office"
+        caption="Student Body President Devin Duncan takes the oath of office."
+        size="medium"
+        focus="center 45%"
+      />
+    )}
+    {option.layout === "editorial-bands" && (
+      <PhotoStory
+        slot="after-news"
+        src="/images/photo-lab/south-building.webp"
+        alt="South Building with Carolina 250 and First and Best for All banners"
+        caption="South Building during Carolina's 250th anniversary year."
+        size="wide"
+        focus="center 62%"
+        treatment="zoom"
+      />
+    )}
+
+    {option.layout === "people-first" && (
+      <PhotoStory
+        slot="after-vision"
+        src="/images/photo-lab/devin-oath.webp"
+        alt="Devin Duncan taking the student body president oath of office"
+        caption="Student Body President Devin Duncan takes the oath of office."
+        size="compact"
+        focus="center 44%"
+      />
+    )}
+    {option.layout === "people-first" && (
+      <PhotoStory
+        slot="after-departments"
+        src="/images/photo-lab/south-building.webp"
+        alt="South Building with Carolina 250 and First and Best for All banners"
+        caption="South Building during Carolina's 250th anniversary year."
+        size="wide"
+        focus="center 62%"
+        treatment="zoom"
+      />
+    )}
+
+    {option.layout === "institutional-anchor" && (
+      <PhotoStory
+        slot="after-priorities"
+        src="/images/photo-lab/student-government-meeting.webp"
+        alt="Student Government leaders gathered around a conference table with Dr. James Orr"
+        caption="Student Government leaders meet with Dr. James Orr in South Building."
+        size="wide"
+        focus="center 48%"
+      />
+    )}
+    {option.layout === "institutional-anchor" && (
+      <PhotoStory
+        slot="after-events"
+        src="/images/photo-lab/devin-oath.webp"
+        alt="Devin Duncan taking the student body president oath of office"
+        caption="Student Body President Devin Duncan takes the oath of office."
+        size="medium"
+        focus="center 44%"
+      />
+    )}
+  </HomeSections>
+</div>

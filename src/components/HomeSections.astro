@@ -23,7 +23,8 @@ const directoryGroups = [
         role: "Vice President",
         email: "usgvp@unc.edu",
         description: "Supports the President and helps coordinate the Executive Council, student engagement, and cross-office initiatives.",
-        initials: "BJ",
+        portrait: "/images/team/ben-jones.webp",
+        portraitPosition: "center 22%",
       },
       {
         team: "Office of the Treasurer",
@@ -183,6 +184,8 @@ const priorities = [
 <div class="content-sections">
   <VisionSection />
 
+  <slot name="after-vision" />
+
   <section class="content-section content-section--priorities" id="priorities" aria-labelledby="priorities-title">
     <header class="section-heading">
       <h2 id="priorities-title">Our priorities</h2>
@@ -201,6 +204,8 @@ const priorities = [
       ))}
     </ol>
   </section>
+
+  <slot name="after-priorities" />
 
   <section class="content-section content-section--departments" id="departments" aria-labelledby="departments-title">
     <header class="section-heading">
@@ -259,11 +264,19 @@ const priorities = [
     ))}
   </section>
 
+  <slot name="after-departments" />
+
   <HomeUpdates />
+
+  <slot name="after-updates" />
 
   <HomeEvents />
 
+  <slot name="after-events" />
+
   <HomeNews />
+
+  <slot name="after-news" />
 
   <section class="content-section content-section--connected" id="connected" aria-labelledby="connected-title">
     <header class="section-heading">

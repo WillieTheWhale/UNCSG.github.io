@@ -34,9 +34,20 @@ const totalCountries = internationalCountries.size + (totalStates > 0 ? 1 : 0);
 ---
 
 <div class:list={["team-directory-page", `team-directory-page--${layout}`]} data-team-directory>
-  <header class="team-directory-hero">
-    <div>
-      <h1>Meet the team</h1>
+  <header class="team-directory-hero" aria-labelledby="team-directory-title">
+    <figure class="team-directory-hero__media">
+      <img
+        src="/images/photo-lab/student-government-meeting.webp"
+        alt="Student Government leaders meeting with Dr. James Orr in South Building"
+        width="2400"
+        height="1600"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </figure>
+    <div class="team-directory-hero__shade" aria-hidden="true"></div>
+    <div class="team-directory-hero__inner">
+      <h1 id="team-directory-title">Meet the team</h1>
       <p>
         Together, {totalPeople} student leaders serve in {totalMemberships} roles across {teamGroups.length} teams,
         representing {totalHometowns} hometowns, {totalStates} states, and {totalCountries} countries.

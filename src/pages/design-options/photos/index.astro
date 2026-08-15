@@ -1,0 +1,41 @@
+---
+import UpdateSiteLayout from "../../../layouts/UpdateSiteLayout.astro";
+import { photoOptions, photoOptionPath } from "../../../data/photo-options";
+import "../../../styles/photo-options.css";
+---
+
+<UpdateSiteLayout
+  title="Photography Placement Design Lab | Duncan Administration"
+  description="Three homepage placements for authorized UNC Student Government and campus photography."
+  canonicalPath="/design-options/photos/"
+  bodyClass="photo-lab-overview-page"
+  noindex
+>
+  <section class="photo-lab-overview" aria-labelledby="photo-lab-title">
+    <header>
+      <p>Duncan Administration · Photography placement lab</p>
+      <h1 id="photo-lab-title">One page. Three photographic rhythms.</h1>
+      <span>Each option keeps the same content, navigation, institutional top bar, and Duncan design system. Only the placement, scale, and crop of the three selected photographs changes.</span>
+    </header>
+
+    <div class="photo-lab-overview__grid">
+      {photoOptions.map((option) => (
+        <article>
+          <a class:list={["photo-lab-overview__preview", `photo-lab-overview__preview--${option.layout}`]} href={photoOptionPath(option)}>
+            <span>{String(option.id).padStart(2, "0")}</span>
+            <div aria-hidden="true">
+              <img src={option.heroImage} alt="" loading="lazy" decoding="async" />
+            </div>
+            <strong>{option.name}</strong>
+          </a>
+          <div>
+            <h2>{option.name}</h2>
+            <p>{option.thesis}</p>
+            <small><b>Tradeoff:</b> {option.tradeoff}</small>
+            <a href={photoOptionPath(option)}>Open option <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</UpdateSiteLayout>

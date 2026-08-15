@@ -274,6 +274,11 @@ a {
   object-position: center 44%;
 }
 
+.hero__media--south-building img {
+  object-position: center 58%;
+  transform: scale(1.13);
+}
+
 .hero__shade {
   z-index: -1;
   background: linear-gradient(0deg, rgb(19 41 75 / 88%) 0%, rgb(19 41 75 / 70%) 52%, rgb(19 41 75 / 48%) 100%);

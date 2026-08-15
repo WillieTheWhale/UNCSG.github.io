@@ -1,0 +1,39 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  caption: string;
+  credit?: string;
+  size?: "wide" | "medium" | "compact";
+  focus?: string;
+  treatment?: "standard" | "zoom";
+}
+
+const {
+  src,
+  alt,
+  caption,
+  credit = "Jon Gardiner/UNC-Chapel Hill",
+  size = "wide",
+  focus = "center",
+  treatment = "standard",
+} = Astro.props;
+---
+
+<figure class:list={["photo-story", `photo-story--${size}`, `photo-story--${treatment}`]}>
+  <div class="photo-story__media">
+    <img
+      src={src}
+      alt={alt}
+      width="2400"
+      height="1600"
+      loading="lazy"
+      decoding="async"
+      style={`object-position: ${focus};`}
+    />
+  </div>
+  <figcaption>
+    <span>{caption}</span>
+    <small>{credit}</small>
+  </figcaption>
+</figure>

@@ -1,0 +1,30 @@
+---
+import PhotoOptionNavigator from "../../../components/design-options/PhotoOptionNavigator.astro";
+import PhotoPlacementPage from "../../../components/design-options/PhotoPlacementPage.astro";
+import { photoOptions, type PhotoOption } from "../../../data/photo-options";
+import UpdateSiteLayout from "../../../layouts/UpdateSiteLayout.astro";
+
+export function getStaticPaths() {
+  return photoOptions.map((option) => ({
+    params: { slug: `${String(option.id).padStart(2, "0")}-${option.slug}` },
+    props: { option },
+  }));
+}
+
+interface Props {
+  option: PhotoOption;
+}
+
+const { option } = Astro.props;
+---
+
+<UpdateSiteLayout
+  title={`${option.name} | Photography Placement Design Lab`}
+  description={option.thesis}
+  canonicalPath={`/design-options/photos/${String(option.id).padStart(2, "0")}-${option.slug}/`}
+  bodyClass="photo-lab-option-page"
+  noindex
+>
+  <PhotoOptionNavigator current={option} />
+  <PhotoPlacementPage option={option} />
+</UpdateSiteLayout>

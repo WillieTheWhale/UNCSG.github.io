@@ -12,19 +12,46 @@
 }
 
 .team-directory-hero {
-  padding: clamp(3rem, 6vw, 5rem) var(--page-gutter);
+  position: relative;
+  display: grid;
+  min-height: clamp(20rem, 34vw, 28rem);
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  padding: clamp(4rem, 8vw, 7rem) var(--page-gutter);
   border-bottom: 1px solid var(--rule);
-  background: var(--neutral-50);
+  color: var(--neutral-0);
+  background: var(--brand-navy);
 }
 
-.team-directory-hero > div {
+.team-directory-hero__media,
+.team-directory-hero__shade {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  margin: 0;
+}
+
+.team-directory-hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 48%;
+}
+
+.team-directory-hero__shade {
+  z-index: -1;
+  background: linear-gradient(110deg, rgb(19 41 75 / 95%), rgb(19 41 75 / 72%));
+}
+
+.team-directory-hero__inner {
   width: min(100%, 82rem);
   margin-inline: auto;
 }
 
 .team-directory-hero h1 {
   margin: 0;
-  color: var(--brand-navy);
+  color: var(--neutral-0);
   font-family: var(--font-body);
   font-size: clamp(2.35rem, 4.4vw, 4.5rem);
   font-weight: 760;
@@ -33,10 +60,10 @@
   text-wrap: balance;
 }
 
-.team-directory-hero > div > p:last-of-type {
+.team-directory-hero__inner > p:last-of-type {
   max-width: 70ch;
   margin: 1.25rem 0 0;
-  color: #344968;
+  color: rgb(255 255 255 / 88%);
   font-size: clamp(1.08rem, 1.5vw, 1.25rem);
   line-height: 1.65;
 }
@@ -882,7 +909,8 @@
 
 @media (max-width: 42rem) {
   .team-directory-hero {
-    background: var(--neutral-50);
+    min-height: 22rem;
+    padding-block: 4rem;
   }
 
   .team-directory-hero h1 {
