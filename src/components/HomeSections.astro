@@ -32,7 +32,8 @@ const directoryGroups = [
         role: "Treasurer",
         email: "usgtreasurer@unc.edu",
         description: "Oversees Executive Branch finances and promotes responsible, transparent stewardship of student government resources.",
-        initials: "HR",
+        portrait: "/images/team/hadi-rahim.webp",
+        portraitPosition: "center 42%",
       },
       {
         team: "Office of the Student Body Secretary",
@@ -224,25 +225,18 @@ const priorities = [
           <span class="directory-group__icon" aria-hidden="true"></span>
         </summary>
         <div class="team-grid">
-          {teams.map(({ team, leader, role, email, description, portrait, portraitPosition, initials }) => (
+          {teams.map(({ team, leader, role, email, description, portrait, portraitPosition }) => (
             <article class="team">
-              <div class:list={["team__portrait", {
-                "team__portrait--fallback": !portrait && initials,
-                "team__portrait--empty": !portrait && !initials,
-              }]}>
-                {portrait ? (
-                  <img
-                    src={portrait}
-                    alt=""
-                    width="160"
-                    height="160"
-                    loading="lazy"
-                    decoding="async"
-                    style={`object-position: ${portraitPosition};`}
-                  />
-                ) : initials ? (
-                  <span aria-hidden="true">{initials}</span>
-                ) : null}
+              <div class="team__portrait">
+                <img
+                  src={portrait}
+                  alt=""
+                  width="160"
+                  height="160"
+                  loading="lazy"
+                  decoding="async"
+                  style={`object-position: ${portraitPosition};`}
+                />
               </div>
               <div class="team__details">
                 <h4>{team}</h4>
