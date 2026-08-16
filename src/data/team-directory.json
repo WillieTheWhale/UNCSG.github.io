@@ -162,9 +162,9 @@
         "name": "Cole Jones",
         "title": "Staffer",
         "email": "coles.jones@unc.edu",
-        "major": "",
-        "hometown": "",
-        "portrait": null
+        "major": "Political Science",
+        "hometown": "Durham, NC",
+        "portrait": "/images/team/cole-jones.webp"
       },
       {
         "name": "Madeline Lewis",
@@ -346,9 +346,9 @@
         "name": "William Niles",
         "title": "Staffer",
         "email": "wniles@ad.unc.edu",
-        "major": "",
-        "hometown": "",
-        "portrait": null
+        "major": "Economics",
+        "hometown": "London, England",
+        "portrait": "/images/team/william-niles.webp"
       }
     ]
   },
@@ -434,9 +434,9 @@
         "name": "Bryson Kohlbrenner",
         "title": "Assistant Director",
         "email": "bkohl@ad.unc.edu",
-        "major": "",
-        "hometown": "",
-        "portrait": null
+        "major": "Economics",
+        "hometown": "Waxhaw, NC",
+        "portrait": "/images/team/bryson-kohlbrenner.webp"
       },
       {
         "name": "Caroline Hurlbert",
