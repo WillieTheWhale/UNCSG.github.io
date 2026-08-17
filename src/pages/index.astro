@@ -6,8 +6,10 @@ import "@fontsource/open-sans/600.css";
 import AccessDeniedBanner from "../components/AccessDeniedBanner.astro";
 import FeaturedEvent from "../components/FeaturedEvent.astro";
 import HomeSections from "../components/HomeSections.astro";
+import LaunchWelcome from "../components/LaunchWelcome.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import "../styles/global.css";
+import "../styles/launch-welcome.css";
 ---
 
 <!doctype html>
@@ -22,6 +24,19 @@ import "../styles/global.css";
     <meta name="theme-color" content="#13294b" />
     <link rel="canonical" href="https://executivebranch.unc.edu/" />
     <title>UNC Student Government Executive Branch | Duncan Administration</title>
+    <script is:inline>
+      (() => {
+        const storageKey = "uncsg_front_door_welcome_v1";
+        try {
+          const forceWelcome = new URLSearchParams(window.location.search).get("welcome") === "1";
+          if (forceWelcome || window.localStorage.getItem(storageKey) !== "seen") {
+            document.documentElement.classList.add("launch-welcome-pending");
+          }
+        } catch {
+          document.documentElement.classList.add("launch-welcome-pending");
+        }
+      })();
+    </script>
     <script
       is:inline
       type="text/javascript"
@@ -33,6 +48,7 @@ import "../styles/global.css";
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
     <AccessDeniedBanner />
+    <LaunchWelcome />
 
     <SiteHeader onHomePage />
 

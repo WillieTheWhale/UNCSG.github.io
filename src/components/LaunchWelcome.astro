@@ -1,0 +1,150 @@
+---
+const confetti = Array.from({ length: 30 }, (_, index) => ({
+  x: (index * 37 + 9) % 100,
+  delay: 1150 + ((index * 53) % 520),
+  duration: 1900 + ((index * 79) % 1150),
+  drift: ((index % 7) - 3) * 17,
+  rotate: (index * 47) % 180,
+}));
+---
+
+<div class="launch-welcome" data-launch-welcome aria-hidden="true">
+  <div class="launch-welcome__backdrop" aria-hidden="true"></div>
+
+  <div class="launch-welcome__confetti" aria-hidden="true">
+    {confetti.map((piece) => (
+      <i
+        style={`--x:${piece.x}%;--delay:${piece.delay}ms;--duration:${piece.duration}ms;--drift:${piece.drift}px;--rotate:${piece.rotate}deg`}
+      ></i>
+    ))}
+  </div>
+
+  <div class="launch-welcome__ribbon-stage" aria-hidden="true">
+    <svg viewBox="0 0 1600 190" preserveAspectRatio="none">
+      <g class="launch-welcome__ribbon-piece launch-welcome__ribbon-piece--left">
+        <path class="launch-welcome__ribbon-shadow" d="M-20 73 C190 59 426 84 806 72 L778 91 L808 108 C430 118 188 91 -20 109 Z"></path>
+        <path class="launch-welcome__ribbon-face" d="M-20 54 C190 42 426 67 806 55 L778 74 L808 91 C430 101 188 76 -20 92 Z"></path>
+      </g>
+      <g class="launch-welcome__ribbon-piece launch-welcome__ribbon-piece--right">
+        <path class="launch-welcome__ribbon-shadow" d="M1592 72 C1214 84 985 59 806 73 L824 91 L794 108 C1000 118 1240 92 1620 109 Z"></path>
+        <path class="launch-welcome__ribbon-face" d="M1592 55 C1214 67 985 42 806 54 L824 74 L794 91 C1000 101 1240 76 1620 92 Z"></path>
+      </g>
+    </svg>
+    <svg class="launch-welcome__scissors" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
+      <g class="launch-welcome__scissors-half launch-welcome__scissors-half--upper">
+        <circle class="launch-welcome__scissors-handle" cx="6" cy="6" r="3"></circle>
+        <path class="launch-welcome__scissors-arm" d="M8.15 8.15 L12 12"></path>
+        <path class="launch-welcome__scissors-blade" d="M12 12 L20 20"></path>
+      </g>
+      <g class="launch-welcome__scissors-half launch-welcome__scissors-half--lower">
+        <circle class="launch-welcome__scissors-handle" cx="6" cy="18" r="3"></circle>
+        <path class="launch-welcome__scissors-arm" d="M8.15 15.85 L12 12"></path>
+        <path class="launch-welcome__scissors-blade" d="M12 12 L20 4"></path>
+      </g>
+      <circle class="launch-welcome__scissors-pivot" cx="12" cy="12" r="1.15"></circle>
+    </svg>
+  </div>
+
+  <section
+    class="launch-welcome__card"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="launch-welcome-title"
+    aria-describedby="launch-welcome-copy"
+    tabindex="-1"
+    data-launch-welcome-dialog
+  >
+    <button class="launch-welcome__close" type="button" aria-label="Close welcome message" data-launch-welcome-close>×</button>
+
+          <p class="launch-welcome__from">A welcome from your Student Body President</p>
+    <h2 id="launch-welcome-title">Welcome to our new front door!</h2>
+
+    <div class="launch-welcome__copy" id="launch-welcome-copy">
+      <p>A better Student Government starts with making it easier for students to see our work, know our people, understand our priorities, and hold us accountable. I'm very proud of our new website designed to make Student Government more accessible, more transparent, and more connected to the students we serve. It is a place to learn who is doing the work, what we are focused on, how decisions are being made, and how you can engage with us along the way.</p>
+      <p>Carolina has a long tradition of student leadership, and that tradition carries a responsibility: to communicate clearly, to lead with integrity, and to leave our institutions stronger than we found them.</p>
+      <p>So, come on in. Take a look around. And, please do <a href="/contact/">reach out</a> if you need anything.</p>
+    </div>
+
+    <div class="launch-welcome__footer">
+      <div class="launch-welcome__signoff">
+        <img
+          class="launch-welcome__signature"
+          src="/images/devin-duncan-signature.png"
+          alt="Devin Duncan's signature"
+          width="1214"
+          height="228"
+          decoding="async"
+        />
+        <p class="launch-welcome__signed-name"><strong>Devin Duncan</strong><span>Student Body President</span></p>
+      </div>
+      <button class="launch-welcome__enter" type="button" data-launch-welcome-close>
+        Enter the website <span aria-hidden="true">→</span>
+      </button>
+    </div>
+  </section>
+</div>
+
+<script is:inline>
+  (() => {
+    const storageKey = "uncsg_front_door_welcome_v1";
+    const root = document.querySelector("[data-launch-welcome]");
+    const dialog = root?.querySelector("[data-launch-welcome-dialog]");
+    if (!(root instanceof HTMLElement) || !(dialog instanceof HTMLElement)) return;
+
+    const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    let previousFocus = document.activeElement;
+    let isOpen = false;
+
+    const rememberVisit = () => {
+      try { window.localStorage.setItem(storageKey, "seen"); } catch { /* Storage can be unavailable in privacy modes. */ }
+    };
+
+    const open = () => {
+      if (!document.documentElement.classList.contains("launch-welcome-pending")) return;
+      isOpen = true;
+      previousFocus = document.activeElement;
+      root.removeAttribute("aria-hidden");
+      document.body.classList.add("launch-welcome-open");
+      window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
+        root.classList.add("is-active");
+        window.setTimeout(() => dialog.focus(), 1650);
+      }));
+    };
+
+    const close = () => {
+      if (!isOpen) return;
+      isOpen = false;
+      rememberVisit();
+      root.classList.remove("is-active");
+      root.setAttribute("aria-hidden", "true");
+      document.documentElement.classList.remove("launch-welcome-pending");
+      document.body.classList.remove("launch-welcome-open");
+      if (previousFocus instanceof HTMLElement && previousFocus !== document.body) previousFocus.focus();
+    };
+
+    root.querySelectorAll("[data-launch-welcome-close]").forEach((control) => control.addEventListener("click", close));
+
+    document.addEventListener("keydown", (event) => {
+      if (!isOpen) return;
+      if (event.key === "Escape") {
+        event.preventDefault();
+        close();
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const focusable = [...dialog.querySelectorAll(focusableSelector)].filter((element) => element instanceof HTMLElement && !element.hidden);
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
+
+    open();
+  })();
+</script>
