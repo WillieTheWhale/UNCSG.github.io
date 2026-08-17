@@ -97,7 +97,7 @@ spec:
     - type: GitHub
       github:
         secretReference:
-          name: uncsg-webhook-secret
+          name: uncsg-updates-api-webhook-secret
 ---
 apiVersion: apps/v1
 kind: Deployment

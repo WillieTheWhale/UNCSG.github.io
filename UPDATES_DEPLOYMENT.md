@@ -57,6 +57,17 @@ unset UPDATES_AUTH_SECRET UPDATES_DATABASE_URL
 If the Secret already exists, update its individual values through the
 OpenShift console before deploying.
 
+The API BuildConfig uses a dedicated GitHub webhook Secret. Create it once in
+OpenShift; keep its generated value out of Git and separate from the frontend
+webhook Secret:
+
+```sh
+UPDATES_WEBHOOK_SECRET="$(openssl rand -hex 32)"
+oc create secret generic uncsg-updates-api-webhook-secret \
+  --from-literal=WebHookSecretKey="${UPDATES_WEBHOOK_SECRET}"
+unset UPDATES_WEBHOOK_SECRET
+```
+
 ## Deploy in CloudApps
 
 ```sh
