@@ -70,6 +70,10 @@ updates/media tables at startup. Scheduled posts become public at their saved
 Eastern Time without a cron job; public queries treat due scheduled posts as
 published.
 
+The API deployment uses the `Recreate` strategy because this quota-constrained
+namespace cannot reserve memory for two API pods during a rolling update. The
+frontend remains online while the API pod is replaced.
+
 ## Local development
 
 Start PostgreSQL locally, copy `.env.example` to `.env`, and replace the

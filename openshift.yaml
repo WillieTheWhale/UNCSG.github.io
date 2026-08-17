@@ -110,6 +110,8 @@ metadata:
       [{"from":{"kind":"ImageStreamTag","name":"uncsg-updates-api:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"uncsg-updates-api\")].image"}]
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: uncsg-updates-api
