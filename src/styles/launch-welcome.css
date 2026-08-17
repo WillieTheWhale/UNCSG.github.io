@@ -345,6 +345,38 @@ html.launch-welcome-pending .launch-welcome {
 .launch-welcome__confetti i:nth-child(5n + 4) { --piece-color: var(--brand-yellow); width: 0.78rem; height: 0.78rem; border-radius: 50%; }
 .launch-welcome__confetti i:nth-child(5n) { --piece-color: var(--neutral-0); }
 
+/* Keep launch motion compatible with the production CSP: no inline style attributes. */
+.launch-welcome__confetti i:nth-child(1) { --x: 9%; --delay: 1150ms; --duration: 1900ms; --drift: -51px; --rotate: 0deg; }
+.launch-welcome__confetti i:nth-child(2) { --x: 46%; --delay: 1203ms; --duration: 1979ms; --drift: -34px; --rotate: 47deg; }
+.launch-welcome__confetti i:nth-child(3) { --x: 83%; --delay: 1256ms; --duration: 2058ms; --drift: -17px; --rotate: 94deg; }
+.launch-welcome__confetti i:nth-child(4) { --x: 20%; --delay: 1309ms; --duration: 2137ms; --drift: 0px; --rotate: 141deg; }
+.launch-welcome__confetti i:nth-child(5) { --x: 57%; --delay: 1362ms; --duration: 2216ms; --drift: 17px; --rotate: 8deg; }
+.launch-welcome__confetti i:nth-child(6) { --x: 94%; --delay: 1415ms; --duration: 2295ms; --drift: 34px; --rotate: 55deg; }
+.launch-welcome__confetti i:nth-child(7) { --x: 31%; --delay: 1468ms; --duration: 2374ms; --drift: 51px; --rotate: 102deg; }
+.launch-welcome__confetti i:nth-child(8) { --x: 68%; --delay: 1521ms; --duration: 2453ms; --drift: -51px; --rotate: 149deg; }
+.launch-welcome__confetti i:nth-child(9) { --x: 5%; --delay: 1574ms; --duration: 2532ms; --drift: -34px; --rotate: 16deg; }
+.launch-welcome__confetti i:nth-child(10) { --x: 42%; --delay: 1627ms; --duration: 2611ms; --drift: -17px; --rotate: 63deg; }
+.launch-welcome__confetti i:nth-child(11) { --x: 79%; --delay: 1160ms; --duration: 2690ms; --drift: 0px; --rotate: 110deg; }
+.launch-welcome__confetti i:nth-child(12) { --x: 16%; --delay: 1213ms; --duration: 2769ms; --drift: 17px; --rotate: 157deg; }
+.launch-welcome__confetti i:nth-child(13) { --x: 53%; --delay: 1266ms; --duration: 2848ms; --drift: 34px; --rotate: 24deg; }
+.launch-welcome__confetti i:nth-child(14) { --x: 90%; --delay: 1319ms; --duration: 2927ms; --drift: 51px; --rotate: 71deg; }
+.launch-welcome__confetti i:nth-child(15) { --x: 27%; --delay: 1372ms; --duration: 3006ms; --drift: -51px; --rotate: 118deg; }
+.launch-welcome__confetti i:nth-child(16) { --x: 64%; --delay: 1425ms; --duration: 1935ms; --drift: -34px; --rotate: 165deg; }
+.launch-welcome__confetti i:nth-child(17) { --x: 1%; --delay: 1478ms; --duration: 2014ms; --drift: -17px; --rotate: 32deg; }
+.launch-welcome__confetti i:nth-child(18) { --x: 38%; --delay: 1531ms; --duration: 2093ms; --drift: 0px; --rotate: 79deg; }
+.launch-welcome__confetti i:nth-child(19) { --x: 75%; --delay: 1584ms; --duration: 2172ms; --drift: 17px; --rotate: 126deg; }
+.launch-welcome__confetti i:nth-child(20) { --x: 12%; --delay: 1637ms; --duration: 2251ms; --drift: 34px; --rotate: 173deg; }
+.launch-welcome__confetti i:nth-child(21) { --x: 49%; --delay: 1170ms; --duration: 2330ms; --drift: 51px; --rotate: 40deg; }
+.launch-welcome__confetti i:nth-child(22) { --x: 86%; --delay: 1223ms; --duration: 2409ms; --drift: -51px; --rotate: 87deg; }
+.launch-welcome__confetti i:nth-child(23) { --x: 23%; --delay: 1276ms; --duration: 2488ms; --drift: -34px; --rotate: 134deg; }
+.launch-welcome__confetti i:nth-child(24) { --x: 60%; --delay: 1329ms; --duration: 2567ms; --drift: -17px; --rotate: 1deg; }
+.launch-welcome__confetti i:nth-child(25) { --x: 97%; --delay: 1382ms; --duration: 2646ms; --drift: 0px; --rotate: 48deg; }
+.launch-welcome__confetti i:nth-child(26) { --x: 34%; --delay: 1435ms; --duration: 2725ms; --drift: 17px; --rotate: 95deg; }
+.launch-welcome__confetti i:nth-child(27) { --x: 71%; --delay: 1488ms; --duration: 2804ms; --drift: 34px; --rotate: 142deg; }
+.launch-welcome__confetti i:nth-child(28) { --x: 8%; --delay: 1541ms; --duration: 2883ms; --drift: 51px; --rotate: 9deg; }
+.launch-welcome__confetti i:nth-child(29) { --x: 45%; --delay: 1594ms; --duration: 2962ms; --drift: -51px; --rotate: 56deg; }
+.launch-welcome__confetti i:nth-child(30) { --x: 82%; --delay: 1647ms; --duration: 3041ms; --drift: -34px; --rotate: 103deg; }
+
 .launch-welcome.is-active .launch-welcome__confetti i {
   animation: launch-confetti var(--duration) ease-in var(--delay) 1 forwards;
 }

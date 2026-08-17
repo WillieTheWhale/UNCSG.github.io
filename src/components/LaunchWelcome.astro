@@ -1,22 +1,12 @@
 ---
-const confetti = Array.from({ length: 30 }, (_, index) => ({
-  x: (index * 37 + 9) % 100,
-  delay: 1150 + ((index * 53) % 520),
-  duration: 1900 + ((index * 79) % 1150),
-  drift: ((index % 7) - 3) * 17,
-  rotate: (index * 47) % 180,
-}));
+const confetti = Array.from({ length: 30 });
 ---
 
 <div class="launch-welcome" data-launch-welcome aria-hidden="true">
   <div class="launch-welcome__backdrop" aria-hidden="true"></div>
 
   <div class="launch-welcome__confetti" aria-hidden="true">
-    {confetti.map((piece) => (
-      <i
-        style={`--x:${piece.x}%;--delay:${piece.delay}ms;--duration:${piece.duration}ms;--drift:${piece.drift}px;--rotate:${piece.rotate}deg`}
-      ></i>
-    ))}
+    {confetti.map(() => <i></i>)}
   </div>
 
   <div class="launch-welcome__ribbon-stage" aria-hidden="true">
@@ -84,9 +74,9 @@ const confetti = Array.from({ length: 30 }, (_, index) => ({
   </section>
 </div>
 
-<script is:inline>
+<script>
   (() => {
-    const storageKey = "uncsg_front_door_welcome_v1";
+    const storageKey = "uncsg_front_door_welcome_v2";
     const root = document.querySelector("[data-launch-welcome]");
     const dialog = root?.querySelector("[data-launch-welcome-dialog]");
     if (!(root instanceof HTMLElement) || !(dialog instanceof HTMLElement)) return;
@@ -132,7 +122,7 @@ const confetti = Array.from({ length: 30 }, (_, index) => ({
         return;
       }
       if (event.key !== "Tab") return;
-      const focusable = [...dialog.querySelectorAll(focusableSelector)].filter((element) => element instanceof HTMLElement && !element.hidden);
+      const focusable = [...dialog.querySelectorAll<HTMLElement>(focusableSelector)].filter((element) => !element.hidden);
       if (!focusable.length) return;
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
