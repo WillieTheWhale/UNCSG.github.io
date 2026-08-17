@@ -1,76 +1,10 @@
 apiVersion: image.openshift.io/v1
 kind: ImageStream
 metadata:
-  name: uncsg-website
-  labels:
-    app: uncsg-website
----
-apiVersion: build.openshift.io/v1
-kind: BuildConfig
-metadata:
-  name: uncsg-website
-  labels:
-    app: uncsg-website
-spec:
-  source:
-    type: Git
-    git:
-      uri: https://github.com/WillieTheWhale/UNCSG.github.io.git
-      ref: main
-  strategy:
-    type: Docker
-    dockerStrategy:
-      dockerfilePath: Dockerfile
-  output:
-    to:
-      kind: ImageStreamTag
-      name: uncsg-website:latest
-  triggers:
-    - type: ConfigChange
-    - type: GitHub
-      github:
-        secretReference:
-          name: uncsg-webhook-secret
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: uncsg-website
-  labels:
-    app: uncsg-website
-  annotations:
-    image.openshift.io/triggers: >-
-      [{"from":{"kind":"ImageStreamTag","name":"uncsg-website:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"uncsg-website\")].image"}]
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: uncsg-website
-  template:
-    metadata:
-      labels:
-        app: uncsg-website
-    spec:
-      containers:
-        - name: uncsg-website
-          image: uncsg-website:latest
-          ports:
-            - containerPort: 8080
-              protocol: TCP
-          resources:
-            limits:
-              memory: 128Mi
-              cpu: 100m
-            requests:
-              memory: 64Mi
-              cpu: 60m
----
-apiVersion: image.openshift.io/v1
-kind: ImageStream
-metadata:
   name: uncsg-updates-api
   labels:
     app: uncsg-updates-api
+    app.kubernetes.io/part-of: uncsg-github-io-app
 ---
 apiVersion: build.openshift.io/v1
 kind: BuildConfig
@@ -78,6 +12,7 @@ metadata:
   name: uncsg-updates-api
   labels:
     app: uncsg-updates-api
+    app.kubernetes.io/part-of: uncsg-github-io-app
 spec:
   source:
     type: Git
@@ -105,6 +40,7 @@ metadata:
   name: uncsg-updates-api
   labels:
     app: uncsg-updates-api
+    app.kubernetes.io/part-of: uncsg-github-io-app
   annotations:
     image.openshift.io/triggers: >-
       [{"from":{"kind":"ImageStreamTag","name":"uncsg-updates-api:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"uncsg-updates-api\")].image"}]
@@ -117,6 +53,7 @@ spec:
     metadata:
       labels:
         app: uncsg-updates-api
+        app.kubernetes.io/part-of: uncsg-github-io-app
     spec:
       containers:
         - name: uncsg-updates-api
@@ -183,40 +120,12 @@ metadata:
   name: uncsg-updates-api
   labels:
     app: uncsg-updates-api
+    app.kubernetes.io/part-of: uncsg-github-io-app
 spec:
   selector:
     app: uncsg-updates-api
   ports:
-    - port: 8080
+    - name: http
+      port: 8080
       targetPort: 8080
       protocol: TCP
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: uncsg-website
-  labels:
-    app: uncsg-website
-spec:
-  selector:
-    app: uncsg-website
-  ports:
-    - port: 8080
-      targetPort: 8080
-      protocol: TCP
----
-apiVersion: route.openshift.io/v1
-kind: Route
-metadata:
-  name: uncsg-website
-  labels:
-    app: uncsg-website
-spec:
-  to:
-    kind: Service
-    name: uncsg-website
-  port:
-    targetPort: 8080
-  tls:
-    termination: edge
-    insecureEdgeTerminationPolicy: Redirect

@@ -3,7 +3,8 @@
 The public Astro site remains statically generated and served by unprivileged
 nginx on port 8080. nginx proxies only `/api/*` to the internal
 `uncsg-updates-api` service. The API stores articles, sessions, one-time codes,
-and uploaded images in PostgreSQL.
+and uploaded images in a Neon-managed PostgreSQL database. CloudApps does not
+run a PostgreSQL pod or allocate a database PVC for this application.
 
 ## One-time email setup
 
@@ -29,38 +30,39 @@ Resend's free transactional tier currently permits 3,000 emails per month and
 100 per day, which is well above the expected sign-in volume for the staff
 whitelist.
 
-## Create the CloudApps secret
+## Configure Neon and the CloudApps secret
 
-Run these commands while logged into the correct CloudApps project. They create
-random database and session secrets and do not put credentials in Git.
+Create a Neon project in a US region and copy its PostgreSQL connection string.
+Store that connection string as the `database-url` key in the existing
+`uncsg-updates-secrets` Secret. Never put the connection string in this
+repository, a build argument, or an unencrypted manifest.
+
+For a new environment, run these commands while logged into the correct
+CloudApps project. They create a random session secret and do not put
+credentials in Git. Replace the placeholders only in your local shell.
 
 ```sh
-UPDATES_DB_PASSWORD="$(openssl rand -hex 24)"
 UPDATES_AUTH_SECRET="$(openssl rand -base64 48 | tr -d '\n')"
-UPDATES_DATABASE_URL="postgresql://uncsg:${UPDATES_DB_PASSWORD}@uncsg-updates-postgres:5432/uncsg_updates"
+UPDATES_DATABASE_URL="PASTE_NEON_CONNECTION_STRING"
 
 oc create secret generic uncsg-updates-secrets \
-  --from-literal=postgres-password="${UPDATES_DB_PASSWORD}" \
   --from-literal=database-url="${UPDATES_DATABASE_URL}" \
   --from-literal=better-auth-secret="${UPDATES_AUTH_SECRET}" \
   --from-literal=resend-api-key="PASTE_RESEND_API_KEY" \
   --from-literal=email-from="Updates Management <manageupdates@sgeb.bennetthilberg.com>"
 
-unset UPDATES_DB_PASSWORD UPDATES_AUTH_SECRET UPDATES_DATABASE_URL
+unset UPDATES_AUTH_SECRET UPDATES_DATABASE_URL
 ```
 
-If the Secret already exists, update it through the OpenShift console or delete
-and recreate only that exact Secret before deploying.
+If the Secret already exists, update its individual values through the
+OpenShift console before deploying.
 
 ## Deploy in CloudApps
 
 ```sh
-oc apply -f openshift.yaml
+oc apply -f openshift.api.yaml
 oc start-build uncsg-updates-api --follow
-oc start-build uncsg-website --follow
-oc rollout status deployment/uncsg-updates-postgres
 oc rollout status deployment/uncsg-updates-api
-oc rollout status deployment/uncsg-website
 ```
 
 The API runs Better Auth's supported PostgreSQL migrations and creates the
@@ -95,6 +97,6 @@ by Git.
 - Archive is a soft delete. There is no permanent-delete API in v1.
 - All whitelisted Onyens have equal create, edit, schedule, publish, and archive
   permission in v1.
-- Database storage is a 2 GiB persistent volume. Monitor its utilization because
-  image uploads are stored in PostgreSQL for this initial, low-volume version.
-- Back up the PostgreSQL volume before upgrades or destructive maintenance.
+- Neon Free provides 0.5 GB per project. Monitor database use because image
+  uploads are stored in PostgreSQL for this initial, low-volume version.
+- Use Neon's restore/backup capabilities before destructive schema changes.
