@@ -63,7 +63,7 @@ spec:
               cpu: 100m
             requests:
               memory: 64Mi
-              cpu: 50m
+              cpu: 60m
 ---
 apiVersion: image.openshift.io/v1
 kind: ImageStream
@@ -141,18 +141,10 @@ spec:
                 secretKeyRef:
                   name: uncsg-updates-secrets
                   key: better-auth-secret
-            - name: MICROSOFT_CLIENT_ID
-              valueFrom:
-                secretKeyRef:
-                  name: uncsg-updates-secrets
-                  key: microsoft-client-id
-            - name: MICROSOFT_CLIENT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: uncsg-updates-secrets
-                  key: microsoft-client-secret
-            - name: MICROSOFT_TENANT_ID
-              value: 58b3d54f-16c9-42d3-af08-1fcabd095666
+            - name: UNC_AUTH_BROKER_URL
+              value: https://uncsg-auth-broker-bhilberg.apps.cloudapps.unc.edu
+            - name: UNC_AUTH_BROKER_CLIENT_ID
+              value: uncsg-updates
             - name: RESEND_API_KEY
               valueFrom:
                 secretKeyRef:
