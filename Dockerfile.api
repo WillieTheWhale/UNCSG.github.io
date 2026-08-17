@@ -9,6 +9,7 @@ COPY tsconfig.json tsconfig.server.json ./
 COPY server ./server
 
 RUN npm run build:api && npm prune --omit=dev
+RUN mkdir -p dist-server/seeds && cp server/seeds/student-government-welcome-reception.jpg dist-server/seeds/
 
 FROM node:24-alpine
 

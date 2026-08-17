@@ -74,21 +74,21 @@ const pillars = [
     const vision = document.querySelector("[data-home-vision]");
     if (!vision) return;
 
-    const tabs = [...vision.querySelectorAll("[data-home-vision-tab]")];
-    const panels = [...vision.querySelectorAll("[data-home-vision-panel]")];
+    const tabs = [...vision.querySelectorAll<HTMLButtonElement>("[data-home-vision-tab]")];
+    const panels = [...vision.querySelectorAll<HTMLElement>("[data-home-vision-panel]")];
 
-    const activate = (index, moveFocus = false) => {
+    const activate = (index: number, moveFocus = false) => {
       const activeIndex = (index + tabs.length) % tabs.length;
 
       tabs.forEach((tab, tabIndex) => {
         const selected = tabIndex === activeIndex;
         tab.setAttribute("aria-selected", String(selected));
         tab.setAttribute("tabindex", selected ? "0" : "-1");
-        if (selected && moveFocus && tab instanceof HTMLButtonElement) tab.focus();
+        if (selected && moveFocus) tab.focus();
       });
 
       panels.forEach((panel, panelIndex) => {
-        if (panel instanceof HTMLElement) panel.hidden = panelIndex !== activeIndex;
+        panel.hidden = panelIndex !== activeIndex;
       });
     };
 

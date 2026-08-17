@@ -317,14 +317,16 @@ const priorities = [
 <script is:inline async src="https://www.instagram.com/embed.js"></script>
 <script>
   (() => {
-    const embeds = [...document.querySelectorAll("[data-instagram-embed-title]")];
+    const embeds = [...document.querySelectorAll<HTMLElement>("[data-instagram-embed-title]")];
     const titleInstagramFrames = () => {
       let titledFrames = 0;
 
       embeds.forEach((embed) => {
-        const frame = embed.querySelector("iframe");
+        const frame = embed.querySelector<HTMLIFrameElement>("iframe");
         if (!frame) return;
-        frame.title = embed.dataset.instagramEmbedTitle;
+        const title = embed.dataset.instagramEmbedTitle;
+        if (!title) return;
+        frame.title = title;
         titledFrames += 1;
       });
 

@@ -1,3 +1,4 @@
+import { readFile } from "node:fs/promises";
 import { Pool as PostgresPool, type Pool } from "pg";
 import { getMigrations } from "better-auth/db/migration";
 import { config } from "./config.js";
@@ -160,10 +161,107 @@ const initialNewsCoverage = [
   ["seed-news-dth-2026-02-18", "Devin Duncan elected as 2026–27 student body president", "The Daily Tar Heel", "https://www.dailytarheel.com/article/be71ed84-fc3e-4cc7-9c24-c408923669aa", "2026-02-18"],
 ] as const;
 
+const welcomeReceptionMedia = {
+  id: "3a6cb8ee-0227-4a0d-95af-2683b10c0315",
+  fileName: "student-government-welcome-reception.jpg",
+  mimeType: "image/jpeg",
+  uploadedBy: "bhilberg",
+  createdAt: "2026-08-17T18:38:39.231502Z",
+} as const;
+
+const welcomeReceptionEvent = {
+  id: "adb506f2-3038-4f72-ac10-fe080ce9a397",
+  title: "Student Government Welcome Reception",
+  slug: "student-government-welcome-reception",
+  summary: "Kick off the year with Student Government at our Welcome Reception!",
+  detailsMarkdown: `Kick off the year with Student Government at our Welcome Reception! Join students from across Carolina for an evening of free food, live entertainment, and great conversation as we celebrate the start of a new academic year.
+
+Meet and connect with leaders from Student Government and across the University, learn about opportunities to get involved, and hear more about what’s ahead for Carolina this year. Whether you’re already involved or simply want to meet new people and learn more about your campus, everyone is welcome.
+
+Come for the food and entertainment, stay for the people, and help us kick off an exciting year at Carolina.
+
+Go Heels!
+`,
+  startAt: "2026-08-21T22:00:00Z",
+  endAt: "2026-08-22T00:00:00Z",
+  location: "Great Hall, Carolina Union",
+  registrationUrl: "https://heellife.unc.edu/event/12562068",
+  publishAt: "2026-08-17T18:39:56.097324Z",
+  publishedAt: "2026-08-17T18:39:56.097324Z",
+  createdBy: "bhilberg",
+  updatedBy: "bhilberg",
+  createdAt: "2026-08-17T18:36:47.152498Z",
+  updatedAt: "2026-08-17T18:39:56.097324Z",
+} as const;
+
+async function seedWelcomeReception(): Promise<void> {
+  const media = await readFile(
+    new URL("./seeds/student-government-welcome-reception.jpg", import.meta.url),
+  );
+  const client = await pool.connect();
+
+  try {
+    await client.query("BEGIN");
+    await client.query(
+      `INSERT INTO update_media
+       (id, file_name, mime_type, byte_size, content, uploaded_by, created_at)
+       VALUES ($1, $2, $3, $4, $5, $6, $7)
+       ON CONFLICT DO NOTHING`,
+      [
+        welcomeReceptionMedia.id,
+        welcomeReceptionMedia.fileName,
+        welcomeReceptionMedia.mimeType,
+        media.byteLength,
+        media,
+        welcomeReceptionMedia.uploadedBy,
+        welcomeReceptionMedia.createdAt,
+      ],
+    );
+
+    await client.query(
+      `INSERT INTO events
+       (id, title, slug, summary, details_markdown, hero_media_id, start_at, end_at,
+        all_day, event_format, location, registration_url, is_featured, status,
+        publish_at, published_at, created_by, updated_by, created_at, updated_at)
+       VALUES
+       ($1, $2, $3, $4, $5, $6, $7, $8, false, 'in-person', $9, $10,
+        NOT EXISTS (SELECT 1 FROM events WHERE is_featured = true AND status = 'published'),
+        'published', $11, $12, $13, $14, $15, $16)
+       ON CONFLICT DO NOTHING`,
+      [
+        welcomeReceptionEvent.id,
+        welcomeReceptionEvent.title,
+        welcomeReceptionEvent.slug,
+        welcomeReceptionEvent.summary,
+        welcomeReceptionEvent.detailsMarkdown,
+        welcomeReceptionMedia.id,
+        welcomeReceptionEvent.startAt,
+        welcomeReceptionEvent.endAt,
+        welcomeReceptionEvent.location,
+        welcomeReceptionEvent.registrationUrl,
+        welcomeReceptionEvent.publishAt,
+        welcomeReceptionEvent.publishedAt,
+        welcomeReceptionEvent.createdBy,
+        welcomeReceptionEvent.updatedBy,
+        welcomeReceptionEvent.createdAt,
+        welcomeReceptionEvent.updatedAt,
+      ],
+    );
+
+    await client.query("COMMIT");
+  } catch (error) {
+    await client.query("ROLLBACK");
+    throw error;
+  } finally {
+    client.release();
+  }
+}
+
 export async function initializeDatabase(authOptions: unknown): Promise<void> {
   const { runMigrations } = await getMigrations(authOptions as never);
   await runMigrations();
   await pool.query(contentSchema);
+  await seedWelcomeReception();
   for (const item of initialNewsCoverage) {
     await pool.query(
       `INSERT INTO news_coverage
