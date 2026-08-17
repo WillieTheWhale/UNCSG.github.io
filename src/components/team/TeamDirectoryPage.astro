@@ -1,0 +1,212 @@
+---
+import teamGroups from "../../data/team-directory.json";
+import type { TeamOptionLayout } from "../../data/team-options";
+import "../../styles/team-directory.css";
+import TeamMember from "./TeamMember.astro";
+
+interface Props {
+  layout: TeamOptionLayout;
+  showLabNote?: boolean;
+}
+
+const { layout, showLabNote = false } = Astro.props;
+const sections = ["Executive offices", "Cabinet departments", "Task forces"];
+const groupedBySection = sections.map((section) => ({
+  section,
+  groups: teamGroups.filter((group) => group.section === section),
+}));
+const uniquePeople = [...new Map(
+  teamGroups.flatMap((group) => group.members).map((member) => [member.email, member]),
+).values()];
+const totalPeople = uniquePeople.length;
+const totalMemberships = teamGroups.reduce((sum, group) => sum + group.members.length, 0);
+const hometowns = uniquePeople.map((member) => member.hometown).filter(Boolean);
+const totalHometowns = new Set(hometowns).size;
+const totalStates = new Set(
+  hometowns.map((hometown) => hometown.match(/, ([A-Z]{2})$/)?.[1]).filter(Boolean),
+).size;
+const internationalCountries = new Set(
+  hometowns
+    .filter((hometown) => !/, [A-Z]{2}$/.test(hometown))
+    .map((hometown) => hometown.split(", ").at(-1)),
+);
+const totalCountries = internationalCountries.size + (totalStates > 0 ? 1 : 0);
+---
+
+<div class:list={["team-directory-page", `team-directory-page--${layout}`]} data-team-directory>
+  <header class="team-directory-hero" aria-labelledby="team-directory-title">
+    <figure class="team-directory-hero__media">
+      <img
+        src="/images/photo-lab/student-government-meeting.webp"
+        alt="Student Government leaders meeting with Dr. James Orr in South Building"
+        width="2400"
+        height="1600"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </figure>
+    <div class="team-directory-hero__shade" aria-hidden="true"></div>
+    <div class="team-directory-hero__inner">
+      <h1 id="team-directory-title">Meet the team</h1>
+      <p>
+        Together, {totalPeople} student leaders serve in {totalMemberships} roles across {teamGroups.length} teams,
+        representing {totalHometowns} hometowns, {totalStates} states, and {totalCountries} countries.
+      </p>
+    </div>
+  </header>
+
+  {showLabNote && (
+    <aside class="team-option-thesis" aria-label="Design option note">
+      <strong>Design prototype</strong>
+      <span>All people and public directory fields come from the supplied onboarding and master-directory files.</span>
+    </aside>
+  )}
+
+  {layout === "sticky-index" && (
+    <div class="team-sticky-shell">
+      <aside class="team-sticky-index" aria-label="Team index">
+        <strong>Jump to a team</strong>
+        <nav>
+          {groupedBySection.map(({ section, groups }) => (
+            <section>
+              <span>{section}</span>
+              {groups.map((group) => <a href={`#team-${group.slug}`}>{group.name}</a>)}
+            </section>
+          ))}
+        </nav>
+      </aside>
+      <div class="team-sticky-content">
+        {teamGroups.map((group) => (
+          <section class="team-group" id={`team-${group.slug}`} aria-labelledby={`team-${group.slug}-title`}>
+            <header class="team-group__heading">
+              <div><h2 id={`team-${group.slug}-title`}>{group.name}</h2></div>
+              <p>{group.description}</p>
+            </header>
+            <div class="team-member-grid">
+              {group.members.map((member) => <TeamMember member={member} />)}
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
+  )}
+
+  {layout === "accordion-directory" && (
+    <div class="team-accordion-groups">
+      {groupedBySection.map(({ section, groups }, sectionIndex) => (
+        <section class="team-section" aria-labelledby={`team-section-${sectionIndex}`}>
+          <h2 id={`team-section-${sectionIndex}`}>{section}</h2>
+          {groups.map((group, groupIndex) => (
+            <details class="team-accordion" open={sectionIndex === 0 && groupIndex === 0}>
+              <summary>
+                <div><h3>{group.name}</h3><p>{group.description}</p></div>
+                <span>{group.members.length}</span>
+                <i aria-hidden="true"></i>
+              </summary>
+              <div class="team-member-grid">
+                {group.members.map((member) => <TeamMember member={member} />)}
+              </div>
+            </details>
+          ))}
+        </section>
+      ))}
+    </div>
+  )}
+
+  {layout === "portrait-mosaic" && (
+    <div class="team-mosaic-shell" data-team-mosaic>
+      <div class="team-section-tabs" role="tablist" aria-label="Team directory sections">
+        {groupedBySection.map(({ section }, index) => (
+          <button
+            type="button"
+            role="tab"
+            aria-selected={index === 0 ? "true" : "false"}
+            aria-controls={`team-mosaic-panel-${index}`}
+            id={`team-mosaic-tab-${index}`}
+            tabindex={index === 0 ? "0" : "-1"}
+            data-team-section-tab={index}
+          >{section}</button>
+        ))}
+      </div>
+      {groupedBySection.map(({ section, groups }, sectionIndex) => (
+        <section
+          class="team-mosaic-panel"
+          id={`team-mosaic-panel-${sectionIndex}`}
+          role="tabpanel"
+          aria-labelledby={`team-mosaic-tab-${sectionIndex}`}
+          hidden={sectionIndex !== 0}
+          data-team-section-panel={sectionIndex}
+        >
+          <h2>{section}</h2>
+          {groups.map((group) => (
+            <section class="team-group" aria-labelledby={`mosaic-${group.slug}-title`}>
+              <header class="team-group__heading">
+                <div><h3 id={`mosaic-${group.slug}-title`}>{group.name}</h3><p>{group.description}</p></div>
+                <span>{group.members.length} {group.members.length === 1 ? "member" : "members"}</span>
+              </header>
+              <div class="team-member-grid">
+                {group.members.map((member, memberIndex) => (
+                  <TeamMember member={member} mode="mosaic" featured={memberIndex === 0} />
+                ))}
+              </div>
+            </section>
+          ))}
+        </section>
+      ))}
+    </div>
+  )}
+
+  {(layout === "classic-grid" || layout === "editorial-roster") && (
+    <div class="team-standard-groups">
+      {groupedBySection.map(({ section, groups }, sectionIndex) => (
+        <section class="team-section" aria-labelledby={`team-standard-section-${sectionIndex}`}>
+          <h2 id={`team-standard-section-${sectionIndex}`}>{section}</h2>
+          {groups.map((group) => (
+            <section class="team-group" id={`team-${group.slug}`} aria-labelledby={`team-${group.slug}-title`}>
+              <header class="team-group__heading">
+                <div><h3 id={`team-${group.slug}-title`}>{group.name}</h3><p>{group.description}</p></div>
+                <span>{group.members.length} {group.members.length === 1 ? "member" : "members"}</span>
+              </header>
+              <div class="team-member-grid">
+                {group.members.map((member) => (
+                  <TeamMember member={member} mode={layout === "editorial-roster" ? "row" : "card"} />
+                ))}
+              </div>
+            </section>
+          ))}
+        </section>
+      ))}
+    </div>
+  )}
+</div>
+
+{layout === "portrait-mosaic" && (
+  <script is:inline>
+    (() => {
+      document.querySelectorAll("[data-team-mosaic]").forEach((mosaic) => {
+        const tabs = [...mosaic.querySelectorAll("[data-team-section-tab]")];
+        const panels = [...mosaic.querySelectorAll("[data-team-section-panel]")];
+        const activate = (index, focus = false) => {
+          tabs.forEach((tab, tabIndex) => {
+            const selected = tabIndex === index;
+            tab.setAttribute("aria-selected", String(selected));
+            tab.setAttribute("tabindex", selected ? "0" : "-1");
+            if (selected && focus && tab instanceof HTMLButtonElement) tab.focus();
+          });
+          panels.forEach((panel, panelIndex) => {
+            if (panel instanceof HTMLElement) panel.hidden = panelIndex !== index;
+          });
+        };
+        tabs.forEach((tab, index) => {
+          tab.addEventListener("click", () => activate(index));
+          tab.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+              event.preventDefault();
+              activate((index + (event.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length, true);
+            }
+          });
+        });
+      });
+    })();
+  </script>
+)}

@@ -1,0 +1,40 @@
+---
+import EventCalendarDialog from "./EventCalendarDialog.astro";
+
+interface Props { mode?: "public" | "preview"; }
+const { mode = "public" } = Astro.props;
+---
+
+<div class="events-listing" data-events-listing data-mode={mode} aria-live="polite">
+  <form class="events-filters" data-event-filters>
+    <label>
+      <span>When</span>
+      <select name="scope">
+        <option value="upcoming">Upcoming events</option>
+        <option value="past">Past events</option>
+        {mode === "preview" && <option value="all">All events</option>}
+      </select>
+    </label>
+    <label>
+      <span>Format</span>
+      <select name="format">
+        <option value="">All formats</option>
+        <option value="in-person">In person</option>
+        <option value="virtual">Virtual</option>
+        <option value="hybrid">Hybrid</option>
+      </select>
+    </label>
+    <button type="button" class="events-filters__clear" data-clear-event-filters>Clear filters</button>
+  </form>
+  <div class="events-listing__status" data-event-list-status>
+    <span class="updates-loading" aria-hidden="true"></span> Loading events…
+  </div>
+  <div class="events-listing__grid" data-event-list-grid hidden></div>
+</div>
+
+<EventCalendarDialog />
+
+<script>
+  import { initializeEventListings } from "../scripts/event-listing";
+  initializeEventListings();
+</script>

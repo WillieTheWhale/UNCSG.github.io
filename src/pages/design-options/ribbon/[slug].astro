@@ -1,0 +1,38 @@
+---
+import RibbonCuttingOption from "../../../components/design-options/RibbonCuttingOption.astro";
+import RibbonOptionNavigator from "../../../components/design-options/RibbonOptionNavigator.astro";
+import LaunchWelcome from "../../../components/LaunchWelcome.astro";
+import { ribbonOptions, type RibbonOption } from "../../../data/ribbon-options";
+import UpdateSiteLayout from "../../../layouts/UpdateSiteLayout.astro";
+import "../../../styles/ribbon-options.css";
+import "../../../styles/launch-welcome.css";
+
+export function getStaticPaths() {
+  return ribbonOptions.map((option) => ({
+    params: { slug: `${String(option.id).padStart(2, "0")}-${option.slug}` },
+    props: { option },
+  }));
+}
+
+interface Props { option: RibbonOption; }
+const { option } = Astro.props;
+---
+
+<UpdateSiteLayout title={`${option.name} | Ribbon-Cutting Design Lab`} description={option.thesis} canonicalPath={`/design-options/ribbon/${String(option.id).padStart(2, "0")}-${option.slug}/`} bodyClass="ribbon-lab-option-page" noindex>
+  {option.id === 2 && <script is:inline>document.documentElement.classList.add("launch-welcome-pending");</script>}
+  <RibbonOptionNavigator current={option} />
+  <section class="ribbon-lab-home" aria-label="Homepage beneath welcome overlay">
+    <figure>
+      <img src="/images/photo-lab/south-building.webp" alt="South Building with Carolina 250 and First and Best for All banners" width="2400" height="1604" />
+    </figure>
+    <div>
+      <h2>UNC Student Government Executive Branch</h2>
+      <p>The Duncan Administration is creating a Carolina that is first in excellence, best in integrity, and for every student.</p>
+      <a href="/team/">Meet our team <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+  <section class="ribbon-lab-home__below" aria-hidden="true">
+    <strong>Our vision</strong><strong>Our priorities</strong><strong>Latest updates</strong>
+  </section>
+  {option.id === 2 ? <LaunchWelcome /> : <RibbonCuttingOption option={option} />}
+</UpdateSiteLayout>

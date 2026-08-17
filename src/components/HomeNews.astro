@@ -1,0 +1,15 @@
+<section class="content-section content-section--news" id="news" aria-labelledby="news-title" data-home-news>
+  <header class="section-heading">
+    <h2 id="news-title">In the news</h2>
+  </header>
+
+  <p class="home-updates-status" data-home-news-status aria-live="polite">
+    Loading news coverage…
+  </p>
+  <ul class="news-list" data-home-news-list hidden></ul>
+</section>
+
+<script>
+  import { initializeHomeNews } from "../scripts/home-news";
+  initializeHomeNews();
+</script>

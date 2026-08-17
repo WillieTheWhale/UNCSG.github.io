@@ -1,0 +1,8 @@
+---
+import SiteErrorPage from "../components/SiteErrorPage.astro";
+import UpdateSiteLayout from "../layouts/UpdateSiteLayout.astro";
+---
+
+<UpdateSiteLayout title="Something Went Wrong | UNC Student Government Executive Branch" description="The requested page could not be loaded." canonicalPath="/500/" noindex bodyClass="updates-page">
+  <SiteErrorPage code="500" title="Something went wrong" description="We couldn’t load this page right now. Please try again in a moment." />
+</UpdateSiteLayout>

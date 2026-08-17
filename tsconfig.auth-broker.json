@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "allowJs": false,
+    "allowImportingTsExtensions": false,
+    "declaration": false,
+    "emitDeclarationOnly": false,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "noEmit": false,
+    "outDir": "dist-auth-broker",
+    "rootDir": "auth-broker",
+    "types": ["node"]
+  },
+  "include": ["auth-broker/**/*.ts"],
+  "exclude": ["auth-broker/**/*.test.ts"]
+}

@@ -1,0 +1,20 @@
+---
+import UpdateArticle from "../../components/UpdateArticle.astro";
+import UpdateSiteLayout from "../../layouts/UpdateSiteLayout.astro";
+---
+
+<UpdateSiteLayout
+  title="Preview Update | UNC Student Government Executive Branch"
+  description="Staff preview of an Executive Branch update."
+  canonicalPath="/preview-updates/"
+  noindex
+  bodyClass="updates-page"
+>
+  <aside class="preview-mode-banner">
+    <p>
+      Showing both public and <strong>preview</strong> updates.
+      {" "}<a href="/manage/updates/">Return to manage updates</a> to finalize and publish.
+    </p>
+  </aside>
+  <UpdateArticle mode="preview" />
+</UpdateSiteLayout>

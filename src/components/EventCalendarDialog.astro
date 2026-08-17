@@ -1,0 +1,33 @@
+<dialog class="calendar-dialog" data-calendar-dialog aria-labelledby="calendar-dialog-title" aria-describedby="calendar-dialog-event">
+  <div class="calendar-dialog__panel">
+    <form method="dialog" class="calendar-dialog__close-form">
+      <button class="calendar-dialog__close" type="submit" aria-label="Close add to calendar dialog">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path d="m6 6 12 12M18 6 6 18" /></svg>
+      </button>
+    </form>
+    <h2 id="calendar-dialog-title">Add to calendar</h2>
+    <p class="calendar-dialog__event" id="calendar-dialog-event" data-calendar-dialog-event></p>
+    <div class="calendar-dialog__options">
+      <a data-calendar-apple href="#" download>
+        <strong>Apple Calendar</strong>
+        <span>Download an .ics calendar event</span>
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path d="m9 6 6 6-6 6" /></svg>
+      </a>
+      <a data-calendar-google href="#" target="_blank" rel="noreferrer">
+        <strong>Google Calendar</strong>
+        <span>Open this event in Google Calendar</span>
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path d="m9 6 6 6-6 6" /></svg>
+      </a>
+      <a data-calendar-outlook href="#" target="_blank" rel="noreferrer">
+        <strong>Microsoft Outlook</strong>
+        <span>Open this event in Outlook Calendar</span>
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path d="m9 6 6 6-6 6" /></svg>
+      </a>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  import { initializeEventCalendar } from "../scripts/event-calendar";
+  initializeEventCalendar();
+</script>

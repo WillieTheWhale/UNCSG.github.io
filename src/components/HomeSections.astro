@@ -1,0 +1,340 @@
+---
+import VisionSection from "./VisionSection.astro";
+import HomeUpdates from "./HomeUpdates.astro";
+import HomeEvents from "./HomeEvents.astro";
+import HomeNews from "./HomeNews.astro";
+
+const directoryGroups = [
+  {
+    title: "Executive offices",
+    teams: [
+      {
+        team: "Office of the Student Body President",
+        leader: "Devin Duncan",
+        role: "Student Body President",
+        email: "spb@unc.edu",
+        description: "Sets the administration's agenda and leads student advocacy, university partnerships, and executive action.",
+        portrait: "/images/leadership/devin-duncan-2026.jpg",
+        portraitPosition: "center 32%",
+      },
+      {
+        team: "Office of the Vice Student Body President",
+        leader: "Ben Jones",
+        role: "Vice President",
+        email: "usgvp@unc.edu",
+        description: "Supports the President and helps coordinate the Executive Council, student engagement, and cross-office initiatives.",
+        portrait: "/images/team/ben-jones.webp",
+        portraitPosition: "center 22%",
+      },
+      {
+        team: "Office of the Treasurer",
+        leader: "Hadi Rahim",
+        role: "Treasurer",
+        email: "usgtreasurer@unc.edu",
+        description: "Oversees Executive Branch finances and promotes responsible, transparent stewardship of student government resources.",
+        portrait: "/images/team/hadi-rahim.webp",
+        portraitPosition: "center 42%",
+      },
+      {
+        team: "Office of the Student Body Secretary",
+        leader: "Hailey Shapiro",
+        role: "Secretary",
+        email: "usgsec@unc.edu",
+        description: "Maintains official records, supports administration-wide operations, and helps keep the branch's work organized and accessible.",
+        portrait: "/images/leadership/hailey-shapiro.jpg",
+        portraitPosition: "center 24%",
+      },
+      {
+        team: "Office of the Chief of the Cabinet",
+        leader: "Finlay Cullen",
+        role: "Chief of Cabinet (Interim)",
+        email: "spb@unc.edu",
+        description: "Coordinates cabinet departments and keeps shared priorities, staff collaboration, and implementation moving together.",
+        portrait: "/images/leadership/finlay-cullen.jpg",
+        portraitPosition: "center 28%",
+      },
+      {
+        team: "Office of Communications",
+        leader: "Hailey Shapiro",
+        role: "Chief Communications Officer",
+        email: "hmshap@unc.edu",
+        description: "Shares authentic student stories and publishes clear updates, benchmarks, and progress from across the administration.",
+        portrait: "/images/leadership/hailey-shapiro.jpg",
+        portraitPosition: "center 24%",
+      },
+    ],
+  },
+  {
+    title: "Cabinet departments",
+    teams: [
+      {
+        team: "Academic Affairs",
+        leader: "Matthew Howard",
+        role: "Director",
+        email: "mghoward@unc.edu",
+        description: "Strengthens advising, mentoring, academic support, and innovation in teaching and learning so every Tar Heel can thrive.",
+        portrait: "/images/leadership/matthew-howard.jpg",
+        portraitPosition: "center 30%",
+      },
+      {
+        team: "Basic Needs",
+        leader: "Chloe Johnson",
+        role: "Director",
+        email: "chlojo@unc.edu",
+        description: "Connects students with food, housing, transportation, and financial-stability resources that make daily life at Carolina more secure.",
+        portrait: "/images/leadership/chloe-johnson.jpg",
+        portraitPosition: "center 34%",
+      },
+      {
+        team: "Civic Engagement and Outreach",
+        leader: "Shakila Cantebury",
+        role: "Director",
+        email: "scant@unc.edu",
+        description: "Builds pathways to service, civic participation, and stronger partnerships between Carolina and the surrounding community.",
+        portrait: "/images/leadership/shakila-cantebury.jpg",
+        portraitPosition: "center 27%",
+      },
+      {
+        team: "Diversity, Equity, and Inclusion",
+        leader: "Cameron Lee",
+        role: "Director",
+        email: "campslee@unc.edu",
+        description: "Fosters belonging, celebrates identity, and advances equitable access and participation across campus life.",
+        portrait: "/images/team/cameron-lee.webp",
+        portraitPosition: "center 24%",
+      },
+      {
+        team: "Environmental Affairs",
+        leader: "Ellie Prosser",
+        role: "Director",
+        email: "eprosser@unc.edu",
+        description: "Leads campus sustainability, waste reduction, food recovery, and shared stewardship of Carolina's environment.",
+        portrait: "/images/leadership/ellie-prosser.jpg",
+        portraitPosition: "center 24%",
+      },
+      {
+        team: "State and External Affairs",
+        leader: "Sophia Fontecchio",
+        role: "Director",
+        email: "sophfont@unc.edu",
+        description: "Represents student priorities beyond campus and connects Tar Heels with public officials, policy, and public-service partners.",
+        portrait: "/images/team/sophia-fontecchio.webp",
+        portraitPosition: "center 24%",
+      },
+      {
+        team: "Student Safety and Wellness",
+        leader: "Lauryn Sidni Cooper",
+        role: "Director",
+        email: "lsc@unc.edu",
+        description: "Improves access to mental and physical health resources while advancing prevention, preparedness, and campus safety.",
+        portrait: "/images/team/lauryn-cooper.webp",
+        portraitPosition: "center 24%",
+      },
+      {
+        team: "Management and Budget",
+        leader: "Timothy Gaylord",
+        role: "Director",
+        email: "tpg@unc.edu",
+        description: "Supports cabinet operations through budgeting, resource planning, and accountable management across the Executive Branch.",
+        portrait: "/images/team/timothy-gaylord.webp",
+        portraitPosition: "center 24%",
+      },
+    ],
+  },
+];
+
+const priorities = [
+  [
+    "01",
+    "Academic success",
+    "Reimagine advising, mentorship, and learning support so every Tar Heel has the guidance to thrive.",
+    "Expand peer support and early feedback while advancing accessible, student-centered innovation in teaching and learning.",
+    "priority-card--academic",
+  ],
+  [
+    "02",
+    "Basic needs and wellbeing",
+    "Help every student reliably access food, housing, transportation, health, and safety resources.",
+    "Centralize support, reduce practical barriers, and pursue partnerships that make essential resources easier to find and use.",
+    "priority-card--needs",
+  ],
+  [
+    "03",
+    "Civic and community engagement",
+    "Strengthen Carolina's culture of service and the connection between students, campus, and the wider community.",
+    "Create more routes into public service, civic participation, respectful dialogue, and town-university collaboration.",
+    "priority-card--civic",
+  ],
+  [
+    "04",
+    "Student success and belonging",
+    "Build a Carolina where every student feels seen, supported, respected, and able to participate fully.",
+    "Invest in belonging, cultural programming, shared understanding, and equitable access across campus life.",
+    "priority-card--belonging",
+  ],
+  [
+    "05",
+    "Communication and transparency",
+    "Tell Carolina's story authentically and ensure student voices help shape university decisions.",
+    "Publish clear benchmarks, timelines, and progress updates so students can see what the administration is doing and hold it accountable.",
+    "priority-card--communication",
+  ],
+];
+
+---
+
+<div class="content-sections">
+  <VisionSection />
+
+  <slot name="after-vision" />
+
+  <section class="content-section content-section--priorities" id="priorities" aria-labelledby="priorities-title">
+    <header class="section-heading">
+      <h2 id="priorities-title">Our priorities</h2>
+    </header>
+
+    <ol class="priority-list">
+      {priorities.map(([number, title, copy, approach, design]) => (
+        <li class:list={["priority-card", design]}>
+          <span>{number}</span>
+          <div>
+            <h3>{title}</h3>
+            <p>{copy}</p>
+            <p class="priority-list__approach"><strong>Our approach:</strong> {approach}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <slot name="after-priorities" />
+
+  <section class="content-section content-section--departments" id="departments" aria-labelledby="departments-title">
+    <header class="section-heading">
+      <h2 id="departments-title">Executive offices and cabinet departments</h2>
+    </header>
+
+    {directoryGroups.map(({ title, teams }, groupIndex) => (
+      <details
+        class="directory-group"
+        aria-labelledby={`directory-${title.toLowerCase().replaceAll(" ", "-")}`}
+        open={groupIndex === 0}
+      >
+        <summary class="directory-group__summary">
+          <h3 class="directory-group__title" id={`directory-${title.toLowerCase().replaceAll(" ", "-")}`}>{title}</h3>
+          <span class="directory-group__icon" aria-hidden="true"></span>
+        </summary>
+        <div class="team-grid">
+          {teams.map(({ team, leader, role, email, description, portrait, portraitPosition }) => (
+            <article class="team">
+              <div class="team__portrait">
+                <img
+                  src={portrait}
+                  alt=""
+                  width="160"
+                  height="160"
+                  loading="lazy"
+                  decoding="async"
+                  style={`object-position: ${portraitPosition};`}
+                />
+              </div>
+              <div class="team__details">
+                <h4>{team}</h4>
+                <p class="team__description">{description}</p>
+                <p class="team__leader"><strong>{leader}</strong><span>{role}</span></p>
+              </div>
+              <a
+                href={`mailto:${email}?subject=${encodeURIComponent(`Executive Branch: ${team}`)}`}
+                aria-label={`Email ${team}`}
+              >
+                <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">
+                  <path d="M3 5.5h18v13H3zM4 7l8 6 8-6" />
+                </svg>
+                Email this team
+              </a>
+            </article>
+          ))}
+        </div>
+      </details>
+    ))}
+  </section>
+
+  <slot name="after-departments" />
+
+  <HomeUpdates />
+
+  <slot name="after-updates" />
+
+  <HomeEvents />
+
+  <slot name="after-events" />
+
+  <HomeNews />
+
+  <slot name="after-news" />
+
+  <section class="content-section content-section--connected" id="connected" aria-labelledby="connected-title">
+    <header class="section-heading">
+      <h2 id="connected-title">Stay connected</h2>
+    </header>
+
+    <div class="instagram-embed-grid">
+      <article
+        class="instagram-embed"
+        aria-label="UNC Student Government Executive Branch Instagram profile"
+        data-instagram-embed-title="UNC Student Government Executive Branch Instagram profile"
+      >
+        <blockquote
+          class="instagram-media"
+          data-instgrm-permalink="https://www.instagram.com/unc_executivebranch/"
+          data-instgrm-version="14"
+        >
+          <a href="https://www.instagram.com/unc_executivebranch/" target="_blank" rel="noreferrer">
+            View the UNC Student Government Executive Branch on Instagram
+          </a>
+        </blockquote>
+      </article>
+
+      <article
+        class="instagram-embed"
+        aria-label="Student Body President Instagram profile"
+        data-instagram-embed-title="Student Body President Devin Duncan Instagram profile"
+      >
+        <blockquote
+          class="instagram-media"
+          data-instgrm-permalink="https://www.instagram.com/sbpdevin/"
+          data-instgrm-version="14"
+        >
+          <a href="https://www.instagram.com/sbpdevin/" target="_blank" rel="noreferrer">
+            View Student Body President Devin Duncan on Instagram
+          </a>
+        </blockquote>
+      </article>
+    </div>
+  </section>
+</div>
+
+<script is:inline async src="https://www.instagram.com/embed.js"></script>
+<script>
+  (() => {
+    const embeds = [...document.querySelectorAll<HTMLElement>("[data-instagram-embed-title]")];
+    const titleInstagramFrames = () => {
+      let titledFrames = 0;
+
+      embeds.forEach((embed) => {
+        const frame = embed.querySelector<HTMLIFrameElement>("iframe");
+        if (!frame) return;
+        const title = embed.dataset.instagramEmbedTitle;
+        if (!title) return;
+        frame.title = title;
+        titledFrames += 1;
+      });
+
+      if (titledFrames === embeds.length) observer.disconnect();
+    };
+
+    const observer = new MutationObserver(titleInstagramFrames);
+    observer.observe(document.body, { childList: true, subtree: true });
+    titleInstagramFrames();
+  })();
+</script>

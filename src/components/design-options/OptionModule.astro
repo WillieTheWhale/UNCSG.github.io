@@ -1,0 +1,353 @@
+---
+import type { ModuleKind } from "../../data/design-options";
+
+interface Props {
+  kind: ModuleKind;
+  refined?: boolean;
+}
+
+const { kind, refined = false } = Astro.props;
+
+const services = [
+  ["01", "Request a meeting", "Talk directly with the office responsible for your concern."],
+  ["02", "Find student resources", "Start with food, housing, health, safety, or academic support."],
+  ["03", "Share a concern", "Tell us what is getting in the way of your Carolina experience."],
+  ["04", "Read public records", "Find minutes, appointments, budgets, and progress updates."],
+];
+
+const priorities = [
+  ["01", "Academic success", "Make advising, planning, and academic support easier to navigate."],
+  ["02", "Basic needs & wellbeing", "Connect students to food, housing, health, and emergency support."],
+  ["03", "Civic engagement", "Build clearer paths from student ideas to public action."],
+  ["04", "Belonging", "Strengthen the communities that help every Tar Heel feel at home."],
+  ["05", "Communication", "Publish what we promised, what changed, and what comes next."],
+];
+
+const leaders = [
+  { name: "Devin Duncan", role: "Student Body President", image: "/design-lab/devin-headshot.jpg", initials: "DD" },
+  { name: "Amiera Alharazim", role: "Executive Council · DEI", initials: "AA" },
+  { name: "Lily-Elizabeth Ludwick", role: "Executive Council · Academic Affairs", initials: "LL" },
+  { name: "Aidan Tobin", role: "Executive Council · State & External Affairs", initials: "AT" },
+  { name: "Hailey Shapiro", role: "Executive Council · Office of the Secretary", initials: "HS" },
+  { name: "Pokuaa Biritwum", role: "Executive Council · Office of the President", initials: "PB" },
+  { name: "Ellie Prosser", role: "Cabinet Director · Environmental Affairs", image: "/design-lab/ellie-prosser.jpg", initials: "EP" },
+  { name: "Chloe Johnson", role: "Cabinet Director · Basic Needs", initials: "CJ" },
+];
+
+const updates = [
+  ["Aug. 18", "Fall listening sessions announced", "The administration will host open conversations across campus during the first six weeks of classes."],
+  ["Aug. 12", "ProjectBOLD progress format released", "Every priority will show an owner, current status, and the next public checkpoint."],
+  ["Aug. 05", "Student resource guide in review", "Departments are consolidating the fastest routes to food, housing, health, and academic support."],
+];
+---
+
+{kind === "services" && (
+  <section class="module module--services" id="services" aria-labelledby="services-title">
+    <header class="module-heading">
+      <span class="section-label">Start here</span>
+      <h2 id="services-title">How can we help?</h2>
+      <p>Choose the fastest route into the Executive Branch.</p>
+    </header>
+    <div class="service-list">
+      {services.map(([number, title, copy]) => (
+        <a class="service-item" href="#contact">
+          <span class="service-number">{number}</span>
+          <span>
+            <strong>{title}</strong>
+            <small>{copy}</small>
+          </span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      ))}
+    </div>
+  </section>
+)}
+
+{kind === "priorities" && (
+  <section class="module module--priorities" id="priorities" aria-labelledby="priorities-title">
+    <header class="module-heading">
+      <span class="section-label">ProjectBOLD</span>
+      <h2 id="priorities-title">Five priorities for a stronger Carolina.</h2>
+    </header>
+    <ol class="priority-list">
+      {priorities.map(([number, title, copy]) => (
+        <li>
+          <span>{number}</span>
+          <h3>{title}</h3>
+          <p>{copy}</p>
+          <a href="#contact">See the work <span aria-hidden="true">→</span></a>
+        </li>
+      ))}
+    </ol>
+  </section>
+)}
+
+{kind === "leadership" && (
+  <section class="module module--leadership" id="leadership" aria-labelledby="leadership-title">
+    <header class="module-heading">
+      <span class="section-label">Selected leadership</span>
+      <h2 id="leadership-title">Meet the people accountable for the work.</h2>
+      <p>The full administration includes 77 students across executive offices and departments.</p>
+    </header>
+    <div class="leader-grid">
+      {leaders.map((leader, index) => (
+        <article class:list={["leader-card", index === 0 && "leader-card--featured"]}>
+          {leader.image ? (
+            <img src={leader.image} alt={leader.name} loading="lazy" />
+          ) : (
+            <span class="leader-placeholder" aria-hidden="true">{leader.initials}</span>
+          )}
+          <div>
+            <h3>{leader.name}</h3>
+            <p>{leader.role}</p>
+            <a href="#contact">View profile <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+)}
+
+{kind === "updates" && (
+  <section class="module module--updates" id="updates" aria-labelledby="updates-title">
+    <header class="module-heading">
+      <span class="section-label">Latest</span>
+      <h2 id="updates-title">The work, reported back.</h2>
+      <a class="heading-link" href="#updates">All updates <span aria-hidden="true">→</span></a>
+    </header>
+    <div class="update-grid">
+      {updates.map(([date, title, copy], index) => (
+        <article class:list={["update-card", index === 0 && "update-card--lead"]}>
+          <time>{date}</time>
+          <h3>{title}</h3>
+          <p>{copy}</p>
+          <a href="#contact">Read update <span aria-hidden="true">→</span></a>
+        </article>
+      ))}
+    </div>
+  </section>
+)}
+
+{kind === "tracker" && (
+  <section class="module module--tracker" id="tracker" aria-labelledby="tracker-title">
+    <header class="module-heading">
+      <span class="section-label">Public progress board</span>
+      <h2 id="tracker-title">You should never have to guess where the work stands.</h2>
+    </header>
+    <div class="tracker-board" role="list" aria-label="Prototype priority statuses">
+      <div class="tracker-row tracker-row--header" aria-hidden="true">
+        <span>Commitment</span><span>Owner</span><span>Status</span><span>Next check-in</span>
+      </div>
+      <div class="tracker-row" role="listitem">
+        <strong>Publish the student resource guide</strong><span>Basic Needs</span><span class="status status--moving">In progress</span><time>Sept. 04</time>
+      </div>
+      <div class="tracker-row" role="listitem">
+        <strong>Launch public monthly updates</strong><span>Communications</span><span class="status status--ready">Ready</span><time>Aug. 28</time>
+      </div>
+      <div class="tracker-row" role="listitem">
+        <strong>Hold first campus listening session</strong><span>President's Office</span><span class="status status--scheduled">Scheduled</span><time>Sept. 09</time>
+      </div>
+    </div>
+    <p class="prototype-note">Prototype content shown for layout evaluation; production statuses would be sourced and dated.</p>
+  </section>
+)}
+
+{kind === "president" && (
+  <section class="module module--president" aria-labelledby="president-title">
+    <div class="president-portrait">
+      <img
+        src={refined ? "/design-lab/devin-portrait.jpg" : "/design-lab/devin-wide.jpg"}
+        alt="Devin Duncan, Student Body President"
+        loading="lazy"
+      />
+      <span>Devin Duncan · Student Body President</span>
+    </div>
+    <div class="president-letter">
+      <span class="section-label">From Devin's desk</span>
+      <h2 id="president-title">We will listen closely, act boldly, and report back.</h2>
+      <p>Carolina's promise is bigger than any one office. This administration will bring students into the decisions that shape daily life, make support easier to find, and be honest about where progress is moving and where it is not.</p>
+      <blockquote>“Our job is to turn student voice into visible work.”</blockquote>
+      <img class="signature" src="/design-lab/devin-signature.png" alt="Devin Duncan" loading="lazy" />
+    </div>
+  </section>
+)}
+
+{kind === "departments" && (
+  <section class="module module--departments" aria-labelledby="departments-title">
+    <header class="module-heading">
+      <span class="section-label">Departments</span>
+      <h2 id="departments-title">Find the team for your issue.</h2>
+    </header>
+    <div class="department-index">
+      {[
+        "Academic Affairs",
+        "Basic Needs",
+        "Civic Engagement & Outreach",
+        "Communications",
+        "Diversity, Equity & Inclusion",
+        "Environmental Affairs",
+        "State & External Affairs",
+        "Student Safety & Wellness",
+        "Executive Offices",
+      ].map((department, index) => (
+        <a href="#contact"><span>{String(index + 1).padStart(2, "0")}</span><strong>{department}</strong><span aria-hidden="true">→</span></a>
+      ))}
+    </div>
+  </section>
+)}
+
+{kind === "records" && (
+  <section class="module module--records" id="records" aria-labelledby="records-title">
+    <header class="module-heading">
+      <span class="section-label">Open government</span>
+      <h2 id="records-title">Public information, without the scavenger hunt.</h2>
+    </header>
+    <div class="record-layout">
+      <div class="record-feature">
+        <span>Featured record</span>
+        <h3>Fall 2026 administration plan</h3>
+        <p>Priorities, owners, public checkpoints, and the process for reporting progress.</p>
+        <a href="#contact">Open the plan <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="record-list">
+        <a href="#contact"><strong>Executive orders</strong><span>View archive →</span></a>
+        <a href="#contact"><strong>Meeting minutes</strong><span>Updated monthly →</span></a>
+        <a href="#contact"><strong>Appointments</strong><span>Browse roles →</span></a>
+        <a href="#contact"><strong>Budgets & reports</strong><span>Open documents →</span></a>
+      </div>
+    </div>
+  </section>
+)}
+
+{kind === "events" && (
+  <section class="module module--events" aria-labelledby="events-title">
+    <header class="module-heading">
+      <span class="section-label">Show up</span>
+      <h2 id="events-title">Upcoming public moments.</h2>
+    </header>
+    <div class="event-list">
+      <article><time><b>28</b> AUG</time><div><span>Open office hours</span><h3>Meet the Executive Council</h3><p>Student Union · Room 3206 · 4:00–6:00 p.m.</p></div><a href="#contact" aria-label="Add Meet the Executive Council to calendar">+</a></article>
+      <article><time><b>09</b> SEP</time><div><span>Listening session</span><h3>Academic advising at Carolina</h3><p>Davis Library · Research Hub · 5:30 p.m.</p></div><a href="#contact" aria-label="Add Academic advising at Carolina to calendar">+</a></article>
+      <article><time><b>17</b> SEP</time><div><span>Public meeting</span><h3>Monthly administration update</h3><p>Student Union · Auditorium · 6:00 p.m.</p></div><a href="#contact" aria-label="Add Monthly administration update to calendar">+</a></article>
+    </div>
+  </section>
+)}
+
+{kind === "voices" && (
+  <section class="module module--voices" aria-labelledby="voices-title">
+    <header class="module-heading">
+      <span class="section-label">Student voice</span>
+      <h2 id="voices-title">A homepage that listens back.</h2>
+    </header>
+    <div class="voice-layout">
+      <blockquote><p>“Make it obvious where to go before a small problem becomes an emergency.”</p><cite>Student input · Basic needs</cite></blockquote>
+      <blockquote><p>“Tell us what happened after the meeting, not just that the meeting happened.”</p><cite>Student input · Transparency</cite></blockquote>
+      <div class="voice-prompt">
+        <span>Your turn</span>
+        <h3>What should we hear next?</h3>
+        <p>Share an idea, a barrier, or a place where Student Government should show up.</p>
+        <a href="#contact">Add your voice <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+)}
+
+{kind === "resources" && (
+  <section class="module module--resources" aria-labelledby="resources-title">
+    <header class="module-heading">
+      <span class="section-label">Immediate support</span>
+      <h2 id="resources-title">Start with what is happening right now.</h2>
+    </header>
+    <div class="resource-grid">
+      <a href="#contact"><span aria-hidden="true">01</span><strong>Food & housing</strong><small>Basic-needs navigation and emergency support</small></a>
+      <a href="#contact"><span aria-hidden="true">02</span><strong>Mental health</strong><small>Counseling, wellbeing, and crisis routes</small></a>
+      <a href="#contact"><span aria-hidden="true">03</span><strong>Safety</strong><small>Urgent contacts and student advocacy</small></a>
+      <a href="#contact"><span aria-hidden="true">04</span><strong>Academic support</strong><small>Advising, tutoring, and planning resources</small></a>
+    </div>
+  </section>
+)}
+
+{kind === "photoEssay" && (
+  <section class="module module--photo-essay" aria-labelledby="photo-title">
+    <header class="module-heading">
+      <span class="section-label">Field notes</span>
+      <h2 id="photo-title">The work begins by showing up.</h2>
+    </header>
+    <div class="photo-grid">
+      <figure class="photo-grid__wide"><img src="/design-lab/students-formal.jpg" alt="Devin Duncan with fellow UNC students" loading="lazy" /><figcaption>Building the relationships that turn ideas into action.</figcaption></figure>
+      <figure><img src="/design-lab/community-floor.jpg" alt="Devin Duncan with a group of UNC students" loading="lazy" /><figcaption>Community starts where students already are.</figcaption></figure>
+      <figure><img src="/design-lab/wilson-library.jpg" alt="Wilson Library on the UNC campus" loading="lazy" /><figcaption>Public institutions should feel open and navigable.</figcaption></figure>
+    </div>
+  </section>
+)}
+
+{kind === "numbers" && (
+  <section class="module module--numbers" aria-labelledby="numbers-title">
+    <header class="module-heading">
+      <span class="section-label">Accountability at a glance</span>
+      <h2 id="numbers-title">Measure the process, not just the promise.</h2>
+    </header>
+    <div class="number-grid">
+      <article><strong>05</strong><span>core priorities</span><small>One named owner for each</small></article>
+      <article><strong>09</strong><span>service areas</span><small>One clear route into every team</small></article>
+      <article><strong>01×</strong><span>every month</span><small>A public progress update</small></article>
+      <article><strong>OPEN</strong><span>records by default</span><small>Minutes, reports, and decisions</small></article>
+    </div>
+  </section>
+)}
+
+{kind === "briefing" && (
+  <section class="module module--briefing" aria-labelledby="briefing-title">
+    <header class="module-heading">
+      <span class="section-label">Executive briefing</span>
+      <h2 id="briefing-title">What matters now.</h2>
+      <p>A concise read on the issues, decisions, and next public checkpoints.</p>
+    </header>
+    <div class="briefing-grid">
+      <article><span>01 · Context</span><h3>Support should be easier to navigate.</h3><p>Students should not need insider knowledge to find the right resource or office.</p></article>
+      <article><span>02 · Decision</span><h3>Organize the site around student needs.</h3><p>Services, owners, and immediate next steps come before organizational jargon.</p></article>
+      <article><span>03 · Proof</span><h3>Report progress on a public cadence.</h3><p>Each priority gets a status, an owner, and a dated next checkpoint.</p></article>
+    </div>
+  </section>
+)}
+
+{kind === "listening" && (
+  <section class="module module--listening" aria-labelledby="listening-title">
+    <header class="module-heading">
+      <span class="section-label">Listen → act → report</span>
+      <h2 id="listening-title">A public loop, not a suggestion box.</h2>
+    </header>
+    <ol class="listening-timeline">
+      <li><span>01</span><div><h3>Listen in the open</h3><p>Host a focused conversation where students already gather.</p></div></li>
+      <li><span>02</span><div><h3>Name the owner</h3><p>Publish which office is responsible for the next step.</p></div></li>
+      <li><span>03</span><div><h3>Return with the result</h3><p>Report what changed, what did not, and what happens next.</p></div></li>
+    </ol>
+  </section>
+)}
+
+{kind === "map" && (
+  <section class="module module--map" aria-labelledby="map-title">
+    <header class="module-heading">
+      <span class="section-label">Campus map</span>
+      <h2 id="map-title">Find the work by place and need.</h2>
+    </header>
+    <div class="campus-map">
+      <img src="/design-lab/unc-sketch.png" alt="A sketched view of the UNC campus" loading="lazy" />
+      <a class="map-pin map-pin--one" href="#contact"><span>01</span> Student Union</a>
+      <a class="map-pin map-pin--two" href="#contact"><span>02</span> Davis Library</a>
+      <a class="map-pin map-pin--three" href="#contact"><span>03</span> Campus Y</a>
+      <a class="map-pin map-pin--four" href="#contact"><span>04</span> Residence halls</a>
+    </div>
+  </section>
+)}
+
+{kind === "cta" && (
+  <section class="module module--cta" aria-labelledby="cta-title">
+    <span class="section-label">There is a place for you in this work</span>
+    <h2 id="cta-title">Bring us the issue. Bring us the idea. Bring your voice.</h2>
+    <div class="cta-actions">
+      <a class="button button--light" href="#contact">Contact the Executive Branch <span aria-hidden="true">→</span></a>
+      <a class="text-link" href="https://www.instagram.com/unc_executivebranch/">Follow our updates <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+)}

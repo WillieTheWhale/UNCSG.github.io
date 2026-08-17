@@ -1,0 +1,117 @@
+---
+import { visionPillars, type VisionOption } from "../../data/vision-options";
+
+interface Props {
+  option: VisionOption;
+}
+
+const { option } = Astro.props;
+---
+
+<section
+  class:list={["vision-prototype", `vision-prototype--${option.layout}`]}
+  id="vision"
+  aria-labelledby="vision-title"
+  data-vision-prototype
+>
+  <div class="vision-prototype__frame">
+    <header class="vision-prototype__heading">
+      <h2 id="vision-title">Our vision</h2>
+      <p>Three commitments guide how the Duncan Administration serves Carolina.</p>
+    </header>
+
+    <div class="vision-prototype__interface">
+      <div class="vision-prototype__tabs" role="tablist" aria-label="Vision pillars">
+        {visionPillars.map((pillar, index) => (
+          <button
+            type="button"
+            id={`vision-tab-${pillar.id}`}
+            role="tab"
+            aria-selected={index === 0 ? "true" : "false"}
+            aria-controls={`vision-panel-${pillar.id}`}
+            tabindex={index === 0 ? "0" : "-1"}
+            data-vision-tab={pillar.id}
+          >
+            <span>{pillar.number}</span>
+            <strong>{pillar.shortTitle}</strong>
+          </button>
+        ))}
+      </div>
+
+      <div class="vision-prototype__stage" aria-live="polite">
+        {visionPillars.map((pillar, index) => (
+          <article
+            id={`vision-panel-${pillar.id}`}
+            role="tabpanel"
+            aria-labelledby={`vision-tab-${pillar.id}`}
+            tabindex="0"
+            hidden={index !== 0}
+            data-vision-panel={pillar.id}
+          >
+            <span class="vision-prototype__panel-number" aria-hidden="true">{pillar.number}</span>
+            <div>
+              <h3>{pillar.title}</h3>
+              <p>{pillar.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="vision-prototype__carousel-controls" aria-label="Move between Vision pillars">
+        <button type="button" data-previous-pillar aria-label="Previous Vision pillar">←</button>
+        <span data-pillar-status aria-live="polite">1 of 3</span>
+        <button type="button" data-next-pillar aria-label="Next Vision pillar">→</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (() => {
+    document.querySelectorAll("[data-vision-prototype]").forEach((prototype) => {
+      const tabs = [...prototype.querySelectorAll("[data-vision-tab]")];
+      const panels = [...prototype.querySelectorAll("[data-vision-panel]")];
+      const status = prototype.querySelector("[data-pillar-status]");
+      let activeIndex = 0;
+
+      const activate = (index, moveFocus = false) => {
+        activeIndex = (index + tabs.length) % tabs.length;
+        tabs.forEach((tab, tabIndex) => {
+          const selected = tabIndex === activeIndex;
+          tab.setAttribute("aria-selected", String(selected));
+          tab.setAttribute("tabindex", selected ? "0" : "-1");
+          if (selected && moveFocus && tab instanceof HTMLButtonElement) tab.focus();
+        });
+        panels.forEach((panel, panelIndex) => {
+          if (panel instanceof HTMLElement) panel.hidden = panelIndex !== activeIndex;
+        });
+        if (status) status.textContent = `${activeIndex + 1} of ${tabs.length}`;
+      };
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener("click", () => activate(index));
+        tab.addEventListener("keydown", (event) => {
+          if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+            event.preventDefault();
+            activate(index - 1, true);
+          }
+          if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+            event.preventDefault();
+            activate(index + 1, true);
+          }
+          if (event.key === "Home") {
+            event.preventDefault();
+            activate(0, true);
+          }
+          if (event.key === "End") {
+            event.preventDefault();
+            activate(tabs.length - 1, true);
+          }
+        });
+      });
+
+      prototype.querySelector("[data-previous-pillar]")?.addEventListener("click", () => activate(activeIndex - 1));
+      prototype.querySelector("[data-next-pillar]")?.addEventListener("click", () => activate(activeIndex + 1));
+    });
+  })();
+</script>

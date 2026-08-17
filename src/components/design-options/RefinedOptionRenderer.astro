@@ -1,0 +1,133 @@
+---
+import type { DesignOption } from "../../data/design-options";
+import OptionModule from "./OptionModule.astro";
+
+interface Props {
+  option: DesignOption;
+}
+
+const { option } = Astro.props;
+const secondaryHref = option.modules.includes("leadership")
+  ? "#leadership"
+  : option.modules.includes("records")
+    ? "#records"
+    : option.modules.includes("tracker")
+      ? "#tracker"
+      : "#contact";
+const publicWorkHref = option.modules.includes("records")
+  ? "#records"
+  : option.modules.includes("tracker")
+    ? "#tracker"
+    : option.modules.includes("updates")
+      ? "#updates"
+      : "#work";
+---
+
+<main id="main" class={`option-page option-page--${option.layout} option-page--refined`}>
+  <section
+    class:list={[
+      "refined-hero",
+      `refined-hero--curve-${option.curve ?? "none"}`,
+      option.heroPanel && "refined-hero--has-panel",
+    ]}
+    aria-labelledby="option-title"
+  >
+    {option.image && (
+      <figure class="refined-hero__media">
+        <img
+          src={option.image}
+          alt={option.imageAlt ?? ""}
+          fetchpriority="high"
+          decoding="async"
+        />
+      </figure>
+    )}
+    <div class="refined-hero__shade" aria-hidden="true"></div>
+
+    <div class="refined-hero__inner">
+      <div class="refined-hero__copy">
+        <h1 id="option-title">{option.headline}</h1>
+        <p>{option.intro}</p>
+        <div class="hero-actions">
+          <a class="button button--primary" href="#work">
+            {option.primaryAction} <span aria-hidden="true">→</span>
+          </a>
+          <a class="button button--secondary" href={secondaryHref}>{option.secondaryAction}</a>
+        </div>
+      </div>
+
+      {option.heroPanel === "services" && (
+        <nav class="refined-hero__panel refined-hero__panel--services" aria-label="Popular student actions">
+          <a href="#services"><strong>Find support</strong><span>Food, housing, health, safety, and academics</span></a>
+          <a href="#contact"><strong>Share a concern</strong><span>Tell the right office what is getting in the way</span></a>
+          <a href={publicWorkHref}><strong>Follow the work</strong><span>Updates, records, owners, and public checkpoints</span></a>
+        </nav>
+      )}
+
+      {option.heroPanel === "progress" && (
+        <dl class="refined-hero__panel refined-hero__panel--progress">
+          <div><dt>Priorities</dt><dd>05</dd></div>
+          <div><dt>Public update</dt><dd>Monthly</dd></div>
+          <div><dt>Current status</dt><dd>Work in progress</dd></div>
+        </dl>
+      )}
+
+      {option.heroPanel === "events" && (
+        <aside class="refined-hero__panel refined-hero__panel--event" aria-label="Next public event">
+          <time datetime="2026-08-28"><b>28</b><span>August</span></time>
+          <div><strong>Open office hours</strong><p>Student Union · Room 3206 · 4–6 p.m.</p><a href="#work">See the public agenda →</a></div>
+        </aside>
+      )}
+
+      {option.heroPanel === "leadership" && (
+        <aside class="refined-hero__panel refined-hero__panel--leadership" aria-label="Executive leadership">
+          <strong>Executive leadership</strong>
+          <p>Devin Duncan · Student Body President</p>
+          <p>Amiera Alharazim · Executive Council</p>
+          <p>Lily-Elizabeth Ludwick · Executive Council</p>
+          <a href="#leadership">Meet the full team →</a>
+        </aside>
+      )}
+
+      {option.heroPanel === "records" && (
+        <nav class="refined-hero__panel refined-hero__panel--records" aria-label="Public record shortcuts">
+          <a href="#records"><span>01</span>Meeting minutes</a>
+          <a href="#records"><span>02</span>Appointments</a>
+          <a href="#records"><span>03</span>Budgets and reports</a>
+          <a href="#tracker"><span>04</span>Progress updates</a>
+        </nav>
+      )}
+
+      {option.heroPanel === "listening" && (
+        <ol class="refined-hero__panel refined-hero__panel--listening" aria-label="Public response process">
+          <li><span>1</span><strong>Listen in the open</strong></li>
+          <li><span>2</span><strong>Name the owner</strong></li>
+          <li><span>3</span><strong>Return with the result</strong></li>
+        </ol>
+      )}
+
+      {option.heroPanel === "priorities" && (
+        <ol class="refined-hero__panel refined-hero__panel--priorities" aria-label="Administration priorities">
+          <li>Academic success</li>
+          <li>Basic needs and wellbeing</li>
+          <li>Civic engagement</li>
+          <li>Belonging</li>
+          <li>Clear communication</li>
+        </ol>
+      )}
+
+      {option.heroPanel === "resources" && (
+        <nav class="refined-hero__panel refined-hero__panel--resources" aria-label="Immediate student resources">
+          <a href="#work">Food and housing <span aria-hidden="true">→</span></a>
+          <a href="#work">Mental health <span aria-hidden="true">→</span></a>
+          <a href="#work">Safety <span aria-hidden="true">→</span></a>
+          <a href="#work">Academic support <span aria-hidden="true">→</span></a>
+        </nav>
+      )}
+    </div>
+  </section>
+
+  <div class="module-stream refined-module-stream" id="work">
+    {option.modules.map((kind) => <OptionModule kind={kind} refined />)}
+  </div>
+</main>

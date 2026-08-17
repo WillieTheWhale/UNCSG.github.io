@@ -1,11 +1,15 @@
 ---
 import "@fontsource/anton/400.css";
 import "@fontsource-variable/montserrat";
+import "@fontsource-variable/montserrat/wght-italic.css";
+import "@fontsource/open-sans/600.css";
+import AccessDeniedBanner from "../components/AccessDeniedBanner.astro";
+import FeaturedEvent from "../components/FeaturedEvent.astro";
+import HomeSections from "../components/HomeSections.astro";
+import LaunchWelcome from "../components/LaunchWelcome.astro";
+import SiteHeader from "../components/SiteHeader.astro";
 import "../styles/global.css";
-
-const executiveBranchInstagramUrl =
-  "https://www.instagram.com/unc_executivebranch/";
-const studentBodyPresidentInstagramUrl = "https://www.instagram.com/sbpdevin/";
+import "../styles/launch-welcome.css";
 ---
 
 <!doctype html>
@@ -15,12 +19,24 @@ const studentBodyPresidentInstagramUrl = "https://www.instagram.com/sbpdevin/";
     <meta name="viewport" content="width=device-width" />
     <meta
       name="description"
-      content="The UNC Student Government Executive Branch website is being updated for the Duncan Administration."
+      content="The UNC Student Government Executive Branch website for the Duncan Administration. Find departments, priorities, updates, and public events."
     />
-    <meta name="robots" content="noindex, nofollow" />
-    <meta name="theme-color" content="#13294B" />
+    <meta name="theme-color" content="#13294b" />
     <link rel="canonical" href="https://executivebranch.unc.edu/" />
-    <title>UNC Student Government | Duncan Administration</title>
+    <title>UNC Student Government Executive Branch | Duncan Administration</title>
+    <script is:inline>
+      (() => {
+        const storageKey = "uncsg_front_door_welcome_v1";
+        try {
+          const forceWelcome = new URLSearchParams(window.location.search).get("welcome") === "1";
+          if (forceWelcome || window.localStorage.getItem(storageKey) !== "seen") {
+            document.documentElement.classList.add("launch-welcome-pending");
+          }
+        } catch {
+          document.documentElement.classList.add("launch-welcome-pending");
+        }
+      })();
+    </script>
     <script
       is:inline
       type="text/javascript"
@@ -30,63 +46,58 @@ const studentBodyPresidentInstagramUrl = "https://www.instagram.com/sbpdevin/";
     ></script>
   </head>
   <body>
-    <main id="main" class="construction">
-      <section class="construction__content" aria-labelledby="construction-title">
-        <h1 id="construction-title">
-          <span class="bold-word">Bold</span>
-          {" "}
-          <span class="headline-rest">things are coming</span>
-        </h1>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <AccessDeniedBanner />
+    <LaunchWelcome />
 
-        <p class="construction__message">
-          This website is being updated for the Duncan Administration. Check back
-          soon.
-        </p>
+    <SiteHeader onHomePage />
 
-        <p class="social-callout">
-          Stay up to date with the
-          {" "}
-          <a
-            href={executiveBranchInstagramUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Student Government Executive Branch Instagram (opens in a new tab)"
-          >
-            <span>Student Government Executive Branch</span>
-            <svg
-              aria-hidden="true"
-              class="social-callout__chevron"
-              viewBox="0 0 16 16"
-              width="16"
-              height="16"
-            >
-              <path d="m5.5 2.75 5.25 5.25-5.25 5.25"></path>
-            </svg>
-          </a>
-          {" "}
-          and
-          {" "}
-          <a
-            href={studentBodyPresidentInstagramUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Student Body President Instagram (opens in a new tab)"
-          >
-            <span>Student Body President</span>
-            <svg
-              aria-hidden="true"
-              class="social-callout__chevron"
-              viewBox="0 0 16 16"
-              width="16"
-              height="16"
-            >
-              <path d="m5.5 2.75 5.25 5.25-5.25 5.25"></path>
-            </svg>
-          </a>
-          {" "}
-          Instagram pages.
-        </p>
+    <main id="main">
+      <section class="hero" aria-labelledby="page-title" data-featured-event-state="empty">
+        <figure class="hero__media hero__media--south-building">
+          <img
+            src="/images/photo-lab/south-building.webp"
+            alt="South Building with Carolina 250 and First and Best for All banners"
+            fetchpriority="high"
+            decoding="async"
+            width="2400"
+            height="1604"
+          />
+        </figure>
+        <div class="hero__shade" aria-hidden="true"></div>
+
+        <div class="hero__inner">
+          <div class="hero__copy">
+            <h1 id="page-title">UNC Student Government Executive Branch</h1>
+            <p>The Duncan Administration is creating a Carolina that is first in excellence, best in integrity, and for every student.</p>
+          </div>
+
+          <FeaturedEvent />
+        </div>
       </section>
+
+      <HomeSections />
     </main>
+
+    <footer class="site-footer" id="contact">
+      <div class="site-footer__identity">
+        <img
+          class="site-footer__signature"
+          src="/images/unc-chapel-hill-signature.svg"
+          alt="The University of North Carolina at Chapel Hill"
+          width="232"
+          height="72"
+        />
+        <strong class="site-footer__title">UNC-Chapel Hill Student Government Executive Branch</strong>
+        <p>First, Best, and For All</p>
+      </div>
+      <div class="site-footer__links">
+        <a href="/contact/">Contact Us</a>
+        <a href="https://studentgovernment.unc.edu/" rel="nofollow">Student Government Home</a>
+        <a href="https://www.instagram.com/unc_executivebranch/">Executive Branch Instagram</a>
+        <a href="https://www.instagram.com/sbpdevin/">Student Body President Instagram</a>
+        <a href="/manage/">Staff Login</a>
+      </div>
+    </footer>
   </body>
 </html>

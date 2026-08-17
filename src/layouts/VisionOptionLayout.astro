@@ -1,0 +1,75 @@
+---
+import "@fontsource/anton/400.css";
+import "@fontsource-variable/montserrat";
+import "../styles/global.css";
+import "../styles/vision-options.css";
+import VisionOptionNavigator from "../components/design-options/VisionOptionNavigator.astro";
+import type { VisionOption } from "../data/vision-options";
+
+interface Props {
+  option: VisionOption;
+}
+
+const { option } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#13294b" />
+    <title>{option.name} | Vision Section Design Lab</title>
+    <script
+      is:inline
+      type="text/javascript"
+      id="unc-ub-script"
+      data-color="black"
+      src="https://unc.edu/web-assets/utility-bar/utility-bar.min.js"
+    ></script>
+  </head>
+  <body class="vision-lab-page">
+    <a class="skip-link" href="#vision">Skip to Vision section</a>
+    <VisionOptionNavigator current={option} />
+
+    <div class="vision-evaluated-ui">
+      <header class="site-header">
+        <a class="site-identity" href="#vision" aria-label="UNC Student Government Executive Branch home">
+          <span class="site-identity__seal" aria-hidden="true"></span>
+          <span class="site-identity__text">
+            <strong>Executive Branch</strong>
+            <small>Duncan Administration · 2026–27</small>
+          </span>
+        </a>
+
+        <nav class="site-nav" aria-label="Executive Branch navigation">
+          <a href="#vision">Vision</a>
+          <a href="#priorities-preview">Priorities</a>
+          <a href="#departments-preview">Teams</a>
+          <a href="#updates-preview">Updates</a>
+          <a href="#events-preview">Events</a>
+          <a class="site-nav__contact" href="#contact-preview">Get in touch</a>
+        </nav>
+      </header>
+
+      <section class="vision-context-hero" aria-label="Homepage hero context">
+        <img src="/design-lab/wilson-library.jpg" alt="" width="2000" height="1333" />
+        <div>
+          <h1>UNC Student Government Executive Branch</h1>
+          <p>The Duncan Administration is creating a Carolina that is first in excellence, best in integrity, and for every student.</p>
+        </div>
+      </section>
+
+      <main>
+        <slot />
+
+        <section class="vision-context-next" id="priorities-preview" aria-label="Following section preview">
+          <span>Next on the homepage</span>
+          <h2>Our priorities</h2>
+          <div aria-hidden="true"><i></i><i></i><i></i></div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+---
+interface Props {
+  mode?: "public" | "preview";
+}
+
+const { mode = "public" } = Astro.props;
+---
+
+<article class="update-article" data-update-article data-mode={mode} aria-live="polite">
+  <div class="update-article__status" data-article-status>
+    <div data-article-loading><span class="updates-loading" aria-hidden="true"></span> Loading update…</div>
+    <div class="content-error-state" data-article-error hidden>
+      <span class="content-error-state__label" data-article-error-label>Update unavailable</span>
+      <h1 data-article-error-title>We couldn’t load this update.</h1>
+      <p data-article-error-message>Please try again. If the problem continues, return to the updates page.</p>
+      <div class="content-error-state__actions">
+        <a class="staff-button staff-button--primary" href={mode === "preview" ? "/preview-updates/" : "/updates/"}>All updates</a>
+        <button class="staff-button staff-button--secondary" type="button" data-article-retry>Try again</button>
+      </div>
+    </div>
+  </div>
+  <div data-article-content hidden>
+    <header class="update-article__header">
+      <a class="update-article__back" href={mode === "preview" ? "/preview-updates/" : "/updates/"}>
+        <span aria-hidden="true">←</span> All updates
+      </a>
+      <span class="update-status" data-article-badge hidden></span>
+      <h1 data-article-title></h1>
+      <time data-article-date></time>
+    </header>
+    <figure class="update-article__hero" data-article-hero hidden>
+      <img alt="" data-article-hero-image />
+    </figure>
+    <div class="update-article__body" data-article-body></div>
+  </div>
+</article>
+
+<script>
+  import { initializeUpdateArticles } from "../scripts/update-article";
+  initializeUpdateArticles();
+</script>

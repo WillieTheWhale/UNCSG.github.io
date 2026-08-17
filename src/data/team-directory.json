@@ -1,0 +1,851 @@
+[
+  {
+    "section": "Executive offices",
+    "name": "Office of the Student Body President",
+    "slug": "office-of-the-student-body-president",
+    "description": "Sets the administration's agenda and leads student advocacy, university partnerships, and executive action.",
+    "members": [
+      {
+        "name": "Devin Duncan",
+        "title": "Student Body President",
+        "email": "duncanda@unc.edu",
+        "major": "Public Policy; Media and Journalism",
+        "hometown": "Cincinnati, OH",
+        "portrait": "/images/leadership/devin-duncan-2026.jpg"
+      },
+      {
+        "name": "Finlay Cullen",
+        "title": "Chief of Staff",
+        "email": "fwcullen@unc.edu",
+        "major": "Political Science",
+        "hometown": "Newtown, United Kingdom",
+        "portrait": "/images/team/finlay-cullen.jpg"
+      },
+      {
+        "name": "Addison McKenna Truzy",
+        "title": "Staffer",
+        "email": "amtruzy@unc.edu",
+        "major": "Political Science; Advertising and Public Relations",
+        "hometown": "Winston-Salem, NC",
+        "portrait": "/images/team/addison-mckenna-truzy.jpg"
+      },
+      {
+        "name": "Laszlo Baumgardner",
+        "title": "Staffer",
+        "email": "lasb@unc.edu",
+        "major": "History; Public Policy",
+        "hometown": "Bozeman, MT",
+        "portrait": "/images/team/laszlo-baumgardner.jpg"
+      },
+      {
+        "name": "Lochlan Downard",
+        "title": "Staffer",
+        "email": "lochlan@unc.edu",
+        "major": "Political Science; Hispanic Studies",
+        "hometown": "Winston-Salem, NC",
+        "portrait": "/images/team/lochlan-downard.jpg"
+      },
+      {
+        "name": "Pokuaa Biritwum",
+        "title": "Staffer",
+        "email": "pokuaa@unc.edu",
+        "major": "Psychology; Political Science",
+        "hometown": "Southern Pines, NC",
+        "portrait": "/images/team/pokuaa-biritwum.jpg"
+      },
+      {
+        "name": "Bennett Hilberg",
+        "title": "Alumni Technical Advisor",
+        "email": "bhilberg@unc.edu",
+        "major": "Computer Science",
+        "hometown": "Medina, MN",
+        "portrait": "/images/team/bennett-hilberg.jpg",
+        "classYear": "'26"
+      }
+    ]
+  },
+  {
+    "section": "Executive offices",
+    "name": "Office of the Vice Student Body President",
+    "slug": "office-of-the-vice-student-body-president",
+    "description": "Supports the President and helps coordinate the Executive Council, student engagement, and cross-office initiatives.",
+    "members": [
+      {
+        "name": "Ben Jones",
+        "title": "Vice President",
+        "email": "benbmj@unc.edu",
+        "major": "Political Science; Peace, War, & Defense",
+        "hometown": "Charlotte, NC",
+        "portrait": "/images/team/ben-jones.webp"
+      },
+      {
+        "name": "AnnaGrace Reynolds",
+        "title": "Principal Deputy",
+        "email": "annarey@unc.edu",
+        "major": "Political Science; Psychology",
+        "hometown": "Greensboro, NC",
+        "portrait": "/images/team/annagrace-reynolds.jpg"
+      },
+      {
+        "name": "April Chou",
+        "title": "Staffer",
+        "email": "aprilcho@unc.edu",
+        "major": "Biostatistics; Mathematics",
+        "hometown": "West Chester, PA",
+        "portrait": "/images/team/april-chou.webp"
+      },
+      {
+        "name": "Jasmine Teague",
+        "title": "Staffer",
+        "email": "jasmine.teague@unc.edu",
+        "major": "Political Science; Information Science",
+        "hometown": "Nashville, TN",
+        "portrait": "/images/team/jasmine-teague.jpg"
+      },
+      {
+        "name": "Kori Billingslea",
+        "title": "Staffer",
+        "email": "korbill@unc.edu",
+        "major": "Advertising and Public Relations",
+        "hometown": "Atlanta, GA",
+        "portrait": "/images/team/kori-billingslea.jpg"
+      }
+    ]
+  },
+  {
+    "section": "Executive offices",
+    "name": "Office of the Treasurer",
+    "slug": "office-of-the-treasurer",
+    "description": "Oversees Executive Branch finances and promotes responsible, transparent stewardship of student government resources.",
+    "members": [
+      {
+        "name": "Hadi Rahim",
+        "title": "Treasurer",
+        "email": "harahim@unc.edu",
+        "major": "Political Science; Media and Journalism",
+        "hometown": "Apex, NC",
+        "portrait": "/images/team/hadi-rahim.webp"
+      }
+    ]
+  },
+  {
+    "section": "Executive offices",
+    "name": "Office of the Student Body Secretary",
+    "slug": "office-of-the-student-body-secretary",
+    "description": "Maintains official records, supports administration-wide operations, and helps keep the branch's work organized and accessible.",
+    "members": [
+      {
+        "name": "Hailey Shapiro",
+        "title": "Secretary",
+        "email": "hmshap@unc.edu",
+        "major": "Political Science; Media and Journalism",
+        "hometown": "Naples, FL",
+        "portrait": "/images/team/hailey-shapiro.jpg"
+      },
+      {
+        "name": "Cora Hawfield",
+        "title": "Principal Deputy",
+        "email": "cph@unc.edu",
+        "major": "Public Policy; Art History",
+        "hometown": "Winston-Salem, NC",
+        "portrait": "/images/team/cora-hawfield.jpg"
+      },
+      {
+        "name": "Addison Grinan",
+        "title": "Staffer",
+        "email": "addieg@unc.edu",
+        "major": "Media and Journalism",
+        "hometown": "Miami, FL",
+        "portrait": "/images/team/addison-grinan.jpg"
+      },
+      {
+        "name": "Cole Jones",
+        "title": "Staffer",
+        "email": "coles.jones@unc.edu",
+        "major": "Political Science",
+        "hometown": "Durham, NC",
+        "portrait": "/images/team/cole-jones.webp"
+      },
+      {
+        "name": "Madeline Lewis",
+        "title": "Staffer",
+        "email": "madlew@unc.edu",
+        "major": "Political Science",
+        "hometown": "Charlotte, NC",
+        "portrait": "/images/team/madeline-lewis.jpg"
+      }
+    ]
+  },
+  {
+    "section": "Executive offices",
+    "name": "Office of the Chief of the Cabinet",
+    "slug": "office-of-the-chief-of-the-cabinet",
+    "description": "Coordinates cabinet departments and keeps shared priorities, staff collaboration, and implementation moving together.",
+    "members": [
+      {
+        "name": "Finlay Cullen",
+        "title": "Chief of Cabinet (Interim)",
+        "email": "fwcullen@unc.edu",
+        "major": "Political Science",
+        "hometown": "Newtown, United Kingdom",
+        "portrait": "/images/team/finlay-cullen.jpg"
+      },
+      {
+        "name": "Harrison Roy",
+        "title": "Staffer",
+        "email": "harroy@unc.edu",
+        "major": "Business Administration; Economics",
+        "hometown": "Waxhaw, NC",
+        "portrait": "/images/team/harrison-roy.jpg"
+      },
+      {
+        "name": "Nicholas Byers",
+        "title": "Staffer",
+        "email": "nicbyers@unc.edu",
+        "major": "Computer Science; Psychology",
+        "hometown": "Charlotte, NC",
+        "portrait": "/images/team/nicholas-byers.jpg"
+      },
+      {
+        "name": "Nicholas Hamilton",
+        "title": "Staffer",
+        "email": "deanham@unc.edu",
+        "major": "History; Global Studies",
+        "hometown": "Miami, FL",
+        "portrait": "/images/team/nicholas-hamilton.jpg"
+      }
+    ]
+  },
+  {
+    "section": "Executive offices",
+    "name": "Office of Communications",
+    "slug": "office-of-communications",
+    "description": "Shares authentic student stories and publishes clear updates, benchmarks, and progress from across the administration.",
+    "members": [
+      {
+        "name": "Hailey Shapiro",
+        "title": "Chief Communications Officer",
+        "email": "hmshap@unc.edu",
+        "major": "Political Science; Media and Journalism",
+        "hometown": "Naples, FL",
+        "portrait": "/images/team/hailey-shapiro.jpg"
+      },
+      {
+        "name": "Kaiden Lech",
+        "title": "Staffer",
+        "email": "kaiden@unc.edu",
+        "major": "Business Administration; Advertising and Public Relations",
+        "hometown": "Greensboro, NC",
+        "portrait": "/images/team/kaiden-lech.jpg"
+      },
+      {
+        "name": "Karena Singh",
+        "title": "Staffer",
+        "email": "karenas@unc.edu",
+        "major": "Biology",
+        "hometown": "Gastonia, NC",
+        "portrait": "/images/team/karena-singh.jpg"
+      },
+      {
+        "name": "Lexie Goodyear",
+        "title": "Staffer",
+        "email": "goodyear@unc.edu",
+        "major": "Business Administration",
+        "hometown": "San Francisco, CA",
+        "portrait": "/images/team/lexie-goodyear.jpg"
+      },
+      {
+        "name": "Misha Singh",
+        "title": "Staffer",
+        "email": "mishaks@unc.edu",
+        "major": "Advertising and Public Relations",
+        "hometown": "Gastonia, NC",
+        "portrait": "/images/team/misha-singh.jpg"
+      },
+      {
+        "name": "Sasha Anand",
+        "title": "Staffer",
+        "email": "svanand@ad.unc.edu",
+        "major": "Political Science; Journalism",
+        "hometown": "Scottsdale, AZ",
+        "portrait": "/images/team/sasha-anand.webp"
+      },
+      {
+        "name": "Sydney Askew",
+        "title": "Staffer",
+        "email": "sraskew@unc.edu",
+        "major": "Sports Journalism and Marketing",
+        "hometown": "Charlotte, NC",
+        "portrait": "/images/team/sydney-askew.jpg"
+      }
+    ]
+  },
+  {
+    "section": "Cabinet departments",
+    "name": "Academic Affairs",
+    "slug": "academic-affairs",
+    "description": "Strengthens advising, mentoring, academic support, and innovation in teaching and learning so every Tar Heel can thrive.",
+    "members": [
+      {
+        "name": "Matthew Howard",
+        "title": "Director",
+        "email": "mghoward@unc.edu",
+        "major": "Economics; Public Policy",
+        "hometown": "Leigh-on-Sea, United Kingdom",
+        "portrait": "/images/team/matthew-howard.jpg"
+      },
+      {
+        "name": "Amy Gao",
+        "title": "Deputy Director",
+        "email": "amygao@unc.edu",
+        "major": "Economics",
+        "hometown": "Denver, CO",
+        "portrait": "/images/team/amy-gao.jpg"
+      },
+      {
+        "name": "Aravind Krishna",
+        "title": "Staffer",
+        "email": "aravindk@unc.edu",
+        "major": "Environmental Health; Quantitative Energy",
+        "hometown": "Cary, NC",
+        "portrait": "/images/team/aravind-krishna.jpg"
+      },
+      {
+        "name": "Brady Rickenbaugh",
+        "title": "Staffer",
+        "email": "bqr@unc.edu",
+        "major": "Political Science; Psychology",
+        "hometown": "Cincinnati, OH",
+        "portrait": "/images/team/brady-rickenbaugh.jpg"
+      },
+      {
+        "name": "Casey Schwartz",
+        "title": "Staffer",
+        "email": "caseysch@unc.edu",
+        "major": "Applied Mathematics; Business Administration",
+        "hometown": "Commack, NY",
+        "portrait": "/images/team/casey-schwartz.jpg"
+      },
+      {
+        "name": "Lily-Elizabeth Elaine Ludwick",
+        "title": "Staffer",
+        "email": "lludwick@unc.edu",
+        "major": "Economics; Business Administration",
+        "hometown": "Charlotte, NC",
+        "portrait": "/images/team/lily-elizabeth-elaine-ludwick.jpg"
+      },
+      {
+        "name": "Simon Lewis",
+        "title": "Staffer",
+        "email": "silewis@unc.edu",
+        "major": "Political Science; Economics",
+        "hometown": "Chattanooga, TN",
+        "portrait": "/images/team/simon-lewis.jpg"
+      },
+      {
+        "name": "William Niles",
+        "title": "Staffer",
+        "email": "wniles@ad.unc.edu",
+        "major": "Economics",
+        "hometown": "London, England",
+        "portrait": "/images/team/william-niles.webp"
+      }
+    ]
+  },
+  {
+    "section": "Cabinet departments",
+    "name": "Basic Needs",
+    "slug": "basic-needs",
+    "description": "Connects students with food, housing, transportation, and financial-stability resources that make daily life at Carolina more secure.",
+    "members": [
+      {
+        "name": "Chloe Johnson",
+        "title": "Director",
+        "email": "chlojo@ad.unc.edu",
+        "major": "Political Science; Human Development and Family Science; Data Science",
+        "hometown": "Knightdale, NC",
+        "portrait": "/images/team/chloe-johnson.jpg"
+      },
+      {
+        "name": "Ryan Parsaee",
+        "title": "Assistant Director",
+        "email": "rparse06@unc.edu",
+        "major": "",
+        "hometown": "Malvern, PA",
+        "portrait": "/images/team/ryan-parsaee.webp"
+      },
+      {
+        "name": "Cameron Shue",
+        "title": "Staffer",
+        "email": "camshue@unc.edu",
+        "major": "Political Science; Public Policy",
+        "hometown": "Troy, NC",
+        "portrait": "/images/team/cameron-shue.jpg"
+      },
+      {
+        "name": "Charles Willets",
+        "title": "Staffer",
+        "email": "cwillets@unc.edu",
+        "major": "Peace, War, and Defense; Political Science",
+        "hometown": "Apex, NC",
+        "portrait": "/images/team/charles-willets.jpg"
+      },
+      {
+        "name": "Ella Bailey",
+        "title": "Staffer",
+        "email": "ellabail@ad.unc.edu",
+        "major": "Business Administration; Management and Society",
+        "hometown": "Apex, NC",
+        "portrait": "/images/team/ella-bailey.jpg"
+      },
+      {
+        "name": "Hyon Gyu Michael Kang",
+        "title": "Staffer",
+        "email": "hmkang17@unc.edu",
+        "major": "Political Science",
+        "hometown": "Chapel Hill, NC",
+        "portrait": "/images/team/hyon-gyu-michael-kang.jpg"
+      },
+      {
+        "name": "Mahip Sompura",
+        "title": "Staffer",
+        "email": "msomp@unc.edu",
+        "major": "Biology",
+        "hometown": "Charlotte, NC",
+        "portrait": "/images/team/mahip-sompura.jpg"
+      }
+    ]
+  },
+  {
+    "section": "Cabinet departments",
+    "name": "Civic Engagement and Outreach",
+    "slug": "civic-engagement-and-outreach",
+    "description": "Builds pathways to service, civic participation, and stronger partnerships between Carolina and the surrounding community.",
+    "members": [
+      {
+        "name": "Shakila Cantebury",
+        "title": "Director",
+        "email": "scant@unc.edu",
+        "major": "Political Science; Human and Organizational Leadership Development",
+        "hometown": "New York, NY",
+        "portrait": "/images/team/shakila-cantebury.jpg"
+      },
+      {
+        "name": "Bryson Kohlbrenner",
+        "title": "Assistant Director",
+        "email": "bkohl@ad.unc.edu",
+        "major": "Economics",
+        "hometown": "Waxhaw, NC",
+        "portrait": "/images/team/bryson-kohlbrenner.webp"
+      },
+      {
+        "name": "Caroline Hurlbert",
+        "title": "Staffer",
+        "email": "churlbe@unc.edu",
+        "major": "Human Development and Family Science; Political Science",
+        "hometown": "Charlotte, NC",
+        "portrait": "/images/team/caroline-hurlbert.jpg"
+      },
+      {
+        "name": "Sergio Santiago-Jimenez",
+        "title": "Staffer",
+        "email": "sanser@unc.edu",
+        "major": "Public Policy; Social Work",
+        "hometown": "Wilson, NC",
+        "portrait": "/images/team/sergio-santiago-jimenez.jpg"
+      }
+    ]
+  },
+  {
+    "section": "Cabinet departments",
+    "name": "Diversity, Equity, and Inclusion",
+    "slug": "diversity-equity-and-inclusion",
+    "description": "Fosters belonging, celebrates identity, and advances equitable access and participation across campus life.",
+    "members": [
+      {
+        "name": "Cameron Lee",
+        "title": "Director",
+        "email": "campslee@unc.edu",
+        "major": "Public Health; Biology",
+        "hometown": "Vancouver, Canada",
+        "portrait": "/images/team/cameron-lee.webp"
+      },
+      {
+        "name": "Martha Pena Ruiz",
+        "title": "Deputy Director",
+        "email": "mpruiz@ad.unc.edu",
+        "major": "Human Development and Family Science; Biology",
+        "hometown": "Winston-Salem, NC",
+        "portrait": "/images/team/martha-pena-ruiz.jpg"
+      },
+      {
+        "name": "Aamiran Yala",
+        "title": "Staffer",
+        "email": "aamiran@unc.edu",
+        "major": "Public Policy; Political Science",
+        "hometown": "Apex, NC",
+        "portrait": "/images/team/aamiran-yala.jpg"
+      },
+      {
+        "name": "Amiera Alharazim",
+        "title": "Staffer",
+        "email": "aamier@unc.edu",
+        "major": "Psychology",
+        "hometown": "Greensboro, NC",
+        "portrait": "/images/team/amiera-alharazim.jpg"
+      },
+      {
+        "name": "Divae Scott",
+        "title": "Staffer",
+        "email": "disco@unc.edu",
+        "major": "Public Policy; Economics",
+        "hometown": "Raleigh, NC",
+        "portrait": "/images/team/divae-scott.jpg"
+      },
+      {
+        "name": "Kyla Sheedy-Goff",
+        "title": "Staffer",
+        "email": "kwillow@unc.edu",
+        "major": "Political Science; Human and Organizational Leadership Development",
+        "hometown": "Boston, MA",
+        "portrait": "/images/team/kyla-sheedy-goff.jpg"
+      },
+      {
+        "name": "Oscar Dublina",
+        "title": "Staffer",
+        "email": "odublina@unc.edu",
+        "major": "Economics; Information Systems",
+        "hometown": "High Point, NC",
+        "portrait": "/images/team/oscar-dublina.jpg"
+      },
+      {
+        "name": "Shiloh Pria Puri Terner",
+        "title": "Staffer",
+        "email": "shiloht@unc.edu",
+        "major": "Geology; Business Administration",
+        "hometown": "Toronto, Canada",
+        "portrait": "/images/team/shiloh-pria-puri-terner.jpg"
+      }
+    ]
+  },
+  {
+    "section": "Cabinet departments",
+    "name": "Environmental Affairs",
+    "slug": "environmental-affairs",
+    "description": "Leads campus sustainability, waste reduction, food recovery, and shared stewardship of Carolina's environment.",
+    "members": [
+      {
+        "name": "Ellie Prosser",
+        "title": "Director",
+        "email": "eprosser@unc.edu",
+        "major": "Environmental Studies",
+        "hometown": "Charlotte, NC",
+        "portrait": "/images/team/ellie-prosser.jpg"
+      },
+      {
+        "name": "Anjali Sankale",
+        "title": "Staffer",
+        "email": "asankale@unc.edu",
+        "major": "Applied Sciences",
+        "hometown": "Atlanta, GA",
+        "portrait": "/images/team/anjali-sankale.jpg"
+      },
+      {
+        "name": "Charles Burkhardt Dockendorf",
+        "title": "Staffer",
+        "email": "cbdock@ad.unc.edu",
+        "major": "Political Science",
+        "hometown": "Hendersonville, NC",
+        "portrait": "/images/team/charles-burkhardt-dockendorf.jpg"
+      },
+      {
+        "name": "Helene Hunter",
+        "title": "Staffer",
+        "email": "helhunt@unc.edu",
+        "major": "Environmental Health Science",
+        "hometown": "Charlotte, NC",
+        "portrait": "/images/team/helene-hunter.jpg"
+      },
+      {
+        "name": "Juliana Lewis",
+        "title": "Staffer",
+        "email": "lewisju@unc.edu",
+        "major": "Political Science; Interdisciplinary Studies",
+        "hometown": "Williamston, MI",
+        "portrait": "/images/team/juliana-lewis.jpg"
+      },
+      {
+        "name": "Maeve Powell",
+        "title": "Staffer",
+        "email": "mdpowell@unc.edu",
+        "major": "Environmental Studies",
+        "hometown": "Durham, NC",
+        "portrait": "/images/team/maeve-powell.jpg"
+      }
+    ]
+  },
+  {
+    "section": "Cabinet departments",
+    "name": "State and External Affairs",
+    "slug": "state-and-external-affairs",
+    "description": "Represents student priorities beyond campus and connects Tar Heels with public officials, policy, and public-service partners.",
+    "members": [
+      {
+        "name": "Sophia Fontecchio",
+        "title": "Director",
+        "email": "sophfont@unc.edu",
+        "major": "Political Science; Public Policy",
+        "hometown": "Downingtown, PA",
+        "portrait": "/images/team/sophia-fontecchio.webp"
+      },
+      {
+        "name": "Sloane Whalen",
+        "title": "Deputy Director",
+        "email": "sloawhal@unc.edu",
+        "major": "Political Science; Global Studies",
+        "hometown": "Winston-Salem, NC",
+        "portrait": "/images/team/sloane-whalen.webp"
+      },
+      {
+        "name": "Aidan Michael Tobin",
+        "title": "Staffer",
+        "email": "aidmtob@unc.edu",
+        "major": "Peace, War, and Defense; Public Policy",
+        "hometown": "Belmont, NC",
+        "portrait": "/images/team/aidan-michael-tobin.jpg"
+      },
+      {
+        "name": "Krishay Annadi",
+        "title": "Staffer",
+        "email": "kannadi@unc.edu",
+        "major": "Neuroscience; Economics",
+        "hometown": "Charlotte, NC",
+        "portrait": "/images/team/krishay-annadi.jpg"
+      },
+      {
+        "name": "Simon Clarida",
+        "title": "Staffer",
+        "email": "sclarida@unc.edu",
+        "major": "Sociology; Political Science",
+        "hometown": "Greensboro, NC",
+        "portrait": "/images/team/simon-clarida.jpg"
+      },
+      {
+        "name": "Williford Cosby Bullard",
+        "title": "Staffer",
+        "email": "wcbullar@ad.unc.edu",
+        "major": "Political Science",
+        "hometown": "Roseboro, NC",
+        "portrait": "/images/team/williford-cosby-bullard.jpg"
+      }
+    ]
+  },
+  {
+    "section": "Cabinet departments",
+    "name": "Student Safety and Wellness",
+    "slug": "student-safety-and-wellness",
+    "description": "Improves access to mental and physical health resources while advancing prevention, preparedness, and campus safety.",
+    "members": [
+      {
+        "name": "Lauryn Sidni Cooper",
+        "title": "Director",
+        "email": "lsc@unc.edu",
+        "major": "Nutrition",
+        "hometown": "Greensboro, NC",
+        "portrait": "/images/team/lauryn-cooper.webp"
+      },
+      {
+        "name": "Elizabeth Alene",
+        "title": "Ass Director, CIA",
+        "email": "alene1@unc.edu",
+        "major": "Global Studies; Chinese; Public Policy",
+        "hometown": "St. Paul, MN",
+        "portrait": "/images/team/elizabeth-alene.jpg"
+      },
+      {
+        "name": "Kamryn Burton",
+        "title": "Deputy Director",
+        "email": "kammyb@unc.edu",
+        "major": "Biology",
+        "hometown": "Charlotte, NC",
+        "portrait": "/images/team/kamryn-burton.jpg"
+      },
+      {
+        "name": "Meredith McKinney",
+        "title": "NSES Director",
+        "email": "meredith.mckinney@unc.edu",
+        "major": "Public Policy; Geography",
+        "hometown": "Greensboro, NC",
+        "portrait": "/images/team/meredith-mckinney.webp"
+      },
+      {
+        "name": "Cameron C. Cooper",
+        "title": "Staffer",
+        "email": "caccoop@ad.unc.edu",
+        "major": "Economics",
+        "hometown": "Whitsett, NC",
+        "portrait": "/images/team/cameron-c-cooper.jpg"
+      },
+      {
+        "name": "Cora Goforth",
+        "title": "Staffer",
+        "email": "cestego@unc.edu",
+        "major": "Global Studies; English and Comparative Literature",
+        "hometown": "Forest City, NC",
+        "portrait": "/images/team/cora-goforth.jpg"
+      },
+      {
+        "name": "Jasmine Kaur Rai",
+        "title": "Staffer",
+        "email": "jkrai@unc.edu",
+        "major": "Biomedical Engineering",
+        "hometown": "Greensboro, NC",
+        "portrait": "/images/team/jasmine-kaur-rai.jpg"
+      },
+      {
+        "name": "Kovida Vupputuri",
+        "title": "Staffer",
+        "email": "vupputu@unc.edu",
+        "major": "Health Policy and Management; Biology",
+        "hometown": "Concord, NC",
+        "portrait": "/images/team/kovida-vupputuri.jpg"
+      },
+      {
+        "name": "Laura Lassiter",
+        "title": "Staffer",
+        "email": "laura_lassiter@kenan-flagler.unc.edu",
+        "major": "Business Administration; Political Science",
+        "hometown": "Charlotte, NC",
+        "portrait": "/images/team/laura-lassiter.jpg"
+      },
+      {
+        "name": "Nithilan Velavan",
+        "title": "Staffer",
+        "email": "nithilan@unc.edu",
+        "major": "Biology; Chemistry",
+        "hometown": "Charlotte, NC",
+        "portrait": "/images/team/nithilan-velavan.jpg"
+      },
+      {
+        "name": "Pranav Ayyappan",
+        "title": "Staffer",
+        "email": "apranav@unc.edu",
+        "major": "Neuroscience",
+        "hometown": "Morrisville, PA",
+        "portrait": "/images/team/pranav-ayyappan.jpg"
+      },
+      {
+        "name": "Sahil Kapadia",
+        "title": "Staffer",
+        "email": "sahilk@unc.edu",
+        "major": "Computer Science; Neuroscience",
+        "hometown": "Fairfax, VA",
+        "portrait": "/images/team/sahil-kapadia.jpg"
+      },
+      {
+        "name": "Sindhu Paladugu",
+        "title": "Staffer",
+        "email": "sinpala@unc.edu",
+        "major": "Biology",
+        "hometown": "Cary, NC",
+        "portrait": "/images/team/sindhu-paladugu.jpg"
+      },
+      {
+        "name": "Sofia Fleury-Mendible",
+        "title": "Staffer",
+        "email": "sofleury@unc.edu",
+        "major": "Nutrition",
+        "hometown": "Clinton, NC",
+        "portrait": "/images/team/sofia-fleury-mendible.jpg"
+      }
+    ]
+  },
+  {
+    "section": "Cabinet departments",
+    "name": "Management and Budget",
+    "slug": "management-and-budget",
+    "description": "Supports cabinet operations through budgeting, resource planning, and accountable management across the Executive Branch.",
+    "members": [
+      {
+        "name": "Timothy Gaylord",
+        "title": "Director",
+        "email": "tpg@unc.edu",
+        "major": "Management and Society; Political Science",
+        "hometown": "Greensboro, NC",
+        "portrait": "/images/team/timothy-gaylord.webp"
+      },
+      {
+        "name": "Hayden Koller",
+        "title": "Deputy Director",
+        "email": "hkoller@unc.edu",
+        "major": "Pre-Business; Economics",
+        "hometown": "Raleigh, NC",
+        "portrait": "/images/team/hayden-koller.webp"
+      }
+    ]
+  },
+  {
+    "section": "Task forces",
+    "name": "Task Force on AI and Academic Affairs",
+    "slug": "task-force-on-ai-and-academic-affairs",
+    "description": "Examines responsible uses of artificial intelligence in teaching, learning, and academic policy while elevating student perspectives.",
+    "members": [
+      {
+        "name": "Brady Rickenbaugh",
+        "title": "Staffer",
+        "email": "bqr@unc.edu",
+        "major": "Political Science; Psychology",
+        "hometown": "Cincinnati, OH",
+        "portrait": "/images/team/brady-rickenbaugh.jpg"
+      },
+      {
+        "name": "Elizabeth Nam",
+        "title": "Staffer",
+        "email": "ejnam@unc.edu",
+        "major": "Data Science; Peace, War, and Defense",
+        "hometown": "Cary, NC",
+        "portrait": "/images/team/elizabeth-nam.jpg"
+      },
+      {
+        "name": "Harsha Matta",
+        "title": "Staffer",
+        "email": "harsham@unc.edu",
+        "major": "Mathematics; Computer Science",
+        "hometown": "Weddington, NC",
+        "portrait": "/images/team/harsha-matta.jpg"
+      },
+      {
+        "name": "Lucas Bacon",
+        "title": "Staffer",
+        "email": "lwbacon@unc.edu",
+        "major": "Business Administration; Sports Administration",
+        "hometown": "Raleigh, NC",
+        "portrait": "/images/team/lucas-bacon.jpg"
+      },
+      {
+        "name": "Ryan Guzman",
+        "title": "Staffer",
+        "email": "rguzm@unc.edu",
+        "major": "Neuroscience; Psychology",
+        "hometown": "Kings Park, NY",
+        "portrait": "/images/team/ryan-guzman.jpg"
+      },
+      {
+        "name": "Sahasra Nandela",
+        "title": "Staffer",
+        "email": "sahasran@unc.edu",
+        "major": "Data Science; Political Science",
+        "hometown": "Cary, NC",
+        "portrait": "/images/team/sahasra-nandela.jpg"
+      },
+      {
+        "name": "Sahil Kapadia",
+        "title": "Staffer",
+        "email": "sahilk@unc.edu",
+        "major": "Computer Science; Neuroscience",
+        "hometown": "Fairfax, VA",
+        "portrait": "/images/team/sahil-kapadia.jpg"
+      }
+    ]
+  }
+]

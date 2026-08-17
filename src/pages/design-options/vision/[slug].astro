@@ -1,0 +1,22 @@
+---
+import VisionPrototype from "../../../components/design-options/VisionPrototype.astro";
+import VisionOptionLayout from "../../../layouts/VisionOptionLayout.astro";
+import { visionOptions, type VisionOption } from "../../../data/vision-options";
+
+export function getStaticPaths() {
+  return visionOptions.map((option) => ({
+    params: { slug: `${String(option.id).padStart(2, "0")}-${option.slug}` },
+    props: { option },
+  }));
+}
+
+interface Props {
+  option: VisionOption;
+}
+
+const { option } = Astro.props;
+---
+
+<VisionOptionLayout option={option}>
+  <VisionPrototype option={option} />
+</VisionOptionLayout>

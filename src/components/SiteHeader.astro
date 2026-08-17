@@ -1,0 +1,49 @@
+---
+interface Props {
+  onHomePage?: boolean;
+  currentPath?: string;
+}
+
+const { onHomePage = false, currentPath = "" } = Astro.props;
+---
+
+<header class="site-header" data-site-header>
+  <a
+    class="site-identity"
+    href={onHomePage ? "#main" : "/"}
+    aria-label="UNC Student Government Executive Branch home"
+  >
+    <span class="site-identity__seal" aria-hidden="true"></span>
+    <span class="site-identity__text">
+      <strong>Executive Branch</strong>
+      <small>Duncan Administration · 2026–27</small>
+    </span>
+  </a>
+
+  <button
+    class="site-nav-toggle"
+    type="button"
+    aria-expanded="false"
+    aria-controls="executive-branch-navigation"
+    data-site-nav-toggle
+  >
+    <span class="site-nav-toggle__icon" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="site-nav-toggle__label" data-site-nav-label>Open navigation</span>
+  </button>
+
+  <nav
+    class="site-nav"
+    id="executive-branch-navigation"
+    aria-label="Executive Branch navigation"
+  >
+    <a href="/team/" aria-current={currentPath === "/team/" ? "page" : undefined}>Our Team</a>
+    <a href="/updates/" aria-current={currentPath === "/updates/" ? "page" : undefined}>Updates</a>
+    <a href={onHomePage ? "#events" : "/events/"} aria-current={currentPath === "/events/" ? "page" : undefined}>Events</a>
+    <a class="site-nav__contact" href="/contact/" aria-current={currentPath === "/contact/" ? "page" : undefined}>Get in touch</a>
+  </nav>
+</header>
+
+<script>
+  import { initializeSiteNavigation } from "../scripts/site-navigation";
+  initializeSiteNavigation();
+</script>

@@ -1,0 +1,19 @@
+---
+interface Props {
+  code: string;
+  title: string;
+  description: string;
+}
+
+const { code, title, description } = Astro.props;
+---
+
+<section class="site-error" aria-labelledby="site-error-title">
+  <span class="site-error__code">{code}</span>
+  <h1 id="site-error-title">{title}</h1>
+  <p>{description}</p>
+  <div class="site-error__actions">
+    <a href="/">Return home</a>
+    <a href="/events/">View events</a>
+  </div>
+</section>

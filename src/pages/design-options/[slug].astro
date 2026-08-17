@@ -1,0 +1,30 @@
+---
+import DesignOptionLayout from "../../layouts/DesignOptionLayout.astro";
+import OptionRenderer from "../../components/design-options/OptionRenderer.astro";
+import RefinedOptionRenderer from "../../components/design-options/RefinedOptionRenderer.astro";
+import FinalistOptionRenderer from "../../components/design-options/FinalistOptionRenderer.astro";
+import { designOptions, type DesignOption } from "../../data/design-options";
+
+export function getStaticPaths() {
+  return designOptions.map((option) => ({
+    params: { slug: `${String(option.id).padStart(2, "0")}-${option.slug}` },
+    props: { option },
+  }));
+}
+
+interface Props {
+  option: DesignOption;
+}
+
+const { option } = Astro.props;
+---
+
+<DesignOptionLayout option={option}>
+  {option.family === "finalist" ? (
+    <FinalistOptionRenderer option={option} />
+  ) : option.family === "refined" ? (
+    <RefinedOptionRenderer option={option} />
+  ) : (
+    <OptionRenderer option={option} />
+  )}
+</DesignOptionLayout>

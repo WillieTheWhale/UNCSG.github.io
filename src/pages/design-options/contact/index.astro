@@ -1,0 +1,32 @@
+---
+import UpdateSiteLayout from "../../../layouts/UpdateSiteLayout.astro";
+import { contactOptions, contactOptionPath } from "../../../data/contact-options";
+import "../../../styles/contact-options.css";
+---
+
+<UpdateSiteLayout title="Contact Page Design Lab | Duncan Administration" description="Twelve guided contact router concepts for the Duncan Administration." canonicalPath="/design-options/contact/" bodyClass="contact-lab-overview-page" noindex>
+  <section class="contact-lab-overview" aria-labelledby="contact-lab-title">
+    <header>
+      <p>Duncan Administration · Contact design lab</p>
+      <h1 id="contact-lab-title">Twelve ways to find the right person.</h1>
+      <span>Every option uses the same real office routing, an explicit Student Body Secretary fallback, and the same optional student-controlled message builder.</span>
+    </header>
+    <div class="contact-lab-overview__grid">
+      {contactOptions.map((option) => (
+        <article class="contact-lab-card">
+          <a class:list={["contact-lab-card__preview", `contact-lab-card__preview--${option.layout}`]} href={contactOptionPath(option)}>
+            <span>{String(option.id).padStart(2, "0")}</span>
+            <div aria-hidden="true"><i></i><i></i><i></i></div>
+            <strong>{option.name}</strong>
+          </a>
+          <div class="contact-lab-card__body">
+            <h2>{option.name}</h2>
+            <p>{option.thesis}</p>
+            <small><b>Tradeoff:</b> {option.tradeoff}</small>
+            <a href={contactOptionPath(option)}>Open option <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</UpdateSiteLayout>

@@ -1,0 +1,156 @@
+---
+import type { ContactOption } from "../../data/contact-options";
+import { contactDestinations, contactIntents } from "../../data/contact-router";
+import "../../styles/contact-options.css";
+
+interface Props { option: ContactOption; production?: boolean; }
+const { option, production = false } = Astro.props;
+const isSearch = option.layout === "quick-search";
+const isConversation = option.layout === "conversation-flow";
+const isMessageFirst = option.layout === "message-first";
+const isAccordion = option.layout === "accordion-triage";
+---
+
+<article class:list={["contact-option", `contact-option--${option.layout}`, { "is-production": production }]} data-contact-router>
+  <script is:inline type="application/json" data-contact-model set:html={JSON.stringify({ intents: contactIntents, destinations: contactDestinations })}></script>
+
+  <header class="contact-hero">
+    <div>
+      {!production && <p class="contact-hero__kicker">Contact the Executive Branch</p>}
+      <h1>{production ? "Contact the Executive Branch" : "Start with what you need."}</h1>
+      <p>Answer one or two quick questions and we’ll point you to the student leader best equipped to help.</p>
+    </div>
+    {!production && <p class="contact-hero__note">You can always choose “I’m not sure.” Your message will go to the Student Body Secretary for routing.</p>}
+  </header>
+
+  {isSearch && (
+    <section class="contact-search" aria-labelledby="contact-search-title">
+      <label id="contact-search-title" for={`contact-search-${option.id}`}>What can we help you with?</label>
+      <input id={`contact-search-${option.id}`} type="search" data-contact-search autocomplete="off" placeholder="Try “advising,” “funding,” or “invite Devin”" />
+      <p data-search-status aria-live="polite">Or browse the common reasons below.</p>
+    </section>
+  )}
+
+  <section class="contact-start" aria-labelledby={`contact-start-title-${option.id}`}>
+    <div class="contact-section-heading">
+      <div>
+        <span>Start here</span>
+        <h2 id={`contact-start-title-${option.id}`}>{isConversation ? "What brings you here today?" : "Choose the closest reason"}</h2>
+      </div>
+      <div class="contact-carousel-controls" aria-label="Common reason carousel controls">
+        <button type="button" data-carousel-previous aria-label="Show previous reasons">←</button>
+        <button type="button" data-carousel-next aria-label="Show more reasons">→</button>
+      </div>
+    </div>
+    <div class="contact-pathways" data-contact-pathways>
+      {contactIntents.map((intent, index) => (
+        <button type="button" class="contact-pathway" data-intent={intent.id} data-search-text={`${intent.label} ${intent.description} ${intent.topics.map((topic) => `${topic.label} ${topic.detail}`).join(" ")}`} aria-pressed="false">
+          {!production && <span>{String(index + 1).padStart(2, "0")}</span>}
+          <strong>{intent.label}</strong>
+          <small>{intent.description}</small>
+          <i aria-hidden="true">→</i>
+        </button>
+      ))}
+    </div>
+  </section>
+
+  {isAccordion && (
+    <section class="contact-accordion-menu" aria-label="Expanded contact pathways">
+      {contactIntents.map((intent) => (
+        <details data-intent-details={intent.id}>
+          <summary>{intent.label}<span aria-hidden="true">+</span></summary>
+          <div>
+            <p>{intent.description}</p>
+            {intent.topics.map((topic) => <button type="button" data-accordion-topic={topic.id} data-accordion-intent={intent.id}>{topic.label}<span aria-hidden="true">→</span></button>)}
+          </div>
+        </details>
+      ))}
+    </section>
+  )}
+
+  <section class="contact-workspace" aria-label="Guided contact router">
+    <aside class="contact-progress" aria-label="Your route">
+      <span>Your route</span>
+      <ol>
+        <li class="is-current" data-progress-reason><b>1</b><span><small>Reason</small><strong>Choose a reason</strong></span></li>
+        <li data-progress-topic><b>2</b><span><small>Topic</small><strong>One quick follow-up</strong></span></li>
+        <li data-progress-contact><b>3</b><span><small>Contact</small><strong>Your best match</strong></span></li>
+      </ol>
+      <button type="button" data-contact-reset hidden>Start over</button>
+    </aside>
+
+    <section class="contact-question" data-question-panel aria-live="polite">
+      {!production && <span class="contact-question__step">Step 2 of 2</span>}
+      <h2 data-question-title>Choose a reason above to begin.</h2>
+      {!production && <p data-question-copy>We’ll ask one short follow-up when it helps us make a better match.</p>}
+      <div class="contact-topics" data-topic-list></div>
+    </section>
+
+    <aside class="contact-result" data-result-panel aria-live="polite">
+      <div class="contact-result__empty" data-result-empty>
+        {!production && <span aria-hidden="true">↗</span>}
+        <h2>Your contact will appear here.</h2>
+        {!production && <p>No form submission or account is required.</p>}
+      </div>
+      <div class="contact-result__content" data-result-content hidden>
+        <span class="contact-result__match">Recommended contact</span>
+        <h2 data-result-office></h2>
+        <p class="contact-result__person"><strong data-result-person></strong><span data-result-title></span></p>
+        <p data-result-summary></p>
+        <div class="contact-result__email-actions">
+          <a class="contact-result__email" data-result-email href="mailto:usgsec@unc.edu">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.75" y="5.25" width="18.5" height="13.5"></rect><path d="m3.5 6 8.5 7 8.5-7"></path></svg>
+            <span data-result-email-text>usgsec@unc.edu</span>
+          </a>
+          <button type="button" data-copy-email>
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="11" height="11"></rect><path d="M16 8V5H5v11h3"></path></svg>
+            <span data-copy-email-label>Copy email</span>
+          </button>
+          <span class="sr-only" data-copy-email-status aria-live="polite"></span>
+        </div>
+        {!production && <button class="contact-result__builder-button" type="button" data-builder-toggle aria-expanded={isMessageFirst ? "true" : "false"}>Build a clear message <span>(optional)</span></button>}
+      </div>
+    </aside>
+  </section>
+
+  {!production && <section class="contact-builder" data-message-builder hidden={!isMessageFirst} aria-labelledby={`message-builder-title-${option.id}`}>
+    <header>
+      <div>
+        <span>Optional writing aid</span>
+        <h2 id={`message-builder-title-${option.id}`}>Turn the essentials into a clear email.</h2>
+        <p>Use as much or as little of this as helpful. You remain in control of what you send.</p>
+      </div>
+      <button type="button" data-builder-close aria-label="Close message builder">×</button>
+    </header>
+    <div class="contact-builder__layout">
+      <form class="contact-builder__form" data-builder-form>
+        <label>What are you writing about?<input type="text" name="subject" data-builder-subject /></label>
+        <label>What happened or what would you like to propose?<textarea name="context" rows="3" data-builder-context></textarea></label>
+        <label>What would be a helpful next step?<textarea name="ask" rows="2" data-builder-ask></textarea></label>
+        <div class="contact-builder__row">
+          <label>Your name<input type="text" name="name" data-builder-name /></label>
+          <label>Relevant date or timing <span>(if any)</span><input type="text" name="timing" data-builder-timing /></label>
+        </div>
+      </form>
+      <div class="contact-builder__preview">
+        <span>Draft preview</span>
+        <strong data-preview-subject>Subject: A question from a UNC student</strong>
+        <pre data-preview-body>Hello,
+
+I’m reaching out with a question and would appreciate your guidance.
+
+Thank you.</pre>
+        <div>
+          <button type="button" data-copy-message>Copy message</button>
+          <a data-open-email href="mailto:usgsec@unc.edu">Open in email <span aria-hidden="true">↗</span></a>
+        </div>
+        <p data-copy-status aria-live="polite"></p>
+      </div>
+    </div>
+  </section>}
+</article>
+
+<script>
+  import { initializeContactRouters } from "../../scripts/contact-router";
+  initializeContactRouters();
+</script>

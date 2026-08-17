@@ -1,0 +1,32 @@
+---
+import UpdateSiteLayout from "../../../layouts/UpdateSiteLayout.astro";
+import { ribbonOptions, ribbonOptionPath } from "../../../data/ribbon-options";
+import "../../../styles/ribbon-options.css";
+---
+
+<UpdateSiteLayout title="Ribbon-Cutting Design Lab | Duncan Administration" description="Ten first-visit ribbon-cutting welcome concepts for the Duncan Administration website." canonicalPath="/design-options/ribbon/" bodyClass="ribbon-lab-overview-page" noindex>
+  <section class="ribbon-lab-overview" aria-labelledby="ribbon-lab-title">
+    <header>
+      <p>Duncan Administration · Ribbon-cutting design lab</p>
+      <h1 id="ribbon-lab-title">Ten ways to open our new front door.</h1>
+      <span>Each option uses the same welcome message, Carolina palette, confetti, accessible dialog behavior, and a direct link to the contact page.</span>
+    </header>
+    <div class="ribbon-lab-overview__grid">
+      {ribbonOptions.map((option) => (
+        <article class="ribbon-lab-card">
+          <a class:list={["ribbon-lab-card__preview", `ribbon-lab-card__preview--${option.layout}`]} href={ribbonOptionPath(option)}>
+            <span>{String(option.id).padStart(2, "0")}</span>
+            <div aria-hidden="true"><i></i><i></i><i></i><b></b></div>
+            <strong>{option.name}</strong>
+          </a>
+          <div class="ribbon-lab-card__body">
+            <h2>{option.name}</h2>
+            <p>{option.thesis}</p>
+            <small><b>Tradeoff:</b> {option.tradeoff}</small>
+            <a href={ribbonOptionPath(option)}>Open option <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</UpdateSiteLayout>

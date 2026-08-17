@@ -1,0 +1,84 @@
+---
+import { designOptions, optionPath, type DesignOption } from "../../data/design-options";
+
+interface Props {
+  current: DesignOption;
+}
+
+const { current } = Astro.props;
+const visibleOptions = current.family === "finalist"
+  ? designOptions.filter((option) => option.family === "finalist")
+  : designOptions;
+const overviewHref = current.family === "finalist" ? "/design-options/finalists/" : "/design-options/";
+const currentIndex = visibleOptions.findIndex((option) => option.id === current.id);
+const previous = visibleOptions[(currentIndex - 1 + visibleOptions.length) % visibleOptions.length];
+const next = visibleOptions[(currentIndex + 1) % visibleOptions.length];
+---
+
+<nav class="lab-nav" aria-label="Design option navigator" data-lab-nav>
+  <a class="lab-nav__overview" href={overviewHref}>
+    {current.family === "finalist" ? "Final 3" : `All ${designOptions.length}`}
+  </a>
+  <a
+    class="lab-nav__step"
+    href={optionPath(previous)}
+    aria-label={`Previous option: ${previous.name}`}
+    data-previous-option
+  >
+    ←
+  </a>
+  <label class="lab-nav__picker">
+    <span class="sr-only">Choose a design option</span>
+    <select data-option-picker>
+      {visibleOptions.map((option) => (
+        <option value={optionPath(option)} selected={option.id === current.id}>
+          {String(option.id).padStart(2, "0")} · {option.name}
+        </option>
+      ))}
+    </select>
+  </label>
+  <span class="lab-nav__count" aria-hidden="true">
+    {current.family === "finalist" ? currentIndex + 1 : String(current.id).padStart(2, "0")} / {visibleOptions.length}
+  </span>
+  <a
+    class="lab-nav__step"
+    href={optionPath(next)}
+    aria-label={`Next option: ${next.name}`}
+    data-next-option
+  >
+    →
+  </a>
+</nav>
+
+<script is:inline>
+  (() => {
+    const nav = document.querySelector("[data-lab-nav]");
+    if (!nav) return;
+
+    const picker = nav.querySelector("[data-option-picker]");
+    picker?.addEventListener("change", (event) => {
+      const target = event.currentTarget;
+      if (target instanceof HTMLSelectElement) window.location.href = target.value;
+    });
+
+    document.addEventListener("keydown", (event) => {
+      const target = event.target;
+      if (
+        target instanceof HTMLInputElement ||
+        target instanceof HTMLTextAreaElement ||
+        target instanceof HTMLSelectElement ||
+        target?.isContentEditable
+      ) return;
+
+      if (event.key === "ArrowLeft") {
+        const previous = nav.querySelector("[data-previous-option]");
+        if (previous instanceof HTMLAnchorElement) window.location.href = previous.href;
+      }
+
+      if (event.key === "ArrowRight") {
+        const next = nav.querySelector("[data-next-option]");
+        if (next instanceof HTMLAnchorElement) window.location.href = next.href;
+      }
+    });
+  })();
+</script>

@@ -1,0 +1,151 @@
+---
+import "@fontsource/anton/400.css";
+import "@fontsource-variable/montserrat";
+import "../../styles/design-options.css";
+import "../../styles/design-options-finalists.css";
+import { designOptions, optionPath } from "../../data/design-options";
+
+const finalists = designOptions.filter((option) => option.family === "finalist");
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#13294b" />
+    <title>Duncan Administration | Final 3 Directions</title>
+  </head>
+  <body class="finalist-index">
+    <main>
+      <header class="finalist-index__header">
+        <div>
+          <h1>Three finalist directions</h1>
+          <p>One content model, three information hierarchies. Each uses Wilson Library, a symmetric curved hero, the navy Executive Branch navigation, a black UNC utility bar, and only the four approved content areas.</p>
+        </div>
+        <a href="/design-options/">View the full exploration</a>
+      </header>
+      <div class="finalist-index__grid">
+        {finalists.map((option, index) => (
+          <article>
+            <a class="finalist-index__preview" href={optionPath(option)}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <strong>{option.name}</strong>
+            </a>
+            <div>
+              <h2>{option.name}</h2>
+              <p>{option.thesis}</p>
+              <small><b>Tradeoff:</b> {option.tradeoff}</small>
+              <a href={optionPath(option)}>Open finalist <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </main>
+  </body>
+</html>
+
+<style>
+  .finalist-index {
+    margin: 0;
+    color: #13294b;
+    background: #edf5fb;
+    font-family: "Montserrat Variable", Montserrat, Arial, sans-serif;
+  }
+
+  .finalist-index main {
+    width: min(100% - 2rem, 92rem);
+    margin-inline: auto;
+    padding-block: clamp(3rem, 8vw, 7rem);
+  }
+
+  .finalist-index__header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 3rem;
+    align-items: end;
+    margin-bottom: clamp(3rem, 6vw, 6rem);
+  }
+
+  .finalist-index__header h1 {
+    margin: 0;
+    font-size: clamp(2.8rem, 7vw, 6.5rem);
+    letter-spacing: -0.055em;
+    line-height: 0.95;
+  }
+
+  .finalist-index__header p {
+    max-width: 68ch;
+    margin: 1.5rem 0 0;
+    line-height: 1.65;
+  }
+
+  .finalist-index a {
+    color: #2959a4;
+    font-weight: 720;
+    text-underline-offset: 0.25em;
+  }
+
+  .finalist-index__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .finalist-index__grid article {
+    background: #fff;
+  }
+
+  .finalist-index__preview {
+    display: flex;
+    min-height: 20rem;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem;
+    overflow: hidden;
+    color: #fff !important;
+    background: linear-gradient(rgb(19 41 75 / 55%), rgb(19 41 75 / 78%)), url("/design-lab/wilson-library.jpg") center 44% / cover;
+    border-radius: 0 0 50% 50% / 0 0 7% 7%;
+    text-decoration: none;
+  }
+
+  .finalist-index__preview span {
+    font-size: 0.8rem;
+    font-weight: 800;
+  }
+
+  .finalist-index__preview strong {
+    max-width: 10ch;
+    font-size: clamp(2rem, 3vw, 3.3rem);
+    letter-spacing: -0.045em;
+    line-height: 0.98;
+  }
+
+  .finalist-index__grid article > div {
+    padding: 1.75rem;
+  }
+
+  .finalist-index__grid h2 {
+    margin: 0;
+    font-size: 1.35rem;
+  }
+
+  .finalist-index__grid p,
+  .finalist-index__grid small {
+    line-height: 1.6;
+  }
+
+  .finalist-index__grid small {
+    display: block;
+    margin-bottom: 1.5rem;
+    color: #52667e;
+  }
+
+  @media (max-width: 60rem) {
+    .finalist-index__header,
+    .finalist-index__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

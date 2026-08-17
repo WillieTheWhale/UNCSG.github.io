@@ -1,0 +1,66 @@
+<aside class="access-denied-banner" data-access-denied-banner hidden aria-live="polite">
+  <p>
+    Your sign-in was successful, but you don’t have access. Contact your department director or <a
+      href="mailto:bhilberg@unc.edu">bhilberg@unc.edu</a
+    >.
+  </p>
+  <button type="button" data-dismiss-access-banner aria-label="Dismiss access message">
+    <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20">
+      <path d="M6 6l12 12M18 6 6 18" />
+    </svg>
+  </button>
+</aside>
+
+<style>
+  .access-denied-banner[hidden] { display: none; }
+  .access-denied-banner {
+    position: relative;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    padding: 0.9rem var(--page-gutter);
+    color: var(--brand-navy);
+    background: var(--brand-yellow);
+    border-bottom: 3px solid var(--brand-navy);
+  }
+  .access-denied-banner p { margin: 0; font-size: 0.95rem; text-align: center; }
+  .access-denied-banner a { font-weight: 750; }
+  .access-denied-banner button {
+    display: grid;
+    width: 2.5rem;
+    height: 2.5rem;
+    flex: 0 0 auto;
+    padding: 0;
+    place-items: center;
+    border: 1px solid rgb(19 41 75 / 35%);
+    border-radius: 50%;
+    color: var(--brand-navy);
+    background: transparent;
+    cursor: pointer;
+  }
+  .access-denied-banner svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-width: 2;
+  }
+  @media (max-width: 42rem) {
+    .access-denied-banner { align-items: flex-start; }
+    .access-denied-banner p { text-align: left; }
+  }
+</style>
+
+<script>
+  const banner = document.querySelector<HTMLElement>("[data-access-denied-banner]");
+  if (banner && new URLSearchParams(window.location.search).get("auth") === "unauthorized") {
+    banner.hidden = false;
+    banner.querySelector("[data-dismiss-access-banner]")?.addEventListener("click", () => {
+      banner.hidden = true;
+      const url = new URL(window.location.href);
+      url.searchParams.delete("auth");
+      window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
+    });
+  }
+</script>

@@ -1,0 +1,8 @@
+---
+import EventArticle from "../../components/EventArticle.astro";
+import UpdateSiteLayout from "../../layouts/UpdateSiteLayout.astro";
+---
+<UpdateSiteLayout title="Preview Event | UNC Student Government Executive Branch" description="Staff event preview." canonicalPath="/preview-events/" noindex bodyClass="updates-page events-page">
+  <aside class="preview-mode-banner"><p>Showing a <strong>preview</strong> event. <a href="/manage/events/">Return to manage events</a> to finalize and publish.</p></aside>
+  <EventArticle mode="preview" />
+</UpdateSiteLayout>

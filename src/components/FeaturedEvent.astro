@@ -1,0 +1,41 @@
+<aside class="office-card" data-featured-event hidden>
+  <time data-featured-time><b></b><span></span></time>
+  <div>
+    <strong data-featured-title></strong>
+    <p data-featured-summary></p>
+    <a data-featured-link>View event <span aria-hidden="true">→</span></a>
+  </div>
+</aside>
+
+<script>
+  import type { PublicEvent } from "../scripts/event-types";
+  import { eventDateParts, eventPlaceLabel } from "../scripts/event-types";
+
+  const card = document.querySelector<HTMLElement>("[data-featured-event]");
+  const hero = card?.closest<HTMLElement>("[data-featured-event-state]");
+  if (card) {
+    fetch("/api/events/featured", { credentials: "same-origin" })
+      .then(async (response) => response.ok ? (await response.json()) as { event: PublicEvent | null } : { event: null })
+      .then(({ event }) => {
+        if (!event) return;
+        const { day, month } = eventDateParts(event);
+        const time = card.querySelector<HTMLElement>("[data-featured-time]");
+        const title = card.querySelector<HTMLElement>("[data-featured-title]");
+        const summary = card.querySelector<HTMLElement>("[data-featured-summary]");
+        const link = card.querySelector<HTMLAnchorElement>("[data-featured-link]");
+        if (!time || !title || !summary || !link) return;
+        time.setAttribute("datetime", event.startAt);
+        const dayElement = time.querySelector("b");
+        const monthElement = time.querySelector("span");
+        if (dayElement) dayElement.textContent = day;
+        if (monthElement) monthElement.textContent = month;
+        title.textContent = event.title;
+        summary.textContent = event.summary || eventPlaceLabel(event);
+        link.href = `/events/${encodeURIComponent(event.slug)}`;
+        card.setAttribute("aria-label", `Featured event: ${event.title}`);
+        if (hero) hero.dataset.featuredEventState = "present";
+        card.hidden = false;
+      })
+      .catch(() => undefined);
+  }
+</script>

@@ -1,0 +1,423 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: uncsg-preview-auth
+  labels:
+    app.kubernetes.io/part-of: uncsg-preview
+  annotations:
+    serviceaccounts.openshift.io/oauth-redirecturi.preview: >-
+      https://uncsg-preview-auth-bhilberg.apps.cloudapps.unc.edu/oauth/callback
+---
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: uncsg-preview-web
+  labels:
+    app.kubernetes.io/part-of: uncsg-preview
+---
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: uncsg-preview-api
+  labels:
+    app.kubernetes.io/part-of: uncsg-preview
+---
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: uncsg-preview-auth
+  labels:
+    app.kubernetes.io/part-of: uncsg-preview
+---
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: uncsg-preview-web
+  labels:
+    app.kubernetes.io/part-of: uncsg-preview
+spec:
+  source:
+    type: Git
+    git:
+      uri: https://github.com/WillieTheWhale/UNCSG.github.io.git
+      ref: duncan-v1
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: Dockerfile.preview
+      env:
+        - name: SITE_URL
+          value: https://uncsg-preview-bhilberg.apps.cloudapps.unc.edu
+  output:
+    to:
+      kind: ImageStreamTag
+      name: uncsg-preview-web:latest
+  triggers:
+    - type: ConfigChange
+---
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: uncsg-preview-api
+  labels:
+    app.kubernetes.io/part-of: uncsg-preview
+spec:
+  source:
+    type: Git
+    git:
+      uri: https://github.com/WillieTheWhale/UNCSG.github.io.git
+      ref: duncan-v1
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: Dockerfile.api
+  output:
+    to:
+      kind: ImageStreamTag
+      name: uncsg-preview-api:latest
+  triggers:
+    - type: ConfigChange
+---
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: uncsg-preview-auth
+  labels:
+    app.kubernetes.io/part-of: uncsg-preview
+spec:
+  source:
+    type: Git
+    git:
+      uri: https://github.com/WillieTheWhale/UNCSG.github.io.git
+      ref: duncan-v1
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: Dockerfile.auth-broker
+  output:
+    to:
+      kind: ImageStreamTag
+      name: uncsg-preview-auth:latest
+  triggers:
+    - type: ConfigChange
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: uncsg-preview-postgres
+  labels:
+    app.kubernetes.io/part-of: uncsg-preview
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uncsg-preview-postgres
+  labels:
+    app: uncsg-preview-postgres
+    app.kubernetes.io/part-of: uncsg-preview
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: uncsg-preview-postgres
+  template:
+    metadata:
+      labels:
+        app: uncsg-preview-postgres
+        app.kubernetes.io/part-of: uncsg-preview
+    spec:
+      containers:
+        - name: postgres
+          image: image-registry.openshift-image-registry.svc:5000/openshift/postgresql:16
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRESQL_USER
+              value: uncsg_preview
+            - name: POSTGRESQL_DATABASE
+              value: uncsg_preview
+            - name: POSTGRESQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: uncsg-preview-secrets
+                  key: postgres-password
+          volumeMounts:
+            - name: database
+              mountPath: /var/lib/pgsql/data
+          readinessProbe:
+            exec:
+              command: ["/bin/sh", "-c", "pg_isready -U uncsg_preview -d uncsg_preview"]
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests:
+              memory: 192Mi
+              cpu: 75m
+            limits:
+              memory: 384Mi
+              cpu: 300m
+      volumes:
+        - name: database
+          persistentVolumeClaim:
+            claimName: uncsg-preview-postgres
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: uncsg-preview-postgres
+  labels:
+    app.kubernetes.io/part-of: uncsg-preview
+spec:
+  selector:
+    app: uncsg-preview-postgres
+  ports:
+    - port: 5432
+      targetPort: 5432
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uncsg-preview-auth
+  labels:
+    app: uncsg-preview-auth
+    app.kubernetes.io/part-of: uncsg-preview
+  annotations:
+    image.openshift.io/triggers: >-
+      [{"from":{"kind":"ImageStreamTag","name":"uncsg-preview-auth:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"uncsg-preview-auth\")].image"}]
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: uncsg-preview-auth
+  template:
+    metadata:
+      labels:
+        app: uncsg-preview-auth
+        app.kubernetes.io/part-of: uncsg-preview
+    spec:
+      serviceAccountName: uncsg-preview-auth
+      containers:
+        - name: uncsg-preview-auth
+          image: uncsg-preview-auth:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: BROKER_PORT
+              value: "8080"
+            - name: BROKER_BASE_URL
+              value: https://uncsg-preview-auth-bhilberg.apps.cloudapps.unc.edu
+            - name: MAIN_CLIENT_ID
+              value: uncsg-preview
+            - name: MAIN_REDIRECT_URIS
+              value: https://uncsg-preview-bhilberg.apps.cloudapps.unc.edu/api/auth/oauth2/callback/unc-openshift
+            - name: OPENSHIFT_OAUTH_BASE_URL
+              value: https://oauth-openshift.apps.cloudapps.unc.edu
+            - name: OPENSHIFT_API_BASE_URL
+              value: https://api.cloudapps.unc.edu:6443
+            - name: OPENSHIFT_SERVICE_ACCOUNT
+              value: uncsg-preview-auth
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 20
+          resources:
+            requests:
+              memory: 48Mi
+              cpu: 60m
+            limits:
+              memory: 128Mi
+              cpu: 100m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: uncsg-preview-auth
+  labels:
+    app.kubernetes.io/part-of: uncsg-preview
+spec:
+  selector:
+    app: uncsg-preview-auth
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: uncsg-preview-auth
+  labels:
+    app.kubernetes.io/part-of: uncsg-preview
+spec:
+  host: uncsg-preview-auth-bhilberg.apps.cloudapps.unc.edu
+  to:
+    kind: Service
+    name: uncsg-preview-auth
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uncsg-preview-api
+  labels:
+    app: uncsg-preview-api
+    app.kubernetes.io/part-of: uncsg-preview
+  annotations:
+    image.openshift.io/triggers: >-
+      [{"from":{"kind":"ImageStreamTag","name":"uncsg-preview-api:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"uncsg-preview-api\")].image"}]
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: uncsg-preview-api
+  template:
+    metadata:
+      labels:
+        app: uncsg-preview-api
+        app.kubernetes.io/part-of: uncsg-preview
+    spec:
+      containers:
+        - name: uncsg-preview-api
+          image: uncsg-preview-api:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: API_PORT
+              value: "8080"
+            - name: PUBLIC_BASE_URL
+              value: https://uncsg-preview-bhilberg.apps.cloudapps.unc.edu
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: uncsg-preview-secrets
+                  key: database-url
+            - name: BETTER_AUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: uncsg-preview-secrets
+                  key: better-auth-secret
+            - name: UNC_AUTH_BROKER_URL
+              value: https://uncsg-preview-auth-bhilberg.apps.cloudapps.unc.edu
+            - name: UNC_AUTH_BROKER_CLIENT_ID
+              value: uncsg-preview
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 8080
+            initialDelaySeconds: 8
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 8080
+            initialDelaySeconds: 25
+            periodSeconds: 20
+          resources:
+            requests:
+              memory: 192Mi
+              cpu: 75m
+            limits:
+              memory: 384Mi
+              cpu: 300m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: uncsg-preview-api
+  labels:
+    app.kubernetes.io/part-of: uncsg-preview
+spec:
+  selector:
+    app: uncsg-preview-api
+  ports:
+    - port: 8080
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uncsg-preview-web
+  labels:
+    app: uncsg-preview-web
+    app.kubernetes.io/part-of: uncsg-preview
+  annotations:
+    image.openshift.io/triggers: >-
+      [{"from":{"kind":"ImageStreamTag","name":"uncsg-preview-web:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"uncsg-preview-web\")].image"}]
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: uncsg-preview-web
+  template:
+    metadata:
+      labels:
+        app: uncsg-preview-web
+        app.kubernetes.io/part-of: uncsg-preview
+    spec:
+      containers:
+        - name: uncsg-preview-web
+          image: uncsg-preview-web:latest
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: 64Mi
+              cpu: 60m
+            limits:
+              memory: 128Mi
+              cpu: 100m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: uncsg-preview-web
+  labels:
+    app.kubernetes.io/part-of: uncsg-preview
+spec:
+  selector:
+    app: uncsg-preview-web
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: uncsg-preview
+  labels:
+    app.kubernetes.io/part-of: uncsg-preview
+spec:
+  host: uncsg-preview-bhilberg.apps.cloudapps.unc.edu
+  to:
+    kind: Service
+    name: uncsg-preview-web
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect

@@ -1,0 +1,120 @@
+---
+const pillars = [
+  {
+    id: "excellence",
+    number: "1",
+    label: "First in Excellence",
+    title: "First in excellence",
+    body: "We pursue ambitious, practical ideas that strengthen academic life and the everyday Carolina experience. Excellence means listening carefully, setting a high standard, and following through on work students can feel.",
+  },
+  {
+    id: "integrity",
+    number: "2",
+    label: "Best in Integrity",
+    title: "Best in integrity",
+    body: "We lead transparently, communicate progress honestly, and hold ourselves accountable to the students we serve. Integrity guides how we make decisions, build partnerships, and earn trust across Carolina.",
+  },
+  {
+    id: "every-student",
+    number: "3",
+    label: "For Every Student",
+    title: "For every student",
+    body: "We are building a Carolina where every student is seen, supported, and able to belong. Our work starts with the full range of student experiences and makes access, dignity, and opportunity central to every initiative.",
+  },
+];
+---
+
+<section class="content-section home-vision" id="vision" aria-labelledby="vision-title" data-home-vision>
+  <header class="home-vision__heading">
+    <h2 id="vision-title">Our vision</h2>
+    <p>Our vision for Student Government is a Carolina that continues to lead, remains grounded in its values, and works every day to deliver on the promise of this University for every student.</p>
+  </header>
+
+  <div class="home-vision__interface">
+    <div class="home-vision__tabs" role="tablist" aria-label="Vision pillars">
+      {pillars.map((pillar, index) => (
+        <button
+          type="button"
+          id={`home-vision-tab-${pillar.id}`}
+          role="tab"
+          aria-selected={index === 0 ? "true" : "false"}
+          aria-controls={`home-vision-panel-${pillar.id}`}
+          tabindex={index === 0 ? "0" : "-1"}
+          data-home-vision-tab
+        >
+          <span>{pillar.number}</span>
+          <strong>{pillar.label}</strong>
+        </button>
+      ))}
+    </div>
+
+    <div class="home-vision__panels" aria-live="polite">
+      {pillars.map((pillar, index) => (
+        <article
+          id={`home-vision-panel-${pillar.id}`}
+          role="tabpanel"
+          aria-labelledby={`home-vision-tab-${pillar.id}`}
+          tabindex="0"
+          hidden={index !== 0}
+          data-home-vision-panel
+        >
+          <span class="home-vision__panel-number" aria-hidden="true">{pillar.number}</span>
+          <div>
+            <h3>{pillar.title}</h3>
+            <p>{pillar.body}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const vision = document.querySelector("[data-home-vision]");
+    if (!vision) return;
+
+    const tabs = [...vision.querySelectorAll<HTMLButtonElement>("[data-home-vision-tab]")];
+    const panels = [...vision.querySelectorAll<HTMLElement>("[data-home-vision-panel]")];
+
+    const activate = (index: number, moveFocus = false) => {
+      const activeIndex = (index + tabs.length) % tabs.length;
+
+      tabs.forEach((tab, tabIndex) => {
+        const selected = tabIndex === activeIndex;
+        tab.setAttribute("aria-selected", String(selected));
+        tab.setAttribute("tabindex", selected ? "0" : "-1");
+        if (selected && moveFocus) tab.focus();
+      });
+
+      panels.forEach((panel, panelIndex) => {
+        panel.hidden = panelIndex !== activeIndex;
+      });
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => activate(index));
+      tab.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+          event.preventDefault();
+          activate(index - 1, true);
+        }
+
+        if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+          event.preventDefault();
+          activate(index + 1, true);
+        }
+
+        if (event.key === "Home") {
+          event.preventDefault();
+          activate(0, true);
+        }
+
+        if (event.key === "End") {
+          event.preventDefault();
+          activate(tabs.length - 1, true);
+        }
+      });
+    });
+  })();
+</script>

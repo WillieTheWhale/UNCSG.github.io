@@ -1,0 +1,60 @@
+---
+import "@fontsource/anton/400.css";
+import "@fontsource-variable/montserrat";
+import "../../../styles/vision-options.css";
+import { visionOptions, visionOptionPath } from "../../../data/vision-options";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#13294b" />
+    <title>Vision Section | Duncan Administration Design Lab</title>
+    <script
+      is:inline
+      type="text/javascript"
+      id="unc-ub-script"
+      data-color="black"
+      src="https://unc.edu/web-assets/utility-bar/utility-bar.min.js"
+    ></script>
+  </head>
+  <body class="vision-overview-page">
+    <a class="skip-link" href="#vision-options">Skip to Vision options</a>
+    <header class="vision-overview-hero">
+      <div>
+        <span>Duncan Administration · Focused design lab</span>
+        <h1>Eight ways to present one clear vision.</h1>
+      </div>
+      <div>
+        <p>Each option keeps the section compact, lets visitors select one of three pillars, and shows only the selected statement.</p>
+        <p>The body copy is realistic placeholder content. The interaction and hierarchy are ready to evaluate before final language arrives.</p>
+      </div>
+    </header>
+
+    <main class="vision-overview-grid" id="vision-options">
+      {visionOptions.map((option) => (
+        <article>
+          <a class={`vision-overview-preview vision-overview-preview--${option.layout}`} href={visionOptionPath(option)}>
+            <span>{String(option.id).padStart(2, "0")}</span>
+            <div aria-hidden="true"><i></i><i></i><i></i></div>
+            <strong>{option.name}</strong>
+          </a>
+          <div class="vision-overview-copy">
+            <h2>{String(option.id).padStart(2, "0")} · {option.name}</h2>
+            <p>{option.thesis}</p>
+            <small><b>Tradeoff:</b> {option.tradeoff}</small>
+            <a href={visionOptionPath(option)}>Open option <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      ))}
+    </main>
+
+    <footer class="vision-overview-footer">
+      <strong>8 Vision interactions · one Duncan design system</strong>
+      <a href="/">Return to the current homepage</a>
+    </footer>
+  </body>
+</html>

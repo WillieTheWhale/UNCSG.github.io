@@ -1,0 +1,132 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: uncsg-auth-broker
+  labels:
+    app: uncsg-auth-broker
+  annotations:
+    serviceaccounts.openshift.io/oauth-redirecturi.production: >-
+      https://uncsg-auth-broker-bhilberg.apps.cloudapps.unc.edu/oauth/callback
+---
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: uncsg-auth-broker
+  labels:
+    app: uncsg-auth-broker
+---
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: uncsg-auth-broker
+  labels:
+    app: uncsg-auth-broker
+spec:
+  source:
+    type: Binary
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: Dockerfile.auth-broker
+  output:
+    to:
+      kind: ImageStreamTag
+      name: uncsg-auth-broker:latest
+  triggers:
+    - type: ConfigChange
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uncsg-auth-broker
+  labels:
+    app: uncsg-auth-broker
+  annotations:
+    image.openshift.io/triggers: >-
+      [{"from":{"kind":"ImageStreamTag","name":"uncsg-auth-broker:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"uncsg-auth-broker\")].image"}]
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: uncsg-auth-broker
+  template:
+    metadata:
+      labels:
+        app: uncsg-auth-broker
+    spec:
+      serviceAccountName: uncsg-auth-broker
+      containers:
+        - name: uncsg-auth-broker
+          image: uncsg-auth-broker:latest
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: BROKER_PORT
+              value: "8080"
+            - name: BROKER_BASE_URL
+              value: https://uncsg-auth-broker-bhilberg.apps.cloudapps.unc.edu
+            - name: MAIN_CLIENT_ID
+              value: uncsg-updates
+            - name: MAIN_REDIRECT_URIS
+              value: >-
+                https://executivebranch.unc.edu/api/auth/oauth2/callback/unc-openshift,http://localhost:4321/api/auth/oauth2/callback/unc-openshift
+            - name: OPENSHIFT_OAUTH_BASE_URL
+              value: https://oauth-openshift.apps.cloudapps.unc.edu
+            - name: OPENSHIFT_API_BASE_URL
+              value: https://api.cloudapps.unc.edu:6443
+            - name: OPENSHIFT_SERVICE_ACCOUNT
+              value: uncsg-auth-broker
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 20
+          resources:
+            limits:
+              memory: 128Mi
+              cpu: 100m
+            requests:
+              memory: 48Mi
+              cpu: 60m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: uncsg-auth-broker
+  labels:
+    app: uncsg-auth-broker
+spec:
+  selector:
+    app: uncsg-auth-broker
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: uncsg-auth-broker
+  labels:
+    app: uncsg-auth-broker
+spec:
+  host: uncsg-auth-broker-bhilberg.apps.cloudapps.unc.edu
+  to:
+    kind: Service
+    name: uncsg-auth-broker
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect

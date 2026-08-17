@@ -1,0 +1,110 @@
+---
+import type { RibbonOption } from "../../data/ribbon-options";
+
+interface Props { option: RibbonOption; }
+const { option } = Astro.props;
+const confetti = Array.from({ length: 34 }, (_, index) => ({
+  index,
+  x: (index * 29 + 7) % 100,
+  delay: (index * 43) % 720,
+  duration: 1700 + ((index * 89) % 1300),
+  rotate: (index * 47) % 180,
+  tone: index % 5,
+}));
+---
+
+<div class:list={["ribbon-welcome", `ribbon-welcome--${option.layout}`, "is-active"]} data-ribbon-welcome>
+  <div class="ribbon-welcome__backdrop" aria-hidden="true"></div>
+  <div class="ribbon-welcome__confetti" aria-hidden="true">
+    {confetti.map((piece) => (
+      <i
+        style={`--x:${piece.x}%;--delay:${piece.delay}ms;--duration:${piece.duration}ms;--rotate:${piece.rotate}deg;--tone:${piece.tone}`}
+      ></i>
+    ))}
+  </div>
+
+  <div class="ribbon-welcome__ceremony" aria-hidden="true">
+    <span class="ribbon-welcome__ribbon ribbon-welcome__ribbon--left"></span>
+    <span class="ribbon-welcome__knot"></span>
+    <span class="ribbon-welcome__ribbon ribbon-welcome__ribbon--right"></span>
+    <span class="ribbon-welcome__ring ribbon-welcome__ring--one"></span>
+    <span class="ribbon-welcome__ring ribbon-welcome__ring--two"></span>
+  </div>
+
+  <section
+    class="ribbon-welcome__message"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby={`ribbon-title-${option.id}`}
+    aria-describedby={`ribbon-copy-${option.id}`}
+    tabindex="-1"
+    data-ribbon-dialog
+  >
+    <button class="ribbon-welcome__close" type="button" aria-label="Close welcome message" data-ribbon-close>×</button>
+    <div class="ribbon-welcome__index" aria-hidden="true">{String(option.id).padStart(2, "0")}</div>
+    <p class="ribbon-welcome__label">Duncan Administration · A welcome from Devin</p>
+    <h1 id={`ribbon-title-${option.id}`}>Welcome to our new front door!</h1>
+    <div class="ribbon-welcome__copy" id={`ribbon-copy-${option.id}`}>
+      <p>A better Student Government starts with making it easier for students to see our work, know our people, understand our priorities, and hold us accountable. I'm very proud of our new website designed to make Student Government more accessible, more transparent, and more connected to the students we serve. It is a place to learn who is doing the work, what we are focused on, how decisions are being made, and how you can engage with us along the way.</p>
+      <p>Carolina has a long tradition of student leadership, and that tradition carries a responsibility: to communicate clearly, to lead with integrity, and to leave our institutions stronger than we found them.</p>
+      <p>So, come on in. Take a look around. And, please do <a href="/contact/">reach out</a> if you need anything.</p>
+    </div>
+    <div class="ribbon-welcome__actions">
+      <button class="ribbon-welcome__enter" type="button" data-ribbon-close>Enter the website <span aria-hidden="true">→</span></button>
+      <span>First, Best, and For All</span>
+    </div>
+  </section>
+</div>
+
+<button class="ribbon-welcome-replay" type="button" data-ribbon-replay hidden>Replay welcome</button>
+
+<script is:inline>
+  (() => {
+    const root = document.querySelector("[data-ribbon-welcome]");
+    const dialog = root?.querySelector("[data-ribbon-dialog]");
+    const replay = document.querySelector("[data-ribbon-replay]");
+    if (!(root instanceof HTMLElement) || !(dialog instanceof HTMLElement) || !(replay instanceof HTMLButtonElement)) return;
+
+    let previousFocus = document.activeElement;
+    const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+    const open = () => {
+      previousFocus = document.activeElement;
+      root.classList.add("is-active");
+      root.removeAttribute("aria-hidden");
+      replay.hidden = true;
+      document.body.classList.add("ribbon-overlay-open");
+      window.setTimeout(() => dialog.focus(), 80);
+    };
+
+    const close = () => {
+      root.classList.remove("is-active");
+      root.setAttribute("aria-hidden", "true");
+      replay.hidden = false;
+      document.body.classList.remove("ribbon-overlay-open");
+      if (previousFocus instanceof HTMLElement && previousFocus !== document.body) previousFocus.focus();
+      else replay.focus();
+    };
+
+    root.querySelectorAll("[data-ribbon-close]").forEach((control) => control.addEventListener("click", close));
+    replay.addEventListener("click", open);
+    document.addEventListener("keydown", (event) => {
+      if (!root.classList.contains("is-active")) return;
+      if (event.key === "Escape") {
+        event.preventDefault();
+        close();
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const focusable = [...dialog.querySelectorAll(focusableSelector)].filter((element) => element instanceof HTMLElement && !element.hidden);
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    });
+
+    document.body.classList.add("ribbon-overlay-open");
+    window.setTimeout(() => dialog.focus(), 120);
+  })();
+</script>

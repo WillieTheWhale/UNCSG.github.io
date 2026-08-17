@@ -1,0 +1,39 @@
+---
+import { contactOptions, contactOptionPath, type ContactOption } from "../../data/contact-options";
+
+interface Props { current: ContactOption; }
+const { current } = Astro.props;
+const currentIndex = contactOptions.findIndex((option) => option.id === current.id);
+const previous = contactOptions[(currentIndex - 1 + contactOptions.length) % contactOptions.length];
+const next = contactOptions[(currentIndex + 1) % contactOptions.length];
+---
+
+<nav class="contact-lab-nav" aria-label="Contact page design option navigator" data-contact-lab-nav>
+  <a class="contact-lab-nav__overview" href="/design-options/contact/">All 12 options</a>
+  <a class="contact-lab-nav__step" href={contactOptionPath(previous)} aria-label={`Previous option: ${previous.name}`} data-previous-option>←</a>
+  <label class="contact-lab-nav__picker">
+    <span class="sr-only">Choose a contact page design option</span>
+    <select data-option-picker>
+      {contactOptions.map((option) => <option value={contactOptionPath(option)} selected={option.id === current.id}>{String(option.id).padStart(2, "0")} · {option.name}</option>)}
+    </select>
+  </label>
+  <span class="contact-lab-nav__count" aria-hidden="true">{currentIndex + 1} / {contactOptions.length}</span>
+  <a class="contact-lab-nav__step" href={contactOptionPath(next)} aria-label={`Next option: ${next.name}`} data-next-option>→</a>
+</nav>
+
+<script is:inline>
+  (() => {
+    const nav = document.querySelector("[data-contact-lab-nav]");
+    if (!nav) return;
+    nav.querySelector("[data-option-picker]")?.addEventListener("change", (event) => {
+      const target = event.currentTarget;
+      if (target instanceof HTMLSelectElement) window.location.href = target.value;
+    });
+    document.addEventListener("keydown", (event) => {
+      const target = event.target;
+      if (target instanceof HTMLButtonElement || target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || target instanceof HTMLSelectElement || target?.isContentEditable) return;
+      if (event.key === "ArrowLeft") window.location.href = nav.querySelector("[data-previous-option]")?.href;
+      if (event.key === "ArrowRight") window.location.href = nav.querySelector("[data-next-option]")?.href;
+    });
+  })();
+</script>

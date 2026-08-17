@@ -1,0 +1,68 @@
+---
+import ManageTabs from "../../../components/ManageTabs.astro";
+import UpdateSiteLayout from "../../../layouts/UpdateSiteLayout.astro";
+---
+<UpdateSiteLayout title="Manage News | UNC Student Government Executive Branch" description="Staff workspace for outside news coverage." canonicalPath="/manage/news/" noindex bodyClass="updates-page manage-updates-page manage-news-page">
+  <section class="staff-auth" data-staff-auth aria-busy="true">
+    <div class="staff-auth__status">
+      <h1 class="visually-hidden">Manage news coverage</h1><span class="staff-auth__spinner" aria-hidden="true"></span>
+      <p class="staff-form-message" data-auth-message aria-live="polite">Checking your UNC sign-in…</p>
+      <div class="staff-auth__actions">
+        <button class="staff-button staff-button--secondary" type="button" data-unc-sign-in hidden>Try UNC SSO again</button>
+        <button class="staff-link-button staff-auth__reset" type="button" data-auth-reset hidden>Sign out and start over</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="updates-manager" data-news-manager hidden aria-label="News coverage management workspace">
+    <header class="manager-toolbar">
+      <div><strong>Manage news</strong><ManageTabs current="news" /></div>
+      <div class="manager-toolbar__actions">
+        <a href="/#news" target="_blank" rel="noopener">View homepage news</a>
+        <span data-staff-identity></span><button class="staff-link-button" type="button" data-sign-out>Sign out</button>
+      </div>
+    </header>
+    <div class="manager-layout">
+      <aside class="manager-sidebar">
+        <div class="manager-sidebar__heading"><h2>News links</h2><button class="staff-button staff-button--primary" type="button" data-new-news><span aria-hidden="true">+</span> New article</button></div>
+        <label class="manager-filter"><span>Show</span><select data-status-filter>
+          <option value="current">Current</option><option value="draft">Drafts</option><option value="published">Published</option><option value="archived">Archived</option><option value="all">All</option>
+        </select></label>
+        <div class="manager-article-list" data-manager-list aria-live="polite"><p class="manager-list-message">Loading news coverage…</p></div>
+      </aside>
+      <section class="manager-editor-shell">
+        <div class="manager-empty" data-manager-empty><h2>Select an article or add a new one.</h2><button class="staff-button staff-button--primary" type="button" data-empty-new-news>Add an article</button></div>
+        <div class="manager-editor manager-news-editor" data-manager-editor hidden>
+          <header class="manager-editor__statusbar">
+            <div class="manager-editor__state"><span class="update-status" data-editor-status>draft</span><span data-save-state aria-live="polite">All changes saved</span></div>
+            <button class="staff-link-button manager-archive-button" type="button" data-archive-news><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M4 7h16M9 7V4h6v3m3 0-1 13H7L6 7m4 4v5m4-5v5"></path></svg><span>Archive</span></button>
+          </header>
+          <div class="manager-fields manager-news-fields">
+            <label class="manager-title-field"><span>Headline</span><input type="text" maxlength="240" data-news-title /></label>
+            <label class="manager-event-field"><span class="manager-field-label">Publication</span><input type="text" maxlength="120" data-news-outlet autocomplete="organization" /></label>
+            <label class="manager-event-field"><span class="manager-field-label">Publication date</span><input type="date" data-news-date /></label>
+            <label class="manager-event-field manager-event-field--wide"><span class="manager-field-label">Article link</span><input type="url" inputmode="url" data-news-url aria-describedby="news-url-help" /><small id="news-url-help">Paste the full public link beginning with https:// or http://.</small></label>
+            <aside class="manager-news-preview" data-news-preview aria-label="Homepage row preview">
+              <span>Homepage preview</span>
+              <div><small data-preview-meta>Publication · Date</small><strong data-preview-title>Article headline</strong><i aria-hidden="true">↗</i></div>
+            </aside>
+          </div>
+          <footer class="manager-publish-bar">
+            <a class="staff-link-button manager-news-open-link" data-open-news target="_blank" rel="noopener" hidden>Open article<svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16"><path d="M14 4h6v6M13 11l7-7M20 13v7H4V4h7"></path></svg></a>
+            <div class="manager-publish-bar__actions">
+              <button class="staff-button staff-button--secondary" type="button" data-save-draft>Save as draft</button>
+              <button class="staff-button staff-button--primary" type="button" data-publish-news>Publish article</button>
+            </div>
+          </footer>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <dialog class="manager-dialog manager-confirm-dialog" data-confirm-dialog aria-labelledby="news-confirm-title" aria-describedby="news-confirm-message"><form method="dialog" class="manager-dialog__panel"><button class="manager-dialog__close" value="cancel" aria-label="Close confirmation dialog">×</button><h2 id="news-confirm-title" data-confirm-title>Confirm action</h2><p id="news-confirm-message" data-confirm-message></p><div class="manager-dialog__actions"><button class="staff-button staff-button--secondary" value="cancel">Cancel</button><button class="staff-button staff-button--primary" value="confirm" data-confirm-accept>Confirm</button></div></form></dialog>
+  <div class="manager-toast-region" data-toast-region aria-live="polite" aria-atomic="true"></div>
+  <script>
+    import { initializeNewsManager } from "../../../scripts/manage-news";
+    initializeNewsManager();
+  </script>
+</UpdateSiteLayout>

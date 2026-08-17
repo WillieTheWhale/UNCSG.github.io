@@ -1,0 +1,20 @@
+---
+import ContactRouterPage from "../../components/contact/ContactRouterPage.astro";
+import { contactOptions } from "../../data/contact-options";
+import UpdateSiteLayout from "../../layouts/UpdateSiteLayout.astro";
+
+const serviceMap = contactOptions.find((option) => option.layout === "service-map");
+
+if (!serviceMap) {
+  throw new Error("The service-map contact layout is not configured.");
+}
+---
+
+<UpdateSiteLayout
+  title="Contact the Executive Branch | UNC Student Government"
+  description="Find the Duncan Administration office best equipped to help with a student issue, proposal, partnership, invitation, or information request."
+  canonicalPath="/contact/"
+  bodyClass="contact-page"
+>
+  <ContactRouterPage option={serviceMap} production />
+</UpdateSiteLayout>

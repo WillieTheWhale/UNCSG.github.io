@@ -1,0 +1,117 @@
+---
+import "@fontsource/anton/400.css";
+import "@fontsource-variable/montserrat";
+import "../styles/design-options.css";
+import "../styles/design-options-variants.css";
+import "../styles/design-options-refined.css";
+import "../styles/design-options-finalists.css";
+import OptionNavigator from "../components/design-options/OptionNavigator.astro";
+import type { DesignOption } from "../data/design-options";
+
+interface Props {
+  option: DesignOption;
+}
+
+const { option } = Astro.props;
+const isRefined = option.family === "refined";
+const isFinalist = option.family === "finalist";
+const footerRecordsHref = option.modules.includes("records")
+  ? "#records"
+  : option.modules.includes("tracker")
+    ? "#tracker"
+    : "#work";
+---
+
+<!doctype html>
+<html lang="en" class={isFinalist ? "finalist-document" : undefined}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content={`${option.name}: an exploratory landing-page direction for the Duncan Administration.`}
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#13294b" />
+    <title>{option.name} | Duncan Administration Design Lab</title>
+    <script
+      is:inline
+      type="text/javascript"
+      id="unc-ub-script"
+      data-color={option.utilityColor ?? "black"}
+      src="https://unc.edu/web-assets/utility-bar/utility-bar.min.js"
+    ></script>
+  </head>
+  <body class:list={["design-lab-page", `option-${option.layout}`, isRefined && "option-refined", isFinalist && "option-finalist"]}>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <OptionNavigator current={option} />
+
+    <div class="evaluated-ui">
+      <header class="option-site-header">
+        {isFinalist ? (
+          <a class="site-lockup site-lockup--finalist" href="#main" aria-label="UNC Student Government Executive Branch home">
+            <span class="site-lockup__seal" aria-hidden="true"></span>
+            <span class="site-lockup__text">
+              <strong>Executive Branch</strong>
+              <small>Duncan Administration · 2026–27</small>
+            </span>
+          </a>
+        ) : isRefined ? (
+          <a class="site-lockup site-lockup--student-government" href="#main" aria-label="UNC Student Government Executive Branch home">
+            <img
+              src="/design-lab/student-government-lockup.avif"
+              alt="UNC Student Government"
+              width="2735"
+              height="742"
+            />
+            <span class="site-lockup__text">
+              <strong>Executive Branch</strong>
+              <small>Duncan Administration · 2026–27</small>
+            </span>
+          </a>
+        ) : (
+          <a class="site-lockup" href="#main" aria-label="UNC Student Government Executive Branch home">
+            <span class="site-lockup__mark" aria-hidden="true">BOLD</span>
+            <span class="site-lockup__text">
+              <strong>Executive Branch</strong>
+              <small>Duncan Administration · 2026–27</small>
+            </span>
+          </a>
+        )}
+
+        {isFinalist ? (
+          <nav class="option-site-nav option-site-nav--finalist" aria-label="Executive Branch navigation">
+            <a href="#departments">Teams</a>
+            <a href="#priorities">Priorities</a>
+            <a href="#updates">Updates</a>
+            <a href="#events">Events</a>
+            <a class="nav-action" href="#contact">Get in touch</a>
+          </nav>
+        ) : (
+          <nav class="option-site-nav" aria-label="Option site navigation">
+            <a href="#work">Our work</a>
+            {option.modules.includes("leadership") && <a href="#leadership">Leadership</a>}
+            {option.modules.includes("updates") && <a href="#updates">Updates</a>}
+            {option.modules.includes("records") && <a href="#records">Records</a>}
+            {!option.modules.includes("records") && option.modules.includes("tracker") && <a href="#tracker">Progress</a>}
+            <a class="nav-action" href="#contact">Get help</a>
+          </nav>
+        )}
+      </header>
+
+      <slot />
+
+      <footer class="option-footer" id="contact">
+        <div>
+          <strong>Executive Branch</strong>
+          <p>Duncan Administration · Serving Carolina's undergraduate students.</p>
+        </div>
+        <div class="footer-links">
+          <a href="mailto:studentgovernment@unc.edu">Contact us</a>
+          <a href="https://www.instagram.com/unc_executivebranch/">Instagram</a>
+          {!isFinalist && <a href={footerRecordsHref}>Public records</a>}
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

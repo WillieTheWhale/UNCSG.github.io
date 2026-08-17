@@ -1,0 +1,20 @@
+---
+interface Props {
+  mode?: "public" | "preview";
+}
+
+const { mode = "public" } = Astro.props;
+---
+
+<div class="updates-listing" data-updates-listing data-mode={mode} aria-live="polite">
+  <div class="updates-listing__status" data-list-status>
+    <span class="updates-loading" aria-hidden="true"></span>
+    Loading updates…
+  </div>
+  <div class="updates-listing__grid" data-list-grid></div>
+</div>
+
+<script>
+  import { initializeUpdateListings } from "../scripts/update-listing";
+  initializeUpdateListings();
+</script>

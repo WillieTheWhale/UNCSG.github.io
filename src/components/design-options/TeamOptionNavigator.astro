@@ -1,0 +1,62 @@
+---
+import { teamOptions, teamOptionPath, type TeamOption } from "../../data/team-options";
+
+interface Props {
+  current: TeamOption;
+}
+
+const { current } = Astro.props;
+const currentIndex = teamOptions.findIndex((option) => option.id === current.id);
+const previous = teamOptions[(currentIndex - 1 + teamOptions.length) % teamOptions.length];
+const next = teamOptions[(currentIndex + 1) % teamOptions.length];
+---
+
+<nav class="team-lab-nav" aria-label="Team page design option navigator" data-team-lab-nav>
+  <a class="team-lab-nav__overview" href="/design-options/team/">All 5 options</a>
+  <a class="team-lab-nav__step" href={teamOptionPath(previous)} aria-label={`Previous option: ${previous.name}`} data-previous-option>←</a>
+  <label class="team-lab-nav__picker">
+    <span class="sr-only">Choose a team page design option</span>
+    <select data-option-picker>
+      {teamOptions.map((option) => (
+        <option value={teamOptionPath(option)} selected={option.id === current.id}>
+          {String(option.id).padStart(2, "0")} · {option.name}
+        </option>
+      ))}
+    </select>
+  </label>
+  <span class="team-lab-nav__count" aria-hidden="true">{currentIndex + 1} / {teamOptions.length}</span>
+  <a class="team-lab-nav__step" href={teamOptionPath(next)} aria-label={`Next option: ${next.name}`} data-next-option>→</a>
+</nav>
+
+<script is:inline>
+  (() => {
+    const nav = document.querySelector("[data-team-lab-nav]");
+    if (!nav) return;
+
+    nav.querySelector("[data-option-picker]")?.addEventListener("change", (event) => {
+      const target = event.currentTarget;
+      if (target instanceof HTMLSelectElement) window.location.href = target.value;
+    });
+
+    document.addEventListener("keydown", (event) => {
+      const target = event.target;
+      if (
+        target instanceof HTMLButtonElement ||
+        target instanceof HTMLInputElement ||
+        target instanceof HTMLTextAreaElement ||
+        target instanceof HTMLSelectElement ||
+        target?.isContentEditable
+      ) return;
+
+      if (event.key === "ArrowLeft") {
+        const previousLink = nav.querySelector("[data-previous-option]");
+        if (previousLink instanceof HTMLAnchorElement) window.location.href = previousLink.href;
+      }
+
+      if (event.key === "ArrowRight") {
+        const nextLink = nav.querySelector("[data-next-option]");
+        if (nextLink instanceof HTMLAnchorElement) window.location.href = nextLink.href;
+      }
+    });
+  })();
+</script>

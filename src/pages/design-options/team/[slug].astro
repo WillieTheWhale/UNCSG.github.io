@@ -1,0 +1,30 @@
+---
+import TeamOptionNavigator from "../../../components/design-options/TeamOptionNavigator.astro";
+import TeamDirectoryPage from "../../../components/team/TeamDirectoryPage.astro";
+import { teamOptions, type TeamOption } from "../../../data/team-options";
+import UpdateSiteLayout from "../../../layouts/UpdateSiteLayout.astro";
+
+export function getStaticPaths() {
+  return teamOptions.map((option) => ({
+    params: { slug: `${String(option.id).padStart(2, "0")}-${option.slug}` },
+    props: { option },
+  }));
+}
+
+interface Props {
+  option: TeamOption;
+}
+
+const { option } = Astro.props;
+---
+
+<UpdateSiteLayout
+  title={`${option.name} | Team Page Design Lab`}
+  description={option.thesis}
+  canonicalPath={`/design-options/team/${String(option.id).padStart(2, "0")}-${option.slug}/`}
+  bodyClass="team-lab-option-page"
+  noindex
+>
+  <TeamOptionNavigator current={option} />
+  <TeamDirectoryPage layout={option.layout} showLabNote />
+</UpdateSiteLayout>
