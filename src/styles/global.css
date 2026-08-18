@@ -1531,10 +1531,6 @@ a {
     width: 3rem;
   }
 
-  .site-identity__text small {
-    display: none;
-  }
-
   .hero {
     min-height: auto;
     border-radius: 0 0 50% 50% / 0 0 3.5% 3.5%;
@@ -1723,8 +1719,26 @@ a {
 }
 
 @media (max-width: 30rem) {
-  .site-identity__text {
-    display: none;
+  .site-header {
+    gap: 0.65rem;
+  }
+
+  .site-identity {
+    min-width: 0;
+    gap: 0.55rem;
+  }
+
+  .site-identity__seal {
+    width: 2.75rem;
+  }
+
+  .site-identity__text strong {
+    font-size: 0.78rem;
+  }
+
+  .site-identity__text small {
+    margin-top: 0.12rem;
+    font-size: 0.56rem;
   }
 }
 
