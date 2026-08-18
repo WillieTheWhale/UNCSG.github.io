@@ -1,6 +1,7 @@
 .team-directory-page {
   color: var(--brand-navy);
   background: var(--neutral-0);
+  scroll-margin-top: 1rem;
 }
 
 .team-directory-page *,
@@ -371,6 +372,47 @@
 
 .team-directory-page--sticky-index .team-group__heading {
   grid-template-columns: minmax(0, 1fr);
+}
+
+.team-to-top-wrap {
+  display: flex;
+  width: min(100%, 90rem);
+  justify-content: flex-end;
+  padding: 0 var(--page-gutter) clamp(4rem, 8vw, 7rem);
+  margin-inline: auto;
+}
+
+.team-to-top {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--brand-blue);
+  color: var(--brand-blue);
+  font-size: 0.84rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.team-to-top svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.75;
+  transition: transform 160ms ease;
+}
+
+.team-to-top:hover,
+.team-to-top:focus-visible {
+  color: var(--neutral-0);
+  background: var(--brand-blue);
+}
+
+.team-to-top:hover svg,
+.team-to-top:focus-visible svg {
+  transform: translateY(-2px);
 }
 
 /* Option 3: quieter, information-forward horizontal roster. */
@@ -984,7 +1026,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .team-accordion summary > i::after,
-  .team-member__email {
+  .team-member__email,
+  .team-to-top svg {
     transition: none;
   }
 }

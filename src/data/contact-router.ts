@@ -90,7 +90,7 @@ export const contactIntents: ContactIntent[] = [
   },
   {
     id: "media",
-    label: "I’m contacting the press or requesting information",
+    label: "I’m from the press or requesting information",
     shortLabel: "Press and information",
     description: "Direct interview, public-information, and communications requests efficiently.",
     topics: [
