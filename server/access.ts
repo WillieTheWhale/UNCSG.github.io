@@ -1,6 +1,7 @@
 export const allowedOnyens = new Set([
   "benbmj",
   "bhilberg",
+  "bkohl",
   "campslee",
   "chlojo",
   "duncanda",
@@ -10,6 +11,7 @@ export const allowedOnyens = new Set([
   "hmshap",
   "lsc",
   "mghoward",
+  "rparse06",
   "sbp",
   "scant",
   "sophfont",

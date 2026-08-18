@@ -6,6 +6,7 @@ test("uses the approved staff Onyen allowlist exactly", () => {
   assert.deepEqual([...allowedOnyens].sort(), [
     "benbmj",
     "bhilberg",
+    "bkohl",
     "campslee",
     "chlojo",
     "duncanda",
@@ -15,6 +16,7 @@ test("uses the approved staff Onyen allowlist exactly", () => {
     "hmshap",
     "lsc",
     "mghoward",
+    "rparse06",
     "sbp",
     "scant",
     "sophfont",
@@ -35,11 +37,12 @@ test("rejects non-UNC domains and non-whitelisted Onyens", () => {
 });
 
 test("accepts whitelist members case-insensitively", () => {
+  assert.equal(isAllowedStaffEmail("BKohl@ad.unc.edu"), true);
   assert.equal(isAllowedStaffEmail("DUNCANDA@unc.edu"), true);
+  assert.equal(isAllowedStaffEmail("RPARSE06@unc.edu"), true);
   assert.equal(isAllowedStaffEmail("USGSEC@ad.unc.edu"), true);
 });
 
 test("rejects former whitelist members", () => {
-  assert.equal(isAllowedStaffEmail("bkohl@unc.edu"), false);
   assert.equal(isAllowedStaffEmail("meredith.mckinney@ad.unc.edu"), false);
 });
