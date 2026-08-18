@@ -415,6 +415,65 @@
   transform: translateY(-2px);
 }
 
+.team-floating-top {
+  position: fixed;
+  z-index: 40;
+  top: 0.8rem;
+  right: var(--page-gutter);
+  display: flex;
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--brand-carolina);
+  background: var(--neutral-0);
+  box-shadow: 0 0.45rem 1.25rem rgb(19 41 75 / 14%);
+}
+
+.team-floating-top[hidden] {
+  display: none;
+}
+
+.team-floating-top a,
+.team-floating-top button {
+  display: inline-flex;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  color: var(--brand-navy);
+  background: transparent;
+}
+
+.team-floating-top a {
+  gap: 0.4rem;
+  padding-inline: 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.team-floating-top button {
+  padding: 0;
+  border: 0;
+  border-left: 1px solid var(--rule);
+  font: inherit;
+  cursor: pointer;
+}
+
+.team-floating-top svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.team-floating-top a:hover,
+.team-floating-top a:focus-visible,
+.team-floating-top button:hover,
+.team-floating-top button:focus-visible {
+  color: var(--neutral-0);
+  background: var(--brand-blue);
+}
+
 /* Option 3: quieter, information-forward horizontal roster. */
 .team-directory-page--editorial-roster .team-standard-groups {
   width: min(100%, 88rem);
