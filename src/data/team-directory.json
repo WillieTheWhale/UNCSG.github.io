@@ -224,7 +224,7 @@
     "members": [
       {
         "name": "Hailey Shapiro",
-        "title": "Chief Communications Officer",
+        "title": "Director of Communications",
         "email": "hmshap@unc.edu",
         "major": "Political Science; Media and Journalism",
         "hometown": "Naples, FL",
@@ -248,7 +248,7 @@
       },
       {
         "name": "Lexie Goodyear",
-        "title": "Staffer",
+        "title": "Cabinet Liaison for the Student Government",
         "email": "goodyear@unc.edu",
         "major": "Business Administration",
         "hometown": "San Francisco, CA",
@@ -655,20 +655,20 @@
         "portrait": "/images/team/lauryn-cooper.webp"
       },
       {
-        "name": "Elizabeth Alene",
-        "title": "Staffer",
-        "email": "alene1@unc.edu",
-        "major": "Global Studies; Chinese; Public Policy",
-        "hometown": "St. Paul, MN",
-        "portrait": "/images/team/elizabeth-alene.jpg"
-      },
-      {
         "name": "Kamryn Burton",
         "title": "Deputy Director",
         "email": "kammyb@unc.edu",
         "major": "Biology",
         "hometown": "Charlotte, NC",
         "portrait": "/images/team/kamryn-burton.jpg"
+      },
+      {
+        "name": "Elizabeth Alene",
+        "title": "Staffer",
+        "email": "alene1@unc.edu",
+        "major": "Global Studies; Chinese; Public Policy",
+        "hometown": "St. Paul, MN",
+        "portrait": "/images/team/elizabeth-alene.jpg"
       },
       {
         "name": "Meredith McKinney",
